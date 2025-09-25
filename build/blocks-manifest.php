@@ -248,10 +248,6 @@ return array(
 			'blockId' => array(
 				'type' => 'string',
 				'default' => ''
-			),
-			'maxWidth' => array(
-				'type' => 'number',
-				'default' => 1200
 			)
 		)
 	),
@@ -839,6 +835,66 @@ return array(
 			'slideTagFontSize' => array(
 				'type' => 'number',
 				'default' => 20
+			),
+			'buttonColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'buttonBackgroundColor' => array(
+				'type' => 'string',
+				'default' => 'transparent'
+			),
+			'buttonHoverColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'buttonHoverBackgroundColor' => array(
+				'type' => 'string',
+				'default' => 'transparent'
+			),
+			'buttonStyle' => array(
+				'type' => 'string',
+				'default' => 'underline'
+			),
+			'underlineColor' => array(
+				'type' => 'string',
+				'default' => '#ff4242'
+			),
+			'blurAmount' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'fontSize' => array(
+				'type' => 'number',
+				'default' => 18
+			),
+			'showIcon' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'hoverAnimation' => array(
+				'type' => 'string',
+				'default' => 'slide-underline'
+			),
+			'buttonPadding' => array(
+				'type' => 'string',
+				'default' => '0.2em 0'
+			),
+			'buttonMargin' => array(
+				'type' => 'string',
+				'default' => '20px 0'
+			),
+			'zIndex' => array(
+				'type' => 'number',
+				'default' => 1
+			),
+			'borderRadius' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'fontWeight' => array(
+				'type' => 'string',
+				'default' => '500'
 			)
 		)
 	),
@@ -946,7 +1002,6 @@ return array(
 					array(
 						'title' => 'Patient Portal',
 						'copy' => 'A secure, user-friendly patient portal where individuals can create accounts, manage their personal information, and access their confidential NFL lab results. The platform ensures HIPAA compliance while providing easy access to critical health data.',
-						'director' => 'User Experience',
 						'img' => ''
 					)
 				)
@@ -965,7 +1020,7 @@ return array(
 			),
 			'country' => array(
 				'type' => 'string',
-				'default' => 'German'
+				'default' => 'Germany'
 			),
 			'industry' => array(
 				'type' => 'string',

@@ -162,6 +162,66 @@
     "slideTagFontSize": {
       "type": "number",
       "default": 20
+    },
+    "buttonColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "buttonBackgroundColor": {
+      "type": "string",
+      "default": "transparent"
+    },
+    "buttonHoverColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "buttonHoverBackgroundColor": {
+      "type": "string",
+      "default": "transparent"
+    },
+    "buttonStyle": {
+      "type": "string",
+      "default": "underline"
+    },
+    "underlineColor": {
+      "type": "string",
+      "default": "#ff4242"
+    },
+    "blurAmount": {
+      "type": "number",
+      "default": 0
+    },
+    "fontSize": {
+      "type": "number",
+      "default": 18
+    },
+    "showIcon": {
+      "type": "boolean",
+      "default": true
+    },
+    "hoverAnimation": {
+      "type": "string",
+      "default": "slide-underline"
+    },
+    "buttonPadding": {
+      "type": "string",
+      "default": "0.2em 0"
+    },
+    "buttonMargin": {
+      "type": "string",
+      "default": "20px 0"
+    },
+    "zIndex": {
+      "type": "number",
+      "default": 1
+    },
+    "borderRadius": {
+      "type": "number",
+      "default": 0
+    },
+    "fontWeight": {
+      "type": "string",
+      "default": "500"
     }
   }
 }

@@ -2,20 +2,28 @@
 /**
  * Plugin Name:       Adaire Blocks
  * Description:       Adaire Blocks is a powerful WordPress plugin that helps developers and designers create visually stunning, high-performance websites with ease right inside the Gutenberg editor.
- * Version:           0.1.0
+ * Version:           1.0.0
  * Requires at least: 6.7
  * Requires PHP:      7.4
  * Author:            Adaire
  * License:           GPL-3.0
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       Adaire Blocks
+ * Text Domain:       adaire-blocks
  *
- * @package CreateBlock
+ * @package AdaireBlocks
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
+
+// Define plugin constants
+define('ADAIRE_BLOCKS_VERSION', '1.0.0');
+define('ADAIRE_BLOCKS_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('ADAIRE_BLOCKS_PLUGIN_PATH', plugin_dir_path(__FILE__));
+
+// Include settings page
+require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'admin/settings-page.php';
 /**
  * Registers the block using a `blocks-manifest.php` file, which improves the performance of block type registration.
  * Behind the scenes, it also registers all assets so they can be enqueued
@@ -25,6 +33,19 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @see https://make.wordpress.org/core/2024/10/17/new-block-type-registration-apis-to-improve-performance-in-wordpress-6-7/
  */
 function create_block_gsap_hero_block_block_init() {
+	// Get settings instance
+	$settings = AdaireBlocksSettings::get_instance();
+	$block_settings = $settings->get_settings();
+	
+	// Get available blocks dynamically
+	$available_blocks = $settings->get_available_blocks();
+	$block_mapping = array();
+	
+	// Build mapping from available blocks
+	foreach ($available_blocks as $settings_key => $block_data) {
+		$block_mapping[$settings_key] = $block_data['block_name'];
+	}
+	
 	/**
 	 * Registers the block(s) metadata from the `blocks-manifest.php` and registers the block type(s)
 	 * based on the registered block metadata.
@@ -33,7 +54,27 @@ function create_block_gsap_hero_block_block_init() {
 	 * @see https://make.wordpress.org/core/2025/03/13/more-efficient-block-type-registration-in-6-8/
 	 */
 	if ( function_exists( 'wp_register_block_types_from_metadata_collection' ) ) {
-		wp_register_block_types_from_metadata_collection( __DIR__ . '/build', __DIR__ . '/build/blocks-manifest.php' );
+		// Filter blocks based on settings before registration
+		$manifest_data = require __DIR__ . '/build/blocks-manifest.php';
+		$filtered_manifest = array();
+		
+		foreach ( $manifest_data as $block_name => $block_data ) {
+			$block_key = array_search( $block_name, $block_mapping );
+			if ( $block_key !== false && isset( $block_settings[ $block_key ] ) && $block_settings[ $block_key ] ) {
+				$filtered_manifest[ $block_name ] = $block_data;
+			}
+		}
+		
+		// Create a temporary filtered manifest file
+		$temp_manifest_path = __DIR__ . '/build/blocks-manifest-filtered.php';
+		file_put_contents( $temp_manifest_path, '<?php return ' . var_export( $filtered_manifest, true ) . ';' );
+		
+		wp_register_block_types_from_metadata_collection( __DIR__ . '/build', $temp_manifest_path );
+		
+		// Clean up temporary file
+		if ( file_exists( $temp_manifest_path ) ) {
+			unlink( $temp_manifest_path );
+		}
 		return;
 	}
 
@@ -46,6 +87,7 @@ function create_block_gsap_hero_block_block_init() {
 	if ( function_exists( 'wp_register_block_metadata_collection' ) ) {
 		wp_register_block_metadata_collection( __DIR__ . '/build', __DIR__ . '/build/blocks-manifest.php' );
 	}
+	
 	/**
 	 * Registers the block type(s) in the `blocks-manifest.php` file.
 	 *
@@ -53,10 +95,94 @@ function create_block_gsap_hero_block_block_init() {
 	 */
 	$manifest_data = require __DIR__ . '/build/blocks-manifest.php';
 	foreach ( array_keys( $manifest_data ) as $block_type ) {
-		register_block_type( __DIR__ . "/build/{$block_type}" );
+		$block_key = array_search( $block_type, $block_mapping );
+		if ( $block_key !== false && isset( $block_settings[ $block_key ] ) && $block_settings[ $block_key ] ) {
+			register_block_type( __DIR__ . "/build/{$block_type}" );
+		}
 	}
 }
 add_action( 'init', 'create_block_gsap_hero_block_block_init' );
+
+// Filter to prevent disabled blocks from appearing in the block editor
+add_filter( 'block_editor_rest_api_preload_paths', 'adaire_blocks_filter_block_editor_blocks' );
+function adaire_blocks_filter_block_editor_blocks( $preload_paths ) {
+	// Get settings
+	$settings = AdaireBlocksSettings::get_instance();
+	$block_settings = $settings->get_settings();
+	$available_blocks = $settings->get_available_blocks();
+	
+	// Remove disabled blocks from the block editor
+	foreach ( $available_blocks as $settings_key => $block_data ) {
+		if ( isset( $block_settings[ $settings_key ] ) && ! $block_settings[ $settings_key ] ) {
+			// Remove the block from available blocks in the editor
+			wp_deregister_script( 'create-block-' . str_replace( '-', '-', $block_data['block_name'] ) );
+		}
+	}
+	
+	return $preload_paths;
+}
+
+// Filter to prevent disabled blocks from being registered
+add_filter( 'register_block_type_args', 'adaire_blocks_prevent_disabled_blocks', 10, 2 );
+function adaire_blocks_prevent_disabled_blocks( $args, $name ) {
+	// Only filter our blocks
+	if ( strpos( $name, 'create-block/' ) !== 0 ) {
+		return $args;
+	}
+	
+	// Get settings
+	$settings = AdaireBlocksSettings::get_instance();
+	$block_settings = $settings->get_settings();
+	$available_blocks = $settings->get_available_blocks();
+	
+	// Find the block key for this block
+	$block_name = str_replace( 'create-block/', '', $name );
+	$block_key = null;
+	
+	foreach ( $available_blocks as $settings_key => $block_data ) {
+		if ( $block_data['block_name'] === $block_name ) {
+			$block_key = $settings_key;
+			break;
+		}
+	}
+	
+	// If block is disabled, prevent registration by returning empty args
+	if ( $block_key && isset( $block_settings[ $block_key ] ) && ! $block_settings[ $block_key ] ) {
+		return array();
+	}
+	
+	return $args;
+}
+
+// Filter to prevent disabled blocks from being available in the editor
+add_action( 'enqueue_block_editor_assets', 'adaire_blocks_filter_editor_blocks' );
+function adaire_blocks_filter_editor_blocks() {
+	// Get settings
+	$settings = AdaireBlocksSettings::get_instance();
+	$block_settings = $settings->get_settings();
+	$available_blocks = $settings->get_available_blocks();
+	
+	// Create JavaScript to remove disabled blocks from the editor
+	$disabled_blocks = array();
+	foreach ( $available_blocks as $settings_key => $block_data ) {
+		if ( isset( $block_settings[ $settings_key ] ) && ! $block_settings[ $settings_key ] ) {
+			$disabled_blocks[] = 'create-block/' . $block_data['block_name'];
+		}
+	}
+	
+	if ( ! empty( $disabled_blocks ) ) {
+		wp_add_inline_script( 'wp-blocks', '
+			wp.domReady( function() {
+				var disabledBlocks = ' . json_encode( $disabled_blocks ) . ';
+				disabledBlocks.forEach( function( blockName ) {
+					if ( wp.blocks.unregisterBlockType ) {
+						wp.blocks.unregisterBlockType( blockName );
+					}
+				});
+			});
+		');
+	}
+}
 
 // Enqueue Locomotive Scroll assets if the locomotive-block is present on the page
 function enqueue_locomotive_scroll_assets() {

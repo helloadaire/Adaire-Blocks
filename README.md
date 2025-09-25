@@ -2,25 +2,25 @@
 
 A powerful WordPress plugin that helps developers and designers create visually stunning, high-performance websites with ease right inside the Gutenberg editor.
 
-## 🚀 Features
+## Features
 
 Adaire Blocks is a comprehensive WordPress plugin that provides a collection of custom Gutenberg blocks designed to create visually stunning, high-performance websites. Built with modern web technologies including GSAP, React, and optimized for performance.
 
 ### Available Blocks
 
-- **🎬 Video Hero Slider** - Create stunning video hero sections with YouTube/Vimeo integration, smooth transitions, and customizable overlays
-- **💼 Portfolio Block** - Showcase your work with elegant portfolio layouts, gallery modals, and GSAP animations
-- **⚙️ Services Block** - Display your services with interactive carousel layouts, scroll-triggered animations, and smooth transitions
-- **🚀 Project Block** - Highlight your projects with interactive showcases, particle effects, and dynamic content
-- **❓ Questions Block** - Create animated FAQ sections with GSAP pinning and smooth transitions
-- **📜 Scroll Text Block** - Add scroll-triggered text animations with customizable speed and direction
-- **✨ Particles Block** - Add dynamic particle effects with scroll-controlled animations and customizable positioning
-- **🔘 Button Block** - Create customizable buttons with hover animations, multiple styles, and advanced styling options
-- **📢 CTA Block** - Build call-to-action sections with animated carousels and gradient backgrounds
-- **🏢 Logos Block** - Display partner/client logos with customizable sliders and smooth animations
-- **💬 Testimonial Block** - Showcase client testimonials with customizable carousels and professional layouts
+- **Video Hero Slider** - Create stunning video hero sections with YouTube/Vimeo integration, smooth transitions, and customizable overlays
+- **Portfolio Block** - Showcase your work with elegant portfolio layouts, gallery modals, and GSAP animations
+- **Services Block** - Display your services with interactive carousel layouts, scroll-triggered animations, and smooth transitions
+- **Project Block** - Highlight your projects with interactive showcases, particle effects, and dynamic content
+- **Questions Block** - Create animated FAQ sections with GSAP pinning and smooth transitions
+- **Scroll Text Block** - Add scroll-triggered text animations with customizable speed and direction
+- **Particles Block** - Add dynamic particle effects with scroll-controlled animations and customizable positioning
+- **Button Block** - Create customizable buttons with hover animations, multiple styles, and advanced styling options
+- **CTA Block** - Build call-to-action sections with animated carousels and gradient backgrounds
+- **Logos Block** - Display partner/client logos with customizable sliders and smooth animations
+- **Testimonial Block** - Showcase client testimonials with customizable carousels and professional layouts
 
-## 🛠 Technical Features
+## Technical Features
 
 - **Modern Stack**: Built with JavaScript (ES6+), React, and GSAP 3.13.0
 - **Performance Optimized**: Efficient block registration using WordPress 6.7+ metadata collection
@@ -31,7 +31,7 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 - **Responsive Design**: Mobile-first approach with touch-friendly interactions
 - **Open Source**: GPL-3.0 licensed for maximum flexibility
 
-## 🎨 Animation & Interaction Features
+## Animation & Interaction Features
 
 - GSAP-powered animations with scroll triggers
 - Smooth transitions and micro-interactions
@@ -41,14 +41,14 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 - Video integration with YouTube and Vimeo
 - Advanced hover effects and transitions
 
-## 📦 Installation
+## Installation
 
 1. Upload the plugin files to the `/wp-content/plugins/adaire-blocks` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Start using the custom blocks in the Gutenberg editor
 4. Configure block settings through the block editor sidebar
 
-## 🎯 Usage
+## Usage
 
 Once activated, you'll find all Adaire Blocks in the Gutenberg block inserter under their respective categories:
 
@@ -64,13 +64,13 @@ Each block comes with extensive customization options accessible through the blo
 - Responsive controls
 - Advanced styling
 
-## 🔧 Requirements
+## Requirements
 
 - **WordPress**: 6.7 or higher
 - **PHP**: 7.4 or higher
 - **Browser**: Modern browsers with JavaScript enabled
 
-## 📱 Mobile Support
+## Mobile Support
 
 All blocks are fully responsive and optimized for mobile devices with:
 
@@ -79,7 +79,7 @@ All blocks are fully responsive and optimized for mobile devices with:
 - Responsive typography and layouts
 - Mobile-specific customization options
 
-## ⚡ Performance
+## Performance
 
 The plugin is optimized for performance with:
 
@@ -89,7 +89,7 @@ The plugin is optimized for performance with:
 - Minimal impact on page load times
 - Optimized asset loading
 
-## 🎨 Customization
+## Customization
 
 ### Block Editor Settings
 Each block includes comprehensive settings panels for:
@@ -106,7 +106,7 @@ For advanced users, all blocks can be further customized through CSS:
 - Theme integration
 - Child theme compatibility
 
-## 🔄 Multiple Instances
+## Multiple Instances
 
 Each block instance is independent and can be customized separately through unique block IDs, allowing you to:
 - Use the same block multiple times on a page
@@ -114,7 +114,7 @@ Each block instance is independent and can be customized separately through uniq
 - Maintain consistent styling across instances
 - Create complex layouts with multiple block types
 
-## 🆘 Support
+## Support
 
 ### Frequently Asked Questions
 
@@ -139,7 +139,7 @@ A: Yes, each block instance is independent and can be customized separately thro
 **Q: Are there any performance considerations?**
 A: The plugin is optimized for performance with efficient block registration and lazy loading of animation scripts. GSAP animations are hardware-accelerated for smooth performance.
 
-## 📋 Changelog
+## Changelog
 
 ### Version 1.0.0
 - Major release with comprehensive block collection
@@ -161,18 +161,16 @@ A: The plugin is optimized for performance with efficient block registration and
 - Enhanced mobile responsiveness across all blocks
 - Added comprehensive customization options for all blocks
 
-## 📄 License
+## License
 
 This plugin is licensed under the GPL-3.0 License - see the [LICENSE](https://www.gnu.org/licenses/gpl-2.0.html) file for details.
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📞 Support
+## Support
 
 For support, feature requests, or bug reports, please contact us through the WordPress.org support forums or visit our website.
-
----
 
 **Made with ❤️ by Adaire Digital**

@@ -145,10 +145,6 @@
     "blockId": {
       "type": "string",
       "default": ""
-    },
-    "maxWidth": {
-      "type": "number",
-      "default": 1200
     }
   }
 }
