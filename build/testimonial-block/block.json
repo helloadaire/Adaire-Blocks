@@ -1,0 +1,125 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/testimonial-block",
+  "version": "0.1.0",
+  "title": "Testimonial Block",
+  "category": "text",
+  "icon": "text",
+  "description": "A testimonial block in a customizable carousel",
+  "example": {},
+  "supports": {
+    "html": false
+  },
+  "textdomain": "testimonial-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "attributes": {
+    "textColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "arrowColor": {
+      "type": "string",
+      "default": "#ff0000"
+    },
+    "dotColor": {
+      "type": "string",
+      "default": "#ff0000"
+    },
+    "fontSize": {
+      "type": "number",
+      "default": 16
+    },
+    "textToDisplay": {
+      "type": "string",
+      "default": "Hello World"
+    },
+    "slidesPerView": {
+      "type": "number",
+      "default": 1
+    },
+    "slides": {
+      "type": "number",
+      "default": 3
+    },
+    "spaceBetween": {
+      "type": "number",
+      "default": 50
+    },
+    "gap": {
+      "type": "number",
+      "default": 30
+    },
+    "logoSize": {
+      "type": "number",
+      "default": 60
+    },
+    "loop": {
+      "type": "boolean",
+      "default": true
+    },
+    "navigation": {
+      "type": "boolean",
+      "default": true
+    },
+    "pagination": {
+      "type": "boolean",
+      "default": true
+    },
+    "scrollbar": {
+      "type": "boolean",
+      "default": false
+    },
+    "testimonials": {
+      "type": "array",
+      "default": [
+        {
+          "companyName": "STATS PERFORM",
+          "companyLogo": "https://via.placeholder.com/200x60/4F46E5/FFFFFF?text=STATS+PERFORM",
+          "quote": "With an aggressive product development timeline, we needed a partner who had advanced mobile and machine-learning capabilities and could also match our pace.",
+          "authorName": "Darryl Lewis",
+          "authorTitle": "CTO of Stats Perform"
+        },
+        {
+          "companyName": "PEOPLEHOOD",
+          "companyLogo": "https://via.placeholder.com/200x60/059669/FFFFFF?text=PEOPLEHOOD",
+          "quote": "With Adaire, we created a seamless facilitator dashboard, and video platform that transformed our community engagement.",
+          "authorName": "Rachel Link",
+          "authorTitle": "COO & CFO of Peoplehood"
+        },
+        {
+          "companyName": "TECHNOLOGY CORP",
+          "companyLogo": "https://via.placeholder.com/200x60/DC2626/FFFFFF?text=TECH+CORP",
+          "quote": "Adaire delivered exceptional results and helped us roll them on the project. We ended up with a solution that exceeded our expectations.",
+          "authorName": "John Smith",
+          "authorTitle": "CEO of Technology Corp"
+        },
+        {
+          "companyName": "INNOVATION LABS",
+          "companyLogo": "https://via.placeholder.com/200x60/7C3AED/FFFFFF?text=INNOVATION",
+          "quote": "The team at Adaire understood our vision and brought it to life with cutting-edge technology and seamless user experience.",
+          "authorName": "Sarah Johnson",
+          "authorTitle": "CTO of Innovation Labs"
+        },
+        {
+          "companyName": "DIGITAL SOLUTIONS",
+          "companyLogo": "https://via.placeholder.com/200x60/EA580C/FFFFFF?text=DIGITAL",
+          "quote": "Working with Adaire was a game-changer for our business. Their expertise and dedication to quality is unmatched.",
+          "authorName": "Michael Chen",
+          "authorTitle": "Founder of Digital Solutions"
+        }
+      ]
+    },
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "maxWidth": {
+      "type": "number",
+      "default": 1200
+    }
+  }
+}
