@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Adaire Blocks
  * Description:       Adaire Blocks is a powerful WordPress plugin that helps developers and designers create visually stunning, high-performance websites with ease right inside the Gutenberg editor.
- * Version:           1.0.2
+ * Version:           1.0.3
  * Requires at least: 6.7
  * Requires PHP:      7.4
  * Author:            Adaire
@@ -135,7 +135,7 @@ add_action('admin_post_my_plugin_rollback', function () {
     }
 
     // URL to the previous version ZIP
-    $previous_version_zip = 'https://github.com/helloadaire/Adaire-Blocks/releases/download/1.0.1/adaire-blocks.zip';
+    $previous_version_zip = 'https://github.com/helloadaire/Adaire-Blocks/releases/download/1.0.2/adaire-blocks.zip';
     error_log('[Adaire Blocks Rollback] Attempting rollback to: ' . $previous_version_zip);
 
     require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
@@ -193,7 +193,7 @@ add_action('admin_notices', function () {
 // End of version rollback code
 
 // Define plugin constants
-define('ADAIRE_BLOCKS_VERSION', '1.0.2');
+define('ADAIRE_BLOCKS_VERSION', '1.0.3');
 define('ADAIRE_BLOCKS_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('ADAIRE_BLOCKS_PLUGIN_PATH', plugin_dir_path(__FILE__));
 
