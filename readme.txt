@@ -2,7 +2,7 @@
 Contributors:      Adaire
 Tags:              block, gutenberg, gsap, animation, portfolio, services, hero, video, testimonial, cta
 Tested up to:      6.7
-Stable tag:        1.0.4
+Stable tag:        1.0.5
 Requires at least: 6.7
 Requires PHP:      7.4
 License:           GPL-3.0
@@ -123,5 +123,5 @@ The plugin is optimized for performance with efficient block registration and la
 
 == Upgrade Notice ==
 
-= 1.0.4 =
+= 1.0.5 =
 Major release of Adaire Blocks plugin with 11 professional blocks, GSAP animations, and comprehensive customization options.

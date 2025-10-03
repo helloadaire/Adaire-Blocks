@@ -1,6 +1,140 @@
 <?php
 // This file is generated. Do not modify it manually.
 return array(
+	'accordion-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/accordion-block',
+		'version' => '0.1.0',
+		'title' => 'Accordion',
+		'category' => 'widgets',
+		'icon' => 'list-view',
+		'description' => 'Configurable accordion with animations, colors, and typography.',
+		'supports' => array(
+			'html' => false,
+			'anchor' => true,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'customClassName' => true
+		),
+		'textdomain' => 'accordion-block',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'viewScript' => 'file:./view.js',
+		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'items' => array(
+				'type' => 'array',
+				'default' => array(
+					array(
+						'title' => 'Accordion Item 1',
+						'content' => 'Lorem ipsum dolor sit amet.',
+						'open' => true
+					),
+					array(
+						'title' => 'Accordion Item 2',
+						'content' => 'Consectetur adipiscing elit.',
+						'open' => false
+					),
+					array(
+						'title' => 'Accordion Item 3',
+						'content' => 'Sed do eiusmod tempor.',
+						'open' => false
+					)
+				)
+			),
+			'titleColor' => array(
+				'type' => 'string',
+				'default' => '#1a1a1a'
+			),
+			'contentColor' => array(
+				'type' => 'string',
+				'default' => '#4a5568'
+			),
+			'backgroundColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'chevronColor' => array(
+				'type' => 'string',
+				'default' => '#4a5568'
+			),
+			'titleFontSize' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'contentFontSize' => array(
+				'type' => 'number',
+				'default' => 16
+			),
+			'gap' => array(
+				'type' => 'number',
+				'default' => 12
+			),
+			'radius' => array(
+				'type' => 'number',
+				'default' => 12
+			),
+			'padding' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'animationDuration' => array(
+				'type' => 'number',
+				'default' => 300
+			),
+			'animationEasing' => array(
+				'type' => 'string',
+				'default' => 'ease'
+			),
+			'allowMultipleOpen' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'icon' => array(
+				'type' => 'string',
+				'default' => 'chevron-down'
+			),
+			'marginTop' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginRight' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginBottom' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginLeft' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'titleFontWeight' => array(
+				'type' => 'string',
+				'default' => '600'
+			),
+			'contentFontWeight' => array(
+				'type' => 'string',
+				'default' => '400'
+			),
+			'shadowIntensity' => array(
+				'type' => 'number',
+				'default' => 0.08
+			),
+			'contentBackgroundColor' => array(
+				'type' => 'string',
+				'default' => '#f8fafc'
+			)
+		)
+	),
 	'button-block' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
@@ -98,6 +232,420 @@ return array(
 				'default' => '500'
 			)
 		)
+	),
+	'call-to-action-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/call-to-action',
+		'version' => '0.1.0',
+		'title' => 'Call To Action Block',
+		'category' => 'widgets',
+		'icon' => 'megaphone',
+		'description' => 'A call-to-action block with animated carousel and glowing gradient background.',
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false,
+			'align' => true,
+			'alignWide' => true,
+			'anchor' => true,
+			'customClassName' => true,
+			'reusable' => true
+		),
+		'textdomain' => 'cta-block',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'viewScript' => 'file:./view.js',
+		'attributes' => array(
+			'layout' => array(
+				'type' => 'string',
+				'default' => 'split-left'
+			),
+			'minHeight' => array(
+				'type' => 'number',
+				'default' => 400
+			),
+			'backgroundImage' => array(
+				'type' => 'object',
+				'default' => null
+			),
+			'backgroundSize' => array(
+				'type' => 'string',
+				'default' => 'cover'
+			),
+			'backgroundPosition' => array(
+				'type' => 'string',
+				'default' => 'center'
+			),
+			'imageWidth' => array(
+				'type' => 'number',
+				'default' => 50
+			),
+			'contentJustify' => array(
+				'type' => 'string',
+				'default' => 'center'
+			),
+			'contentAlign' => array(
+				'type' => 'string',
+				'default' => 'flex-start'
+			),
+			'contentPadding' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => 20,
+					'right' => 20,
+					'bottom' => 20,
+					'left' => 20
+				)
+			),
+			'contentBackgroundColor' => array(
+				'type' => 'string',
+				'default' => '#f5f5f5'
+			),
+			'headerText' => array(
+				'type' => 'string',
+				'default' => 'Header Text'
+			),
+			'headerFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 40,
+					'tablet' => 32,
+					'mobile' => 24
+				)
+			),
+			'headerColor' => array(
+				'type' => 'string',
+				'default' => '#333333'
+			),
+			'headerMarginBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 20,
+					'tablet' => 16,
+					'mobile' => 12
+				)
+			),
+			'headerTextAlign' => array(
+				'type' => 'string',
+				'default' => 'left'
+			),
+			'headerFontWeight' => array(
+				'type' => 'string',
+				'default' => '300'
+			),
+			'bodyText' => array(
+				'type' => 'string',
+				'default' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ultrices est quam, sit amet sollicitudin nunc dapibus vitae. Donec congue, augue non pulvinar tempus, quam ipsum dignissim odio, id finibus neque nulla a velit. Suspendisse potenti.'
+			),
+			'bodyFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 16,
+					'tablet' => 14,
+					'mobile' => 12
+				)
+			),
+			'bodyColor' => array(
+				'type' => 'string',
+				'default' => '#666666'
+			),
+			'bodyMarginBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 20,
+					'tablet' => 16,
+					'mobile' => 12
+				)
+			),
+			'bodyTextAlign' => array(
+				'type' => 'string',
+				'default' => 'left'
+			),
+			'bodyFontWeight' => array(
+				'type' => 'string',
+				'default' => '300'
+			),
+			'stackedImageHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => array(
+						'value' => 500,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 400,
+						'unit' => 'px'
+					),
+					'mobile' => array(
+						'value' => 300,
+						'unit' => 'px'
+					)
+				)
+			),
+			'stackedContentWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 50,
+					'tablet' => 70,
+					'mobile' => 90
+				)
+			),
+			'overlayBackgroundColor' => array(
+				'type' => 'string',
+				'default' => '#000000'
+			),
+			'overlayOpacity' => array(
+				'type' => 'number',
+				'default' => 0.5
+			),
+			'overlayContentWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 50,
+					'tablet' => 70,
+					'mobile' => 90
+				)
+			),
+			'overlayTextColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'overlayHeaderColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'overlayBodyColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'marginTop' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginRight' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginLeft' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'gradientType' => array(
+				'type' => 'string',
+				'default' => 'none'
+			),
+			'gradientColor1' => array(
+				'type' => 'string',
+				'default' => '#ff4444'
+			),
+			'gradientColor2' => array(
+				'type' => 'string',
+				'default' => '#ff6666'
+			),
+			'gradientDirection' => array(
+				'type' => 'string',
+				'default' => '135deg'
+			),
+			'gradientOpacity' => array(
+				'type' => 'number',
+				'default' => 0.1
+			)
+		)
+	),
+	'container-block' => array(
+		'apiVersion' => 3,
+		'name' => 'create-block/container-block',
+		'version' => '1.0.0',
+		'title' => 'Container',
+		'category' => 'layout',
+		'icon' => 'index-card',
+		'description' => 'A flexible container that can hold any blocks with customizable layout and styling.',
+		'supports' => array(
+			'html' => false,
+			'anchor' => true,
+			'align' => array(
+				'wide',
+				'full'
+			)
+		),
+		'attributes' => array(
+			'justifyContent' => array(
+				'type' => 'string',
+				'default' => 'flex-start'
+			),
+			'alignItems' => array(
+				'type' => 'string',
+				'default' => 'stretch'
+			),
+			'flexDirection' => array(
+				'type' => 'string',
+				'default' => 'row'
+			),
+			'gap' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'flexDirectionMobile' => array(
+				'type' => 'string',
+				'default' => 'column'
+			),
+			'justifyContentMobile' => array(
+				'type' => 'string',
+				'default' => 'flex-start'
+			),
+			'alignItemsMobile' => array(
+				'type' => 'string',
+				'default' => 'stretch'
+			),
+			'gapMobile' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'flexDirectionTablet' => array(
+				'type' => 'string',
+				'default' => 'row'
+			),
+			'justifyContentTablet' => array(
+				'type' => 'string',
+				'default' => 'flex-start'
+			),
+			'alignItemsTablet' => array(
+				'type' => 'string',
+				'default' => 'stretch'
+			),
+			'gapTablet' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'containerWidth' => array(
+				'type' => 'string',
+				'default' => 'full'
+			),
+			'maxWidth' => array(
+				'type' => 'number',
+				'default' => 1200
+			),
+			'paddingTop' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'paddingRight' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'paddingBottom' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'paddingLeft' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginTop' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginRight' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginBottom' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginLeft' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'backgroundColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'backgroundOpacity' => array(
+				'type' => 'number',
+				'default' => 1
+			),
+			'backgroundGradient' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'backgroundImageURL' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'backgroundPosition' => array(
+				'type' => 'string',
+				'default' => 'center center'
+			),
+			'backgroundSize' => array(
+				'type' => 'string',
+				'default' => 'cover'
+			),
+			'backgroundRepeat' => array(
+				'type' => 'string',
+				'default' => 'no-repeat'
+			),
+			'overlayColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'overlayOpacity' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'borderStyle' => array(
+				'type' => 'string',
+				'default' => 'none'
+			),
+			'borderColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'borderWidth' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'borderRadius' => array(
+				'type' => 'number',
+				'default' => 0
+			)
+		),
+		'usesContext' => array(
+			
+		),
+		'providesContext' => array(
+			
+		),
+		'example' => array(
+			
+		),
+		'editorScript' => 'file:./index.js',
+		'viewScript' => 'file:./view.js',
+		'style' => 'file:./style.scss',
+		'editorStyle' => 'file:./editor.scss'
 	),
 	'cta-block' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
