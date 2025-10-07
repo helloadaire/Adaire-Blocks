@@ -117,6 +117,14 @@ return array(
 				'type' => 'number',
 				'default' => 0
 			),
+			'marginHorizontal' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
 			'titleFontWeight' => array(
 				'type' => 'string',
 				'default' => '600'
@@ -132,6 +140,17 @@ return array(
 			'contentBackgroundColor' => array(
 				'type' => 'string',
 				'default' => '#f8fafc'
+			),
+			'containerMode' => array(
+				'type' => 'string',
+				'default' => 'full'
+			),
+			'containerMaxWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'value' => 1200,
+					'unit' => 'px'
+				)
 			)
 		)
 	),
@@ -173,7 +192,7 @@ return array(
 			),
 			'buttonColor' => array(
 				'type' => 'string',
-				'default' => '#ffffff'
+				'default' => '#000000'
 			),
 			'buttonBackgroundColor' => array(
 				'type' => 'string',
@@ -212,12 +231,22 @@ return array(
 				'default' => 'slide-underline'
 			),
 			'buttonPadding' => array(
-				'type' => 'string',
-				'default' => '0.2em 0'
+				'type' => 'object',
+				'default' => array(
+					'top' => '10px',
+					'right' => '20px',
+					'bottom' => '10px',
+					'left' => '20px'
+				)
 			),
 			'buttonMargin' => array(
-				'type' => 'string',
-				'default' => '20px 0'
+				'type' => 'object',
+				'default' => array(
+					'top' => '20px',
+					'right' => '0px',
+					'bottom' => '20px',
+					'left' => '0px'
+				)
 			),
 			'zIndex' => array(
 				'type' => 'number',
@@ -472,6 +501,54 @@ return array(
 			'gradientOpacity' => array(
 				'type' => 'number',
 				'default' => 0.1
+			),
+			'contentGradientType' => array(
+				'type' => 'string',
+				'default' => 'none'
+			),
+			'contentGradientColor1' => array(
+				'type' => 'string',
+				'default' => '#ff4444'
+			),
+			'contentGradientColor2' => array(
+				'type' => 'string',
+				'default' => '#ff6666'
+			),
+			'contentGradientDirection' => array(
+				'type' => 'string',
+				'default' => '135deg'
+			),
+			'contentGradientOpacity' => array(
+				'type' => 'number',
+				'default' => 0.1
+			),
+			'contentGradientOrigin' => array(
+				'type' => 'string',
+				'default' => 'center'
+			),
+			'overlayGradientType' => array(
+				'type' => 'string',
+				'default' => 'none'
+			),
+			'overlayGradientColor1' => array(
+				'type' => 'string',
+				'default' => '#000000'
+			),
+			'overlayGradientColor2' => array(
+				'type' => 'string',
+				'default' => '#000000'
+			),
+			'overlayGradientDirection' => array(
+				'type' => 'string',
+				'default' => '135deg'
+			),
+			'overlayGradientOpacity' => array(
+				'type' => 'number',
+				'default' => 0.5
+			),
+			'overlayGradientOrigin' => array(
+				'type' => 'string',
+				'default' => 'center'
 			)
 		)
 	),
@@ -2002,6 +2079,191 @@ return array(
 			'containerHeightPhone' => array(
 				'type' => 'number',
 				'default' => 50
+			)
+		)
+	),
+	'tab-panel-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/tab-panel-block',
+		'version' => '0.1.0',
+		'title' => 'Tab Panel',
+		'category' => 'widgets',
+		'parent' => array(
+			'create-block/tabs-block'
+		),
+		'icon' => 'media-text',
+		'description' => 'A single tab panel content area (automatically managed by Tabs block).',
+		'supports' => array(
+			'html' => false,
+			'reusable' => false,
+			'inserter' => false
+		),
+		'textdomain' => 'tab-panel-block',
+		'editorScript' => 'file:./index.js',
+		'style' => 'file:./style-index.css',
+		'attributes' => array(
+			'tabTitle' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'tabId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'tabIndex' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'isActive' => array(
+				'type' => 'boolean',
+				'default' => false
+			)
+		)
+	),
+	'tabs-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/tabs-block',
+		'version' => '0.1.0',
+		'title' => 'Tabs',
+		'category' => 'widgets',
+		'icon' => 'index-card',
+		'description' => 'Beautiful tabbed content with smooth GSAP animations and customizable styling.',
+		'supports' => array(
+			'html' => false,
+			'anchor' => true,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'customClassName' => true
+		),
+		'textdomain' => 'tabs-block',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'viewScript' => 'file:./view.js',
+		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'tabs' => array(
+				'type' => 'array',
+				'default' => array(
+					array(
+						'title' => 'Retail',
+						'id' => 'tab-1'
+					),
+					array(
+						'title' => 'Post, Parcel & Express',
+						'id' => 'tab-2'
+					),
+					array(
+						'title' => 'Supply Chain Logistics',
+						'id' => 'tab-3'
+					),
+					array(
+						'title' => 'Air Travel',
+						'id' => 'tab-4'
+					),
+					array(
+						'title' => 'Manufacturing',
+						'id' => 'tab-5'
+					)
+				)
+			),
+			'activeTab' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'tabTitleColor' => array(
+				'type' => 'string',
+				'default' => '#64748b'
+			),
+			'tabTitleActiveColor' => array(
+				'type' => 'string',
+				'default' => '#0f172a'
+			),
+			'tabUnderlineColor' => array(
+				'type' => 'string',
+				'default' => '#3b82f6'
+			),
+			'tabTitleFontSize' => array(
+				'type' => 'number',
+				'default' => 18
+			),
+			'tabTitleFontWeight' => array(
+				'type' => 'string',
+				'default' => '500'
+			),
+			'tabTitleActiveFontWeight' => array(
+				'type' => 'string',
+				'default' => '600'
+			),
+			'tabGap' => array(
+				'type' => 'number',
+				'default' => 32
+			),
+			'underlineHeight' => array(
+				'type' => 'number',
+				'default' => 3
+			),
+			'contentPaddingTop' => array(
+				'type' => 'number',
+				'default' => 40
+			),
+			'contentPaddingRight' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'contentPaddingBottom' => array(
+				'type' => 'number',
+				'default' => 40
+			),
+			'contentPaddingLeft' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'tabsAlign' => array(
+				'type' => 'string',
+				'default' => 'flex-start'
+			),
+			'animationDuration' => array(
+				'type' => 'number',
+				'default' => 0.6
+			),
+			'animationEase' => array(
+				'type' => 'string',
+				'default' => 'power2.out'
+			),
+			'containerMode' => array(
+				'type' => 'string',
+				'default' => 'full'
+			),
+			'containerMaxWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'value' => 1200,
+					'unit' => 'px'
+				)
+			),
+			'marginTop' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginRight' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginBottom' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginLeft' => array(
+				'type' => 'number',
+				'default' => 0
 			)
 		)
 	),

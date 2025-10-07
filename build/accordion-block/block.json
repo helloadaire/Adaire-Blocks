@@ -114,6 +114,14 @@
       "type": "number",
       "default": 0
     },
+    "marginHorizontal": {
+      "type": "object",
+      "default": {
+        "desktop": 0,
+        "tablet": 0,
+        "mobile": 0
+      }
+    },
     "titleFontWeight": {
       "type": "string",
       "default": "600"
@@ -129,6 +137,17 @@
     "contentBackgroundColor": {
       "type": "string",
       "default": "#f8fafc"
+    },
+    "containerMode": {
+      "type": "string",
+      "default": "full"
+    },
+    "containerMaxWidth": {
+      "type": "object",
+      "default": {
+        "value": 1200,
+        "unit": "px"
+      }
     }
   }
 }

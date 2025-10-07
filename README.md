@@ -141,25 +141,8 @@ A: The plugin is optimized for performance with efficient block registration and
 
 ## Changelog
 
-### Version 1.0.0
-- Major release with comprehensive block collection
-- Added Video Hero Slider with YouTube/Vimeo integration
-- Added Portfolio Block with gallery modals and GSAP animations
-- Added Services Block with interactive carousel and scroll effects
-- Added Project Block with particle effects and dynamic content
-- Added Questions Block with GSAP pinning and transitions
-- Added Scroll Text Block with customizable scroll animations
-- Added Particles Block with scroll-controlled particle effects
-- Added Button Block with advanced styling and hover animations
-- Added CTA Block with animated carousels and gradient backgrounds
-- Added Logos Block with customizable partner logo sliders
-- Added Testimonial Block with professional client showcase layouts
-- Optimized block registration for WordPress 6.7+ with metadata collection
-- Integrated GSAP 3.13.0 for professional animations
-- Added REST API endpoints for dynamic content
-- Implemented Locomotive Scroll support for smooth scrolling
-- Enhanced mobile responsiveness across all blocks
-- Added comprehensive customization options for all blocks
+### Version 1.0.6
+- Added the Tabs Block
 
 ## License
 

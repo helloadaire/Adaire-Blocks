@@ -235,6 +235,54 @@
     "gradientOpacity": {
       "type": "number",
       "default": 0.1
+    },
+    "contentGradientType": {
+      "type": "string",
+      "default": "none"
+    },
+    "contentGradientColor1": {
+      "type": "string",
+      "default": "#ff4444"
+    },
+    "contentGradientColor2": {
+      "type": "string",
+      "default": "#ff6666"
+    },
+    "contentGradientDirection": {
+      "type": "string",
+      "default": "135deg"
+    },
+    "contentGradientOpacity": {
+      "type": "number",
+      "default": 0.1
+    },
+    "contentGradientOrigin": {
+      "type": "string",
+      "default": "center"
+    },
+    "overlayGradientType": {
+      "type": "string",
+      "default": "none"
+    },
+    "overlayGradientColor1": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "overlayGradientColor2": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "overlayGradientDirection": {
+      "type": "string",
+      "default": "135deg"
+    },
+    "overlayGradientOpacity": {
+      "type": "number",
+      "default": 0.5
+    },
+    "overlayGradientOrigin": {
+      "type": "string",
+      "default": "center"
     }
   }
 }
