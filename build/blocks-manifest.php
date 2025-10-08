@@ -1523,6 +1523,288 @@ return array(
 			)
 		)
 	),
+	'posts-grid-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/posts-grid-block',
+		'version' => '0.1.0',
+		'title' => 'Posts Grid',
+		'category' => 'widgets',
+		'icon' => 'grid-view',
+		'description' => 'A dynamic posts grid with beautiful GSAP animations, multiple layout options, and category filtering.',
+		'supports' => array(
+			'html' => false,
+			'anchor' => true,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'customClassName' => true
+		),
+		'textdomain' => 'posts-grid-block',
+		'editorScript' => 'file:./index.js',
+		'style' => 'file:./style-index.css',
+		'viewScript' => 'file:./view.js',
+		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'postsPerPage' => array(
+				'type' => 'number',
+				'default' => 6
+			),
+			'enablePagination' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'paginationStyle' => array(
+				'type' => 'string',
+				'default' => 'numbers'
+			),
+			'selectedCategories' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			),
+			'selectedPosts' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			),
+			'postType' => array(
+				'type' => 'string',
+				'default' => 'post'
+			),
+			'excludeCurrentPost' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'showCategories' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'showDate' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'showAuthor' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'showReadTime' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'showExcerpt' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'excerptLength' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'layoutType' => array(
+				'type' => 'string',
+				'default' => 'normal'
+			),
+			'columns' => array(
+				'type' => 'number',
+				'default' => 3
+			),
+			'enableFiltering' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'filterPosition' => array(
+				'type' => 'string',
+				'default' => 'top'
+			),
+			'filterStyle' => array(
+				'type' => 'string',
+				'default' => 'pills'
+			),
+			'cardBorderRadius' => array(
+				'type' => 'number',
+				'default' => 8
+			),
+			'cardPadding' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'cardGap' => array(
+				'type' => 'number',
+				'default' => 24
+			),
+			'imageHeight' => array(
+				'type' => 'number',
+				'default' => 200
+			),
+			'imageFit' => array(
+				'type' => 'string',
+				'default' => 'cover'
+			),
+			'titleColor' => array(
+				'type' => 'string',
+				'default' => '#1f2937'
+			),
+			'titleFontSize' => array(
+				'type' => 'number',
+				'default' => 18
+			),
+			'titleFontWeight' => array(
+				'type' => 'string',
+				'default' => '600'
+			),
+			'excerptColor' => array(
+				'type' => 'string',
+				'default' => '#6b7280'
+			),
+			'excerptFontSize' => array(
+				'type' => 'number',
+				'default' => 14
+			),
+			'excerptFontWeight' => array(
+				'type' => 'string',
+				'default' => '400'
+			),
+			'metaColor' => array(
+				'type' => 'string',
+				'default' => '#9ca3af'
+			),
+			'metaFontSize' => array(
+				'type' => 'number',
+				'default' => 12
+			),
+			'metaFontWeight' => array(
+				'type' => 'string',
+				'default' => '400'
+			),
+			'categoryColor' => array(
+				'type' => 'string',
+				'default' => '#3b82f6'
+			),
+			'categoryBackgroundColor' => array(
+				'type' => 'string',
+				'default' => '#f1f5f9'
+			),
+			'categoryBorderRadius' => array(
+				'type' => 'number',
+				'default' => 16
+			),
+			'filterBorderRadius' => array(
+				'type' => 'number',
+				'default' => 16
+			),
+			'paginationBorderRadius' => array(
+				'type' => 'number',
+				'default' => 6
+			),
+			'enableAnimations' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'animationType' => array(
+				'type' => 'string',
+				'default' => 'fadeUp'
+			),
+			'transitionAnimation' => array(
+				'type' => 'string',
+				'default' => 'fade'
+			),
+			'animationDuration' => array(
+				'type' => 'number',
+				'default' => 0.6
+			),
+			'animationDelay' => array(
+				'type' => 'number',
+				'default' => 0.1
+			),
+			'animationEase' => array(
+				'type' => 'string',
+				'default' => 'power2.out'
+			),
+			'enableHoverEffects' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'hoverScale' => array(
+				'type' => 'number',
+				'default' => 1.05
+			),
+			'hoverShadow' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'overlayOpacity' => array(
+				'type' => 'number',
+				'default' => 0.4
+			),
+			'overlayGradient' => array(
+				'type' => 'string',
+				'default' => 'linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%)'
+			),
+			'textAlign' => array(
+				'type' => 'string',
+				'default' => 'left'
+			),
+			'containerMode' => array(
+				'type' => 'string',
+				'default' => 'full'
+			),
+			'containerMaxWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
+					)
+				)
+			),
+			'marginTop' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginRight' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginLeft' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			)
+		)
+	),
 	'project-block' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,

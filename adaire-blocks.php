@@ -517,3 +517,6 @@ function get_video_hero_block_data($request) {
     
     return $video_hero_blocks;
 }
+
+// Include Posts Grid Block PHP functionality
+require_once plugin_dir_path(__FILE__) . 'src/posts-grid-block/render.php';
