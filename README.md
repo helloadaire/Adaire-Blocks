@@ -141,7 +141,7 @@ A: The plugin is optimized for performance with efficient block registration and
 
 ## Changelog
 
-### Version 1.0.6
+### Version 1.0.7
 - Added the Tabs Block
 
 ## License
