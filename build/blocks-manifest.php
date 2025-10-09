@@ -148,8 +148,18 @@ return array(
 			'containerMaxWidth' => array(
 				'type' => 'object',
 				'default' => array(
-					'value' => 1200,
-					'unit' => 'px'
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
+					)
 				)
 			)
 		)
@@ -549,180 +559,33 @@ return array(
 			'overlayGradientOrigin' => array(
 				'type' => 'string',
 				'default' => 'center'
-			)
-		)
-	),
-	'container-block' => array(
-		'apiVersion' => 3,
-		'name' => 'create-block/container-block',
-		'version' => '1.0.0',
-		'title' => 'Container',
-		'category' => 'layout',
-		'icon' => 'index-card',
-		'description' => 'A flexible container that can hold any blocks with customizable layout and styling.',
-		'supports' => array(
-			'html' => false,
-			'anchor' => true,
-			'align' => array(
-				'wide',
-				'full'
-			)
-		),
-		'attributes' => array(
-			'justifyContent' => array(
-				'type' => 'string',
-				'default' => 'flex-start'
 			),
-			'alignItems' => array(
-				'type' => 'string',
-				'default' => 'stretch'
-			),
-			'flexDirection' => array(
-				'type' => 'string',
-				'default' => 'row'
-			),
-			'gap' => array(
-				'type' => 'number',
-				'default' => 0
-			),
-			'flexDirectionMobile' => array(
-				'type' => 'string',
-				'default' => 'column'
-			),
-			'justifyContentMobile' => array(
-				'type' => 'string',
-				'default' => 'flex-start'
-			),
-			'alignItemsMobile' => array(
-				'type' => 'string',
-				'default' => 'stretch'
-			),
-			'gapMobile' => array(
-				'type' => 'number',
-				'default' => 0
-			),
-			'flexDirectionTablet' => array(
-				'type' => 'string',
-				'default' => 'row'
-			),
-			'justifyContentTablet' => array(
-				'type' => 'string',
-				'default' => 'flex-start'
-			),
-			'alignItemsTablet' => array(
-				'type' => 'string',
-				'default' => 'stretch'
-			),
-			'gapTablet' => array(
-				'type' => 'number',
-				'default' => 0
-			),
-			'containerWidth' => array(
+			'containerMode' => array(
 				'type' => 'string',
 				'default' => 'full'
 			),
-			'maxWidth' => array(
-				'type' => 'number',
-				'default' => 1200
+			'containerMaxWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
+					)
+				)
 			),
-			'paddingTop' => array(
-				'type' => 'number',
-				'default' => 0
-			),
-			'paddingRight' => array(
-				'type' => 'number',
-				'default' => 0
-			),
-			'paddingBottom' => array(
-				'type' => 'number',
-				'default' => 0
-			),
-			'paddingLeft' => array(
-				'type' => 'number',
-				'default' => 0
-			),
-			'marginTop' => array(
-				'type' => 'number',
-				'default' => 0
-			),
-			'marginRight' => array(
-				'type' => 'number',
-				'default' => 0
-			),
-			'marginBottom' => array(
-				'type' => 'number',
-				'default' => 0
-			),
-			'marginLeft' => array(
-				'type' => 'number',
-				'default' => 0
-			),
-			'backgroundColor' => array(
-				'type' => 'string',
-				'default' => ''
-			),
-			'backgroundOpacity' => array(
-				'type' => 'number',
-				'default' => 1
-			),
-			'backgroundGradient' => array(
-				'type' => 'string',
-				'default' => ''
-			),
-			'backgroundImageURL' => array(
-				'type' => 'string',
-				'default' => ''
-			),
-			'backgroundPosition' => array(
-				'type' => 'string',
-				'default' => 'center center'
-			),
-			'backgroundSize' => array(
-				'type' => 'string',
-				'default' => 'cover'
-			),
-			'backgroundRepeat' => array(
-				'type' => 'string',
-				'default' => 'no-repeat'
-			),
-			'overlayColor' => array(
-				'type' => 'string',
-				'default' => ''
-			),
-			'overlayOpacity' => array(
-				'type' => 'number',
-				'default' => 0
-			),
-			'borderStyle' => array(
-				'type' => 'string',
-				'default' => 'none'
-			),
-			'borderColor' => array(
-				'type' => 'string',
-				'default' => ''
-			),
-			'borderWidth' => array(
-				'type' => 'number',
-				'default' => 0
-			),
-			'borderRadius' => array(
+			'contentBorderRadius' => array(
 				'type' => 'number',
 				'default' => 0
 			)
-		),
-		'usesContext' => array(
-			
-		),
-		'providesContext' => array(
-			
-		),
-		'example' => array(
-			
-		),
-		'editorScript' => 'file:./index.js',
-		'viewScript' => 'file:./view.js',
-		'style' => 'file:./style.scss',
-		'editorStyle' => 'file:./editor.scss'
+		)
 	),
 	'cta-block' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
@@ -990,6 +853,27 @@ return array(
 			'blockId' => array(
 				'type' => 'string',
 				'default' => ''
+			),
+			'containerMode' => array(
+				'type' => 'string',
+				'default' => 'full'
+			),
+			'containerMaxWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
+					)
+				)
 			)
 		)
 	),
@@ -2527,8 +2411,18 @@ return array(
 			'containerMaxWidth' => array(
 				'type' => 'object',
 				'default' => array(
-					'value' => 1200,
-					'unit' => 'px'
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
+					)
 				)
 			),
 			'marginTop' => array(
@@ -2546,6 +2440,22 @@ return array(
 			'marginLeft' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'tabLayout' => array(
+				'type' => 'string',
+				'default' => 'horizontal'
+			),
+			'tabPosition' => array(
+				'type' => 'string',
+				'default' => 'top'
+			),
+			'verticalActiveBgColor' => array(
+				'type' => 'string',
+				'default' => 'rgba(59, 130, 246, 0.05)'
+			),
+			'verticalActiveBgOpacity' => array(
+				'type' => 'number',
+				'default' => 0.05
 			)
 		)
 	),

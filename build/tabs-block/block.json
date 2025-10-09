@@ -122,8 +122,18 @@
     "containerMaxWidth": {
       "type": "object",
       "default": {
-        "value": 1200,
-        "unit": "px"
+        "desktop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 100,
+          "unit": "%"
+        },
+        "mobile": {
+          "value": 100,
+          "unit": "%"
+        }
       }
     },
     "marginTop": {
@@ -141,6 +151,22 @@
     "marginLeft": {
       "type": "number",
       "default": 0
+    },
+    "tabLayout": {
+      "type": "string",
+      "default": "horizontal"
+    },
+    "tabPosition": {
+      "type": "string",
+      "default": "top"
+    },
+    "verticalActiveBgColor": {
+      "type": "string",
+      "default": "rgba(59, 130, 246, 0.05)"
+    },
+    "verticalActiveBgOpacity": {
+      "type": "number",
+      "default": 0.05
     }
   }
 }

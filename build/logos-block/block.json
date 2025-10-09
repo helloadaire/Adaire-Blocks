@@ -110,6 +110,27 @@
     "blockId": {
       "type": "string",
       "default": ""
+    },
+    "containerMode": {
+      "type": "string",
+      "default": "full"
+    },
+    "containerMaxWidth": {
+      "type": "object",
+      "default": {
+        "desktop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 100,
+          "unit": "%"
+        },
+        "mobile": {
+          "value": 100,
+          "unit": "%"
+        }
+      }
     }
   }
 }

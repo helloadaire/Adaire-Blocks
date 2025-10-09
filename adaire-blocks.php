@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Adaire Blocks
  * Description:       A powerful WordPress plugin that helps developers and designers create visually stunning, high-performance websites with ease right inside the Gutenberg editor.
- * Version:           1.0.7
+ * Version:           1.0.8
  * Requires at least: 6.7
  * Requires PHP:      7.4
  * Author:            <a href="https://adaire.digital" target="_blank">Adaire Digital</a>
@@ -135,7 +135,7 @@ add_action('admin_post_my_plugin_rollback', function () {
     }
 
     // URL to the previous version ZIP
-    $previous_version_zip = 'https://github.com/helloadaire/Adaire-Blocks/releases/download/v1.0.6.alpha/adaire-blocks.1.0.6.alpha.zip';
+    $previous_version_zip = 'https://github.com/helloadaire/Adaire-Blocks/releases/download/v1.0.7.alpha/adaire-blocks.1.0.7.alpha.zip';
     error_log('[Adaire Blocks Rollback] Attempting rollback to: ' . $previous_version_zip);
 
     require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
@@ -193,7 +193,7 @@ add_action('admin_notices', function () {
 // End of version rollback code
 
 // Define plugin constants
-define('ADAIRE_BLOCKS_VERSION', '1.0.7');
+define('ADAIRE_BLOCKS_VERSION', '1.0.8');
 define('ADAIRE_BLOCKS_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('ADAIRE_BLOCKS_PLUGIN_PATH', plugin_dir_path(__FILE__));
 
@@ -518,5 +518,8 @@ function get_video_hero_block_data($request) {
     return $video_hero_blocks;
 }
 
-// Include Posts Grid Block PHP functionality
-require_once plugin_dir_path(__FILE__) . 'src/posts-grid-block/render.php';
+// Include Posts Grid Block PHP functionality (if file exists)
+$posts_grid_render = plugin_dir_path(__FILE__) . 'src/posts-grid-block/render.php';
+if (file_exists($posts_grid_render)) {
+    require_once $posts_grid_render;
+}

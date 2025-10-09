@@ -8,17 +8,22 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 
 ### Available Blocks
 
-- **Video Hero Slider** - Create stunning video hero sections with YouTube/Vimeo integration, smooth transitions, and customizable overlays
+- **Accordion Block** - Create collapsible content sections with smooth animations, customizable styling, and responsive design
+- **Button Block** - Create customizable buttons with hover animations, multiple styles, and advanced styling options
+- **Call to Action Block** - Build powerful call-to-action sections with animated carousels and gradient backgrounds
+- **Container Block** - Create flexible layout containers with constrained/full-width options and responsive settings
+- **CTA Block** - Build call-to-action sections with animated carousels and gradient backgrounds
+- **Logos Block** - Display partner/client logos with customizable sliders, smooth animations, and responsive breakpoints
+- **Particles Block** - Add dynamic particle effects with scroll-controlled animations and customizable positioning
 - **Portfolio Block** - Showcase your work with elegant portfolio layouts, gallery modals, and GSAP animations
-- **Services Block** - Display your services with interactive carousel layouts, scroll-triggered animations, and smooth transitions
+- **Posts Grid Block** - Display WordPress posts in beautiful grid layouts with filtering, pagination, and FLIP animations
 - **Project Block** - Highlight your projects with interactive showcases, particle effects, and dynamic content
 - **Questions Block** - Create animated FAQ sections with GSAP pinning and smooth transitions
 - **Scroll Text Block** - Add scroll-triggered text animations with customizable speed and direction
-- **Particles Block** - Add dynamic particle effects with scroll-controlled animations and customizable positioning
-- **Button Block** - Create customizable buttons with hover animations, multiple styles, and advanced styling options
-- **CTA Block** - Build call-to-action sections with animated carousels and gradient backgrounds
-- **Logos Block** - Display partner/client logos with customizable sliders and smooth animations
+- **Services Block** - Display your services with interactive carousel layouts, scroll-triggered animations, and smooth transitions
+- **Tabs Block** - Create tabbed content sections with smooth GSAP animations, vertical/horizontal layouts, and customizable styling
 - **Testimonial Block** - Showcase client testimonials with customizable carousels and professional layouts
+- **Video Hero Block** - Create stunning video hero sections with YouTube/Vimeo integration, smooth transitions, and customizable overlays
 
 ## Technical Features
 
@@ -52,9 +57,10 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 
 Once activated, you'll find all Adaire Blocks in the Gutenberg block inserter under their respective categories:
 
-- **Media**: Video Hero Slider, Logos Block
-- **Widgets**: Portfolio, Services, Project, Questions, Scroll Text, Particles, Button, CTA, Testimonial
-- **Text**: Swiper Block
+- **Media**: Video Hero Block, Logos Block
+- **Design**: Container Block, Accordion Block, Tabs Block
+- **Widgets**: Portfolio, Services, Project, Questions, Scroll Text, Particles, Button, CTA, Call to Action, Testimonial, Posts Grid
+- **Text**: Scroll Text Block
 
 Each block comes with extensive customization options accessible through the block editor sidebar, including:
 
@@ -141,8 +147,38 @@ A: The plugin is optimized for performance with efficient block registration and
 
 ## Changelog
 
-### Version 1.0.7
-- Added the Tabs Block
+### Version 1.0.8
+- Added Accordion Block with smooth animations and customizable styling
+- Added Posts Grid Block with filtering, pagination, and FLIP animations
+- Added Tabs Block with vertical/horizontal layouts and GSAP animations
+- Added Container Block with responsive constrained/full-width options
+- Added Call to Action Block with enhanced carousel features
+- Enhanced Logos Block with responsive breakpoints and container settings
+- Added initial active tab selector for Tabs Block
+- Improved font family inheritance for Accordion Block titles
+- Added responsive max-width settings for container-enabled blocks
+- Fixed bouncing animation in Posts Grid Block FLIP transitions
+- Fixed Tab block missing underline
+
+### Version 1.0.0
+- Major release with comprehensive block collection
+- Added Video Hero Block with YouTube/Vimeo integration
+- Added Portfolio Block with gallery modals and GSAP animations
+- Added Services Block with interactive carousel and scroll effects
+- Added Project Block with particle effects and dynamic content
+- Added Questions Block with GSAP pinning and transitions
+- Added Scroll Text Block with customizable scroll animations
+- Added Particles Block with scroll-controlled particle effects
+- Added Button Block with advanced styling and hover animations
+- Added CTA Block with animated carousels and gradient backgrounds
+- Added Logos Block with customizable partner logo sliders
+- Added Testimonial Block with professional client showcase layouts
+- Optimized block registration for WordPress 6.7+ with metadata collection
+- Integrated GSAP 3.13.0 for professional animations
+- Added REST API endpoints for dynamic content
+- Implemented Locomotive Scroll support for smooth scrolling
+- Enhanced mobile responsiveness across all blocks
+- Added comprehensive customization options for all blocks
 
 ## License
 

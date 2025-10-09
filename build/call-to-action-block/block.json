@@ -283,6 +283,31 @@
     "overlayGradientOrigin": {
       "type": "string",
       "default": "center"
+    },
+    "containerMode": {
+      "type": "string",
+      "default": "full"
+    },
+    "containerMaxWidth": {
+      "type": "object",
+      "default": {
+        "desktop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 100,
+          "unit": "%"
+        },
+        "mobile": {
+          "value": 100,
+          "unit": "%"
+        }
+      }
+    },
+    "contentBorderRadius": {
+      "type": "number",
+      "default": 0
     }
   }
 }

@@ -145,8 +145,18 @@
     "containerMaxWidth": {
       "type": "object",
       "default": {
-        "value": 1200,
-        "unit": "px"
+        "desktop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 100,
+          "unit": "%"
+        },
+        "mobile": {
+          "value": 100,
+          "unit": "%"
+        }
       }
     }
   }
