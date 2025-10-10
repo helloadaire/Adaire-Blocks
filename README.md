@@ -147,6 +147,18 @@ A: The plugin is optimized for performance with efficient block registration and
 
 ## Changelog
 
+### Version 1.0.9
+- **Added:** Block Migration Tool for automated block updates and validation fixes
+- **Added:** Migration admin page under Adaire Blocks menu
+- **Feature:** Batch-update all posts and pages with Adaire Blocks
+- **Feature:** Real-time progress tracking with visual indicators
+- **Feature:** Detailed migration logs with timestamps
+- **Feature:** Automatic validation error recovery
+- **Feature:** Safe cancellation and timeout protection
+- **Improvement:** Hidden iframe-based migration for proper editor context
+- **Security:** Nonce-protected AJAX endpoints and capability checks
+- **UX:** Professional admin interface with progress bar and color-coded logs
+
 ### Version 1.0.8
 - Added Accordion Block with smooth animations and customizable styling
 - Added Posts Grid Block with filtering, pagination, and FLIP animations

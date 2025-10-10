@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Adaire Blocks
  * Description:       A powerful WordPress plugin that helps developers and designers create visually stunning, high-performance websites with ease right inside the Gutenberg editor.
- * Version:           1.0.8
+ * Version:           1.0.9
  * Requires at least: 6.7
  * Requires PHP:      7.4
  * Author:            <a href="https://adaire.digital" target="_blank">Adaire Digital</a>
@@ -135,7 +135,7 @@ add_action('admin_post_my_plugin_rollback', function () {
     }
 
     // URL to the previous version ZIP
-    $previous_version_zip = 'https://github.com/helloadaire/Adaire-Blocks/releases/download/v1.0.7.alpha/adaire-blocks.1.0.7.alpha.zip';
+    $previous_version_zip = 'https://github.com/helloadaire/Adaire-Blocks/releases/download/v1.0.8.alpha/adaire-blocks.1.0.8.alpha.zip';
     error_log('[Adaire Blocks Rollback] Attempting rollback to: ' . $previous_version_zip);
 
     require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
@@ -193,12 +193,15 @@ add_action('admin_notices', function () {
 // End of version rollback code
 
 // Define plugin constants
-define('ADAIRE_BLOCKS_VERSION', '1.0.8');
+define('ADAIRE_BLOCKS_VERSION', '1.0.9');
 define('ADAIRE_BLOCKS_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('ADAIRE_BLOCKS_PLUGIN_PATH', plugin_dir_path(__FILE__));
 
 // Include settings page
 require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'admin/settings-page.php';
+
+// Include block migration tool
+require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'admin/block-migration.php';
 /**
  * Registers the block using a `blocks-manifest.php` file, which improves the performance of block type registration.
  * Behind the scenes, it also registers all assets so they can be enqueued
@@ -240,15 +243,18 @@ function create_block_gsap_hero_block_block_init() {
 			}
 		}
 		
-		// Create a temporary filtered manifest file
-		$temp_manifest_path = __DIR__ . '/build/blocks-manifest-filtered.php';
-		file_put_contents( $temp_manifest_path, '<?php return ' . var_export( $filtered_manifest, true ) . ';' );
-		
-		wp_register_block_types_from_metadata_collection( __DIR__ . '/build', $temp_manifest_path );
-		
-		// Clean up temporary file
-		if ( file_exists( $temp_manifest_path ) ) {
-			unlink( $temp_manifest_path );
+		// Only proceed if we have blocks to register
+		if ( ! empty( $filtered_manifest ) ) {
+			// Create a temporary filtered manifest file
+			$temp_manifest_path = __DIR__ . '/build/blocks-manifest-filtered.php';
+			file_put_contents( $temp_manifest_path, '<?php return ' . var_export( $filtered_manifest, true ) . ';' );
+			
+			wp_register_block_types_from_metadata_collection( __DIR__ . '/build', $temp_manifest_path );
+			
+			// Clean up temporary file
+			if ( file_exists( $temp_manifest_path ) ) {
+				unlink( $temp_manifest_path );
+			}
 		}
 		return;
 	}
@@ -523,3 +529,21 @@ $posts_grid_render = plugin_dir_path(__FILE__) . 'src/posts-grid-block/render.ph
 if (file_exists($posts_grid_render)) {
     require_once $posts_grid_render;
 }
+
+// Auto Block Recovery - Automatically recover blocks on editor load
+function adaire_blocks_enqueue_auto_recovery() {
+	// Only load in the block editor
+	if ( ! is_admin() ) {
+		return;
+	}
+
+	// Enqueue the auto-recovery script
+	wp_enqueue_script(
+		'adaire-auto-block-recovery',
+		ADAIRE_BLOCKS_PLUGIN_URL . 'admin/js/auto-block-recovery.js',
+		array( 'wp-blocks', 'wp-data', 'wp-block-editor', 'wp-notices' ),
+		ADAIRE_BLOCKS_VERSION,
+		true
+	);
+}
+add_action( 'enqueue_block_editor_assets', 'adaire_blocks_enqueue_auto_recovery' );

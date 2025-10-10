@@ -120,6 +120,39 @@
     "maxWidth": {
       "type": "number",
       "default": 1200
+    },
+    "cardBackgroundColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "blockBackgroundColor": {
+      "type": "string",
+      "default": ""
+    },
+    "logoAlignment": {
+      "type": "string",
+      "default": "center"
+    },
+    "containerMode": {
+      "type": "string",
+      "default": "full"
+    },
+    "containerMaxWidth": {
+      "type": "object",
+      "default": {
+        "desktop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 100,
+          "unit": "%"
+        },
+        "mobile": {
+          "value": 100,
+          "unit": "%"
+        }
+      }
     }
   }
 }

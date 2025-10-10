@@ -138,6 +138,14 @@
       "type": "string",
       "default": "#f8fafc"
     },
+    "dividerColor": {
+      "type": "string",
+      "default": "#e2e8f0"
+    },
+    "dividerThickness": {
+      "type": "number",
+      "default": 1
+    },
     "containerMode": {
       "type": "string",
       "default": "full"

@@ -2,7 +2,7 @@
 Contributors:      Adaire
 Tags:              block, gutenberg, gsap, animation, portfolio, services, hero, video, testimonial, cta, accordion, tabs, posts, grid
 Tested up to:      6.7
-Stable tag:        1.0.8
+Stable tag:        1.0.9
 Requires at least: 6.7
 Requires PHP:      7.4
 License:           GPL-3.0
@@ -91,20 +91,11 @@ Yes, each block instance is independent and can be customized separately through
 
 The plugin is optimized for performance with efficient block registration and lazy loading of animation scripts. GSAP animations are hardware-accelerated for smooth performance.
 
-== Screenshots ==
-
-1. Accordion Block with collapsible content and smooth animations
-2. Posts Grid Block with filtering, pagination, and beautiful layouts
-3. Tabs Block with vertical/horizontal layouts and GSAP transitions
-4. Video Hero Block with smooth video transitions and overlay controls
-5. Portfolio Block showcasing projects with interactive gallery modals
-6. Services Block with animated carousel and scroll-triggered effects
-7. Logos Block with responsive partner logo slider
-8. Container Block with constrained/full-width responsive settings
-9. Particles Block with scroll-controlled particle animations
-10. Testimonial Block with professional client showcase layouts
-
 == Changelog ==
+
+
+= 1.0.9 =
+* Added migration tool: One click tool in admin panel to allow auto migration of all Adaire Blocks on all pages and posts.
 
 = 1.0.8 =
 * Added Accordion Block with smooth animations and customizable styling
@@ -117,28 +108,7 @@ The plugin is optimized for performance with efficient block registration and la
 * Improved font family inheritance for Accordion Block titles
 * Added responsive max-width settings for container-enabled blocks
 * Fixed bouncing animation in Posts Grid Block FLIP transitions
-
-= 1.0.0 =
-* Major release with comprehensive block collection
-* Added Video Hero Block with YouTube/Vimeo integration
-* Added Portfolio Block with gallery modals and GSAP animations
-* Added Services Block with interactive carousel and scroll effects
-* Added Project Block with particle effects and dynamic content
-* Added Questions Block with GSAP pinning and transitions
-* Added Scroll Text Block with customizable scroll animations
-* Added Particles Block with scroll-controlled particle effects
-* Added Button Block with advanced styling and hover animations
-* Added CTA Block with animated carousels and gradient backgrounds
-* Added Logos Block with customizable partner logo sliders
-* Added Testimonial Block with professional client showcase layouts
-* Optimized block registration for WordPress 6.7+ with metadata collection
-* Integrated GSAP 3.13.0 for professional animations
-* Added REST API endpoints for dynamic content
-* Implemented Locomotive Scroll support for smooth scrolling
-* Enhanced mobile responsiveness across all blocks
-* Added comprehensive customization options for all blocks
-
 == Upgrade Notice ==
 
-= 1.0.8 =
-New blocks added: Accordion, Posts Grid, Tabs, and Container blocks. Enhanced responsive settings and improved animations across all blocks.
+
+Made with ❤️ by Adaire Digital

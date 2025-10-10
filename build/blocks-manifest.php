@@ -141,6 +141,14 @@ return array(
 				'type' => 'string',
 				'default' => '#f8fafc'
 			),
+			'dividerColor' => array(
+				'type' => 'string',
+				'default' => '#e2e8f0'
+			),
+			'dividerThickness' => array(
+				'type' => 'number',
+				'default' => 1
+			),
 			'containerMode' => array(
 				'type' => 'string',
 				'default' => 'full'
@@ -2583,6 +2591,39 @@ return array(
 			'maxWidth' => array(
 				'type' => 'number',
 				'default' => 1200
+			),
+			'cardBackgroundColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'blockBackgroundColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'logoAlignment' => array(
+				'type' => 'string',
+				'default' => 'center'
+			),
+			'containerMode' => array(
+				'type' => 'string',
+				'default' => 'full'
+			),
+			'containerMaxWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
+					)
+				)
 			)
 		)
 	),
