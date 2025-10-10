@@ -44,10 +44,10 @@ function adaire_blocks_migration_page() {
             
             <p><strong>What this does:</strong></p>
             <ul>
-                <li>✅ Finds all posts/pages with Adaire Blocks</li>
-                <li>✅ Re-saves each post to update block HTML</li>
-                <li>✅ Fixes validation errors automatically</li>
-                <li>✅ Preserves all block settings and content</li>
+                <li>Finds all posts/pages with Adaire Blocks</li>
+                <li>Re-saves each post to update block HTML</li>
+                <li>Fixes validation errors automatically</li>
+                <li>Preserves all block settings and content</li>
             </ul>
             
             <p><strong>⚠️ Important:</strong></p>
@@ -67,7 +67,7 @@ function adaire_blocks_migration_page() {
                     <div id="migration-log" style="max-height: 300px; overflow-y: auto; background: #fff; padding: 10px; margin-top: 10px; border-radius: 4px; font-family: monospace; font-size: 12px;"></div>
                 </div>
                 <div id="migration-complete" style="display: none;">
-                    <p style="color: #00a32a; font-weight: bold;">✅ Migration completed successfully!</p>
+                    <p style="color: #00a32a; font-weight: bold;">Migration completed successfully!</p>
                     <p id="completion-summary"></p>
                 </div>
             </div>
