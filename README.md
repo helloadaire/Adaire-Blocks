@@ -159,49 +159,19 @@ A: The plugin is optimized for performance with efficient block registration and
 - **Security:** Nonce-protected AJAX endpoints and capability checks
 - **UX:** Professional admin interface with progress bar and color-coded logs
 
-### Version 1.0.8
-- Added Accordion Block with smooth animations and customizable styling
-- Added Posts Grid Block with filtering, pagination, and FLIP animations
-- Added Tabs Block with vertical/horizontal layouts and GSAP animations
-- Added Container Block with responsive constrained/full-width options
-- Added Call to Action Block with enhanced carousel features
-- Enhanced Logos Block with responsive breakpoints and container settings
-- Added initial active tab selector for Tabs Block
-- Improved font family inheritance for Accordion Block titles
-- Added responsive max-width settings for container-enabled blocks
-- Fixed bouncing animation in Posts Grid Block FLIP transitions
-- Fixed Tab block missing underline
-
-### Version 1.0.0
-- Major release with comprehensive block collection
-- Added Video Hero Block with YouTube/Vimeo integration
-- Added Portfolio Block with gallery modals and GSAP animations
-- Added Services Block with interactive carousel and scroll effects
-- Added Project Block with particle effects and dynamic content
-- Added Questions Block with GSAP pinning and transitions
-- Added Scroll Text Block with customizable scroll animations
-- Added Particles Block with scroll-controlled particle effects
-- Added Button Block with advanced styling and hover animations
-- Added CTA Block with animated carousels and gradient backgrounds
-- Added Logos Block with customizable partner logo sliders
-- Added Testimonial Block with professional client showcase layouts
-- Optimized block registration for WordPress 6.7+ with metadata collection
-- Integrated GSAP 3.13.0 for professional animations
-- Added REST API endpoints for dynamic content
-- Implemented Locomotive Scroll support for smooth scrolling
-- Enhanced mobile responsiveness across all blocks
-- Added comprehensive customization options for all blocks
+## This is an Alpha
+- This plugin is in alpha stage and is still in active development. Some features may update and unexpeted issues may occur.
+- We encourage developers to experiement and play around.
+- Feedback is welcome, as this will help improve the plugin.
+- No official support is provided at this stage.
 
 ## License
 
-This plugin is licensed under the GPL-3.0 License - see the [LICENSE](https://www.gnu.org/licenses/gpl-2.0.html) file for details.
+This plugin is licensed under the GPL-3.0 License.
 
-## Contributing
+The GPL-3.0 is a free and open-source software license created by the Free Software Foundation.
+It ensures users have the freedom to use, study, share, and modify the software.
 
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Support
-
-For support, feature requests, or bug reports, please contact us through the WordPress.org support forums or visit our website.
+see the [LICENSE](https://www.gnu.org/licenses/gpl-2.0.html) file for details. 
 
 **Made with ❤️ by Adaire Digital**
