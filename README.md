@@ -163,7 +163,7 @@ A: The plugin is optimized for performance with efficient block registration and
 - This plugin is in alpha stage and is still in active development. Some features may update and unexpeted issues may occur.
 - We encourage developers to experiement and play around.
 - Feedback is welcome, as this will help improve the plugin.
-- No official support is provided at this stage.
+- No support is provided at this stage.
 
 ## License
 
