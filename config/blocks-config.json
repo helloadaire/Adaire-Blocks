@@ -1,0 +1,181 @@
+{
+    "free": {
+        "accordion-block": {
+            "enabled": true,
+            "limits": {
+                "maxItems": 3
+            },
+            "upgradeMessage": "Go pro to add more accordion items."
+        },
+    "button-block": {
+      "enabled": true,
+      "limits": {
+        "maxStyles": 3
+      },
+      "upgradeMessage": "Upgrade to Premium for unlimited button styles and animations."
+    },
+    "counter-block": {
+      "enabled": true,
+      "limits": {
+        "maxDuration": 3000,
+        "features": ["basic-counter"]
+      },
+      "upgradeMessage": "Upgrade to Premium for advanced counter animations and unlimited duration."
+    },
+    "cta-block": {
+      "enabled": true,
+      "limits": {
+        "maxButtons": 1
+      },
+      "upgradeMessage": "Upgrade to Premium for multiple buttons and advanced layouts."
+    },
+        "testimonial-block": {
+            "enabled": true,
+            "limits": {
+                "maxItems": 3
+            },
+            "upgradeMessage": "Go pro to add more testimonial items."
+        },
+    "video-hero-block": {
+      "enabled": false,
+      "upgradeMessage": "Video Hero Block is a Premium feature. Upgrade to create stunning video backgrounds."
+    },
+    "portfolio-block": {
+      "enabled": false,
+      "upgradeMessage": "Portfolio Block is a Premium feature. Upgrade to showcase your work professionally."
+    },
+    "particles-block": {
+      "enabled": false,
+      "upgradeMessage": "Particles Block is a Premium feature. Upgrade to add interactive particle effects."
+    },
+    "services-block": {
+      "enabled": false,
+      "upgradeMessage": "Services Block is a Premium feature. Upgrade to create professional service showcases."
+    },
+        "logos-block": {
+            "enabled": true,
+            "limits": {
+                "maxItems": 3
+            },
+            "upgradeMessage": "Go pro to add more logo items."
+        },
+    "posts-grid-block": {
+      "enabled": false,
+      "upgradeMessage": "Posts Grid Block is a Premium feature. Upgrade to create dynamic content grids."
+    },
+    "project-block": {
+      "enabled": false,
+      "upgradeMessage": "Project Block is a Premium feature. Upgrade to showcase projects with advanced layouts."
+    },
+    "scroll-text-block": {
+      "enabled": false,
+      "upgradeMessage": "Scroll Text Block is a Premium feature. Upgrade to add animated scrolling text effects."
+    },
+        "tabs-block": {
+            "enabled": true,
+            "limits": {
+                "maxItems": 3
+            },
+            "upgradeMessage": "Go pro to add more tab items."
+        },
+    "tab-panel-block": {
+      "enabled": false,
+      "upgradeMessage": "Tab Panel Block is a Premium feature. Upgrade to create advanced tabbed interfaces."
+    },
+    "questions-block": {
+      "enabled": false,
+      "upgradeMessage": "Questions Block is a Premium feature. Upgrade to create interactive FAQ sections."
+    },
+    "call-to-action-block": {
+      "enabled": false,
+      "upgradeMessage": "Call to Action Block is a Premium feature. Upgrade to create compelling CTAs."
+    }
+  },
+  "premium": {
+    "accordion-block": {
+      "enabled": true,
+      "limits": {},
+      "features": ["unlimited-items", "advanced-styling", "custom-animations", "conditional-logic"]
+    },
+    "button-block": {
+      "enabled": true,
+      "limits": {},
+      "features": ["unlimited-styles", "animations", "conditional-logic", "advanced-effects"]
+    },
+    "counter-block": {
+      "enabled": true,
+      "limits": {},
+      "features": ["unlimited-duration", "advanced-animations", "conditional-triggers", "custom-easing"]
+    },
+    "cta-block": {
+      "enabled": true,
+      "limits": {},
+      "features": ["unlimited-buttons", "advanced-layouts", "conditional-display", "A/B-testing"]
+    },
+    "testimonial-block": {
+      "enabled": true,
+      "limits": {},
+      "features": ["unlimited-testimonials", "advanced-carousel", "filtering", "custom-templates"]
+    },
+    "video-hero-block": {
+      "enabled": true,
+      "limits": {},
+      "features": ["multiple-videos", "advanced-controls", "overlay-effects", "responsive-optimization"]
+    },
+    "portfolio-block": {
+      "enabled": true,
+      "limits": {},
+      "features": ["unlimited-projects", "advanced-filtering", "lightbox-effects", "custom-layouts"]
+    },
+    "particles-block": {
+      "enabled": true,
+      "limits": {},
+      "features": ["custom-particles", "interactive-effects", "performance-optimization", "custom-shapes"]
+    },
+    "services-block": {
+      "enabled": true,
+      "limits": {},
+      "features": ["unlimited-services", "advanced-animations", "custom-icons", "conditional-display"]
+    },
+    "logos-block": {
+      "enabled": true,
+      "limits": {},
+      "features": ["unlimited-logos", "advanced-animations", "hover-effects", "custom-styling"]
+    },
+    "posts-grid-block": {
+      "enabled": true,
+      "limits": {},
+      "features": ["unlimited-posts", "advanced-filtering", "custom-templates", "infinite-scroll"]
+    },
+    "project-block": {
+      "enabled": true,
+      "limits": {},
+      "features": ["unlimited-projects", "advanced-layouts", "custom-galleries", "interactive-effects"]
+    },
+    "scroll-text-block": {
+      "enabled": true,
+      "limits": {},
+      "features": ["custom-animations", "multiple-texts", "advanced-timing", "responsive-controls"]
+    },
+    "tabs-block": {
+      "enabled": true,
+      "limits": {},
+      "features": ["unlimited-tabs", "advanced-animations", "conditional-content", "custom-styling"]
+    },
+    "tab-panel-block": {
+      "enabled": true,
+      "limits": {},
+      "features": ["advanced-panels", "conditional-logic", "custom-animations", "responsive-behavior"]
+    },
+    "questions-block": {
+      "enabled": true,
+      "limits": {},
+      "features": ["unlimited-questions", "advanced-animations", "conditional-logic", "custom-styling"]
+    },
+    "call-to-action-block": {
+      "enabled": true,
+      "limits": {},
+      "features": ["unlimited-ctas", "advanced-layouts", "conditional-display", "A/B-testing"]
+    }
+  }
+}

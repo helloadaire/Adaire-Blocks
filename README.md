@@ -12,6 +12,7 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 - **Button Block** - Create customizable buttons with hover animations, multiple styles, and advanced styling options
 - **Call to Action Block** - Build powerful call-to-action sections with animated carousels and gradient backgrounds
 - **Container Block** - Create flexible layout containers with constrained/full-width options and responsive settings
+- **Counter Block** - Display animated counters that count up or down to a target number, with customizable prefixes, suffixes, and captions for showcasing statistics and achievements
 - **CTA Block** - Build call-to-action sections with animated carousels and gradient backgrounds
 - **Logos Block** - Display partner/client logos with customizable sliders, smooth animations, and responsive breakpoints
 - **Particles Block** - Add dynamic particle effects with scroll-controlled animations and customizable positioning
@@ -145,52 +146,7 @@ A: Yes, each block instance is independent and can be customized separately thro
 **Q: Are there any performance considerations?**
 A: The plugin is optimized for performance with efficient block registration and lazy loading of animation scripts. GSAP animations are hardware-accelerated for smooth performance.
 
-## Changelog
 
-### Version 1.0.9
-- **Added:** Block Migration Tool for automated block updates and validation fixes
-- **Added:** Migration admin page under Adaire Blocks menu
-- **Feature:** Batch-update all posts and pages with Adaire Blocks
-- **Feature:** Real-time progress tracking with visual indicators
-- **Feature:** Detailed migration logs with timestamps
-- **Feature:** Automatic validation error recovery
-- **Feature:** Safe cancellation and timeout protection
-- **Improvement:** Hidden iframe-based migration for proper editor context
-- **Security:** Nonce-protected AJAX endpoints and capability checks
-- **UX:** Professional admin interface with progress bar and color-coded logs
-
-### Version 1.0.8
-- Added Accordion Block with smooth animations and customizable styling
-- Added Posts Grid Block with filtering, pagination, and FLIP animations
-- Added Tabs Block with vertical/horizontal layouts and GSAP animations
-- Added Container Block with responsive constrained/full-width options
-- Added Call to Action Block with enhanced carousel features
-- Enhanced Logos Block with responsive breakpoints and container settings
-- Added initial active tab selector for Tabs Block
-- Improved font family inheritance for Accordion Block titles
-- Added responsive max-width settings for container-enabled blocks
-- Fixed bouncing animation in Posts Grid Block FLIP transitions
-- Fixed Tab block missing underline
-
-### Version 1.0.0
-- Major release with comprehensive block collection
-- Added Video Hero Block with YouTube/Vimeo integration
-- Added Portfolio Block with gallery modals and GSAP animations
-- Added Services Block with interactive carousel and scroll effects
-- Added Project Block with particle effects and dynamic content
-- Added Questions Block with GSAP pinning and transitions
-- Added Scroll Text Block with customizable scroll animations
-- Added Particles Block with scroll-controlled particle effects
-- Added Button Block with advanced styling and hover animations
-- Added CTA Block with animated carousels and gradient backgrounds
-- Added Logos Block with customizable partner logo sliders
-- Added Testimonial Block with professional client showcase layouts
-- Optimized block registration for WordPress 6.7+ with metadata collection
-- Integrated GSAP 3.13.0 for professional animations
-- Added REST API endpoints for dynamic content
-- Implemented Locomotive Scroll support for smooth scrolling
-- Enhanced mobile responsiveness across all blocks
-- Added comprehensive customization options for all blocks
 
 ## License
 

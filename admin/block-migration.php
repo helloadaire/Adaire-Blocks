@@ -35,39 +35,56 @@ function adaire_blocks_migration_page() {
         <h1>Adaire Blocks Migration Tool</h1>
         
         <div class="card" style="max-width: 800px; margin-top: 20px;">
-            <h2>Update All Blocks</h2>
+            <h2> Update All Blocks (Queue-Based Migration)</h2>
             <p>
-                This tool will find all posts and pages that contain Adaire Blocks and re-save them 
-                with the current block structure. This is useful when you've made changes to block 
+                This tool uses a fast queue-based system to find all posts and pages that contain Adaire Blocks 
+                and re-save them with the current block structure. This is useful when you've made changes to block 
                 code that cause validation errors.
             </p>
             
             <p><strong>What this does:</strong></p>
             <ul>
-                <li>Finds all posts/pages with Adaire Blocks</li>
-                <li>Re-saves each post to update block HTML</li>
-                <li>Fixes validation errors automatically</li>
-                <li>Preserves all block settings and content</li>
+                <li> Finds all posts/pages with Adaire Blocks</li>
+                <li> Processes each post one at a time in a queue</li>
+                <li> Automatically recovers and fixes validation errors</li>
+                <li> Re-saves each post with the current block structure</li>
+                <li> Preserves all block settings and content</li>
+                <li> Cleans up resources after each post for optimal performance</li>
             </ul>
             
             <p><strong>⚠️ Important:</strong></p>
             <ul>
-                <li>This may take a few minutes depending on how many posts you have</li>
-                <li>It's recommended to backup your database first</li>
+                <li> Faster than previous version - processes posts sequentially with optimized timeouts</li>
+                <li> It's recommended to backup your database first</li>
                 <li>Do not close this page while migration is running</li>
+                <li> You can cancel at any time - already processed posts will remain migrated</li>
             </ul>
             
             <div id="migration-status" style="margin: 20px 0; padding: 15px; background: #f0f0f1; border-radius: 4px; display: none;">
                 <div id="migration-progress">
-                    <p><strong>Status:</strong> <span id="status-text">Preparing...</span></p>
-                    <p><strong>Progress:</strong> <span id="progress-text">0/0</span></p>
-                    <div style="background: #fff; border-radius: 4px; height: 30px; margin: 10px 0; overflow: hidden;">
-                        <div id="progress-bar" style="background: #2271b1; height: 100%; width: 0%; transition: width 0.3s;"></div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <div>
+                            <p style="margin: 0;"><strong>Status:</strong> <span id="status-text">Preparing...</span></p>
+                            <p style="margin: 5px 0 0 0; font-size: 12px; color: #666;">
+                                <span id="queue-status">Queue: Initializing...</span>
+                            </p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p style="margin: 0;"><strong>Progress:</strong> <span id="progress-text">0/0</span></p>
+                            <p style="margin: 5px 0 0 0; font-size: 12px; color: #666;">
+                                <span id="stats-text">✅ 0 | ❌ 0</span>
+                            </p>
+                        </div>
                     </div>
-                    <div id="migration-log" style="max-height: 300px; overflow-y: auto; background: #fff; padding: 10px; margin-top: 10px; border-radius: 4px; font-family: monospace; font-size: 12px;"></div>
+                    <div style="background: #fff; border-radius: 4px; height: 30px; margin: 10px 0; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);">
+                        <div id="progress-bar" style="background: linear-gradient(90deg, #2271b1, #135e96); height: 100%; width: 0%; transition: width 0.3s; display: flex; align-items: center; justify-content: center; color: white; font-size: 11px; font-weight: bold;">
+                            <span id="progress-percent" style="text-shadow: 0 1px 2px rgba(0,0,0,0.3);"></span>
+                        </div>
+                    </div>
+                    <div id="migration-log" style="max-height: 300px; overflow-y: auto; background: #fff; padding: 10px; margin-top: 10px; border-radius: 4px; font-family: monospace; font-size: 12px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);"></div>
                 </div>
                 <div id="migration-complete" style="display: none;">
-                    <p style="color: #00a32a; font-weight: bold;">Migration completed successfully!</p>
+                    <p style="color: #00a32a; font-weight: bold; font-size: 16px;">✅ Migration completed!</p>
                     <p id="completion-summary"></p>
                 </div>
             </div>
@@ -84,31 +101,37 @@ function adaire_blocks_migration_page() {
     </div>
 
     <script>
-    let migrationCancelled = false;
+    // Migration Queue System
+    let migrationQueue = [];
+    let currentIndex = 0;
     let totalPosts = 0;
     let processedPosts = 0;
+    let failedPosts = 0;
+    let migrationCancelled = false;
     let hiddenIframe = null;
+    let currentMessageHandler = null;
+    let currentTimeout = null;
 
     function startMigration() {
         if (!confirm('Are you sure you want to start the migration? This will update all posts with Adaire Blocks.')) {
             return;
         }
 
+        // Reset state
+        migrationQueue = [];
+        currentIndex = 0;
+        processedPosts = 0;
+        failedPosts = 0;
         migrationCancelled = false;
+
         document.getElementById('start-migration').style.display = 'none';
         document.getElementById('cancel-migration').style.display = 'inline-block';
         document.getElementById('migration-status').style.display = 'block';
         document.getElementById('migration-progress').style.display = 'block';
         document.getElementById('migration-complete').style.display = 'none';
         
-        addLog('Starting migration...');
-        
-        // Create hidden iframe for loading editor contexts
-        if (!hiddenIframe) {
-            hiddenIframe = document.createElement('iframe');
-            hiddenIframe.style.display = 'none';
-            document.body.appendChild(hiddenIframe);
-        }
+        addLog('🚀 Starting migration...');
+        addLog('📋 Fetching posts to migrate...');
         
         // Get posts to migrate
         fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
@@ -121,107 +144,221 @@ function adaire_blocks_migration_page() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                totalPosts = data.data.posts.length;
-                addLog(`Found ${totalPosts} posts to migrate`);
+                migrationQueue = data.data.posts;
+                totalPosts = migrationQueue.length;
+                
+                addLog(`✅ Found ${totalPosts} post${totalPosts !== 1 ? 's' : ''} to migrate`);
                 
                 if (totalPosts === 0) {
-                    completeMigration(0);
+                    completeMigration();
                     return;
                 }
                 
-                // Start processing posts
-                processPosts(data.data.posts, 0);
+                addLog('🔄 Starting queue processing...');
+                // Start the queue
+                processNextInQueue();
             } else {
-                addLog('Error: ' + data.data.message, 'error');
+                addLog('❌ Error: ' + data.data.message, 'error');
                 resetButtons();
             }
         })
         .catch(error => {
-            addLog('Error: ' + error.message, 'error');
+            addLog('❌ Error fetching posts: ' + error.message, 'error');
             resetButtons();
         });
     }
 
-    function processPosts(posts, index) {
-        if (migrationCancelled || index >= posts.length) {
-            if (!migrationCancelled) {
-                completeMigration(processedPosts);
-            }
-            // Clean up iframe
-            if (hiddenIframe && hiddenIframe.parentNode) {
-                hiddenIframe.parentNode.removeChild(hiddenIframe);
-                hiddenIframe = null;
-            }
+    function processNextInQueue() {
+        // Check if we should stop
+        if (migrationCancelled) {
+            addLog('⏹️ Migration cancelled by user', 'warn');
+            cleanupIframe();
+            completeMigration();
             return;
         }
 
-        const post = posts[index];
-        updateProgress(index + 1, totalPosts, `Migrating: ${post.title}`);
-        addLog(`Processing: ${post.title} (ID: ${post.id})...`);
+        // Check if queue is complete
+        if (currentIndex >= migrationQueue.length) {
+            addLog('✅ Queue processing complete!');
+            cleanupIframe();
+            completeMigration();
+            return;
+        }
 
-        // Load the post in editor context and trigger auto-recovery
-        const editorUrl = '<?php echo admin_url('post.php'); ?>?post=' + post.id + '&action=edit&adaire_auto_migrate=1';
+        const post = migrationQueue[currentIndex];
+        const progress = currentIndex + 1;
         
-        // Set up message listener for iframe
-        const messageHandler = function(event) {
-            if (event.data && event.data.type === 'adaire_migration_complete') {
-                window.removeEventListener('message', messageHandler);
+        updateProgress(progress, totalPosts, `Processing: ${post.title}`);
+        addLog(`[${progress}/${totalPosts}] 📄 Processing: ${post.title} (ID: ${post.id})`);
+
+        // Clean up previous iframe if it exists
+        cleanupIframe();
+
+        // Create fresh iframe for this post
+        hiddenIframe = document.createElement('iframe');
+        hiddenIframe.style.display = 'none';
+        hiddenIframe.id = 'migration-iframe-' + post.id;
+        document.body.appendChild(hiddenIframe);
+
+        // Set up message handler for this specific post
+        setupMessageHandler(post);
+
+        // Set timeout (reduced to 15 seconds for faster processing)
+        currentTimeout = setTimeout(() => {
+            addLog(`⏱️ Timeout for: ${post.title}`, 'warn');
+            failedPosts++;
+            moveToNextPost();
+        }, 15000);
+
+        // Load the post in the iframe
+        const editorUrl = '<?php echo admin_url('post.php'); ?>?post=' + post.id + '&action=edit&adaire_auto_migrate=1';
+        addLog(`  Loading editor for post ${post.id}...`);
+        hiddenIframe.src = editorUrl;
+    }
+
+    function setupMessageHandler(post) {
+        // Remove previous handler if exists
+        if (currentMessageHandler) {
+            window.removeEventListener('message', currentMessageHandler);
+        }
+
+        // Create new handler for this post
+        currentMessageHandler = function(event) {
+            // Only process messages from our migration
+            if (!event.data || !event.data.type) {
+                return;
+            }
+
+            // Handle completion messages
+            if (event.data.type === 'adaire_migration_complete') {
+                // Clear timeout
+                if (currentTimeout) {
+                    clearTimeout(currentTimeout);
+                    currentTimeout = null;
+                }
                 
                 if (event.data.success) {
                     processedPosts++;
-                    addLog(`✅ Migrated: ${post.title} (ID: ${post.id}) - ${event.data.blocksRecovered} blocks recovered`);
+                    const blocks = event.data.blocksRecovered || 0;
+                    addLog(`  ✅ Success: ${blocks} block${blocks !== 1 ? 's' : ''} recovered and saved`);
                 } else {
-                    addLog(`❌ Failed: ${post.title} - ${event.data.error || 'Unknown error'}`, 'error');
+                    failedPosts++;
+                    addLog(`  ❌ Failed: ${event.data.error || 'Unknown error'}`, 'error');
                 }
                 
-                // Process next post after a brief delay
-                setTimeout(() => processPosts(posts, index + 1), 500);
+                // Move to next post after a short delay
+                setTimeout(() => moveToNextPost(), 500);
+            }
+            
+            // Handle log messages from iframe (optional, can be verbose)
+            if (event.data.type === 'adaire_migration_log' && event.data.level === 'error') {
+                addLog(`  ⚠️ ${event.data.message}`, event.data.level);
             }
         };
         
-        window.addEventListener('message', messageHandler);
+        window.addEventListener('message', currentMessageHandler);
+    }
+
+    function moveToNextPost() {
+        // Increment index
+        currentIndex++;
         
-        // Load the editor in hidden iframe
-        hiddenIframe.src = editorUrl;
-        
-        // Timeout fallback in case iframe doesn't respond
-        setTimeout(() => {
-            window.removeEventListener('message', messageHandler);
-            addLog(`⚠️ Timeout: ${post.title} - Moving to next post`, 'error');
-            setTimeout(() => processPosts(posts, index + 1), 100);
-        }, 10000); // 10 second timeout
+        // Process next post
+        setTimeout(() => processNextInQueue(), 100);
+    }
+
+    function cleanupIframe() {
+        // Clear timeout
+        if (currentTimeout) {
+            clearTimeout(currentTimeout);
+            currentTimeout = null;
+        }
+
+        // Remove message handler
+        if (currentMessageHandler) {
+            window.removeEventListener('message', currentMessageHandler);
+            currentMessageHandler = null;
+        }
+
+        // Remove iframe
+        if (hiddenIframe && hiddenIframe.parentNode) {
+            hiddenIframe.parentNode.removeChild(hiddenIframe);
+            hiddenIframe = null;
+        }
     }
 
     function updateProgress(current, total, status) {
-        const percentage = (current / total) * 100;
+        const percentage = Math.round((current / total) * 100);
+        const remaining = total - current;
+        
         document.getElementById('status-text').textContent = status;
         document.getElementById('progress-text').textContent = `${current}/${total}`;
         document.getElementById('progress-bar').style.width = percentage + '%';
+        document.getElementById('progress-percent').textContent = percentage + '%';
+        
+        // Update queue status
+        if (remaining > 0) {
+            document.getElementById('queue-status').textContent = `Queue: ${remaining} remaining`;
+        } else {
+            document.getElementById('queue-status').textContent = 'Queue: Complete';
+        }
+        
+        // Update stats
+        document.getElementById('stats-text').textContent = `✅ ${processedPosts} | ❌ ${failedPosts}`;
     }
 
     function addLog(message, type = 'info') {
         const log = document.getElementById('migration-log');
         const entry = document.createElement('div');
         entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+        
+        // Color code based on log level
         if (type === 'error') {
             entry.style.color = '#d63638';
+            entry.style.fontWeight = 'bold';
+        } else if (type === 'warn') {
+            entry.style.color = '#f0b849';
+        } else if (message.includes('✅') || message.includes('SUCCESS')) {
+            entry.style.color = '#00a32a';
+        } else if (message.includes('===')) {
+            entry.style.fontWeight = 'bold';
+            entry.style.marginTop = '8px';
         }
+        
         log.appendChild(entry);
         log.scrollTop = log.scrollHeight;
     }
 
-    function completeMigration(count) {
+    function completeMigration() {
+        addLog('');
+        addLog('=== MIGRATION COMPLETE ===');
+        addLog(`📊 Total posts: ${totalPosts}`);
+        addLog(`✅ Successful: ${processedPosts}`);
+        addLog(`❌ Failed: ${failedPosts}`);
+        addLog(`⏭️ Skipped: ${totalPosts - processedPosts - failedPosts}`);
+        
         document.getElementById('migration-progress').style.display = 'none';
         document.getElementById('migration-complete').style.display = 'block';
-        document.getElementById('completion-summary').textContent = `Successfully migrated ${count} out of ${totalPosts} posts.`;
+        
+        const successRate = totalPosts > 0 ? Math.round((processedPosts / totalPosts) * 100) : 0;
+        document.getElementById('completion-summary').innerHTML = 
+            `<strong>Migration Results:</strong><br>` +
+            `✅ ${processedPosts} successfully migrated<br>` +
+            `❌ ${failedPosts} failed<br>` +
+            `📈 Success rate: ${successRate}%`;
+        
         resetButtons();
     }
 
     function cancelMigration() {
-        if (confirm('Are you sure you want to cancel the migration?')) {
+        if (confirm('Are you sure you want to cancel the migration? Posts already processed will remain migrated.')) {
             migrationCancelled = true;
-            addLog('Migration cancelled by user', 'error');
-            resetButtons();
+            addLog('🛑 Cancelling migration...', 'warn');
+            cleanupIframe();
+            
+            setTimeout(() => {
+                completeMigration();
+            }, 500);
         }
     }
 

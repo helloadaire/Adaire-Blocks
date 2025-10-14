@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Adaire Blocks
  * Description:       A powerful WordPress plugin that helps developers and designers create visually stunning, high-performance websites with ease right inside the Gutenberg editor.
- * Version:           1.0.9
+ * Version:           1.1.0
  * Requires at least: 6.7
  * Requires PHP:      7.4
  * Author:            <a href="https://adaire.digital" target="_blank">Adaire Digital</a>
@@ -135,7 +135,7 @@ add_action('admin_post_my_plugin_rollback', function () {
     }
 
     // URL to the previous version ZIP
-    $previous_version_zip = 'https://github.com/helloadaire/Adaire-Blocks/releases/download/v1.0.8.alpha/adaire-blocks.1.0.8.alpha.zip';
+    $previous_version_zip = 'https://github.com/helloadaire/Adaire-Blocks/releases/download/v1.0.9.alpha/adaire-blocks.1.0.8.alpha.zip';
     error_log('[Adaire Blocks Rollback] Attempting rollback to: ' . $previous_version_zip);
 
     require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
@@ -193,18 +193,169 @@ add_action('admin_notices', function () {
 // End of version rollback code
 
 // Define plugin constants
-define('ADAIRE_BLOCKS_VERSION', '1.0.9');
+define('ADAIRE_BLOCKS_VERSION', '1.1.0');
 define('ADAIRE_BLOCKS_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('ADAIRE_BLOCKS_PLUGIN_PATH', plugin_dir_path(__FILE__));
+
+// Define premium version flag (free version will override this)
+if (!defined('ADAIRE_BLOCKS_IS_FREE')) {
+    define('ADAIRE_BLOCKS_IS_FREE', false);
+}
+
+// Include configuration manager
+require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'includes/class-adaire-blocks-config.php';
 
 // Include settings page
 require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'admin/settings-page.php';
 
+/**
+ * Helper function to render blocks with upgrade notices
+ * Use this in your render callbacks to automatically handle free/premium differences
+ */
+function adaire_render_block_with_notice($block_name, $attributes, $render_callback) {
+    $config = AdaireBlocksConfig::get_instance();
+    
+    // Check if we should show upgrade notice instead of rendering
+    if ($config->should_show_upgrade_notice($block_name, $attributes)) {
+        return $config->render_upgrade_notice($block_name);
+    }
+    
+    // Render the block normally
+    return call_user_func($render_callback, $attributes);
+}
+
 // Include block migration tool
 require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'admin/block-migration.php';
+
+// Include diagnostics tool
+require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'admin/diagnostics.php';
+
 /**
- * Registers the block using a `blocks-manifest.php` file, which improves the performance of block type registration.
- * Behind the scenes, it also registers all assets so they can be enqueued
+ * Render callback for counter-block (Dynamic Block)
+ * This PHP function outputs the HTML - JavaScript logic in view.js
+ */
+function render_counter_block($attributes) {
+    // Use the helper function to automatically handle upgrade notices
+    return adaire_render_block_with_notice('counter-block', $attributes, function($attrs) {
+        // Debug: Check if function is called
+        error_log('Counter Block Render Called with attributes: ' . print_r($attrs, true));
+    
+        $block_id = $attrs['blockId'] ?? '';
+        $container_mode = $attrs['containerMode'] ?? 'full';
+        $container_max_width = $attrs['containerMaxWidth'] ?? array();
+        $margin_top = $attrs['marginTop'] ?? array();
+        $margin_right = $attrs['marginRight'] ?? array();
+        $margin_bottom = $attrs['marginBottom'] ?? array();
+        $margin_left = $attrs['marginLeft'] ?? array();
+        $padding_top = $attrs['paddingTop'] ?? array();
+        $padding_right = $attrs['paddingRight'] ?? array();
+        $padding_bottom = $attrs['paddingBottom'] ?? array();
+        $padding_left = $attrs['paddingLeft'] ?? array();
+        $starting_number = $attrs['startingNumber'] ?? 100;
+        $ending_number = $attrs['endingNumber'] ?? 200;
+        $duration = $attrs['duration'] ?? 3000;
+        $delay_bool = $attrs['delayBool'] ?? false;
+        $delay_time = $attrs['delayTime'] ?? 500;
+        $font_size = $attrs['fontSize'] ?? 48;
+        $font_weight = $attrs['fontWeight'] ?? '700';
+        $color = $attrs['color'] ?? '#1a1a1a';
+        $letter_spacing = $attrs['letterSpacing'] ?? 0;
+        $prefix = $attrs['prefix'] ?? '';
+        $suffix = $attrs['suffix'] ?? '';
+        $counter_direction = $attrs['counterDirection'] ?? 'up';
+        $caption = $attrs['caption'] ?? '';
+        $caption_position = $attrs['captionPosition'] ?? 'bottom';
+        $caption_font_size = $attrs['captionFontSize'] ?? 16;
+        $caption_color = $attrs['captionColor'] ?? '#666666';
+    
+    // Build CSS variables
+    $desktop_max_width = ($container_max_width['desktop']['value'] ?? 1200) . ($container_max_width['desktop']['unit'] ?? 'px');
+    $tablet_max_width = ($container_max_width['tablet']['value'] ?? 100) . ($container_max_width['tablet']['unit'] ?? '%');
+    $mobile_max_width = ($container_max_width['mobile']['value'] ?? 100) . ($container_max_width['mobile']['unit'] ?? '%');
+    
+    $styles = array(
+        '--container-max-width' => $desktop_max_width,
+        '--container-max-width-tablet' => $tablet_max_width,
+        '--container-max-width-mobile' => $mobile_max_width,
+        'margin-top' => ($margin_top['desktop'] ?? 0) . 'px',
+        'margin-right' => ($margin_right['desktop'] ?? 0) . 'px',
+        'margin-bottom' => ($margin_bottom['desktop'] ?? 0) . 'px',
+        'margin-left' => ($margin_left['desktop'] ?? 0) . 'px',
+        '--margin-top-tablet' => ($margin_top['tablet'] ?? 0) . 'px',
+        '--margin-right-tablet' => ($margin_right['tablet'] ?? 0) . 'px',
+        '--margin-bottom-tablet' => ($margin_bottom['tablet'] ?? 0) . 'px',
+        '--margin-left-tablet' => ($margin_left['tablet'] ?? 0) . 'px',
+        '--margin-top-mobile' => ($margin_top['mobile'] ?? 0) . 'px',
+        '--margin-right-mobile' => ($margin_right['mobile'] ?? 0) . 'px',
+        '--margin-bottom-mobile' => ($margin_bottom['mobile'] ?? 0) . 'px',
+        '--margin-left-mobile' => ($margin_left['mobile'] ?? 0) . 'px',
+        'padding-top' => ($padding_top['desktop'] ?? 0) . 'px',
+        'padding-right' => ($padding_right['desktop'] ?? 0) . 'px',
+        'padding-bottom' => ($padding_bottom['desktop'] ?? 0) . 'px',
+        'padding-left' => ($padding_left['desktop'] ?? 0) . 'px',
+        '--padding-top-tablet' => ($padding_top['tablet'] ?? 0) . 'px',
+        '--padding-right-tablet' => ($padding_right['tablet'] ?? 0) . 'px',
+        '--padding-bottom-tablet' => ($padding_bottom['tablet'] ?? 0) . 'px',
+        '--padding-left-tablet' => ($padding_left['tablet'] ?? 0) . 'px',
+        '--padding-top-mobile' => ($padding_top['mobile'] ?? 0) . 'px',
+        '--padding-right-mobile' => ($padding_right['mobile'] ?? 0) . 'px',
+        '--padding-bottom-mobile' => ($padding_bottom['mobile'] ?? 0) . 'px',
+        '--padding-left-mobile' => ($padding_left['mobile'] ?? 0) . 'px',
+    );
+    
+    $style_string = '';
+    foreach ($styles as $prop => $value) {
+        $style_string .= "$prop:$value;";
+    }
+    
+    $container_class = $container_mode === 'constrained' ? 'is-constrained' : '';
+    
+    ob_start();
+    ?>
+    <div class="ab-counter-block counter-block" 
+         style="<?php echo esc_attr($style_string); ?>"
+         data-block-id="<?php echo esc_attr($block_id); ?>"
+         data-starting-number="<?php echo esc_attr($starting_number); ?>"
+         data-ending-number="<?php echo esc_attr($ending_number); ?>"
+         data-duration="<?php echo esc_attr($duration); ?>"
+         data-delay-bool="<?php echo esc_attr($delay_bool ? 'true' : 'false'); ?>"
+         data-delay-time="<?php echo esc_attr($delay_time); ?>"
+         data-counter-direction="<?php echo esc_attr($counter_direction); ?>"
+         data-prefix="<?php echo esc_attr($prefix); ?>"
+         data-suffix="<?php echo esc_attr($suffix); ?>">
+        <div class="ab-counter-block__container <?php echo esc_attr($container_class); ?>">
+            <?php if ($caption && $caption_position === 'top'): ?>
+                <div class="ab-counter-block__caption ab-counter-block__caption--top"
+                     style="font-size: <?php echo esc_attr($caption_font_size); ?>px; color: <?php echo esc_attr($caption_color); ?>; margin-bottom: 16px; text-align: center;">
+                    <?php echo esc_html($caption); ?>
+                </div>
+            <?php endif; ?>
+            
+            <div class="ab-counter-block__content" style="text-align: center;">
+                <span class="ab-counter-block__number"
+                      style="font-size: <?php echo esc_attr($font_size); ?>px; font-weight: <?php echo esc_attr($font_weight); ?>; color: <?php echo esc_attr($color); ?>; letter-spacing: <?php echo esc_attr($letter_spacing); ?>px;">
+                    <?php if ($prefix): ?><span class="ab-counter-block__prefix"><?php echo esc_html($prefix); ?></span><?php endif; ?>
+                    <span class="displayNumber"><?php echo esc_html($starting_number); ?></span>
+                    <?php if ($suffix): ?><span class="ab-counter-block__suffix"><?php echo esc_html($suffix); ?></span><?php endif; ?>
+                </span>
+            </div>
+            
+            <?php if ($caption && $caption_position === 'bottom'): ?>
+                <div class="ab-counter-block__caption ab-counter-block__caption--bottom"
+                     style="font-size: <?php echo esc_attr($caption_font_size); ?>px; color: <?php echo esc_attr($caption_color); ?>; margin-top: 16px; text-align: center;">
+                    <?php echo esc_html($caption); ?>
+                </div>
+            <?php endif; ?>
+        </div>
+        </div>
+        <?php
+        return ob_get_clean();
+    });
+}
+
+/**
+ * Registers the block using the metadata loaded from the `block.json` file.
+ * Behind the scenes, it registers also all assets so they can be enqueued
  * through the block editor in the corresponding context.
  *
  * @see https://make.wordpress.org/core/2025/03/13/more-efficient-block-type-registration-in-6-8/
@@ -245,6 +396,14 @@ function create_block_gsap_hero_block_block_init() {
 		
 		// Only proceed if we have blocks to register
 		if ( ! empty( $filtered_manifest ) ) {
+			// Separate counter-block for dynamic rendering
+			$counter_block_enabled = isset( $filtered_manifest['counter-block'] );
+			if ( $counter_block_enabled ) {
+				unset( $filtered_manifest['counter-block'] );
+			}
+			
+			// Register remaining blocks normally
+		if ( ! empty( $filtered_manifest ) ) {
 			// Create a temporary filtered manifest file
 			$temp_manifest_path = __DIR__ . '/build/blocks-manifest-filtered.php';
 			file_put_contents( $temp_manifest_path, '<?php return ' . var_export( $filtered_manifest, true ) . ';' );
@@ -254,6 +413,14 @@ function create_block_gsap_hero_block_block_init() {
 			// Clean up temporary file
 			if ( file_exists( $temp_manifest_path ) ) {
 				unlink( $temp_manifest_path );
+				}
+			}
+			
+			// Register counter-block separately with render callback
+			if ( $counter_block_enabled ) {
+				register_block_type( __DIR__ . '/build/counter-block', array(
+					'render_callback' => 'render_counter_block'
+				) );
 			}
 		}
 		return;
@@ -262,11 +429,39 @@ function create_block_gsap_hero_block_block_init() {
 	/**
 	 * Registers the block(s) metadata from the `blocks-manifest.php` file.
 	 * Added to WordPress 6.7 to improve the performance of block type registration.
+	 * For WordPress 6.7 and older versions
 	 *
 	 * @see https://make.wordpress.org/core/2024/10/17/new-block-type-registration-apis-to-improve-performance-in-wordpress-6-7/
 	 */
-	if ( function_exists( 'wp_register_block_metadata_collection' ) ) {
-		wp_register_block_metadata_collection( __DIR__ . '/build', __DIR__ . '/build/blocks-manifest.php' );
+	
+	// Build filtered manifest for WordPress 6.7 and older
+	$manifest_data = require __DIR__ . '/build/blocks-manifest.php';
+	$filtered_manifest_fallback = array();
+	$counter_block_enabled_fallback = false;
+	
+	foreach ( array_keys( $manifest_data ) as $block_type ) {
+		$block_key = array_search( $block_type, $block_mapping );
+		if ( $block_key !== false && isset( $block_settings[ $block_key ] ) && $block_settings[ $block_key ] ) {
+			if ( $block_type === 'counter-block' ) {
+				$counter_block_enabled_fallback = true;
+			} else {
+				$filtered_manifest_fallback[ $block_type ] = $manifest_data[ $block_type ];
+			}
+		}
+	}
+	
+	// Register metadata collection (6.7+)
+	if ( function_exists( 'wp_register_block_metadata_collection' ) && ! empty( $filtered_manifest_fallback ) ) {
+		// Create temp manifest without counter-block
+		$temp_manifest_path_fallback = __DIR__ . '/build/blocks-manifest-fallback.php';
+		file_put_contents( $temp_manifest_path_fallback, '<?php return ' . var_export( $filtered_manifest_fallback, true ) . ';' );
+		
+		wp_register_block_metadata_collection( __DIR__ . '/build', $temp_manifest_path_fallback );
+		
+		// Clean up
+		if ( file_exists( $temp_manifest_path_fallback ) ) {
+			unlink( $temp_manifest_path_fallback );
+		}
 	}
 	
 	/**
@@ -274,12 +469,15 @@ function create_block_gsap_hero_block_block_init() {
 	 *
 	 * @see https://developer.wordpress.org/reference/functions/register_block_type/
 	 */
-	$manifest_data = require __DIR__ . '/build/blocks-manifest.php';
-	foreach ( array_keys( $manifest_data ) as $block_type ) {
-		$block_key = array_search( $block_type, $block_mapping );
-		if ( $block_key !== false && isset( $block_settings[ $block_key ] ) && $block_settings[ $block_key ] ) {
+	foreach ( array_keys( $filtered_manifest_fallback ) as $block_type ) {
 			register_block_type( __DIR__ . "/build/{$block_type}" );
 		}
+	
+	// Register counter-block separately with render callback (for WordPress 6.7 and older)
+	if ( $counter_block_enabled_fallback ) {
+		register_block_type( __DIR__ . '/build/counter-block', array(
+			'render_callback' => 'render_counter_block'
+		) );
 	}
 }
 add_action( 'init', 'create_block_gsap_hero_block_block_init' );
@@ -530,10 +728,41 @@ if (file_exists($posts_grid_render)) {
     require_once $posts_grid_render;
 }
 
+// Ensure REST API settings are available on the frontend
+function adaire_blocks_add_rest_api_settings() {
+	// Only needed on frontend
+	if (is_admin()) {
+		return;
+	}
+
+	// Add REST API settings to the page head
+	// This ensures wpApiSettings is always available for our blocks
+	?>
+	<script>
+	if (typeof window.wpApiSettings === 'undefined') {
+		window.wpApiSettings = {
+			root: <?php echo json_encode(esc_url_raw(rest_url())); ?>,
+			nonce: <?php echo json_encode(wp_create_nonce('wp_rest')); ?>,
+			versionString: 'wp/v2/'
+		};
+		console.log('[Adaire Blocks] wpApiSettings initialized:', window.wpApiSettings);
+	}
+	</script>
+	<?php
+}
+add_action('wp_head', 'adaire_blocks_add_rest_api_settings', 1);
+
 // Auto Block Recovery - Automatically recover blocks on editor load
 function adaire_blocks_enqueue_auto_recovery() {
-	// Only load in the block editor
+	// Always load in admin, let the script decide if it should run
 	if ( ! is_admin() ) {
+		return;
+	}
+
+	// Check if the auto-recovery file exists
+	$script_path = ADAIRE_BLOCKS_PLUGIN_PATH . 'admin/js/auto-block-recovery.js';
+	if ( ! file_exists( $script_path ) ) {
+		error_log( '[Adaire Blocks] Auto-recovery script not found at: ' . $script_path );
 		return;
 	}
 
@@ -541,9 +770,82 @@ function adaire_blocks_enqueue_auto_recovery() {
 	wp_enqueue_script(
 		'adaire-auto-block-recovery',
 		ADAIRE_BLOCKS_PLUGIN_URL . 'admin/js/auto-block-recovery.js',
-		array( 'wp-blocks', 'wp-data', 'wp-block-editor', 'wp-notices' ),
+		array( 'wp-blocks', 'wp-data', 'wp-block-editor', 'wp-notices', 'wp-element' ),
 		ADAIRE_BLOCKS_VERSION,
-		true
+		true // Load in footer to ensure dependencies are loaded
+	);
+
+	// Add inline script to verify loading
+	$script_url = ADAIRE_BLOCKS_PLUGIN_URL . 'admin/js/auto-block-recovery.js';
+	$inline_script = sprintf(
+		'console.log("[Adaire Blocks] Inline script executing...");
+		console.log("[Adaire Blocks] Version: %s");
+		console.log("[Adaire Blocks] Script URL: %s");
+		console.log("[Adaire Blocks] Plugin path exists:", %s);
+		window.adaireBlocksAutoRecoveryLoaded = true;
+		window.adaireBlocksVersion = "%s";',
+		esc_js(ADAIRE_BLOCKS_VERSION),
+		esc_js($script_url),
+		file_exists($script_path) ? 'true' : 'false',
+		esc_js(ADAIRE_BLOCKS_VERSION)
+	);
+	
+	wp_add_inline_script(
+		'adaire-auto-block-recovery',
+		$inline_script,
+		'before'
 	);
 }
 add_action( 'enqueue_block_editor_assets', 'adaire_blocks_enqueue_auto_recovery' );
+
+// Pass block configuration to editor
+function adaire_blocks_localize_editor_config() {
+	// Only load in block editor
+	if ( ! is_admin() || ! function_exists( 'get_current_screen' ) ) {
+		return;
+	}
+	
+	$screen = get_current_screen();
+	if ( ! $screen || $screen->base !== 'post' ) {
+		return;
+	}
+	
+	// Get configuration
+	$config = AdaireBlocksConfig::get_instance();
+	$plugin_version = $config->get_plugin_version();
+	$is_premium = $config->is_premium();
+	
+	// Build blocks configuration
+	$blocks_config = array();
+	$available_blocks = $config->get_available_blocks();
+	
+	foreach ( $available_blocks as $block_name ) {
+		$block_config = $config->get_block_config( $block_name );
+		$blocks_config[ $block_name ] = array(
+			'enabled' => $block_config['enabled'] ?? true,
+			'limits' => $config->get_block_limits( $block_name ),
+			'upgradeMessage' => $config->get_upgrade_message( $block_name )
+		);
+	}
+	
+	// Prepare configuration for JavaScript
+	$editor_config = array(
+		'isPremium' => $is_premium,
+		'pluginVersion' => $plugin_version,
+		'blocks' => $blocks_config
+	);
+	
+	// Localize script with configuration
+	wp_localize_script(
+		'wp-block-editor',
+		'adaireBlocksConfig',
+		$editor_config
+	);
+	
+	// Also add to editor settings for useBlockLimits hook
+	add_filter( 'block_editor_settings_all', function( $settings ) use ( $editor_config ) {
+		$settings['adaireBlocksConfig'] = $editor_config;
+		return $settings;
+	});
+}
+add_action( 'enqueue_block_editor_assets', 'adaire_blocks_localize_editor_config' );

@@ -36,16 +36,6 @@ return array(
 						'title' => 'Accordion Item 1',
 						'content' => 'Lorem ipsum dolor sit amet.',
 						'open' => true
-					),
-					array(
-						'title' => 'Accordion Item 2',
-						'content' => 'Consectetur adipiscing elit.',
-						'open' => false
-					),
-					array(
-						'title' => 'Accordion Item 3',
-						'content' => 'Sed do eiusmod tempor.',
-						'open' => false
 					)
 				)
 			),
@@ -595,6 +585,185 @@ return array(
 			)
 		)
 	),
+	'counter-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/counter-block',
+		'version' => '0.1.0',
+		'title' => 'Counter Block',
+		'category' => 'widgets',
+		'icon' => 'admin-settings',
+		'description' => 'Display animated counters that count up to a target number, with customizable prefixes and suffixes.',
+		'supports' => array(
+			'html' => false,
+			'anchor' => true,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'customClassName' => true
+		),
+		'textdomain' => 'counter-block',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'viewScript' => 'file:./view.js',
+		'attributes' => array(
+			'startingNumber' => array(
+				'type' => 'number',
+				'default' => 100
+			),
+			'endingNumber' => array(
+				'type' => 'number',
+				'default' => 200
+			),
+			'delayBool' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'delayTime' => array(
+				'type' => 'number',
+				'default' => 500
+			),
+			'duration' => array(
+				'type' => 'number',
+				'default' => 3000
+			),
+			'fontSize' => array(
+				'type' => 'number',
+				'default' => 48
+			),
+			'fontWeight' => array(
+				'type' => 'string',
+				'default' => '700'
+			),
+			'color' => array(
+				'type' => 'string',
+				'default' => '#1a1a1a'
+			),
+			'letterSpacing' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'prefix' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'suffix' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'counterDirection' => array(
+				'type' => 'string',
+				'default' => 'up'
+			),
+			'caption' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'captionPosition' => array(
+				'type' => 'string',
+				'default' => 'bottom'
+			),
+			'captionFontSize' => array(
+				'type' => 'number',
+				'default' => 16
+			),
+			'captionColor' => array(
+				'type' => 'string',
+				'default' => '#666666'
+			),
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'containerMode' => array(
+				'type' => 'string',
+				'default' => 'full'
+			),
+			'containerMaxWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
+					)
+				)
+			),
+			'marginTop' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginRight' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginLeft' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingTop' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingRight' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingLeft' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			)
+		)
+	),
 	'cta-block' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
@@ -779,24 +948,6 @@ return array(
 					array(
 						'id' => 1,
 						'companyName' => 'Company 1',
-						'imageUrl' => '',
-						'imageId' => 0
-					),
-					array(
-						'id' => 2,
-						'companyName' => 'Company 2',
-						'imageUrl' => '',
-						'imageId' => 0
-					),
-					array(
-						'id' => 3,
-						'companyName' => 'Company 3',
-						'imageUrl' => '',
-						'imageId' => 0
-					),
-					array(
-						'id' => 4,
-						'companyName' => 'Company 4',
 						'imageUrl' => '',
 						'imageId' => 0
 					)
@@ -2329,22 +2480,6 @@ return array(
 					array(
 						'title' => 'Retail',
 						'id' => 'tab-1'
-					),
-					array(
-						'title' => 'Post, Parcel & Express',
-						'id' => 'tab-2'
-					),
-					array(
-						'title' => 'Supply Chain Logistics',
-						'id' => 'tab-3'
-					),
-					array(
-						'title' => 'Air Travel',
-						'id' => 'tab-4'
-					),
-					array(
-						'title' => 'Manufacturing',
-						'id' => 'tab-5'
 					)
 				)
 			),
@@ -2553,34 +2688,6 @@ return array(
 						'quote' => 'With an aggressive product development timeline, we needed a partner who had advanced mobile and machine-learning capabilities and could also match our pace.',
 						'authorName' => 'Darryl Lewis',
 						'authorTitle' => 'CTO of Stats Perform'
-					),
-					array(
-						'companyName' => 'PEOPLEHOOD',
-						'companyLogo' => 'https://via.placeholder.com/200x60/059669/FFFFFF?text=PEOPLEHOOD',
-						'quote' => 'With Adaire, we created a seamless facilitator dashboard, and video platform that transformed our community engagement.',
-						'authorName' => 'Rachel Link',
-						'authorTitle' => 'COO & CFO of Peoplehood'
-					),
-					array(
-						'companyName' => 'TECHNOLOGY CORP',
-						'companyLogo' => 'https://via.placeholder.com/200x60/DC2626/FFFFFF?text=TECH+CORP',
-						'quote' => 'Adaire delivered exceptional results and helped us roll them on the project. We ended up with a solution that exceeded our expectations.',
-						'authorName' => 'John Smith',
-						'authorTitle' => 'CEO of Technology Corp'
-					),
-					array(
-						'companyName' => 'INNOVATION LABS',
-						'companyLogo' => 'https://via.placeholder.com/200x60/7C3AED/FFFFFF?text=INNOVATION',
-						'quote' => 'The team at Adaire understood our vision and brought it to life with cutting-edge technology and seamless user experience.',
-						'authorName' => 'Sarah Johnson',
-						'authorTitle' => 'CTO of Innovation Labs'
-					),
-					array(
-						'companyName' => 'DIGITAL SOLUTIONS',
-						'companyLogo' => 'https://via.placeholder.com/200x60/EA580C/FFFFFF?text=DIGITAL',
-						'quote' => 'Working with Adaire was a game-changer for our business. Their expertise and dedication to quality is unmatched.',
-						'authorName' => 'Michael Chen',
-						'authorTitle' => 'Founder of Digital Solutions'
 					)
 				)
 			),

@@ -32,22 +32,6 @@
         {
           "title": "Retail",
           "id": "tab-1"
-        },
-        {
-          "title": "Post, Parcel & Express",
-          "id": "tab-2"
-        },
-        {
-          "title": "Supply Chain Logistics",
-          "id": "tab-3"
-        },
-        {
-          "title": "Air Travel",
-          "id": "tab-4"
-        },
-        {
-          "title": "Manufacturing",
-          "id": "tab-5"
         }
       ]
     },

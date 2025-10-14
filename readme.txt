@@ -1,8 +1,8 @@
 === Adaire Blocks ===
 Contributors:      Adaire
-Tags:              block, gutenberg, gsap, animation, portfolio, services, hero, video, testimonial, cta, accordion, tabs, posts, grid
+Tags:              block, gutenberg, gsap, animation, portfolio, services, hero, video, testimonial, cta, accordion, tabs, posts, grid, counter, statistics
 Tested up to:      6.7
-Stable tag:        1.0.9
+Stable tag:        1.1.0
 Requires at least: 6.7
 Requires PHP:      7.4
 License:           GPL-3.0
@@ -20,6 +20,7 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 * **Button Block** - Create customizable buttons with hover animations, multiple styles, and advanced styling options
 * **Call to Action Block** - Build powerful call-to-action sections with animated carousels and gradient backgrounds
 * **Container Block** - Create flexible layout containers with constrained/full-width options and responsive settings
+* **Counter Block** - Display animated counters that count up or down to a target number, with customizable prefixes, suffixes, and captions for showcasing statistics and achievements
 * **CTA Block** - Build call-to-action sections with animated carousels and gradient backgrounds
 * **Logos Block** - Display partner/client logos with customizable sliders, smooth animations, and responsive breakpoints
 * **Particles Block** - Add dynamic particle effects with scroll-controlled animations and customizable positioning
@@ -93,6 +94,17 @@ The plugin is optimized for performance with efficient block registration and la
 
 == Changelog ==
 
+= 1.1.0 =
+* Added Counter Block with animated counting effects and customizable styling
+* Added counter direction (count up or count down)
+* Added prefix and suffix support for counter numbers
+* Added caption support with top/bottom positioning
+* Added comprehensive typography controls (font size, weight, letter spacing)
+* Added color controls for counter and caption
+* Added responsive container settings with device-specific max-widths
+* Added live animation preview in WordPress editor
+* Implemented dynamic block rendering for Counter Block
+* Added custom icon support for blocks
 
 = 1.0.9 =
 * Added migration tool: One click tool in admin panel to allow auto migration of all Adaire Blocks on all pages and posts.

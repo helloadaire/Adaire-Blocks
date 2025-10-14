@@ -111,6 +111,12 @@
     color: #50575e;
 }
 
+.adaire-block-icon svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
 .adaire-block-info {
     flex: 1;
 }

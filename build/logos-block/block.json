@@ -30,24 +30,6 @@
           "companyName": "Company 1",
           "imageUrl": "",
           "imageId": 0
-        },
-        {
-          "id": 2,
-          "companyName": "Company 2",
-          "imageUrl": "",
-          "imageId": 0
-        },
-        {
-          "id": 3,
-          "companyName": "Company 3",
-          "imageUrl": "",
-          "imageId": 0
-        },
-        {
-          "id": 4,
-          "companyName": "Company 4",
-          "imageUrl": "",
-          "imageId": 0
         }
       ]
     },

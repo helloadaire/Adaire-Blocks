@@ -33,16 +33,6 @@
           "title": "Accordion Item 1",
           "content": "Lorem ipsum dolor sit amet.",
           "open": true
-        },
-        {
-          "title": "Accordion Item 2",
-          "content": "Consectetur adipiscing elit.",
-          "open": false
-        },
-        {
-          "title": "Accordion Item 3",
-          "content": "Sed do eiusmod tempor.",
-          "open": false
         }
       ]
     },
