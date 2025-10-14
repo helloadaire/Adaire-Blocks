@@ -147,17 +147,31 @@ A: Yes, each block instance is independent and can be customized separately thro
 A: The plugin is optimized for performance with efficient block registration and lazy loading of animation scripts. GSAP animations are hardware-accelerated for smooth performance.
 
 
+### Version 1.0.9
+- **Added:** Block Migration Tool for automated block updates and validation fixes
+- **Added:** Migration admin page under Adaire Blocks menu
+- **Feature:** Batch-update all posts and pages with Adaire Blocks
+- **Feature:** Real-time progress tracking with visual indicators
+- **Feature:** Detailed migration logs with timestamps
+- **Feature:** Automatic validation error recovery
+- **Feature:** Safe cancellation and timeout protection
+- **Improvement:** Hidden iframe-based migration for proper editor context
+- **Security:** Nonce-protected AJAX endpoints and capability checks
+- **UX:** Professional admin interface with progress bar and color-coded logs
+
+## This is an Alpha
+- This plugin is in alpha stage and is still in active development. Some features may update and unexpeted issues may occur.
+- We encourage developers to experiement and play around.
+- Feedback is welcome, as this will help improve the plugin.
+- No support is provided at this stage.
 
 ## License
 
-This plugin is licensed under the GPL-3.0 License - see the [LICENSE](https://www.gnu.org/licenses/gpl-2.0.html) file for details.
+This plugin is licensed under the GPL-3.0 License.
 
-## Contributing
+The GPL-3.0 is a free and open-source software license created by the Free Software Foundation.
+It ensures users have the freedom to use, study, share, and modify the software.
 
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Support
-
-For support, feature requests, or bug reports, please contact us through the WordPress.org support forums or visit our website.
+see the [LICENSE](https://www.gnu.org/licenses/gpl-2.0.html) file for details. 
 
 **Made with ❤️ by Adaire Digital**
