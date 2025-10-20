@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/mega-menu-panel-block",
+  "version": "0.1.0",
+  "title": "Mega Menu Panel",
+  "category": "design",
+  "parent": [
+    "create-block/mega-menu-block"
+  ],
+  "icon": "media-text",
+  "description": "A single mega menu panel content area (automatically managed by Mega Menu block).",
+  "supports": {
+    "html": false,
+    "reusable": false,
+    "inserter": false
+  },
+  "textdomain": "mega-menu-panel-block",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "attributes": {
+    "menuItemTitle": {
+      "type": "string",
+      "default": ""
+    },
+    "menuItemId": {
+      "type": "string",
+      "default": ""
+    },
+    "menuItemIndex": {
+      "type": "number",
+      "default": 0
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}

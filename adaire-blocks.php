@@ -7,7 +7,7 @@
  * Requires PHP:      7.4
  * Author:            <a href="https://adaire.digital" target="_blank">Adaire Digital</a>
  * License:           GPL-3.0
- * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:       adaire-blocks
  *
  * @package AdaireBlocks
@@ -205,8 +205,67 @@ if (!defined('ADAIRE_BLOCKS_IS_FREE')) {
 // Include configuration manager
 require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'includes/class-adaire-blocks-config.php';
 
+// Include license manager
+require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'includes/class-adaire-blocks-license.php';
+
 // Include settings page
 require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'admin/settings-page.php';
+
+// Include license page
+require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'admin/license-page.php';
+
+/**
+ * Check if premium features are available
+ */
+function adaire_blocks_is_premium_available() {
+	$license_manager = AdaireBlocksLicense::get_instance();
+	return $license_manager->is_license_active();
+}
+
+/**
+ * Show license activation notice
+ */
+function adaire_blocks_license_notice() {
+	$license_manager = AdaireBlocksLicense::get_instance();
+	$license_status = $license_manager->get_license_status();
+	
+	// Only show notice if we're on admin pages and license is not active
+	if (!is_admin() || $license_status['status'] === 'active') {
+		return;
+	}
+	
+	$license_page_url = admin_url('admin.php?page=adaire-blocks-license');
+	?>
+	<div class="notice notice-warning is-dismissible">
+		<p>
+			<strong>Adaire Blocks:</strong> 
+			Your license is not active. 
+			<a href="<?php echo esc_url($license_page_url); ?>">Activate your license</a> 
+			to unlock all features and receive updates.
+		</p>
+	</div>
+	<?php
+}
+
+/**
+ * Show license error notice for specific errors
+ */
+function adaire_blocks_license_error_notice($message) {
+	if (!is_admin()) {
+		return;
+	}
+	
+	$license_page_url = admin_url('admin.php?page=adaire-blocks-license');
+	?>
+	<div class="notice notice-error is-dismissible">
+		<p>
+			<strong>Adaire Blocks License Error:</strong> 
+			<?php echo esc_html($message); ?>
+			<a href="<?php echo esc_url($license_page_url); ?>">Check your license</a>
+		</p>
+	</div>
+	<?php
+}
 
 /**
  * Helper function to render blocks with upgrade notices
@@ -214,6 +273,26 @@ require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'admin/settings-page.php';
  */
 function adaire_render_block_with_notice($block_name, $attributes, $render_callback) {
     $config = AdaireBlocksConfig::get_instance();
+    $license_manager = AdaireBlocksLicense::get_instance();
+    
+    // Check license status first
+    if (!$license_manager->is_license_active()) {
+        // Show license activation notice for premium blocks
+        $premium_blocks = array(
+            'video-hero-block',
+            'portfolio-block', 
+            'particles-block',
+            'services-block',
+            'posts-grid-block',
+            'project-block',
+            'scroll-text-block',
+            'questions-block'
+        );
+        
+        if (in_array($block_name, $premium_blocks)) {
+            return adaire_render_license_notice($block_name);
+        }
+    }
     
     // Check if we should show upgrade notice instead of rendering
     if ($config->should_show_upgrade_notice($block_name, $attributes)) {
@@ -224,11 +303,45 @@ function adaire_render_block_with_notice($block_name, $attributes, $render_callb
     return call_user_func($render_callback, $attributes);
 }
 
+/**
+ * Render license activation notice for premium blocks
+ */
+function adaire_render_license_notice($block_name) {
+    $license_page_url = admin_url('admin.php?page=adaire-blocks-license');
+    $block_title = ucwords(str_replace('-', ' ', $block_name));
+    
+    ob_start();
+    ?>
+    <div class="adaire-license-notice" style="
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 4px;
+        padding: 20px;
+        margin: 20px 0;
+        text-align: center;
+    ">
+        <h3 style="margin: 0 0 10px 0; color: #856404;">
+            <span class="dashicons dashicons-lock" style="margin-right: 8px;"></span>
+            Premium Feature
+        </h3>
+        <p style="margin: 0 0 15px 0; color: #856404;">
+            The <strong><?php echo esc_html($block_title); ?></strong> is a premium feature. 
+            Activate your license to unlock this block and many more premium features.
+        </p>
+        <a href="<?php echo esc_url($license_page_url); ?>" 
+           class="button button-primary" 
+           style="text-decoration: none;">
+            Activate License
+        </a>
+    </div>
+    <?php
+    return ob_get_clean();
+}
+
 // Include block migration tool
 require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'admin/block-migration.php';
 
-// Include diagnostics tool
-require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'admin/diagnostics.php';
+// Diagnostics tool removed
 
 /**
  * Render callback for counter-block (Dynamic Block)
@@ -362,6 +475,16 @@ function render_counter_block($attributes) {
  * @see https://make.wordpress.org/core/2024/10/17/new-block-type-registration-apis-to-improve-performance-in-wordpress-6-7/
  */
 function create_block_gsap_hero_block_block_init() {
+	// Check license status first
+	$license_manager = AdaireBlocksLicense::get_instance();
+	$is_license_active = $license_manager->is_license_active();
+	
+	// If license is not active, show license notice and limit functionality
+	if (!$is_license_active) {
+		add_action('admin_notices', 'adaire_blocks_license_notice');
+		// Still allow basic blocks to work, but with limitations
+	}
+	
 	// Get settings instance
 	$settings = AdaireBlocksSettings::get_instance();
 	$block_settings = $settings->get_settings();
@@ -394,33 +517,43 @@ function create_block_gsap_hero_block_block_init() {
 			}
 		}
 		
-		// Only proceed if we have blocks to register
-		if ( ! empty( $filtered_manifest ) ) {
-			// Separate counter-block for dynamic rendering
-			$counter_block_enabled = isset( $filtered_manifest['counter-block'] );
-			if ( $counter_block_enabled ) {
-				unset( $filtered_manifest['counter-block'] );
+		// Register enabled blocks individually
+		foreach ( $block_settings as $block_key => $enabled ) {
+			if ( ! $enabled ) {
+				continue; // Skip disabled blocks
 			}
 			
-			// Register remaining blocks normally
-		if ( ! empty( $filtered_manifest ) ) {
-			// Create a temporary filtered manifest file
-			$temp_manifest_path = __DIR__ . '/build/blocks-manifest-filtered.php';
-			file_put_contents( $temp_manifest_path, '<?php return ' . var_export( $filtered_manifest, true ) . ';' );
-			
-			wp_register_block_types_from_metadata_collection( __DIR__ . '/build', $temp_manifest_path );
-			
-			// Clean up temporary file
-			if ( file_exists( $temp_manifest_path ) ) {
-				unlink( $temp_manifest_path );
-				}
+			$block_name = $block_mapping[ $block_key ] ?? null;
+			if ( ! $block_name ) {
+				continue;
 			}
 			
-			// Register counter-block separately with render callback
-			if ( $counter_block_enabled ) {
-				register_block_type( __DIR__ . '/build/counter-block', array(
+			// Check if this is a premium block and license is not active
+			$premium_blocks = array(
+				'video-hero-block',
+				'portfolio-block', 
+				'particles-block',
+				'services-block',
+				'posts-grid-block',
+				'project-block',
+				'scroll-text-block',
+				'questions-block'
+			);
+			
+			if ( in_array( $block_name, $premium_blocks ) && ! $is_license_active ) {
+				continue; // Skip premium blocks if license is not active
+			}
+			
+			$block_path = __DIR__ . '/build/' . $block_name;
+			
+			// Special handling for counter-block (has render callback)
+			if ( $block_name === 'counter-block' ) {
+				register_block_type( $block_path, array(
 					'render_callback' => 'render_counter_block'
 				) );
+			} else {
+				// Register block normally
+				register_block_type( $block_path );
 			}
 		}
 		return;
@@ -470,11 +603,28 @@ function create_block_gsap_hero_block_block_init() {
 	 * @see https://developer.wordpress.org/reference/functions/register_block_type/
 	 */
 	foreach ( array_keys( $filtered_manifest_fallback ) as $block_type ) {
-			register_block_type( __DIR__ . "/build/{$block_type}" );
+		// Check if this is a premium block and license is not active
+		$premium_blocks = array(
+			'video-hero-block',
+			'portfolio-block', 
+			'particles-block',
+			'services-block',
+			'posts-grid-block',
+			'project-block',
+			'scroll-text-block',
+			'questions-block'
+		);
+		
+		if ( in_array( $block_type, $premium_blocks ) && ! $is_license_active ) {
+			continue; // Skip premium blocks if license is not active
 		}
+		
+		register_block_type( __DIR__ . "/build/{$block_type}" );
+	}
 	
 	// Register counter-block separately with render callback (for WordPress 6.7 and older)
 	if ( $counter_block_enabled_fallback ) {
+		// Counter block is free, so no license check needed
 		register_block_type( __DIR__ . '/build/counter-block', array(
 			'render_callback' => 'render_counter_block'
 		) );

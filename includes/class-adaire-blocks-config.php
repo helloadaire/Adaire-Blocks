@@ -38,20 +38,39 @@ class AdaireBlocksConfig {
      * Detect plugin version (free or premium)
      */
     private function detect_plugin_version() {
-        // Explicitly check if this is the free version
-        if (defined('ADAIRE_BLOCKS_IS_FREE') && ADAIRE_BLOCKS_IS_FREE === true) {
-            return 'free';
+        // Method 1: Check config file for version flag
+        // This is the WordPress.org compliant way
+        if (file_exists($this->config_file)) {
+            $config_content = file_get_contents($this->config_file);
+            $config = json_decode($config_content, true);
+            
+            // Check if config has a version indicator
+            if (isset($config['version']) && $config['version'] === 'free') {
+                return 'free';
+            }
+            
+            // Check if premium config is empty (indicates free version)
+            if (isset($config['premium']) && empty($config['premium'])) {
+                return 'free';
+            }
         }
         
-        // Check plugin header for explicit version info
-        $plugin_data = get_plugin_data(ADAIRE_BLOCKS_PLUGIN_PATH . 'adaire-blocks.php');
-        $plugin_name = $plugin_data['Name'] ?? '';
-        
-        if (stripos($plugin_name, 'Free') !== false || stripos($plugin_name, '(Free)') !== false) {
-            return 'free';
+        // Method 2: Check for premium-only files (NOT update-checker related)
+        // Check for a premium-specific admin file
+        $premium_marker = ADAIRE_BLOCKS_PLUGIN_PATH . 'admin/premium-features.php';
+        if (!file_exists($premium_marker)) {
+            // No premium marker file = likely free version
+            // But only if we have the free config
+            if (file_exists($this->config_file)) {
+                $config_content = file_get_contents($this->config_file);
+                $config = json_decode($config_content, true);
+                if (isset($config['free'])) {
+                    return 'free';
+                }
+            }
         }
         
-        // Check if premium license is active
+        // Method 3: Check if premium license is active
         if ($this->is_premium_license_active()) {
             return 'premium';
         }

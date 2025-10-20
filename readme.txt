@@ -1,14 +1,15 @@
 === Adaire Blocks ===
-Contributors:      Adaire
-Tags:              block, gutenberg, gsap, animation, portfolio, services, hero, video, testimonial, cta, accordion, tabs, posts, grid, counter, statistics
-Tested up to:      6.7
-Stable tag:        1.1.0
+Contributors: adaire
+Donate link: https://adaire.digital/
+Tags: blocks, gutenberg, gsap, animation, portfolio
 Requires at least: 6.7
-Requires PHP:      7.4
-License:           GPL-3.0
-License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+Tested up to: 6.8
+Stable tag: 1.1.0
+Requires PHP: 7.4
+License: GPL-3.0
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-A powerful WordPress plugin that helps developers and designers create visually stunning, high-performance websites with ease right inside the Gutenberg editor.
+A powerful WordPress plugin for creating visually stunning, high-performance websites with custom Gutenberg blocks and GSAP animations.
 
 == Description ==
 
@@ -19,7 +20,6 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 * **Accordion Block** - Create collapsible content sections with smooth animations, customizable styling, and responsive design
 * **Button Block** - Create customizable buttons with hover animations, multiple styles, and advanced styling options
 * **Call to Action Block** - Build powerful call-to-action sections with animated carousels and gradient backgrounds
-* **Container Block** - Create flexible layout containers with constrained/full-width options and responsive settings
 * **Counter Block** - Display animated counters that count up or down to a target number, with customizable prefixes, suffixes, and captions for showcasing statistics and achievements
 * **CTA Block** - Build call-to-action sections with animated carousels and gradient backgrounds
 * **Logos Block** - Display partner/client logos with customizable sliders, smooth animations, and responsive breakpoints
@@ -43,7 +43,7 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 * REST API integration for dynamic content
 * Locomotive Scroll support for smooth scrolling experiences
 * Responsive design with mobile-first approach
-* GPL-3.0 licensed for maximum flexibility
+* GPL-2.0 licensed for maximum flexibility
 
 **Animation & Interaction Features:**
 
@@ -61,6 +61,13 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Start using the custom blocks in the Gutenberg editor
 4. Configure block settings through the block editor sidebar
+
+For manual installation:
+
+1. Download the plugin zip file
+2. Navigate to Plugins > Add New > Upload Plugin
+3. Choose the downloaded file and click Install Now
+4. After installation, click Activate Plugin
 
 == Frequently Asked Questions ==
 
@@ -92,6 +99,19 @@ Yes, each block instance is independent and can be customized separately through
 
 The plugin is optimized for performance with efficient block registration and lazy loading of animation scripts. GSAP animations are hardware-accelerated for smooth performance.
 
+= How do I get support? =
+
+For support, please visit our website at https://adaire.digital/ or contact us through the WordPress.org support forums.
+
+== Screenshots ==
+
+1. Accordion Block with smooth animations and customizable styling
+2. Counter Block with animated counting effects
+3. Portfolio Block showcasing projects with elegant layouts
+4. Video Hero Block with YouTube/Vimeo integration
+5. Tabs Block with vertical and horizontal layout options
+6. Posts Grid Block with filtering and pagination
+
 == Changelog ==
 
 = 1.1.0 =
@@ -104,10 +124,13 @@ The plugin is optimized for performance with efficient block registration and la
 * Added responsive container settings with device-specific max-widths
 * Added live animation preview in WordPress editor
 * Implemented dynamic block rendering for Counter Block
-* Added custom icon support for blocks
+* Added custom icon support for all blocks
+* Updated all block icons with new custom designs
 
 = 1.0.9 =
-* Added migration tool: One click tool in admin panel to allow auto migration of all Adaire Blocks on all pages and posts.
+* Added migration tool: One-click tool in admin panel to allow auto-migration of all Adaire Blocks on all pages and posts
+* Improved block compatibility with WordPress 6.7
+* Fixed block registration issues
 
 = 1.0.8 =
 * Added Accordion Block with smooth animations and customizable styling
@@ -120,7 +143,44 @@ The plugin is optimized for performance with efficient block registration and la
 * Improved font family inheritance for Accordion Block titles
 * Added responsive max-width settings for container-enabled blocks
 * Fixed bouncing animation in Posts Grid Block FLIP transitions
+
+= 1.0.0 =
+* Initial release
+* Portfolio Block with GSAP animations
+* Services Block with carousel layouts
+* Video Hero Block with YouTube/Vimeo support
+* Testimonial Block with customizable carousels
+* Project Block with interactive showcases
+* Logos Block with responsive sliders
+* Particles Block with scroll effects
+* Questions Block with FAQ animations
+* Scroll Text Block with text animations
+* CTA Block with gradient backgrounds
+
 == Upgrade Notice ==
 
+= 1.1.0 =
+Major update with new Counter Block, custom icons for all blocks, and improved animation controls. Highly recommended upgrade for enhanced functionality.
 
-Made with ❤️ by Adaire Digital
+= 1.0.9 =
+Important update that adds one-click block migration tool and improves WordPress 6.7 compatibility. Upgrade recommended.
+
+= 1.0.8 =
+Significant feature release adding Accordion, Posts Grid, and Tabs blocks with improved responsive controls. Upgrade to access new blocks.
+
+= 1.0.0 =
+Initial release of Adaire Blocks.
+
+== Additional Information ==
+
+**Made with ❤️ by Adaire Digital**
+
+Visit [Adaire Digital](https://adaire.digital/ "Professional WordPress Development") for more information about our services and products.
+
+**Support and Documentation**
+
+For detailed documentation, tutorials, and support, please visit our website or contact us through the WordPress.org support forums.
+
+**Contributing**
+
+We welcome contributions! If you'd like to contribute to the development of Adaire Blocks, please visit our GitHub repository.

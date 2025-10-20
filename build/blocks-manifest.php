@@ -1036,6 +1036,211 @@ return array(
 			)
 		)
 	),
+	'mega-menu-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/mega-menu-block',
+		'version' => '0.1.0',
+		'title' => 'Mega Menu',
+		'category' => 'design',
+		'icon' => 'menu',
+		'description' => 'Beautiful mega menu with smooth GSAP animations and customizable styling.',
+		'supports' => array(
+			'html' => false,
+			'anchor' => true,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'customClassName' => true
+		),
+		'textdomain' => 'mega-menu-block',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'viewScript' => 'file:./view.js',
+		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'menuItems' => array(
+				'type' => 'array',
+				'default' => array(
+					array(
+						'title' => 'Home',
+						'id' => 'menu-item-1',
+						'url' => '#',
+						'type' => 'link'
+					),
+					array(
+						'title' => 'About',
+						'id' => 'menu-item-2',
+						'url' => '#',
+						'type' => 'link'
+					),
+					array(
+						'title' => 'Services',
+						'id' => 'menu-item-3',
+						'url' => '#',
+						'type' => 'panel'
+					)
+				)
+			),
+			'activeMenuItem' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'menuItemColor' => array(
+				'type' => 'string',
+				'default' => '#64748b'
+			),
+			'menuItemActiveColor' => array(
+				'type' => 'string',
+				'default' => '#0f172a'
+			),
+			'menuItemHoverColor' => array(
+				'type' => 'string',
+				'default' => '#3b82f6'
+			),
+			'menuItemFontSize' => array(
+				'type' => 'number',
+				'default' => 18
+			),
+			'menuItemFontWeight' => array(
+				'type' => 'string',
+				'default' => '500'
+			),
+			'menuItemActiveFontWeight' => array(
+				'type' => 'string',
+				'default' => '600'
+			),
+			'menuItemGap' => array(
+				'type' => 'number',
+				'default' => 32
+			),
+			'contentPaddingTop' => array(
+				'type' => 'number',
+				'default' => 40
+			),
+			'contentPaddingRight' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'contentPaddingBottom' => array(
+				'type' => 'number',
+				'default' => 40
+			),
+			'contentPaddingLeft' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'menuAlign' => array(
+				'type' => 'string',
+				'default' => 'flex-start'
+			),
+			'animationDuration' => array(
+				'type' => 'number',
+				'default' => 0.6
+			),
+			'animationEase' => array(
+				'type' => 'string',
+				'default' => 'power2.out'
+			),
+			'containerMode' => array(
+				'type' => 'string',
+				'default' => 'full'
+			),
+			'containerMaxWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
+					)
+				)
+			),
+			'marginTop' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginRight' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginBottom' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginLeft' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'menuLayout' => array(
+				'type' => 'string',
+				'default' => 'horizontal'
+			),
+			'menuPosition' => array(
+				'type' => 'string',
+				'default' => 'top'
+			),
+			'verticalActiveBgColor' => array(
+				'type' => 'string',
+				'default' => 'rgba(59, 130, 246, 0.05)'
+			),
+			'verticalActiveBgOpacity' => array(
+				'type' => 'number',
+				'default' => 0.05
+			)
+		)
+	),
+	'mega-menu-panel-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/mega-menu-panel-block',
+		'version' => '0.1.0',
+		'title' => 'Mega Menu Panel',
+		'category' => 'design',
+		'parent' => array(
+			'create-block/mega-menu-block'
+		),
+		'icon' => 'media-text',
+		'description' => 'A single mega menu panel content area (automatically managed by Mega Menu block).',
+		'supports' => array(
+			'html' => false,
+			'reusable' => false,
+			'inserter' => false
+		),
+		'textdomain' => 'mega-menu-panel-block',
+		'editorScript' => 'file:./index.js',
+		'style' => 'file:./style-index.css',
+		'attributes' => array(
+			'menuItemTitle' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'menuItemId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'menuItemIndex' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'isActive' => array(
+				'type' => 'boolean',
+				'default' => false
+			)
+		)
+	),
 	'particles-block' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,

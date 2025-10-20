@@ -12,7 +12,6 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 - **Button Block** - Create customizable buttons with hover animations, multiple styles, and advanced styling options
 - **Call to Action Block** - Build powerful call-to-action sections with animated carousels and gradient backgrounds
 - **Container Block** - Create flexible layout containers with constrained/full-width options and responsive settings
-- **Counter Block** - Display animated counters that count up or down to a target number, with customizable prefixes, suffixes, and captions for showcasing statistics and achievements
 - **CTA Block** - Build call-to-action sections with animated carousels and gradient backgrounds
 - **Logos Block** - Display partner/client logos with customizable sliders, smooth animations, and responsive breakpoints
 - **Particles Block** - Add dynamic particle effects with scroll-controlled animations and customizable positioning
@@ -146,6 +145,20 @@ A: Yes, each block instance is independent and can be customized separately thro
 **Q: Are there any performance considerations?**
 A: The plugin is optimized for performance with efficient block registration and lazy loading of animation scripts. GSAP animations are hardware-accelerated for smooth performance.
 
+## Changelog
+
+
+### Version 1.1.0 =
+* **Added** Counter Block with animated counting effects and customizable styling
+* **Added** counter direction (count up or count down)
+* **Added** prefix and suffix support for counter numbers
+* **Added** caption support with top/bottom positioning
+* **Added** comprehensive typography controls (font size, weight, letter spacing)
+* **Added** color controls for counter and caption
+* **Added** responsive container settings with device-specific max-widths
+* **Added** live animation preview in WordPress editor
+* **Implemented** dynamic block rendering for Counter Block
+* **Added** custom icon support for blocks
 
 ### Version 1.0.9
 - **Added:** Block Migration Tool for automated block updates and validation fixes
