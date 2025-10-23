@@ -5,7 +5,6 @@
   "version": "0.1.0",
   "title": "Video Hero Slider",
   "category": "media",
-  "icon": "video-alt3",
   "description": "A video slider with smooth transitions using YouTube/Vimeo videos.",
   "example": {},
   "supports": {
@@ -237,5 +236,6 @@
       "type": "string",
       "default": ""
     }
-  }
+  },
+  "icon": "<svg\r\n\t\t\twidth=\"24\"\r\n\t\t\theight=\"24\"\r\n\t\t\tviewBox=\"0 0 24 24\"\r\n\t\t\tfill=\"none\"\r\n\t\t\txmlns=\"http://www.w3.org/2000/svg\"\r\n\t\t>\r\n\t\t\t<rect width=\"24\" height=\"24\" rx=\"5\" fill=\"#F0F0F1\" />\r\n\t\t\t<path\r\n\t\t\t\td=\"M7.41666 20.25H16.5833\"\r\n\t\t\t\tstroke=\"black\"\r\n\t\t\t\tstrokeWidth=\"1.5\"\r\n\t\t\t\tstrokeLinecap=\"round\"\r\n\t\t\t\tstrokeLinejoin=\"round\"\r\n\t\t\t/>\r\n\t\t\t<path\r\n\t\t\t\td=\"M19.3333 3.75H4.66668C3.65415 3.75 2.83334 4.57081 2.83334 5.58333V14.75C2.83334 15.7625 3.65415 16.5833 4.66668 16.5833H19.3333C20.3459 16.5833 21.1667 15.7625 21.1667 14.75V5.58333C21.1667 4.57081 20.3459 3.75 19.3333 3.75Z\"\r\n\t\t\t\tfill=\"#F0F0F1\"\r\n\t\t\t\tstroke=\"black\"\r\n\t\t\t\tstrokeWidth=\"1.5\"\r\n\t\t\t\tstrokeLinecap=\"round\"\r\n\t\t\t\tstrokeLinejoin=\"round\"\r\n\t\t\t/>\r\n\t\t\t<path\r\n\t\t\t\td=\"M14.7802 9.65334C14.8703 9.70544 14.945 9.78029 14.997 9.87039C15.0489 9.96049 15.0763 10.0627 15.0763 10.1667C15.0763 10.2707 15.0489 10.3729 14.997 10.463C14.945 10.5531 14.8703 10.6279 14.7802 10.68L11.054 12.836C10.964 12.8881 10.8619 12.9155 10.7579 12.9155C10.654 12.9155 10.5518 12.8881 10.4618 12.836C10.3718 12.784 10.2972 12.7091 10.2454 12.619C10.1935 12.5288 10.1664 12.4266 10.1667 12.3227V8.01068C10.1665 7.90685 10.1936 7.8048 10.2454 7.71481C10.2972 7.62481 10.3718 7.55003 10.4616 7.498C10.5515 7.44597 10.6534 7.41851 10.7573 7.4184C10.8611 7.41828 10.9631 7.44551 11.0531 7.49734L14.7802 9.65334Z\"\r\n\t\t\t\tfill=\"#FF0000\"\r\n\t\t\t\tstroke=\"#FF0000\"\r\n\t\t\t\tstrokeWidth=\"1.5\"\r\n\t\t\t\tstrokeLinecap=\"round\"\r\n\t\t\t\tstrokeLinejoin=\"round\"\r\n\t\t\t/>\r\n\t\t</svg>"
 }

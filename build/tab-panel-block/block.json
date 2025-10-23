@@ -8,7 +8,6 @@
   "parent": [
     "create-block/tabs-block"
   ],
-  "icon": "media-text",
   "description": "A single tab panel content area (automatically managed by Tabs block).",
   "supports": {
     "html": false,
@@ -35,5 +34,6 @@
       "type": "boolean",
       "default": false
     }
-  }
+  },
+  "icon": "<svg\r\n\t\t\twidth=\"24\"\r\n\t\t\theight=\"24\"\r\n\t\t\tviewBox=\"0 0 24 24\"\r\n\t\t\tfill=\"none\"\r\n\t\t\txmlns=\"http://www.w3.org/2000/svg\"\r\n\t\t>\r\n\t\t\t<rect width=\"24\" height=\"24\" rx=\"5\" fill=\"#F0F0F1\" />\r\n\t\t\t<path d=\"M2.25 6H21.75Z\" fill=\"#F0F0F1\" />\r\n\t\t\t<path\r\n\t\t\t\td=\"M2.25 6H21.75\"\r\n\t\t\t\tstroke=\"black\"\r\n\t\t\t\tstrokeLinecap=\"round\"\r\n\t\t\t\tstrokeLinejoin=\"round\"\r\n\t\t\t/>\r\n\t\t\t<path\r\n\t\t\t\td=\"M21.75 6.00003V16.8333C21.75 18.0299 20.7799 19 19.5833 19H4.41667C3.22005 19 2.25 18.0299 2.25 16.8333V6\"\r\n\t\t\t\tstroke=\"black\"\r\n\t\t\t\tstrokeLinecap=\"round\"\r\n\t\t\t\tstrokeLinejoin=\"round\"\r\n\t\t\t/>\r\n\t\t\t<path d=\"M18.5 10.55H5.5Z\" fill=\"#F0F0F1\" />\r\n\t\t\t<path\r\n\t\t\t\td=\"M18.5 10.55H5.5\"\r\n\t\t\t\tstroke=\"#FF0000\"\r\n\t\t\t\tstrokeWidth=\"2\"\r\n\t\t\t\tstrokeLinecap=\"round\"\r\n\t\t\t\tstrokeLinejoin=\"round\"\r\n\t\t\t/>\r\n\t\t\t<path d=\"M18.5 14.45H5.5Z\" fill=\"#F0F0F1\" />\r\n\t\t\t<path\r\n\t\t\t\td=\"M18.5 14.45H5.5\"\r\n\t\t\t\tstroke=\"black\"\r\n\t\t\t\tstrokeWidth=\"2\"\r\n\t\t\t\tstrokeLinecap=\"round\"\r\n\t\t\t\tstrokeLinejoin=\"round\"\r\n\t\t\t/>\r\n\t\t</svg>"
 }

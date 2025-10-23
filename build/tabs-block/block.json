@@ -5,7 +5,6 @@
   "version": "0.1.0",
   "title": "Tabs",
   "category": "widgets",
-  "icon": "index-card",
   "description": "Beautiful tabbed content with smooth GSAP animations and customizable styling.",
   "supports": {
     "html": false,
@@ -17,6 +16,7 @@
     "customClassName": true
   },
   "textdomain": "tabs-block",
+  "icon": "<svg\r\n\t\t\twidth=\"24\"\r\n\t\t\theight=\"24\"\r\n\t\t\tviewBox=\"0 0 24 24\"\r\n\t\t\tfill=\"none\"\r\n\t\t\txmlns=\"http://www.w3.org/2000/svg\"\r\n\t\t>\r\n\t\t\t<g clipPath=\"url(#clip0_7_2)\">\r\n\t\t\t\t<rect width=\"24\" height=\"24\" rx=\"5\" fill=\"#F0F0F1\" />\r\n\t\t\t\t<path\r\n\t\t\t\t\td=\"M19.5833 2.25H4.41667C3.22005 2.25 2.25 3.22005 2.25 4.41667V19.5833C2.25 20.78 3.22005 21.75 4.41667 21.75H19.5833C20.78 21.75 21.75 20.78 21.75 19.5833V4.41667C21.75 3.22005 20.78 2.25 19.5833 2.25Z\"\r\n\t\t\t\t\tfill=\"#F0F0F1\"\r\n\t\t\t\t\tstroke=\"black\"\r\n\t\t\t\t\tstrokeLinecap=\"round\"\r\n\t\t\t\t\tstrokeLinejoin=\"round\"\r\n\t\t\t\t/>\r\n\t\t\t\t<path\r\n\t\t\t\t\td=\"M12 8.75V2.25\"\r\n\t\t\t\t\tstroke=\"black\"\r\n\t\t\t\t\tstrokeLinecap=\"round\"\r\n\t\t\t\t\tstrokeLinejoin=\"round\"\r\n\t\t\t\t/>\r\n\t\t\t\t<path\r\n\t\t\t\t\td=\"M2.25 8.75H21.75\"\r\n\t\t\t\t\tstroke=\"black\"\r\n\t\t\t\t\tstrokeLinecap=\"round\"\r\n\t\t\t\t\tstrokeLinejoin=\"round\"\r\n\t\t\t\t/>\r\n\t\t\t\t<path\r\n\t\t\t\t\td=\"M20 13H4\"\r\n\t\t\t\t\tstroke=\"#FF0000\"\r\n\t\t\t\t\tstrokeWidth=\"2\"\r\n\t\t\t\t\tstrokeLinecap=\"round\"\r\n\t\t\t\t\tstrokeLinejoin=\"round\"\r\n\t\t\t\t/>\r\n\t\t\t\t<path\r\n\t\t\t\t\td=\"M20 18L4 18\"\r\n\t\t\t\t\tstroke=\"black\"\r\n\t\t\t\t\tstrokeWidth=\"2\"\r\n\t\t\t\t\tstrokeLinecap=\"round\"\r\n\t\t\t\t\tstrokeLinejoin=\"round\"\r\n\t\t\t\t/>\r\n\t\t\t</g>\r\n\t\t\t<defs>\r\n\t\t\t\t<clipPath id=\"clip0_7_2\">\r\n\t\t\t\t\t<rect width=\"24\" height=\"24\" rx=\"5\" fill=\"white\" />\r\n\t\t\t\t</clipPath>\r\n\t\t\t</defs>\r\n\t\t</svg>",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",

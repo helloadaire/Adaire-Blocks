@@ -14,13 +14,16 @@ class AdaireBlocksLicense {
     
     private static $instance = null;
     private $table_name;
-    private $api_base_url = 'https://adaire.dev/ad/wp-json/lmfwc/v2/licenses';
-    private $consumer_key = 'ck_5a9271d84ab660911a7c48dfd3f89e1691d9e286';
-    private $consumer_secret = 'cs_d92b496a59e64042539c7e6eb14f17697d347827';
+    
+    // Validation server configuration
+    private $validation_server_url;
     
     private function __construct() {
         global $wpdb;
         $this->table_name = $wpdb->prefix . 'adaire_blocks_licenses';
+        
+        // Load validation server configuration
+        $this->validation_server_url = AdaireBlocksValidationConfig::get_validation_server_url();
         
         // Initialize on admin init
         add_action('admin_init', array($this, 'init'));
@@ -51,21 +54,6 @@ class AdaireBlocksLicense {
         $this->create_license_table();
         $this->check_license_status();
     }
-    
-    /**
-     * Get authentication headers for API requests
-     */
-    private function get_auth_headers() {
-        error_log('Adaire Blocks License: Using Query Parameter Authentication');
-        error_log('Adaire Blocks License: Consumer Key: ' . substr($this->consumer_key, 0, 8) . '...');
-        
-        return array(
-            'User-Agent' => 'PostmanRuntime/7.32.3', // Try matching Postman's User-Agent
-            'Content-Type' => 'application/json',
-            'Accept' => 'application/json'
-        );
-    }
-    
     
     /**
      * Extract and sanitize license key from URL if full URL is provided
@@ -99,35 +87,6 @@ class AdaireBlocksLicense {
         }
         
         return $license_key;
-    }
-    
-    /**
-     * Add authentication query parameters to URL
-     */
-    private function add_auth_params($url) {
-        $separator = (strpos($url, '?') !== false) ? '&' : '?';
-        
-        // Try different encoding methods to match Postman exactly
-        $key_encoded = urlencode($this->consumer_key);
-        $secret_encoded = urlencode($this->consumer_secret);
-        
-        // Also try without encoding (in case Postman doesn't encode)
-        $key_raw = $this->consumer_key;
-        $secret_raw = $this->consumer_secret;
-        
-        $auth_url = $url . $separator . 'consumer_key=' . $key_encoded . '&consumer_secret=' . $secret_encoded;
-        
-        error_log('Adaire Blocks License: ===== URL AUTHENTICATION =====');
-        error_log('Adaire Blocks License: Original URL: ' . $url);
-        error_log('Adaire Blocks License: Consumer Key (raw): ' . $key_raw);
-        error_log('Adaire Blocks License: Consumer Secret (raw): ' . $secret_raw);
-        error_log('Adaire Blocks License: Consumer Key (encoded): ' . $key_encoded);
-        error_log('Adaire Blocks License: Consumer Secret (encoded): ' . $secret_encoded);
-        error_log('Adaire Blocks License: Authenticated URL: ' . $auth_url);
-        error_log('Adaire Blocks License: URL Length: ' . strlen($auth_url));
-        error_log('Adaire Blocks License: ===== URL AUTHENTICATION END =====');
-        
-        return $auth_url;
     }
     
     /**
@@ -247,18 +206,33 @@ class AdaireBlocksLicense {
     }
     
     /**
-     * Validate license with API
+     * Validate license with validation server
      */
     public function validate_license($license_key) {
-        $url = $this->api_base_url . '/validate/' . $license_key;
-        $auth_url = $this->add_auth_params($url);
+        // Development bypass for "douglasmasho." key
+        if ($license_key === 'douglasmasho') {
+            error_log('Adaire Blocks License: Development bypass validation for key: douglasmasho');
+            
+            // Return mock validation data for development
+            return array(
+                'timesActivated' => 1,
+                'timesActivatedMax' => 999,
+                'remainingActivations' => 999
+            );
+        }
         
-        error_log('Adaire Blocks License: Starting license validation');
+        $url = $this->validation_server_url . '/?action=validate&license_key=' . urlencode($license_key);
+        
+        error_log('Adaire Blocks License: Starting license validation via validation server');
         error_log('Adaire Blocks License: License Key: ' . substr($license_key, 0, 8) . '...');
+        error_log('Adaire Blocks License: Validation server URL: ' . $url);
         
-        $response = wp_remote_get($auth_url, array(
+        $response = wp_remote_get($url, array(
             'timeout' => 30,
-            'headers' => $this->get_auth_headers()
+            'headers' => array(
+                'Accept' => 'application/json',
+                'User-Agent' => 'Adaire-Blocks-WordPress/1.1.1'
+            )
         ));
         
         if (is_wp_error($response)) {
@@ -311,9 +285,12 @@ class AdaireBlocksLicense {
             return false;
         }
         
-        $license_info = $data['data'];
+        // The validation server wraps the response, so data could be nested
+        // Check if data.data exists (validation server wrapping the license API response)
+        $license_info = isset($data['data']['data']) ? $data['data']['data'] : $data['data'];
         
-        error_log('Adaire Blocks License: License info: ' . print_r($license_info, true));
+        error_log('Adaire Blocks License: Raw data from server: ' . print_r($data['data'], true));
+        error_log('Adaire Blocks License: Extracted license info: ' . print_r($license_info, true));
         
         // Check if there are any active activations
         if (isset($license_info['timesActivated']) && $license_info['timesActivated'] == 0) {
@@ -334,9 +311,9 @@ class AdaireBlocksLicense {
         // Save license data
         $this->save_license_data($license_key, array(
             'status' => 'active',
-            'times_activated' => $license_info['timesActivated'],
-            'times_activated_max' => $license_info['timesActivatedMax'],
-            'remaining_activations' => $license_info['remainingActivations']
+            'times_activated' => $license_info['timesActivated'] ?? 0,
+            'times_activated_max' => $license_info['timesActivatedMax'] ?? 0,
+            'remaining_activations' => $license_info['remainingActivations'] ?? 0
         ));
         
         error_log('Adaire Blocks License: License validation successful');
@@ -362,38 +339,50 @@ class AdaireBlocksLicense {
             error_log('Adaire Blocks License: Extracted key: ' . $license_key);
         }
         
-        $url = $this->api_base_url . '/activate/' . $license_key;
-        $auth_url = $this->add_auth_params($url);
+        // Development bypass for "douglasmasho." key
+        if ($license_key === 'douglasmasho') {
+            error_log('Adaire Blocks License: Development bypass activated for key: douglasmasho');
+            
+            // Save license data with development bypass
+            $this->save_license_data($license_key, array(
+                'activation_token' => 'dev-bypass-token-' . time(),
+                'status' => 'active',
+                'times_activated' => 1,
+                'times_activated_max' => 999,
+                'remaining_activations' => 999
+            ));
+            
+            return array(
+                'success' => true,
+                'message' => 'License activated successfully (Development Mode)',
+                'token' => 'dev-bypass-token-' . time()
+            );
+        }
         
-        error_log('Adaire Blocks License: Starting license activation');
+        $url = $this->validation_server_url . '/?action=activate&license_key=' . urlencode($license_key);
+        
+        error_log('Adaire Blocks License: Starting license activation via validation server');
         error_log('Adaire Blocks License: License Key: ' . substr($license_key, 0, 8) . '...');
         
         // Log the exact request being made
-        error_log('Adaire Blocks License: Making POST request to: ' . $auth_url);
-        error_log('Adaire Blocks License: Request headers: ' . print_r($this->get_auth_headers(), true));
+        error_log('Adaire Blocks License: Making GET request to validation server: ' . $url);
         
-        // Use the same minimal request args as the test method
+        // Use minimal request args for validation server
         $request_args = array(
             'timeout' => 30,
-            'method' => 'POST',
-            'sslverify' => false,
+            'method' => 'GET',
+            'sslverify' => true,
             'httpversion' => '1.1',
             'blocking' => true,
             'headers' => array(
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json'
-            ),
-            'cookies' => false,
-            'compress' => false,
-            'decompress' => true,
-            'user-agent' => 'PostmanRuntime/7.32.3',
-            'reject_unsafe_urls' => false,
-            'limit_response_size' => null
+                'Accept' => 'application/json',
+                'User-Agent' => 'Adaire-Blocks-WordPress/1.1.1'
+            )
         );
         
         error_log('Adaire Blocks License: Request arguments: ' . print_r($request_args, true));
         
-        $response = wp_remote_request($auth_url, $request_args);
+        $response = wp_remote_request($url, $request_args);
         
         // Log the actual request that was made (WordPress might modify it)
         if (is_wp_error($response)) {
@@ -410,7 +399,7 @@ class AdaireBlocksLicense {
         // If that fails, try with cURL directly (bypass WordPress HTTP completely)
         if (is_wp_error($response) || wp_remote_retrieve_response_code($response) === 401) {
             error_log('Adaire Blocks License: WordPress request failed, trying direct cURL');
-            $response = $this->make_direct_curl_request($auth_url);
+            $response = $this->make_direct_curl_request($url);
         }
         
         if (is_wp_error($response)) {
@@ -563,16 +552,19 @@ class AdaireBlocksLicense {
      * Deactivate license
      */
     public function deactivate_license($license_key, $token) {
-        $url = $this->api_base_url . '/deactivate/' . $license_key . '?token=' . $token;
-        $auth_url = $this->add_auth_params($url);
+        $url = $this->validation_server_url . '/?action=deactivate&license_key=' . urlencode($license_key) . '&token=' . urlencode($token);
         
-        error_log('Adaire Blocks License: Starting license deactivation');
+        error_log('Adaire Blocks License: Starting license deactivation via validation server');
         error_log('Adaire Blocks License: License Key: ' . substr($license_key, 0, 8) . '...');
         error_log('Adaire Blocks License: Token: ' . substr($token, 0, 8) . '...');
+        error_log('Adaire Blocks License: Validation server URL: ' . $url);
         
-        $response = wp_remote_post($auth_url, array(
+        $response = wp_remote_get($url, array(
             'timeout' => 30,
-            'headers' => $this->get_auth_headers()
+            'headers' => array(
+                'Accept' => 'application/json',
+                'User-Agent' => 'Adaire-Blocks-WordPress/1.1.1'
+            )
         ));
         
         if (is_wp_error($response)) {
@@ -626,6 +618,12 @@ class AdaireBlocksLicense {
             return false;
         }
         
+        // Development bypass for "douglasmasho." key
+        if ($license_data['license_key'] === 'douglasmasho') {
+            error_log('Adaire Blocks License: Development bypass - license is active for key: douglasmasho');
+            return true;
+        }
+        
         return $license_data['status'] === 'active' && !empty($license_data['activation_token']);
     }
     
@@ -639,6 +637,18 @@ class AdaireBlocksLicense {
             return array(
                 'status' => 'inactive',
                 'message' => 'No license found'
+            );
+        }
+        
+        // Development bypass for "douglasmasho." key
+        if ($license_data['license_key'] === 'douglasmasho') {
+            error_log('Adaire Blocks License: Development bypass - returning active status for key: douglasmasho');
+            return array(
+                'status' => 'active',
+                'message' => 'License is active (Development Mode)',
+                'remaining_activations' => 999,
+                'times_activated' => 1,
+                'times_activated_max' => 999
             );
         }
         
@@ -802,17 +812,18 @@ class AdaireBlocksLicense {
             wp_send_json_error(array('message' => 'License key is required for testing'));
         }
         
-        // Test activation endpoint
-        $url = $this->api_base_url . '/activate/' . $license_key;
-        $auth_url = $this->add_auth_params($url);
+        // Test validation server endpoint
+        $url = $this->validation_server_url . '/?action=activate&license_key=' . urlencode($license_key);
         
-        error_log('Adaire Blocks License: Testing API endpoint');
-        error_log('Adaire Blocks License: Original URL: ' . $url);
-        error_log('Adaire Blocks License: Authenticated URL: ' . $auth_url);
+        error_log('Adaire Blocks License: Testing validation server endpoint');
+        error_log('Adaire Blocks License: Validation server URL: ' . $url);
         
-        $response = wp_remote_post($auth_url, array(
+        $response = wp_remote_get($url, array(
             'timeout' => 30,
-            'headers' => $this->get_auth_headers()
+            'headers' => array(
+                'Accept' => 'application/json',
+                'User-Agent' => 'Adaire-Blocks-WordPress/1.1.1'
+            )
         ));
         
         if (is_wp_error($response)) {
@@ -840,7 +851,7 @@ class AdaireBlocksLicense {
         error_log('Adaire Blocks License: ===== TEST API RESPONSE END =====');
         
         wp_send_json_success(array(
-            'url' => $auth_url, // Use the authenticated URL, not the original
+            'url' => $url,
             'response_code' => $response_code,
             'response_headers' => $response_headers->getAll(),
             'raw_body' => $body,
@@ -881,40 +892,31 @@ class AdaireBlocksLicense {
             error_log('Adaire Blocks License: Sanitized key: ' . $license_key);
         }
         
-        $url = $this->api_base_url . '/activate/' . $license_key;
+        $url = $this->validation_server_url . '/?action=activate&license_key=' . urlencode($license_key);
         
-        // Test Query Parameters Authentication
-        error_log('Adaire Blocks License: ===== TESTING QUERY PARAM AUTH ONLY =====');
-        $auth_url = $this->add_auth_params($url);
+        // Test validation server
+        error_log('Adaire Blocks License: ===== TESTING VALIDATION SERVER =====');
         
         // Log the exact request being made
-        error_log('Adaire Blocks License: Making POST request to: ' . $auth_url);
-        error_log('Adaire Blocks License: Request headers: ' . print_r($this->get_auth_headers(), true));
+        error_log('Adaire Blocks License: Making GET request to validation server: ' . $url);
         
-        // Try to match Postman exactly - minimal WordPress interference
+        // Use minimal request args for validation server
         $request_args = array(
             'timeout' => 30,
-            'method' => 'POST',
-            'sslverify' => false,
+            'method' => 'GET',
+            'sslverify' => true,
             'httpversion' => '1.1',
             'blocking' => true,
             'headers' => array(
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json'
-            ),
-            // Remove WordPress-specific settings that might interfere
-            'cookies' => false,
-            'compress' => false,
-            'decompress' => true,
-            'user-agent' => 'PostmanRuntime/7.32.3', // Match Postman exactly
-            'reject_unsafe_urls' => false,
-            'limit_response_size' => null
+                'Accept' => 'application/json',
+                'User-Agent' => 'Adaire-Blocks-WordPress/1.1.1'
+            )
         );
         
         error_log('Adaire Blocks License: Request arguments: ' . print_r($request_args, true));
         
         // Try with wp_remote_request for more control
-        $response = wp_remote_request($auth_url, $request_args);
+        $response = wp_remote_request($url, $request_args);
         
         // Log the actual request that was made (WordPress might modify it)
         if (is_wp_error($response)) {
@@ -931,11 +933,11 @@ class AdaireBlocksLicense {
         // If that fails, try with cURL directly (bypass WordPress HTTP completely)
         if (is_wp_error($response) || wp_remote_retrieve_response_code($response) === 401) {
             error_log('Adaire Blocks License: WordPress request failed, trying direct cURL');
-            $response = $this->make_direct_curl_request($auth_url);
+            $response = $this->make_direct_curl_request($url);
         }
         
         $result = array(
-            'url' => $auth_url,
+            'url' => $url,
             'response_code' => wp_remote_retrieve_response_code($response),
             'body' => wp_remote_retrieve_body($response),
             'is_error' => is_wp_error($response),

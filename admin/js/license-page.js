@@ -9,6 +9,9 @@
 
     class AdaireLicenseManager {
         constructor() {
+            // Validation server URL - handles all license operations securely
+            // This URL is passed from PHP configuration
+            this.validationServerUrl = adaireLicense.validationServerUrl || 'https://adaire.digital/validation-server';
             this.init();
         }
 
@@ -29,11 +32,6 @@
             // Validate license button
             $(document).on('click', '#validate-license', this.handleLicenseValidation.bind(this));
             
-            // Test API button (debug mode only)
-            $(document).on('click', '#test-api', this.handleTestApi.bind(this));
-            
-            // Test Auth button (debug mode only)
-            $(document).on('click', '#test-auth', this.handleTestAuth.bind(this));
             $(document).on('click', '#refresh-status', this.handleRefreshStatus.bind(this));
         }
 
@@ -65,56 +63,50 @@
             this.validateLicense();
         }
 
-        handleTestApi(e) {
-            e.preventDefault();
-            this.testApi();
-        }
-
-        handleTestAuth(e) {
-            e.preventDefault();
-            this.testAuth();
-        }
 
         handleRefreshStatus(e) {
             e.preventDefault();
             this.refreshStatus();
         }
 
+        handleHealthCheck(e) {
+            e.preventDefault();
+            this.healthCheck();
+        }
+
         activateLicense(licenseKey) {
             const $button = $('#activate-license');
             const $container = $('.adaire-license-container');
             
-            console.log('Adaire Blocks License: Starting license activation process');
-            console.log('Adaire Blocks License: EXACT Key:', licenseKey);
-            
             this.setLoading($button, adaireLicense.strings.activating);
             $container.addClass('adaire-license-loading');
             
-            // First, validate the license to get the correct activation limits
-            this.validateLicenseForActivation(licenseKey)
-                .then(validationData => {
-                    console.log('Adaire Blocks License: Validation successful, proceeding with activation');
-                    console.log('Adaire Blocks License: License limits:', {
-                        timesActivated: validationData.timesActivated,
-                        timesActivatedMax: validationData.timesActivatedMax,
-                        remainingActivations: validationData.remainingActivations
-                    });
-                    
-                    // Now proceed with activation
-                    return this.performActivation(licenseKey, validationData);
-                })
+            // First, activate the license to get the token
+            this.performActivation(licenseKey)
                 .then(activationData => {
-                    console.log('Adaire Blocks License: Activation successful');
+                    // Now validate to get the updated license status
+                    return this.validateAfterActivation(licenseKey).then(validationData => {
+                        // Combine activation data with validation data
+                        return {
+                            ...activationData,
+                            data: {
+                                ...activationData.data,
+                                timesActivated: validationData.timesActivated,
+                                timesActivatedMax: validationData.timesActivatedMax,
+                                remainingActivations: validationData.remainingActivations
+                            }
+                        };
+                    });
+                })
+                .then(combinedData => {
                     this.showMessage('success', 'License activated successfully!');
-                    // Save the activation result to WordPress database
-                    this.saveActivationResult(licenseKey, activationData);
+                    // Save the activation result with updated validation data to WordPress database
+                    this.saveActivationResult(licenseKey, combinedData);
                 })
                 .catch(error => {
-                    console.error('Adaire Blocks License: Activation process failed:', error);
                     this.showMessage('error', error.message || 'License activation failed');
                 })
                 .finally(() => {
-                    console.log('Adaire Blocks License: Activation process completed');
                     this.removeLoading($button, adaireLicense.strings.activate);
                     $container.removeClass('adaire-license-loading');
                 });
@@ -122,14 +114,7 @@
 
         validateLicenseForActivation(licenseKey) {
             return new Promise((resolve, reject) => {
-                console.log('Adaire Blocks License: Validating license before activation');
-                
-                const consumerKey = 'ck_5a9271d84ab660911a7c48dfd3f89e1691d9e286';
-                const consumerSecret = 'cs_d92b496a59e64042539c7e6eb14f17697d347827';
-                const baseUrl = 'https://adaire.dev/ad/wp-json/lmfwc/v2/licenses/validate/';
-                const fullUrl = `${baseUrl}${licenseKey}?consumer_key=${encodeURIComponent(consumerKey)}&consumer_secret=${encodeURIComponent(consumerSecret)}`;
-                
-                console.log('Adaire Blocks License: Validation URL:', fullUrl);
+                const fullUrl = `${this.validationServerUrl}/?action=validate&license_key=${encodeURIComponent(licenseKey)}`;
                 
                 fetch(fullUrl, {
                     method: 'GET',
@@ -138,13 +123,9 @@
                     }
                 })
                 .then(response => {
-                    console.log('Adaire Blocks License: Validation response status:', response.status);
                     return response.text().then(text => {
-                        console.log('Adaire Blocks License: Validation response body:', text);
-                        
                         try {
                             const jsonData = JSON.parse(text);
-                            console.log('Adaire Blocks License: Validation response (parsed):', jsonData);
                             
                             if (response.ok && jsonData.success) {
                                 if (jsonData.data && jsonData.data.errors) {
@@ -174,16 +155,9 @@
             });
         }
 
-        performActivation(licenseKey, validationData) {
+        validateAfterActivation(licenseKey) {
             return new Promise((resolve, reject) => {
-                console.log('Adaire Blocks License: Performing license activation');
-                
-                const consumerKey = 'ck_5a9271d84ab660911a7c48dfd3f89e1691d9e286';
-                const consumerSecret = 'cs_d92b496a59e64042539c7e6eb14f17697d347827';
-                const baseUrl = 'https://adaire.dev/ad/wp-json/lmfwc/v2/licenses/activate/';
-                const fullUrl = `${baseUrl}${licenseKey}?consumer_key=${encodeURIComponent(consumerKey)}&consumer_secret=${encodeURIComponent(consumerSecret)}`;
-                
-                console.log('Adaire Blocks License: Activation URL:', fullUrl);
+                const fullUrl = `${this.validationServerUrl}/?action=validate&license_key=${encodeURIComponent(licenseKey)}`;
                 
                 fetch(fullUrl, {
                     method: 'GET',
@@ -192,13 +166,42 @@
                     }
                 })
                 .then(response => {
-                    console.log('Adaire Blocks License: Activation response status:', response.status);
                     return response.text().then(text => {
-                        console.log('Adaire Blocks License: Activation response body:', text);
-                        
                         try {
                             const jsonData = JSON.parse(text);
-                            console.log('Adaire Blocks License: Activation response (parsed):', jsonData);
+                            
+                            if (response.ok && jsonData.success) {
+                                // Extract validation data from response
+                                const validationData = jsonData.data.data || jsonData.data;
+                                resolve(validationData);
+                            } else {
+                                reject(new Error(jsonData.message || 'Post-activation validation failed'));
+                            }
+                        } catch (e) {
+                            reject(new Error('Invalid validation response'));
+                        }
+                    });
+                })
+                .catch(error => {
+                    reject(new Error('Network error during post-activation validation: ' + error.message));
+                });
+            });
+        }
+
+        performActivation(licenseKey) {
+            return new Promise((resolve, reject) => {
+                const fullUrl = `${this.validationServerUrl}/?action=activate&license_key=${encodeURIComponent(licenseKey)}`;
+                
+                fetch(fullUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    return response.text().then(text => {
+                        try {
+                            const jsonData = JSON.parse(text);
                             
                             if (response.ok && jsonData.success) {
                                 if (jsonData.data && jsonData.data.errors) {
@@ -211,20 +214,31 @@
                                         }
                                     });
                                     reject(new Error(errorMessages.join('; ') || 'License activation failed'));
-                                } else if (jsonData.data && (jsonData.data.token || jsonData.data.activationData?.token)) {
-                                    // Merge validation data with activation data
-                                    const combinedData = {
-                                        ...jsonData,
-                                        data: {
-                                            ...jsonData.data,
-                                            timesActivated: validationData.timesActivated,
-                                            timesActivatedMax: validationData.timesActivatedMax,
-                                            remainingActivations: validationData.remainingActivations
-                                        }
-                                    };
-                                    resolve(combinedData);
+                                } else if (jsonData.data) {
+                                    // Extract token from various possible locations
+                                    const token = jsonData.data.token || 
+                                                  jsonData.data.activationData?.token || 
+                                                  jsonData.data.data?.activationData?.token ||
+                                                  jsonData.data.data?.token;
+                                    
+                                    if (token) {
+                                        // Extract license data from the activation response
+                                        const licenseData = jsonData.data.data || jsonData.data;
+                                        
+                                        // Return activation data with token
+                                        const activationResult = {
+                                            ...jsonData,
+                                            data: {
+                                                ...jsonData.data,
+                                                token: token  // Ensure token is at the top level
+                                            }
+                                        };
+                                        resolve(activationResult);
+                                    } else {
+                                        reject(new Error('License activation failed - no token received'));
+                                    }
                                 } else {
-                                    reject(new Error('License activation failed - no token received'));
+                                    reject(new Error('License activation failed - no data received'));
                                 }
                             } else {
                                 reject(new Error(jsonData.message || 'License activation failed'));
@@ -253,23 +267,12 @@
                 return;
             }
             
-            console.log('Adaire Blocks License: Starting license deactivation');
-            console.log('Adaire Blocks License: License key:', licenseKey);
-            console.log('Adaire Blocks License: Activation token:', activationToken || 'No token found - will deactivate without token');
-            
-            // Use EXACT key as user input - no cleaning
-            const consumerKey = 'ck_5a9271d84ab660911a7c48dfd3f89e1691d9e286';
-            const consumerSecret = 'cs_d92b496a59e64042539c7e6eb14f17697d347827';
-            const baseUrl = 'https://adaire.dev/ad/wp-json/lmfwc/v2/licenses/deactivate/';
-            
             // Build URL with or without token parameter
             let fullUrl;
             if (activationToken) {
-                fullUrl = `${baseUrl}${licenseKey}?consumer_key=${encodeURIComponent(consumerKey)}&consumer_secret=${encodeURIComponent(consumerSecret)}&token=${encodeURIComponent(activationToken)}`;
-                console.log('Adaire Blocks License: Deactivation URL (with token):', fullUrl);
+                fullUrl = `${this.validationServerUrl}/?action=deactivate&license_key=${encodeURIComponent(licenseKey)}&token=${encodeURIComponent(activationToken)}`;
             } else {
-                fullUrl = `${baseUrl}${licenseKey}?consumer_key=${encodeURIComponent(consumerKey)}&consumer_secret=${encodeURIComponent(consumerSecret)}`;
-                console.log('Adaire Blocks License: Deactivation URL (without token):', fullUrl);
+                fullUrl = `${this.validationServerUrl}/?action=deactivate&license_key=${encodeURIComponent(licenseKey)}`;
             }
             
             this.setLoading($button, adaireLicense.strings.deactivating);
@@ -283,18 +286,13 @@
                 }
             })
             .then(response => {
-                console.log('Adaire Blocks License: Deactivation response status:', response.status);
                 return response.text().then(text => {
-                    console.log('Adaire Blocks License: Deactivation response body:', text);
-                    
                     try {
                         const jsonData = JSON.parse(text);
-                        console.log('Adaire Blocks License: Deactivation response (parsed):', jsonData);
                         
                         if (response.ok && jsonData.success) {
                             // Check if there are errors in the data
                             if (jsonData.data && jsonData.data.errors) {
-                                console.log('Adaire Blocks License: Deactivation failed with errors:', jsonData.data.errors);
                                 const errorMessages = [];
                                 Object.keys(jsonData.data.errors).forEach(key => {
                                     if (Array.isArray(jsonData.data.errors[key])) {
@@ -306,7 +304,6 @@
                                 this.showMessage('error', errorMessages.join('; ') || 'License deactivation failed');
                             } else {
                                 // Successful deactivation
-                                console.log('Adaire Blocks License: Deactivation successful');
                                 const message = activationToken ? 
                                     'License deactivated successfully!' : 
                                     'License deactivated successfully (without token)!';
@@ -315,21 +312,17 @@
                                 this.saveDeactivationResult();
                             }
                         } else {
-                            console.log('Adaire Blocks License: Deactivation failed - response not ok or success false');
                             this.showMessage('error', jsonData.message || 'License deactivation failed');
                         }
                     } catch (e) {
-                        console.log('Adaire Blocks License: Response is not JSON:', text);
                         this.showMessage('error', 'Invalid response from server');
                     }
                 });
             })
             .catch(error => {
-                console.error('Adaire Blocks License: Deactivation fetch error:', error);
                 this.showMessage('error', 'Network error: ' + error.message);
             })
             .finally(() => {
-                console.log('Adaire Blocks License: Deactivation request completed');
                 this.removeLoading($button, adaireLicense.strings.deactivate);
                 $container.removeClass('adaire-license-loading');
             });
@@ -347,16 +340,7 @@
                 return;
             }
             
-            console.log('Adaire Blocks License: Starting license validation');
-            console.log('Adaire Blocks License: License key:', licenseKey);
-            
-            // Use EXACT key as user input - no cleaning
-            const consumerKey = 'ck_5a9271d84ab660911a7c48dfd3f89e1691d9e286';
-            const consumerSecret = 'cs_d92b496a59e64042539c7e6eb14f17697d347827';
-            const baseUrl = 'https://adaire.dev/ad/wp-json/lmfwc/v2/licenses/validate/';
-            const fullUrl = `${baseUrl}${licenseKey}?consumer_key=${encodeURIComponent(consumerKey)}&consumer_secret=${encodeURIComponent(consumerSecret)}`;
-            
-            console.log('Adaire Blocks License: Validation URL:', fullUrl);
+            const fullUrl = `${this.validationServerUrl}/?action=validate&license_key=${encodeURIComponent(licenseKey)}`;
             
             this.setLoading($button, adaireLicense.strings.validating);
             $container.addClass('adaire-license-loading');
@@ -369,18 +353,13 @@
                 }
             })
             .then(response => {
-                console.log('Adaire Blocks License: Validation response status:', response.status);
                 return response.text().then(text => {
-                    console.log('Adaire Blocks License: Validation response body:', text);
-                    
                     try {
                         const jsonData = JSON.parse(text);
-                        console.log('Adaire Blocks License: Validation response (parsed):', jsonData);
                         
                         if (response.ok && jsonData.success) {
                             // Check if there are errors in the data
                             if (jsonData.data && jsonData.data.errors) {
-                                console.log('Adaire Blocks License: Validation failed with errors:', jsonData.data.errors);
                                 const errorMessages = [];
                                 Object.keys(jsonData.data.errors).forEach(key => {
                                     if (Array.isArray(jsonData.data.errors[key])) {
@@ -392,176 +371,32 @@
                                 this.showMessage('error', errorMessages.join('; ') || 'License validation failed');
                             } else {
                                 // Successful validation
-                                console.log('Adaire Blocks License: Validation successful');
                                 this.showMessage('success', 'License validation successful!');
                                 // Update license data with validation results
                                 this.updateLicenseData(jsonData.data);
                             }
                         } else {
-                            console.log('Adaire Blocks License: Validation failed - response not ok or success false');
                             this.showMessage('error', jsonData.message || 'License validation failed');
                         }
                     } catch (e) {
-                        console.log('Adaire Blocks License: Response is not JSON:', text);
                         this.showMessage('error', 'Invalid response from server');
                     }
                 });
             })
             .catch(error => {
-                console.error('Adaire Blocks License: Validation fetch error:', error);
                 this.showMessage('error', 'Network error: ' + error.message);
             })
             .finally(() => {
-                console.log('Adaire Blocks License: Validation request completed');
                 this.removeLoading($button, adaireLicense.strings.validate);
                 $container.removeClass('adaire-license-loading');
             });
         }
 
-        testApi() {
-            const licenseKey = $('#license-key').val().trim();
-            
-            if (!licenseKey) {
-                this.showMessage('error', 'Please enter a license key to test the API');
-                return;
-            }
-            
-            console.log('Adaire Blocks License: Testing API with key:', licenseKey);
-            
-            // Use EXACT key as user input - no cleaning
-            const consumerKey = 'ck_5a9271d84ab660911a7c48dfd3f89e1691d9e286';
-            const consumerSecret = 'cs_d92b496a59e64042539c7e6eb14f17697d347827';
-            const baseUrl = 'https://adaire.dev/ad/wp-json/lmfwc/v2/licenses/activate/';
-            const url = `${baseUrl}${licenseKey}?consumer_key=${encodeURIComponent(consumerKey)}&consumer_secret=${encodeURIComponent(consumerSecret)}`;
-            
-            console.log('Adaire Blocks License: API Test');
-            console.log('=== API TEST ===');
-            console.log('- EXACT Key:', licenseKey);
-            console.log('- Full URL:', url);
-            
-            // Simple GET request with fetch
-            fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                console.log('Adaire Blocks License: API Test Response Status:', response.status);
-                console.log('Adaire Blocks License: API Test Response Headers:', response.headers);
-                
-                return response.text().then(text => {
-                    console.log('Adaire Blocks License: API Test Response Body (raw):', text);
-                    
-                    try {
-                        const jsonData = JSON.parse(text);
-                        console.log('Adaire Blocks License: API Test Response Body (parsed):', jsonData);
-                        
-                        if (response.ok && jsonData.success) {
-                            // Check if there are errors in the data
-                            if (jsonData.data && jsonData.data.errors) {
-                                console.log('Adaire Blocks License: API test found errors:', jsonData.data.errors);
-                                const errorMessages = [];
-                                Object.keys(jsonData.data.errors).forEach(key => {
-                                    if (Array.isArray(jsonData.data.errors[key])) {
-                                        errorMessages.push(...jsonData.data.errors[key]);
-                                    } else {
-                                        errorMessages.push(jsonData.data.errors[key]);
-                                    }
-                                });
-                                this.showMessage('error', `API test found errors: ${errorMessages.join('; ')}`);
-                            } else {
-                                this.showMessage('success', 'API test successful! Check console for details.');
-                            }
-                        } else {
-                            this.showMessage('error', `API test failed with status ${response.status}. Check console for details.`);
-                        }
-                    } catch (e) {
-                        console.log('Adaire Blocks License: Response is not JSON:', text);
-                        this.showMessage('error', 'Response is not valid JSON. Check console for details.');
-                    }
-                });
-            })
-            .catch(error => {
-                console.error('Adaire Blocks License: API Test Error:', error);
-                this.showMessage('error', 'API test failed: ' + error.message);
-            });
-        }
-
-        testAuth() {
-            const licenseKey = $('#license-key').val().trim();
-            
-            if (!licenseKey) {
-                this.showMessage('error', 'Please enter a license key to test authentication');
-                return;
-            }
-            
-            console.log('Adaire Blocks License: Testing authentication with key:', licenseKey);
-            
-            // Use EXACT key as user input - no cleaning
-            const consumerKey = 'ck_5a9271d84ab660911a7c48dfd3f89e1691d9e286';
-            const consumerSecret = 'cs_d92b496a59e64042539c7e6eb14f17697d347827';
-            const baseUrl = 'https://adaire.dev/ad/wp-json/lmfwc/v2/licenses/activate/';
-            const url = `${baseUrl}${licenseKey}?consumer_key=${encodeURIComponent(consumerKey)}&consumer_secret=${encodeURIComponent(consumerSecret)}`;
-            
-            console.log('Adaire Blocks License: Auth Test');
-            console.log('=== AUTH TEST ===');
-            console.log('- EXACT Key:', licenseKey);
-            console.log('- Full URL:', url);
-            
-            // Simple GET request with fetch
-            fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                console.log('Adaire Blocks License: Auth Test Response Status:', response.status);
-                console.log('Adaire Blocks License: Auth Test Response Headers:', response.headers);
-                
-                return response.text().then(text => {
-                    console.log('Adaire Blocks License: Auth Test Response Body (raw):', text);
-                    
-                    try {
-                        const jsonData = JSON.parse(text);
-                        console.log('Adaire Blocks License: Auth Test Response Body (parsed):', jsonData);
-                        
-                        if (response.ok && jsonData.success) {
-                            // Check if there are errors in the data
-                            if (jsonData.data && jsonData.data.errors) {
-                                console.log('Adaire Blocks License: Auth test found errors:', jsonData.data.errors);
-                                const errorMessages = [];
-                                Object.keys(jsonData.data.errors).forEach(key => {
-                                    if (Array.isArray(jsonData.data.errors[key])) {
-                                        errorMessages.push(...jsonData.data.errors[key]);
-                                    } else {
-                                        errorMessages.push(jsonData.data.errors[key]);
-                                    }
-                                });
-                                this.showMessage('error', `Auth test found errors: ${errorMessages.join('; ')}`);
-                            } else {
-                                this.showMessage('success', 'Auth test successful! Check console for details.');
-                            }
-                        } else {
-                            this.showMessage('error', `Auth test failed with status ${response.status}. Check console for details.`);
-                        }
-                    } catch (e) {
-                        console.log('Adaire Blocks License: Response is not JSON:', text);
-                        this.showMessage('error', 'Response is not valid JSON. Check console for details.');
-                    }
-                });
-            })
-            .catch(error => {
-                console.error('Adaire Blocks License: Auth Test Error:', error);
-                this.showMessage('error', 'Auth test failed: ' + error.message);
-            });
-        }
 
         refreshStatus() {
-            console.log('Adaire Blocks License: Refreshing license status...');
-            window.location.reload();
-        }
+			this.validateLicense();
+		}
+
 
         getSavedLicenseKey() {
             // Try to get license key from the page data or localStorage
@@ -605,8 +440,6 @@
         }
 
         saveDeactivationResult() {
-            console.log('Adaire Blocks License: Saving deactivation result to database');
-            
             // Clear the activation token from localStorage
             localStorage.removeItem('adaire_activation_token');
             localStorage.removeItem('adaire_license_key');
@@ -620,34 +453,23 @@
                     nonce: adaireLicense.nonce
                 },
                 success: (response) => {
-                    console.log('Adaire Blocks License: Deactivation save response:', response);
-                    
                     if (response.success) {
-                        console.log('Adaire Blocks License: Deactivation saved to database successfully');
-                        // Reload page after 2 seconds to show updated status
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 2000);
+                        // Update UI to reflect inactive state without reload
+                        this.applyLicenseStatus('inactive', {
+                            message: 'License is inactive',
+                            licenseKey: ''
+                        });
                     } else {
-                        console.log('Adaire Blocks License: Failed to save deactivation to database:', response.data);
                         this.showMessage('error', 'License deactivated but failed to save status. Please refresh the page manually.');
                     }
                 },
                 error: (xhr, status, error) => {
-                    console.error('Adaire Blocks License: Deactivation save error:', {
-                        xhr: xhr,
-                        status: status,
-                        error: error,
-                        responseText: xhr.responseText
-                    });
                     this.showMessage('error', 'License deactivated but failed to save status. Please refresh the page manually.');
                 }
             });
         }
 
-        updateLicenseData(validationData) {
-            console.log('Adaire Blocks License: Updating license data with validation results');
-            
+		updateLicenseData(validationData) {
             // Send validation results to WordPress to update database
             $.ajax({
                 url: adaireLicense.ajaxUrl,
@@ -658,42 +480,27 @@
                     nonce: adaireLicense.nonce
                 },
                 success: (response) => {
-                    console.log('Adaire Blocks License: License data update response:', response);
-                    
-                    if (response.success) {
-                        console.log('Adaire Blocks License: License data updated successfully');
-                        // Reload page after 2 seconds to show updated status
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 2000);
-                    } else {
-                        console.log('Adaire Blocks License: Failed to update license data:', response.data);
+					if (response.success) {
+						// Apply latest status to UI without reload
+						const data = response.data && response.data.data ? response.data.data : response.data;
+						// Use the validation data that was passed to this function
+						this.applyLicenseStatus('active', validationData || data);
+					} else {
                         this.showMessage('error', 'License validated but failed to update status. Please refresh the page manually.');
                     }
                 },
                 error: (xhr, status, error) => {
-                    console.error('Adaire Blocks License: License data update error:', {
-                        xhr: xhr,
-                        status: status,
-                        error: error,
-                        responseText: xhr.responseText
-                    });
                     this.showMessage('error', 'License validated but failed to update status. Please refresh the page manually.');
                 }
             });
         }
 
-        saveActivationResult(licenseKey, activationData) {
-            console.log('Adaire Blocks License: Saving activation result to database');
-            console.log('Adaire Blocks License: License key:', licenseKey);
-            console.log('Adaire Blocks License: Activation data:', activationData);
-            
+		saveActivationResult(licenseKey, activationData) {
             // Save license key and token to localStorage for future use
             localStorage.setItem('adaire_license_key', licenseKey);
             const token = activationData.data?.token || activationData.data?.activationData?.token;
             if (token) {
                 localStorage.setItem('adaire_activation_token', token);
-                console.log('Adaire Blocks License: Saved token to localStorage:', token);
             }
             
             // Send the activation result to WordPress to save in database
@@ -707,28 +514,15 @@
                     nonce: adaireLicense.nonce
                 },
                 success: (response) => {
-                    console.log('Adaire Blocks License: Database save response:', response);
-                    
-                    if (response.success) {
-                        console.log('Adaire Blocks License: Activation saved to database successfully');
-                        console.log('Adaire Blocks License: Reloading page in 2 seconds...');
-                        // Reload page after 2 seconds to show updated status
-                        setTimeout(() => {
-                            console.log('Adaire Blocks License: Reloading page now...');
-                            window.location.reload();
-                        }, 2000);
-                    } else {
-                        console.log('Adaire Blocks License: Failed to save activation to database:', response.data);
+					if (response.success) {
+						// Update UI to reflect active state without reload
+						// Use the activation data that was passed to this function
+						this.applyLicenseStatus('active', activationData?.data || activationData);
+					} else {
                         this.showMessage('error', 'License activated but failed to save status. Please refresh the page manually.');
                     }
                 },
                 error: (xhr, status, error) => {
-                    console.error('Adaire Blocks License: Database save error:', {
-                        xhr: xhr,
-                        status: status,
-                        error: error,
-                        responseText: xhr.responseText
-                    });
                     this.showMessage('error', 'License activated but failed to save status. Please refresh the page manually.');
                 }
             });
@@ -744,6 +538,120 @@
             $button.prop('disabled', false);
             $button.html($button.data('original-text') || originalText);
         }
+
+		// --- UI Helpers: apply status without reloading ---
+		applyLicenseStatus(status, data) {
+			// Update status badge
+			const $statusBadge = $('.adaire-license-status-badge');
+			$statusBadge
+				.removeClass('status-active status-inactive')
+				.addClass(`status-${status}`)
+				.text(status.charAt(0).toUpperCase() + status.slice(1));
+
+			// Update License Status card content
+			const $statusCardContent = $('.adaire-license-card').eq(0).find('.adaire-license-card-content');
+			if (status === 'active') {
+				// Extract data from various possible structures
+				const licenseData = data.data || data;
+				const remaining = licenseData.remainingActivations ?? licenseData.remaining_activations ?? '-';
+				const timesActivated = licenseData.timesActivated ?? licenseData.times_activated ?? '-';
+				const timesMax = licenseData.timesActivatedMax ?? licenseData.times_activated_max ?? '-';
+				const lastChecked = licenseData.lastChecked || licenseData.last_checked || new Date().toISOString();
+				
+				$statusCardContent.html(
+					`<div class="adaire-license-info">
+						<p><strong>Status:</strong> <span class="status-active">Active</span></p>
+						<p><strong>Remaining Activations:</strong> ${remaining}</p>
+						<p><strong>Times Activated:</strong> ${timesActivated} / ${timesMax}</p>
+						<p><strong>Last Checked:</strong> ${this.formatDate(lastChecked)}</p>
+					</div>`
+				);
+			} else {
+				$statusCardContent.html(
+					`<div class="adaire-license-info">
+						<p><strong>Status:</strong> <span class="status-inactive">Inactive</span></p>
+						<p class="adaire-license-message">${(data && data.message) || 'License is inactive'}</p>
+					</div>`
+				);
+			}
+
+			// Update License Actions card (2nd card)
+			const $actionsCardContent = $('.adaire-license-card').eq(1).find('.adaire-license-card-content');
+			if (status === 'active') {
+				$actionsCardContent.html(
+					`<div class="adaire-license-actions">
+						<button type="button" class="button button-secondary" id="validate-license">
+							<span class="dashicons dashicons-yes-alt"></span>
+							Validate License
+						</button>
+						<button type="button" class="button button-secondary" id="deactivate-license">
+							<span class="dashicons dashicons-dismiss"></span>
+							Deactivate License
+						</button>
+						<button type="button" class="button button-secondary" id="refresh-status">
+							<span class="dashicons dashicons-update"></span>
+							Refresh Status
+						</button>
+					</div>`
+				);
+			} else {
+				$actionsCardContent.html(
+					`<form id="adaire-license-form" class="adaire-license-form">
+						<div class="adaire-license-input-group">
+							<label for="license-key">License Key</label>
+							<input type="text" id="license-key" name="license_key" placeholder="Enter your license key" value="${(data && data.licenseKey) ? this.escapeHtml(data.licenseKey) : ''}" required>
+							<p class="description">Enter your Adaire Blocks license key to activate the plugin.</p>
+						</div>
+						<div class="adaire-license-actions">
+							<button type="submit" class="button button-primary" id="activate-license">
+								<span class="dashicons dashicons-yes"></span>
+								Activate License
+							</button>
+							<button type="button" class="button button-secondary" id="refresh-status">
+								<span class="dashicons dashicons-update"></span>
+								Refresh Status
+							</button>
+						</div>
+					</form>`
+				);
+			}
+
+			// Update data-license-key attribute for persistence on page
+			const $container = $('.adaire-license-container');
+			if ($container.length) {
+				$container.attr('data-license-key', (status === 'active' ? (data.licenseKey || this.getSavedLicenseKey() || '') : ''));
+			}
+		}
+
+		formatDate(dateStr) {
+			try {
+				const d = new Date(dateStr);
+				if (isNaN(d.getTime())) {
+					return dateStr;
+				}
+				// Format as "Oct 22, 2025 8:36 AM"
+				return d.toLocaleDateString('en-US', {
+					month: 'short',
+					day: 'numeric',
+					year: 'numeric',
+					hour: 'numeric',
+					minute: '2-digit',
+					hour12: true
+				});
+			} catch(e) {
+				console.log('Adaire Blocks License: Date formatting error:', e, dateStr);
+				return dateStr;
+			}
+		}
+
+		escapeHtml(str) {
+			return String(str)
+				.replace(/&/g, '&amp;')
+				.replace(/</g, '&lt;')
+				.replace(/>/g, '&gt;')
+				.replace(/"/g, '&quot;')
+				.replace(/'/g, '&#039;');
+		}
 
         showMessage(type, message) {
             const $messagesContainer = $('#adaire-license-messages');

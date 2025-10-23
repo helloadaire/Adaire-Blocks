@@ -72,6 +72,7 @@ class AdaireBlocksLicensePage {
         wp_localize_script('adaire-blocks-license', 'adaireLicense', array(
             'ajaxUrl' => admin_url('admin-ajax.php'),
             'nonce' => wp_create_nonce('adaire_license_nonce'),
+            'validationServerUrl' => AdaireBlocksValidationConfig::get_validation_server_url(),
             'strings' => array(
                 'activating' => __('Activating...', 'adaire-blocks'),
                 'deactivating' => __('Deactivating...', 'adaire-blocks'),
@@ -197,16 +198,6 @@ class AdaireBlocksLicensePage {
                                             <span class="dashicons dashicons-update"></span>
                                             Refresh Status
                                         </button>
-                                        <?php if (defined('WP_DEBUG') && WP_DEBUG): ?>
-                                        <button type="button" class="button button-secondary" id="test-api">
-                                            <span class="dashicons dashicons-admin-tools"></span>
-                                            Test API
-                                        </button>
-                                        <button type="button" class="button button-secondary" id="test-auth">
-                                            <span class="dashicons dashicons-shield"></span>
-                                            Test Auth
-                                        </button>
-                                        <?php endif; ?>
                                     </div>
                                 </form>
                             <?php endif; ?>

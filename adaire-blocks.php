@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Adaire Blocks
  * Description:       A powerful WordPress plugin that helps developers and designers create visually stunning, high-performance websites with ease right inside the Gutenberg editor.
- * Version:           1.1.0
+ * Version:           1.1.2
  * Requires at least: 6.7
  * Requires PHP:      7.4
  * Author:            <a href="https://adaire.digital" target="_blank">Adaire Digital</a>
@@ -135,7 +135,7 @@ add_action('admin_post_my_plugin_rollback', function () {
     }
 
     // URL to the previous version ZIP
-    $previous_version_zip = 'https://github.com/helloadaire/Adaire-Blocks/releases/download/v1.0.9.alpha/adaire-blocks.1.0.8.alpha.zip';
+    $previous_version_zip = 'https://github.com/helloadaire/Adaire-Blocks/releases/download/v1.1.1.alpha/adaire-blocks.1.1.1.premium.zip';
     error_log('[Adaire Blocks Rollback] Attempting rollback to: ' . $previous_version_zip);
 
     require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
@@ -193,7 +193,7 @@ add_action('admin_notices', function () {
 // End of version rollback code
 
 // Define plugin constants
-define('ADAIRE_BLOCKS_VERSION', '1.1.0');
+define('ADAIRE_BLOCKS_VERSION', '1.1.2');
 define('ADAIRE_BLOCKS_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('ADAIRE_BLOCKS_PLUGIN_PATH', plugin_dir_path(__FILE__));
 
@@ -204,6 +204,9 @@ if (!defined('ADAIRE_BLOCKS_IS_FREE')) {
 
 // Include configuration manager
 require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'includes/class-adaire-blocks-config.php';
+
+// Include validation server configuration
+require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'includes/class-adaire-blocks-validation-config.php';
 
 // Include license manager
 require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'includes/class-adaire-blocks-license.php';
@@ -293,6 +296,7 @@ function adaire_render_block_with_notice($block_name, $attributes, $render_callb
             return adaire_render_license_notice($block_name);
         }
     }
+    
     
     // Check if we should show upgrade notice instead of rendering
     if ($config->should_show_upgrade_notice($block_name, $attributes)) {
@@ -999,3 +1003,29 @@ function adaire_blocks_localize_editor_config() {
 	});
 }
 add_action( 'enqueue_block_editor_assets', 'adaire_blocks_localize_editor_config' );
+
+// Enqueue custom block icons for admin pages
+function adaire_blocks_enqueue_admin_icons() {
+	// Only load on admin pages
+	if ( ! is_admin() ) {
+		return;
+	}
+	
+	// Enqueue the admin icons script
+	wp_enqueue_script(
+		'adaire-blocks-admin-icons',
+		ADAIRE_BLOCKS_PLUGIN_URL . 'admin/js/block-icons-admin.js',
+		array(),
+		ADAIRE_BLOCKS_VERSION,
+		true
+	);
+	
+	// Enqueue the admin icons CSS
+	wp_enqueue_style(
+		'adaire-blocks-admin-icons',
+		ADAIRE_BLOCKS_PLUGIN_URL . 'admin/css/block-icons-admin.css',
+		array(),
+		ADAIRE_BLOCKS_VERSION
+	);
+}
+add_action( 'admin_enqueue_scripts', 'adaire_blocks_enqueue_admin_icons' );

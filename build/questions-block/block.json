@@ -5,13 +5,13 @@
   "version": "0.1.0",
   "title": "Questions Block",
   "category": "widgets",
-  "icon": "smiley",
   "description": "Animated questions section with GSAP pinning and transitions.",
   "example": {},
   "supports": {
     "html": false
   },
   "textdomain": "questions-block",
+  "icon": "<svg\r\n\t\t\twidth=\"24\"\r\n\t\t\theight=\"24\"\r\n\t\t\tviewBox=\"0 0 24 24\"\r\n\t\t\tfill=\"none\"\r\n\t\t\txmlns=\"http://www.w3.org/2000/svg\"\r\n\t\t>\r\n\t\t\t<g clipPath=\"url(#clip0_4_71)\">\r\n\t\t\t\t<path\r\n\t\t\t\t\td=\"M0 5C0 2.23858 2.23858 0 5 0H19C21.7614 0 24 2.23858 24 5V19C24 21.7614 21.7614 24 19 24H5C2.23858 24 0 21.7614 0 19V5Z\"\r\n\t\t\t\t\tfill=\"#F0F0F1\"\r\n\t\t\t\t/>\r\n\t\t\t\t<path\r\n\t\t\t\t\td=\"M7 6.3383C7.40327 5.22525 8.19923 4.28668 9.24692 3.68883C10.2946 3.09099 11.5264 2.87245 12.7241 3.07193C13.9219 3.2714 15.0083 3.87601 15.7909 4.77868C16.5735 5.68135 17.0018 6.82381 17 8.00373C17 11.3346 11.8542 13 11.8542 13\"\r\n\t\t\t\t\tfill=\"#F0F0F1\"\r\n\t\t\t\t/>\r\n\t\t\t\t<path\r\n\t\t\t\t\td=\"M7 6.3383C7.40327 5.22525 8.19923 4.28668 9.24692 3.68883C10.2946 3.09099 11.5264 2.87245 12.7241 3.07193C13.9219 3.2714 15.0083 3.87601 15.7909 4.77868C16.5735 5.68135 17.0018 6.82381 17 8.00373C17 11.3346 11.8542 13 11.8542 13\"\r\n\t\t\t\t\tstroke=\"#FF0000\"\r\n\t\t\t\t\tstrokeWidth=\"2\"\r\n\t\t\t\t\tstrokeLinecap=\"round\"\r\n\t\t\t\t\tstrokeLinejoin=\"round\"\r\n\t\t\t\t/>\r\n\t\t\t\t<circle cx=\"12\" cy=\"18\" r=\"2\" fill=\"black\" />\r\n\t\t\t</g>\r\n\t\t\t<defs>\r\n\t\t\t\t<clipPath id=\"clip0_4_71\">\r\n\t\t\t\t\t<path\r\n\t\t\t\t\t\td=\"M0 5C0 2.23858 2.23858 0 5 0H19C21.7614 0 24 2.23858 24 5V19C24 21.7614 21.7614 24 19 24H5C2.23858 24 0 21.7614 0 19V5Z\"\r\n\t\t\t\t\t\tfill=\"white\"\r\n\t\t\t\t\t/>\r\n\t\t\t\t</clipPath>\r\n\t\t\t</defs>\r\n\t\t</svg>",
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",

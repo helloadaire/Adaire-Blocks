@@ -136,10 +136,7 @@ class AdaireBlocksSettings {
                 continue;
             }
             
-            // Check if block is enabled in current version
-            if (!$config->is_block_enabled($block_name)) {
-                continue;
-            }
+            // Load all blocks - we'll handle premium/free logic in the display
             
             // Read block.json to get block information
             $block_json = file_get_contents($dir . '/block.json');
@@ -162,6 +159,12 @@ class AdaireBlocksSettings {
             $upgrade_message = $config->get_upgrade_message($block_name);
             $limits = $config->get_block_limits($block_name);
             
+            // Determine if this is a premium block (disabled in free version)
+            $is_premium_block = !$config->is_premium() && !$config->is_block_enabled($block_name);
+            
+            // Debug: Log block status
+            error_log("Adaire Blocks Settings: Block $block_name - enabled: " . ($config->is_block_enabled($block_name) ? 'true' : 'false') . ", premium: " . ($is_premium_block ? 'true' : 'false'));
+            
             $blocks[$settings_key] = array(
                 'name' => $name,
                 'description' => $description,
@@ -170,7 +173,7 @@ class AdaireBlocksSettings {
                 'block_name' => $block_name,
                 'upgrade_message' => $upgrade_message,
                 'limits' => $limits,
-                'is_premium' => !empty($limits) || !$config->is_premium()
+                'is_premium' => $is_premium_block
             );
         }
         
@@ -226,6 +229,23 @@ class AdaireBlocksSettings {
      * Settings page HTML
      */
     public function settings_page() {
+        // Debug: Check if class exists
+        if (!class_exists('AdaireBlocksConfig')) {
+            wp_die('Error: AdaireBlocksConfig class not found. Please check if the plugin is properly loaded.');
+        }
+        
+        $config = AdaireBlocksConfig::get_instance();
+        
+        // Safety check - ensure config is loaded
+        if (!$config) {
+            wp_die('Error: Adaire Blocks configuration not loaded. Please try refreshing the page.');
+        }
+        
+        // Debug: Log config status
+        error_log('Adaire Blocks Settings: Config loaded - is_premium: ' . ($config->is_premium() ? 'true' : 'false'));
+        error_log('Adaire Blocks Settings: Plugin version: ' . $config->get_plugin_version());
+        
+        
         $available_blocks = $this->get_available_blocks();
         $settings = get_option($this->option_name, $this->get_default_settings());
         
@@ -284,6 +304,70 @@ class AdaireBlocksSettings {
             .adaire-toggle-switch input:checked + .adaire-toggle-slider:before {
                 transform: translateX(26px);
             }
+            
+            /* Premium block styles */
+            .adaire-block-premium {
+                opacity: 0.6;
+                position: relative;
+                background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+                border: 2px dashed #dee2e6;
+            }
+            
+            .adaire-block-premium-badge {
+                position: absolute;
+                top: -8px;
+                right: -8px;
+                background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+                color: #333;
+                padding: 4px 8px;
+                border-radius: 12px;
+                font-size: 11px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                z-index: 10;
+            }
+            
+            .adaire-block-premium-badge .dashicons {
+                font-size: 12px;
+                margin-right: 2px;
+                vertical-align: middle;
+            }
+            
+            .adaire-block-upgrade-prompt {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 24px;
+            }
+            
+            .adaire-upgrade-button {
+                background: linear-gradient(135deg, #0073aa 0%, #005177 100%);
+                color: white;
+                padding: 6px 12px;
+                border-radius: 4px;
+                text-decoration: none;
+                font-size: 12px;
+                font-weight: 600;
+                display: inline-flex;
+                align-items: center;
+                gap: 4px;
+                transition: all 0.2s ease;
+                box-shadow: 0 2px 4px rgba(0,115,170,0.2);
+            }
+            
+            .adaire-upgrade-button:hover {
+                background: linear-gradient(135deg, #005177 0%, #003d5c 100%);
+                color: white;
+                text-decoration: none;
+                transform: translateY(-1px);
+                box-shadow: 0 4px 8px rgba(0,115,170,0.3);
+            }
+            
+            .adaire-upgrade-button .dashicons {
+                font-size: 12px;
+            }
             </style>
             
             <div class="adaire-blocks-settings-container">
@@ -292,16 +376,45 @@ class AdaireBlocksSettings {
                         <h2>Block Management</h2>
                         <p class="description">Manage which blocks are available in the Gutenberg editor. Toggle blocks on/off to customize your editing experience.</p>
                         <p class="description" style="font-size: 12px; color: #666; margin-top: 10px;">
-                            <strong>Detected Blocks:</strong> <?php echo count($available_blocks); ?> blocks found in build directory
+                            <strong>Available Blocks:</strong> 
+                            <?php 
+                            $total_blocks = count($available_blocks);
+                            $free_blocks = 0;
+                            $premium_blocks = 0;
+                            
+                            foreach ($available_blocks as $block_key => $block_data) {
+                                if ($block_data['is_premium']) {
+                                    $premium_blocks++;
+                                } else {
+                                    $free_blocks++;
+                                }
+                            }
+                            
+                            echo $total_blocks . ' blocks available';
+                            if ($config && !$config->is_premium()) {
+                                echo " ($free_blocks free, $premium_blocks premium)";
+                            }
+                            ?>
                         </p>
                         <p class="description" style="font-size: 12px; color: #666; margin-top: 5px;">
                             <strong>Current Settings:</strong> 
                             <?php 
                             $enabled_count = 0;
+                            $total_free = 0;
                             foreach ($settings as $key => $value) {
-                                if ($value) $enabled_count++;
+                                // Only count settings for free blocks
+                                if (isset($available_blocks[$key])) {
+                                    $block_data = $available_blocks[$key];
+                                    if (!$block_data['is_premium']) {
+                                        $total_free++;
+                                        if ($value) $enabled_count++;
+                                    }
+                                }
                             }
-                            echo $enabled_count . ' enabled, ' . (count($settings) - $enabled_count) . ' disabled';
+                            echo $enabled_count . ' enabled, ' . ($total_free - $enabled_count) . ' disabled';
+                            if ($config && !$config->is_premium() && $premium_blocks > 0) {
+                                echo " ($premium_blocks premium blocks require upgrade)";
+                            }
                             ?>
                         </p>
                     </div>
@@ -317,35 +430,34 @@ class AdaireBlocksSettings {
                     
                     <div class="adaire-blocks-controls">
                         <div class="adaire-blocks-bulk-actions">
-                            <button type="button" class="button" id="enable-all-blocks">Enable All</button>
-                            <button type="button" class="button" id="disable-all-blocks">Disable All</button>
+                            <button type="button" class="button" id="enable-all-blocks">Enable All Free Blocks</button>
+                            <button type="button" class="button" id="disable-all-blocks">Disable All Free Blocks</button>
                             <button type="button" class="button" id="reset-to-defaults">Reset to Defaults</button>
                         </div>
                     </div>
                     
                     <div class="adaire-blocks-grid">
                         <?php foreach ($available_blocks as $block_key => $block_data): ?>
-                            <div class="adaire-block-card">
+                            <div class="adaire-block-card <?php echo $block_data['is_premium'] ? 'adaire-block-premium' : ''; ?>">
+                                <?php if ($block_data['is_premium']): ?>
+                                    <div class="adaire-block-premium-badge">
+                                        <span class="dashicons dashicons-star-filled"></span>
+                                        Premium
+                                    </div>
+                                <?php endif; ?>
                                 <div class="adaire-block-header">
                                     <div class="adaire-block-icon">
                                         <?php 
-                                        // Check if custom SVG icon file exists
-                                        $icon_file = str_replace('-block', '', $block_data['block_name']); // Remove -block suffix  
-                                        $custom_icon_path = ADAIRE_BLOCKS_PLUGIN_PATH . 'src/icons/' . $icon_file . '.js';
-                                        
-                                        if (file_exists($custom_icon_path)) {
-                                            // Read and extract SVG from JS file
-                                            $js_content = file_get_contents($custom_icon_path);
-                                            // Extract SVG content using regex
-                                            if (preg_match('/<svg[^>]*>.*?<\/svg>/is', $js_content, $matches)) {
-                                                // Found SVG, render it
-                                                echo $matches[0];
-                                            } else {
-                                                // Fallback to dashicon if SVG not found
-                                                echo '<span class="dashicons dashicons-' . esc_attr($block_data['icon']) . '"></span>';
-                                            }
+                                        // Check if icon is SVG content (starts with <svg)
+                                        if (strpos($block_data['icon'], '<svg') === 0) {
+                                            // Render the actual SVG content
+                                            echo $block_data['icon'];
+                                        } elseif (strpos($block_data['icon'], 'data:image/svg+xml;base64,') === 0) {
+                                            // Decode base64 SVG and render it (fallback for old format)
+                                            $svg_data = base64_decode(str_replace('data:image/svg+xml;base64,', '', $block_data['icon']));
+                                            echo $svg_data;
                                         } else {
-                                            // Use dashicon
+                                            // Use dashicon for non-SVG icons
                                             echo '<span class="dashicons dashicons-' . esc_attr($block_data['icon']) . '"></span>';
                                         }
                                         ?>
@@ -355,15 +467,24 @@ class AdaireBlocksSettings {
                                         <span class="adaire-block-category"><?php echo esc_html($block_data['category']); ?></span>
                                     </div>
                                     <div class="adaire-block-toggle">
-                                        <label class="adaire-toggle-switch">
-                                            <!-- Hidden input to ensure unchecked boxes send a value -->
-                                            <input type="hidden" name="<?php echo esc_attr($this->option_name); ?>[<?php echo esc_attr($block_key); ?>]" value="0" />
-                                            <input type="checkbox" 
-                                                   name="<?php echo esc_attr($this->option_name); ?>[<?php echo esc_attr($block_key); ?>]" 
-                                                   value="1" 
-                                                   <?php checked(isset($settings[$block_key]) ? $settings[$block_key] : true, true); ?>>
-                                            <span class="adaire-toggle-slider"></span>
-                                        </label>
+                                        <?php if ($block_data['is_premium']): ?>
+                                            <div class="adaire-block-upgrade-prompt">
+                                                <a href="https://adaire.digital/shop-blocks" target="_blank" class="adaire-upgrade-button">
+                                                    <span class="dashicons dashicons-external"></span>
+                                                    Upgrade
+                                                </a>
+                                            </div>
+                                        <?php else: ?>
+                                            <label class="adaire-toggle-switch">
+                                                <!-- Hidden input to ensure unchecked boxes send a value -->
+                                                <input type="hidden" name="<?php echo esc_attr($this->option_name); ?>[<?php echo esc_attr($block_key); ?>]" value="0" />
+                                                <input type="checkbox" 
+                                                       name="<?php echo esc_attr($this->option_name); ?>[<?php echo esc_attr($block_key); ?>]" 
+                                                       value="1" 
+                                                       <?php checked(isset($settings[$block_key]) ? $settings[$block_key] : true, true); ?>>
+                                                <span class="adaire-toggle-slider"></span>
+                                            </label>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                                 <div class="adaire-block-description">

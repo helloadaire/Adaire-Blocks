@@ -5,8 +5,7 @@
   "version": "0.1.0",
   "title": "Mega Menu",
   "category": "design",
-  "icon": "menu",
-  "description": "Beautiful mega menu with smooth GSAP animations and customizable styling.",
+  "description": "Advanced mega menu with customizable colors, logo upload, and hierarchical menu items.",
   "supports": {
     "html": false,
     "anchor": true,
@@ -14,7 +13,8 @@
       "wide",
       "full"
     ],
-    "customClassName": true
+    "customClassName": true,
+    "innerBlocks": true
   },
   "textdomain": "mega-menu-block",
   "editorScript": "file:./index.js",
@@ -26,88 +26,274 @@
       "type": "string",
       "default": ""
     },
+    "logoUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "logoAlt": {
+      "type": "string",
+      "default": "Logo"
+    },
+    "logoSize": {
+      "type": "number",
+      "default": 40
+    },
     "menuItems": {
       "type": "array",
       "default": [
         {
-          "title": "Home",
           "id": "menu-item-1",
+          "title": "Home",
           "url": "#",
-          "type": "link"
+          "isBold": false,
+          "canvasImageUrl": "",
+          "canvasImageAlt": "Canvas Image",
+          "canvasImagePosition": "left",
+          "canvasImageWidth": {
+            "desktop": {
+              "value": 300,
+              "unit": "px"
+            },
+            "tablet": {
+              "value": 250,
+              "unit": "px"
+            }
+          },
+          "canvasImageHeight": 200,
+          "children": []
         },
         {
-          "title": "About",
           "id": "menu-item-2",
+          "title": "About",
           "url": "#",
-          "type": "link"
+          "isBold": false,
+          "canvasImageUrl": "",
+          "canvasImageAlt": "Canvas Image",
+          "canvasImagePosition": "left",
+          "canvasImageWidth": {
+            "desktop": {
+              "value": 300,
+              "unit": "px"
+            },
+            "tablet": {
+              "value": 250,
+              "unit": "px"
+            }
+          },
+          "canvasImageHeight": 200,
+          "children": []
         },
         {
-          "title": "Services",
           "id": "menu-item-3",
+          "title": "Services",
           "url": "#",
-          "type": "panel"
+          "isBold": false,
+          "canvasImageUrl": "",
+          "canvasImageAlt": "Canvas Image",
+          "canvasImagePosition": "left",
+          "canvasImageWidth": {
+            "desktop": {
+              "value": 300,
+              "unit": "px"
+            },
+            "tablet": {
+              "value": 250,
+              "unit": "px"
+            }
+          },
+          "canvasImageHeight": 200,
+          "children": [
+            {
+              "id": "sub-item-1",
+              "title": "Web Design",
+              "url": "#",
+              "isBold": false,
+              "fontSize": 14,
+              "fontWeight": "400",
+              "hoverColor": "#428aff",
+              "showHoverUnderline": true,
+              "underlineWidth": 2,
+              "underlineColor": "#428aff",
+              "underlineBorderRadius": 0,
+              "children": []
+            },
+            {
+              "id": "sub-item-2",
+              "title": "Development",
+              "url": "#",
+              "isBold": false,
+              "fontSize": 14,
+              "fontWeight": "400",
+              "hoverColor": "#428aff",
+              "showHoverUnderline": true,
+              "underlineWidth": 2,
+              "underlineColor": "#428aff",
+              "underlineBorderRadius": 0,
+              "children": []
+            }
+          ]
         }
       ]
     },
-    "activeMenuItem": {
+    "backgroundColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "hoverColor": {
+      "type": "string",
+      "default": "#428aff"
+    },
+    "activeColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "level1HoverColor": {
+      "type": "string",
+      "default": "#428aff"
+    },
+    "level1ShowHoverUnderline": {
+      "type": "boolean",
+      "default": true
+    },
+    "level1UnderlineWidth": {
+      "type": "number",
+      "default": 3
+    },
+    "level1UnderlineColor": {
+      "type": "string",
+      "default": "#428aff"
+    },
+    "level1UnderlineBorderRadius": {
       "type": "number",
       "default": 0
     },
-    "menuItemColor": {
+    "level2HoverColor": {
       "type": "string",
-      "default": "#64748b"
+      "default": "#428aff"
     },
-    "menuItemActiveColor": {
+    "level2ShowHoverUnderline": {
+      "type": "boolean",
+      "default": true
+    },
+    "level2UnderlineWidth": {
+      "type": "number",
+      "default": 2
+    },
+    "level2UnderlineColor": {
       "type": "string",
-      "default": "#0f172a"
+      "default": "#428aff"
     },
-    "menuItemHoverColor": {
+    "level2UnderlineBorderRadius": {
+      "type": "number",
+      "default": 0
+    },
+    "level3HoverColor": {
       "type": "string",
-      "default": "#3b82f6"
+      "default": "#428aff"
     },
-    "menuItemFontSize": {
+    "level3ShowHoverUnderline": {
+      "type": "boolean",
+      "default": true
+    },
+    "level3UnderlineWidth": {
+      "type": "number",
+      "default": 1
+    },
+    "level3UnderlineColor": {
+      "type": "string",
+      "default": "#428aff"
+    },
+    "level3UnderlineBorderRadius": {
+      "type": "number",
+      "default": 0
+    },
+    "level1FontSize": {
+      "type": "number",
+      "default": 16
+    },
+    "level1FontWeight": {
+      "type": "string",
+      "default": "400"
+    },
+    "level1FontColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "level2FontSize": {
+      "type": "number",
+      "default": 14
+    },
+    "level2FontWeight": {
+      "type": "string",
+      "default": "400"
+    },
+    "level2FontColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "level3FontSize": {
+      "type": "number",
+      "default": 12
+    },
+    "level3FontWeight": {
+      "type": "string",
+      "default": "400"
+    },
+    "level3FontColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "canvasFontSize": {
       "type": "number",
       "default": 18
     },
-    "menuItemFontWeight": {
-      "type": "string",
-      "default": "500"
-    },
-    "menuItemActiveFontWeight": {
+    "canvasFontWeight": {
       "type": "string",
       "default": "600"
     },
-    "menuItemGap": {
-      "type": "number",
-      "default": 32
+    "canvasFontColor": {
+      "type": "string",
+      "default": "#000000"
     },
-    "contentPaddingTop": {
+    "canvasBorderRadius": {
       "type": "number",
-      "default": 40
+      "default": 8
     },
-    "contentPaddingRight": {
+    "menuBorderRadius": {
       "type": "number",
       "default": 0
     },
-    "contentPaddingBottom": {
-      "type": "number",
-      "default": 40
+    "showCanvasTitle": {
+      "type": "boolean",
+      "default": false
     },
-    "contentPaddingLeft": {
+    "fontSize": {
       "type": "number",
-      "default": 0
+      "default": 16
     },
-    "menuAlign": {
+    "fontWeight": {
       "type": "string",
-      "default": "flex-start"
+      "default": "400"
     },
-    "animationDuration": {
-      "type": "number",
-      "default": 0.6
-    },
-    "animationEase": {
+    "boldWeight": {
       "type": "string",
-      "default": "power2.out"
+      "default": "700"
+    },
+    "fontFamily": {
+      "type": "string",
+      "default": "inherit"
+    },
+    "underlineColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "isSticky": {
+      "type": "boolean",
+      "default": true
     },
     "containerMode": {
       "type": "string",
@@ -130,37 +316,24 @@
         }
       }
     },
-    "marginTop": {
-      "type": "number",
-      "default": 0
+    "padding": {
+      "type": "object",
+      "default": {
+        "top": 20,
+        "right": 20,
+        "bottom": 20,
+        "left": 20
+      }
     },
-    "marginRight": {
-      "type": "number",
-      "default": 0
-    },
-    "marginBottom": {
-      "type": "number",
-      "default": 0
-    },
-    "marginLeft": {
-      "type": "number",
-      "default": 0
-    },
-    "menuLayout": {
-      "type": "string",
-      "default": "horizontal"
-    },
-    "menuPosition": {
-      "type": "string",
-      "default": "top"
-    },
-    "verticalActiveBgColor": {
-      "type": "string",
-      "default": "rgba(59, 130, 246, 0.05)"
-    },
-    "verticalActiveBgOpacity": {
-      "type": "number",
-      "default": 0.05
+    "margin": {
+      "type": "object",
+      "default": {
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      }
     }
-  }
+  },
+  "icon": "<svg\r\n\t\t\twidth=\"24\"\r\n\t\t\theight=\"24\"\r\n\t\t\tviewBox=\"0 0 24 24\"\r\n\t\t\tfill=\"none\"\r\n\t\t\txmlns=\"http://www.w3.org/2000/svg\"\r\n\t\t>\r\n\t\t\t<g clip-path=\"url(#clip0_21_23)\">\r\n\t\t\t\t<rect width=\"24\" height=\"24\" rx=\"5\" fill=\"#F0F0F1\" />\r\n\t\t\t\t<g clip-path=\"url(#clip1_21_23)\">\r\n\t\t\t\t\t<path\r\n\t\t\t\t\t\td=\"M4 5H20\"\r\n\t\t\t\t\t\tstroke=\"black\"\r\n\t\t\t\t\t\tstroke-width=\"2\"\r\n\t\t\t\t\t\tstroke-linecap=\"round\"\r\n\t\t\t\t\t\tstroke-linejoin=\"round\"\r\n\t\t\t\t\t/>\r\n\t\t\t\t\t<path\r\n\t\t\t\t\t\td=\"M4 12H20\"\r\n\t\t\t\t\t\tstroke=\"#FF0000\"\r\n\t\t\t\t\t\tstroke-width=\"2\"\r\n\t\t\t\t\t\tstroke-linecap=\"round\"\r\n\t\t\t\t\t\tstroke-linejoin=\"round\"\r\n\t\t\t\t\t/>\r\n\t\t\t\t\t<path\r\n\t\t\t\t\t\td=\"M4 19H20\"\r\n\t\t\t\t\t\tstroke=\"black\"\r\n\t\t\t\t\t\tstroke-width=\"2\"\r\n\t\t\t\t\t\tstroke-linecap=\"round\"\r\n\t\t\t\t\t\tstroke-linejoin=\"round\"\r\n\t\t\t\t\t/>\r\n\t\t\t\t</g>\r\n\t\t\t</g>\r\n\t\t\t<defs>\r\n\t\t\t\t<clipPath id=\"clip0_21_23\">\r\n\t\t\t\t\t<rect width=\"24\" height=\"24\" rx=\"5\" fill=\"white\" />\r\n\t\t\t\t</clipPath>\r\n\t\t\t\t<clipPath id=\"clip1_21_23\">\r\n\t\t\t\t\t<rect width=\"24\" height=\"24\" fill=\"white\" />\r\n\t\t\t\t</clipPath>\r\n\t\t\t</defs>\r\n\t\t</svg>"
 }

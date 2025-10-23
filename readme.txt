@@ -4,7 +4,7 @@ Donate link: https://adaire.digital/
 Tags: blocks, gutenberg, gsap, animation, portfolio
 Requires at least: 6.7
 Tested up to: 6.8
-Stable tag: 1.1.0
+Stable tag: 1.1.2
 Requires PHP: 7.4
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -114,7 +114,31 @@ For support, please visit our website at https://adaire.digital/ or contact us t
 
 == Changelog ==
 
-= 1.1.0 =
+= 1.1.2 =
+* Added Complete custom SVG icon system with React component integration
+* Added Automatic icon synchronization between icon components and WordPress block registration
+* Added Enhanced admin page icon display with actual custom SVG icons instead of dashicons
+* Added Streamlined build process with optimized icon handling
+* Added Comprehensive icon documentation and developer guides
+* Added New NPM script update-icons for manual icon updates
+* Added Production-ready icon workflow for both development and production environments
+* Improved Developer experience with clear icon component templates and workflow
+* Improved Icon consistency across WordPress editor and admin interfaces
+* Improved Build performance by removing redundant icon processing steps
+* Fixed Icon display issues in block management admin page
+* Updated All existing blocks with new custom SVG icon system
+
+= 1.1.1 =
+* Added Complete License Activation System with external API integration
+* Added License validation, activation, and deactivation functionality
+* Added License admin page under Adaire Blocks menu
+* Added Automatic license status checking and premium feature management
+* Added Database integration with automatic table creation
+* Added Token-based activation system with secure storage
+* Added Dynamic license limits based on license type
+* Added Auto-deactivation when license reaches maximum activations
+* Added Comprehensive error handling and logging for debugging
+* Added Real-time license status display with activation counts
 * Added Counter Block with animated counting effects and customizable styling
 * Added counter direction (count up or count down)
 * Added prefix and suffix support for counter numbers
@@ -159,7 +183,7 @@ For support, please visit our website at https://adaire.digital/ or contact us t
 
 == Upgrade Notice ==
 
-= 1.1.0 =
+= 1.1.1 =
 Major update with new Counter Block, custom icons for all blocks, and improved animation controls. Highly recommended upgrade for enhanced functionality.
 
 = 1.0.9 =

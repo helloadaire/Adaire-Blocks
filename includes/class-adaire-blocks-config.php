@@ -75,15 +75,23 @@ class AdaireBlocksConfig {
             return 'premium';
         }
         
-        // Default to premium for main development version
-        return 'premium';
+        // Default to free version when license is inactive
+        return 'free';
     }
     
     /**
      * Check if premium license is active
      */
     private function is_premium_license_active() {
-        // Check for license key or premium status
+        // Use the new license system
+        if (class_exists('AdaireBlocksLicense')) {
+            $license_manager = AdaireBlocksLicense::get_instance();
+            $license_status = $license_manager->get_license_status();
+            
+            return $license_status['status'] === 'active';
+        }
+        
+        // Fallback to old system if new license system not available
         $license_key = get_option('adaire_blocks_license_key', '');
         $license_status = get_option('adaire_blocks_license_status', 'inactive');
         
