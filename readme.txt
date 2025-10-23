@@ -115,18 +115,18 @@ For support, please visit our website at https://adaire.digital/ or contact us t
 == Changelog ==
 
 = 1.1.2 =
-* Added Complete custom SVG icon system with React component integration
-* Added Automatic icon synchronization between icon components and WordPress block registration
-* Added Enhanced admin page icon display with actual custom SVG icons instead of dashicons
-* Added Streamlined build process with optimized icon handling
-* Added Comprehensive icon documentation and developer guides
-* Added New NPM script update-icons for manual icon updates
-* Added Production-ready icon workflow for both development and production environments
-* Improved Developer experience with clear icon component templates and workflow
-* Improved Icon consistency across WordPress editor and admin interfaces
-* Improved Build performance by removing redundant icon processing steps
-* Fixed Icon display issues in block management admin page
-* Updated All existing blocks with new custom SVG icon system
+* Added Mega Menu Block with advanced navigation capabilities and customizable layouts
+* Added Enhanced block icons for better visual identification in the WordPress editor
+* Added Improved admin interface with custom icons for easier block management
+* Added Responsive mega menu design that works perfectly on all devices
+* Added Advanced styling options for mega menu customization
+* Added Drag-and-drop interface for easy menu organization
+* Added Performance optimizations for faster loading
+* Improved User experience with better visual consistency across all blocks
+* Improved Block selection and management in the WordPress editor
+* Improved Navigation creation workflow for users
+* Fixed Visual inconsistencies in block management interface
+* Enhanced Overall user experience with professional block icons
 
 = 1.1.1 =
 * Added Complete License Activation System with external API integration
