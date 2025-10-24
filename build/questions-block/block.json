@@ -64,6 +64,34 @@
     "blockId": {
       "type": "string",
       "default": ""
+    },
+    "scrollDistance": {
+      "type": "number",
+      "default": 250
+    },
+    "scrollDistanceMobile": {
+      "type": "number",
+      "default": 170
+    },
+    "showProgressIndicator": {
+      "type": "boolean",
+      "default": true
+    },
+    "progressIndicatorColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "progressIndicatorActiveColor": {
+      "type": "string",
+      "default": "#ff0000"
+    },
+    "progressIndicatorFillColor": {
+      "type": "string",
+      "default": "#ff0000"
+    },
+    "progressIndicatorWidth": {
+      "type": "number",
+      "default": 3
     }
   }
 }

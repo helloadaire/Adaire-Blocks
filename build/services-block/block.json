@@ -38,8 +38,8 @@
       "default": [
         {
           "id": 1,
-          "slideTitle": "Digital Innovation",
-          "slideDescription": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit accusantium consequatur alias sequi tenetur ratione odio quis vitae ab id dolores quas quidem ipsam nesciunt, quam sed minus nihil molestiae?",
+          "slideTitle": "Build",
+          "slideDescription": "We design and develop custom websites and applications that are tailored to your specific needs and goals.",
           "slideUrl": "https://link.com",
           "slideTags": [
             "Digital",
@@ -52,8 +52,8 @@
         },
         {
           "id": 2,
-          "slideTitle": "Startup Nights",
-          "slideDescription": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit accusantium consequatur alias sequi tenetur ratione odio quis vitae ab id dolores quas quidem ipsam nesciunt, quam sed minus nihil molestiae?",
+          "slideTitle": "Migrate",
+          "slideDescription": "Effortlessly move your data and systems to modern platforms with minimal downtime and maximum security.",
           "slideUrl": "https://link.com",
           "slideTags": [
             "Client 1",
@@ -66,8 +66,8 @@
         },
         {
           "id": 3,
-          "slideTitle": "APST Research",
-          "slideDescription": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit accusantium consequatur alias sequi tenetur ratione odio quis vitae ab id dolores quas quidem ipsam nesciunt, quam sed minus nihil molestiae?",
+          "slideTitle": "Maintain",
+          "slideDescription": "We provide ongoing maintenance and support to ensure your digital assets are always performing at their best.",
           "slideUrl": "https://link.com",
           "slideTags": [
             "Monochrome",
@@ -80,8 +80,8 @@
         },
         {
           "id": 4,
-          "slideTitle": "Future Tree",
-          "slideDescription": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit accusantium consequatur alias sequi tenetur ratione odio quis vitae ab id dolores quas quidem ipsam nesciunt, quam sed minus nihil molestiae?",
+          "slideTitle": "Support",
+          "slideDescription": "Our dedicated support team is always available to help you with any issues or questions you may have.",
           "slideUrl": "https://link.com",
           "slideTags": [
             "Monochrome",
@@ -94,8 +94,8 @@
         },
         {
           "id": 5,
-          "slideTitle": "Physio Und Sport",
-          "slideDescription": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit accusantium consequatur alias sequi tenetur ratione odio quis vitae ab id dolores quas quidem ipsam nesciunt, quam sed minus nihil molestiae?",
+          "slideTitle": "Host",
+          "slideDescription": "We offer reliable and secure hosting solutions to ensure your website is always online and performing optimally.",
           "slideUrl": "https://link.com",
           "slideTags": [
             "Monochrome",
@@ -178,7 +178,7 @@
     },
     "previewText": {
       "type": "string",
-      "default": "We:"
+      "default": "Services:"
     },
     "linkText": {
       "type": "string",

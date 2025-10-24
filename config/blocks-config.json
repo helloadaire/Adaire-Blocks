@@ -12,11 +12,11 @@
 			"upgradeMessage": "Upgrade to Premium for unlimited button styles and animations."
 		},
 		"counter-block": {
-			"enabled": true,
+			"enabled": false,
 			"upgradeMessage": "Upgrade to Premium for advanced counter animations and features."
 		},
 		"cta-block": {
-			"enabled": true,
+			"enabled": false,
 			"upgradeMessage": "Upgrade to Premium for multiple buttons and advanced layouts."
 		},
 		"testimonial-block": {
@@ -78,10 +78,10 @@
 		},
 		"call-to-action-block": {
 			"enabled": true,
-			"upgradeMessage": "Call to Action Block is a Premium feature. Upgrade to create compelling CTAs."
+			"upgradeMessage": "Call to Action Block is a Free feature. Upgrade to create compelling CTAs."
 		},
 		"mega-menu-block": {
-			"enabled": true,
+			"enabled": false,
 			"upgradeMessage": "Mega Menu Block is available in the premium version."
 		}
 	},

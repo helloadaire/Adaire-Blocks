@@ -147,6 +147,13 @@ A: The plugin is optimized for performance with efficient block registration and
 
 ## Changelog
 
+### Version 1.1.3 =
+* **Fixed** Image rendering issue in Services Block component affecting visual asset display and layout integrity
+* **Added** User feedback mechanism for Questions Block with progress tracking and interactive state management
+* **Enhanced** Mega Menu Block with dynamic opacity controls and CSS custom property integration for improved visual hierarchy
+* **Optimized** Particles Block text fade-out timing with improved scroll-triggered animation performance and reduced DOM overhead
+* **Removed** Architectural constraints on Mega Menu Block navigation depth and item count limitations for enhanced scalability
+
 ### Version 1.1.2 =
 * **Added** Mega Menu Block with advanced navigation capabilities and customizable layouts
 * **Added** Enhanced block icons for better visual identification in the WordPress editor

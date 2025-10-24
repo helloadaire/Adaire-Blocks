@@ -4,7 +4,7 @@ Donate link: https://adaire.digital/
 Tags: blocks, gutenberg, gsap, animation, portfolio
 Requires at least: 6.7
 Tested up to: 6.8
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 Requires PHP: 7.4
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -113,6 +113,13 @@ For support, please visit our website at https://adaire.digital/ or contact us t
 6. Posts Grid Block with filtering and pagination
 
 == Changelog ==
+
+= 1.1.3 =
+* Fixed Image rendering issue in Services Block component affecting visual asset display and layout integrity
+* Added User feedback mechanism for Questions Block with progress tracking and interactive state management
+* Enhanced Mega Menu Block with dynamic opacity controls and CSS custom property integration for improved visual hierarchy
+* Optimized Particles Block text fade-out timing with improved scroll-triggered animation performance and reduced DOM overhead
+* Removed Architectural constraints on Mega Menu Block navigation depth and item count limitations for enhanced scalability
 
 = 1.1.2 =
 * Added Mega Menu Block with advanced navigation capabilities and customizable layouts

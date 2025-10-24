@@ -1318,7 +1318,7 @@ return array(
 					array(
 						'id' => 'menu-item-1',
 						'title' => 'Home',
-						'url' => '#',
+						'url' => '/',
 						'isBold' => false,
 						'canvasImageUrl' => '',
 						'canvasImageAlt' => 'Canvas Image',
@@ -1333,15 +1333,28 @@ return array(
 								'unit' => 'px'
 							)
 						),
-						'canvasImageHeight' => 200,
+						'canvasImageHeight' => array(
+							'desktop' => array(
+								'value' => 200,
+								'unit' => 'px'
+							),
+							'tablet' => array(
+								'value' => 150,
+								'unit' => 'px'
+							),
+							'mobile' => array(
+								'value' => 120,
+								'unit' => 'px'
+							)
+						),
 						'children' => array(
 							
 						)
 					),
 					array(
 						'id' => 'menu-item-2',
-						'title' => 'About',
-						'url' => '#',
+						'title' => 'Services',
+						'url' => '/services',
 						'isBold' => false,
 						'canvasImageUrl' => '',
 						'canvasImageAlt' => 'Canvas Image',
@@ -1356,15 +1369,252 @@ return array(
 								'unit' => 'px'
 							)
 						),
-						'canvasImageHeight' => 200,
+						'canvasImageHeight' => array(
+							'desktop' => array(
+								'value' => 200,
+								'unit' => 'px'
+							),
+							'tablet' => array(
+								'value' => 150,
+								'unit' => 'px'
+							),
+							'mobile' => array(
+								'value' => 120,
+								'unit' => 'px'
+							)
+						),
+						'children' => array(
+							array(
+								'id' => 'sub-item-1',
+								'title' => 'Web Development',
+								'url' => '/services/web-development',
+								'isBold' => false,
+								'fontSize' => 16,
+								'fontWeight' => '400',
+								'hoverColor' => '#428aff',
+								'showHoverUnderline' => true,
+								'underlineWidth' => 2,
+								'underlineColor' => '#428aff',
+								'underlineBorderRadius' => 0,
+								'children' => array(
+									array(
+										'id' => 'tier3-item-1',
+										'title' => 'Custom Websites',
+										'url' => '/services/web-development/custom-websites',
+										'isBold' => false,
+										'fontSize' => 14,
+										'fontWeight' => '400',
+										'hoverColor' => '#428aff',
+										'showHoverUnderline' => true,
+										'underlineWidth' => 2,
+										'underlineColor' => '#428aff',
+										'underlineBorderRadius' => 0,
+										'children' => array(
+											
+										)
+									),
+									array(
+										'id' => 'tier3-item-2',
+										'title' => 'E-commerce',
+										'url' => '/services/web-development/ecommerce',
+										'isBold' => false,
+										'fontSize' => 14,
+										'fontWeight' => '400',
+										'hoverColor' => '#428aff',
+										'showHoverUnderline' => true,
+										'underlineWidth' => 2,
+										'underlineColor' => '#428aff',
+										'underlineBorderRadius' => 0,
+										'children' => array(
+											
+										)
+									),
+									array(
+										'id' => 'tier3-item-3',
+										'title' => 'WordPress',
+										'url' => '/services/web-development/wordpress',
+										'isBold' => false,
+										'fontSize' => 14,
+										'fontWeight' => '400',
+										'hoverColor' => '#428aff',
+										'showHoverUnderline' => true,
+										'underlineWidth' => 2,
+										'underlineColor' => '#428aff',
+										'underlineBorderRadius' => 0,
+										'children' => array(
+											
+										)
+									)
+								)
+							),
+							array(
+								'id' => 'sub-item-2',
+								'title' => 'Digital Marketing',
+								'url' => '/services/digital-marketing',
+								'isBold' => false,
+								'fontSize' => 16,
+								'fontWeight' => '400',
+								'hoverColor' => '#428aff',
+								'showHoverUnderline' => true,
+								'underlineWidth' => 2,
+								'underlineColor' => '#428aff',
+								'underlineBorderRadius' => 0,
+								'children' => array(
+									array(
+										'id' => 'tier3-item-4',
+										'title' => 'SEO Services',
+										'url' => '/services/digital-marketing/seo',
+										'isBold' => false,
+										'fontSize' => 14,
+										'fontWeight' => '400',
+										'hoverColor' => '#428aff',
+										'showHoverUnderline' => true,
+										'underlineWidth' => 2,
+										'underlineColor' => '#428aff',
+										'underlineBorderRadius' => 0,
+										'children' => array(
+											
+										)
+									),
+									array(
+										'id' => 'tier3-item-5',
+										'title' => 'Social Media',
+										'url' => '/services/digital-marketing/social-media',
+										'isBold' => false,
+										'fontSize' => 14,
+										'fontWeight' => '400',
+										'hoverColor' => '#428aff',
+										'showHoverUnderline' => true,
+										'underlineWidth' => 2,
+										'underlineColor' => '#428aff',
+										'underlineBorderRadius' => 0,
+										'children' => array(
+											
+										)
+									),
+									array(
+										'id' => 'tier3-item-6',
+										'title' => 'PPC Advertising',
+										'url' => '/services/digital-marketing/ppc',
+										'isBold' => false,
+										'fontSize' => 14,
+										'fontWeight' => '400',
+										'hoverColor' => '#428aff',
+										'showHoverUnderline' => true,
+										'underlineWidth' => 2,
+										'underlineColor' => '#428aff',
+										'underlineBorderRadius' => 0,
+										'children' => array(
+											
+										)
+									)
+								)
+							),
+							array(
+								'id' => 'sub-item-3',
+								'title' => 'Branding',
+								'url' => '/services/branding',
+								'isBold' => false,
+								'fontSize' => 16,
+								'fontWeight' => '400',
+								'hoverColor' => '#428aff',
+								'showHoverUnderline' => true,
+								'underlineWidth' => 2,
+								'underlineColor' => '#428aff',
+								'underlineBorderRadius' => 0,
+								'children' => array(
+									array(
+										'id' => 'tier3-item-7',
+										'title' => 'Logo Design',
+										'url' => '/services/branding/logo-design',
+										'isBold' => false,
+										'fontSize' => 14,
+										'fontWeight' => '400',
+										'hoverColor' => '#428aff',
+										'showHoverUnderline' => true,
+										'underlineWidth' => 2,
+										'underlineColor' => '#428aff',
+										'underlineBorderRadius' => 0,
+										'children' => array(
+											
+										)
+									),
+									array(
+										'id' => 'tier3-item-8',
+										'title' => 'Brand Identity',
+										'url' => '/services/branding/brand-identity',
+										'isBold' => false,
+										'fontSize' => 14,
+										'fontWeight' => '400',
+										'hoverColor' => '#428aff',
+										'showHoverUnderline' => true,
+										'underlineWidth' => 2,
+										'underlineColor' => '#428aff',
+										'underlineBorderRadius' => 0,
+										'children' => array(
+											
+										)
+									),
+									array(
+										'id' => 'tier3-item-9',
+										'title' => 'Print Design',
+										'url' => '/services/branding/print-design',
+										'isBold' => false,
+										'fontSize' => 14,
+										'fontWeight' => '400',
+										'hoverColor' => '#428aff',
+										'showHoverUnderline' => true,
+										'underlineWidth' => 2,
+										'underlineColor' => '#428aff',
+										'underlineBorderRadius' => 0,
+										'children' => array(
+											
+										)
+									)
+								)
+							)
+						)
+					),
+					array(
+						'id' => 'menu-item-3',
+						'title' => 'Portfolio',
+						'url' => '/portfolio',
+						'isBold' => false,
+						'canvasImageUrl' => '',
+						'canvasImageAlt' => 'Canvas Image',
+						'canvasImagePosition' => 'left',
+						'canvasImageWidth' => array(
+							'desktop' => array(
+								'value' => 300,
+								'unit' => 'px'
+							),
+							'tablet' => array(
+								'value' => 250,
+								'unit' => 'px'
+							)
+						),
+						'canvasImageHeight' => array(
+							'desktop' => array(
+								'value' => 200,
+								'unit' => 'px'
+							),
+							'tablet' => array(
+								'value' => 150,
+								'unit' => 'px'
+							),
+							'mobile' => array(
+								'value' => 120,
+								'unit' => 'px'
+							)
+						),
 						'children' => array(
 							
 						)
 					),
 					array(
-						'id' => 'menu-item-3',
-						'title' => 'Services',
-						'url' => '#',
+						'id' => 'menu-item-4',
+						'title' => 'About',
+						'url' => '/about',
 						'isBold' => false,
 						'canvasImageUrl' => '',
 						'canvasImageAlt' => 'Canvas Image',
@@ -1379,40 +1629,58 @@ return array(
 								'unit' => 'px'
 							)
 						),
-						'canvasImageHeight' => 200,
-						'children' => array(
-							array(
-								'id' => 'sub-item-1',
-								'title' => 'Web Design',
-								'url' => '#',
-								'isBold' => false,
-								'fontSize' => 14,
-								'fontWeight' => '400',
-								'hoverColor' => '#428aff',
-								'showHoverUnderline' => true,
-								'underlineWidth' => 2,
-								'underlineColor' => '#428aff',
-								'underlineBorderRadius' => 0,
-								'children' => array(
-									
-								)
+						'canvasImageHeight' => array(
+							'desktop' => array(
+								'value' => 200,
+								'unit' => 'px'
 							),
-							array(
-								'id' => 'sub-item-2',
-								'title' => 'Development',
-								'url' => '#',
-								'isBold' => false,
-								'fontSize' => 14,
-								'fontWeight' => '400',
-								'hoverColor' => '#428aff',
-								'showHoverUnderline' => true,
-								'underlineWidth' => 2,
-								'underlineColor' => '#428aff',
-								'underlineBorderRadius' => 0,
-								'children' => array(
-									
-								)
+							'tablet' => array(
+								'value' => 150,
+								'unit' => 'px'
+							),
+							'mobile' => array(
+								'value' => 120,
+								'unit' => 'px'
 							)
+						),
+						'children' => array(
+							
+						)
+					),
+					array(
+						'id' => 'menu-item-5',
+						'title' => 'Contact',
+						'url' => '/contact',
+						'isBold' => false,
+						'canvasImageUrl' => '',
+						'canvasImageAlt' => 'Canvas Image',
+						'canvasImagePosition' => 'left',
+						'canvasImageWidth' => array(
+							'desktop' => array(
+								'value' => 300,
+								'unit' => 'px'
+							),
+							'tablet' => array(
+								'value' => 250,
+								'unit' => 'px'
+							)
+						),
+						'canvasImageHeight' => array(
+							'desktop' => array(
+								'value' => 200,
+								'unit' => 'px'
+							),
+							'tablet' => array(
+								'value' => 150,
+								'unit' => 'px'
+							),
+							'mobile' => array(
+								'value' => 120,
+								'unit' => 'px'
+							)
+						),
+						'children' => array(
+							
 						)
 					)
 				)
@@ -1615,6 +1883,18 @@ return array(
 					'bottom' => 0,
 					'left' => 0
 				)
+			),
+			'keepCanvasOpenOnClick' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'increaseOpacity' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'scrollBackgroundColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
 			)
 		),
 		'icon' => '<svg
@@ -2918,6 +3198,34 @@ return array(
 			'blockId' => array(
 				'type' => 'string',
 				'default' => ''
+			),
+			'scrollDistance' => array(
+				'type' => 'number',
+				'default' => 250
+			),
+			'scrollDistanceMobile' => array(
+				'type' => 'number',
+				'default' => 170
+			),
+			'showProgressIndicator' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'progressIndicatorColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'progressIndicatorActiveColor' => array(
+				'type' => 'string',
+				'default' => '#ff0000'
+			),
+			'progressIndicatorFillColor' => array(
+				'type' => 'string',
+				'default' => '#ff0000'
+			),
+			'progressIndicatorWidth' => array(
+				'type' => 'number',
+				'default' => 3
 			)
 		)
 	),
@@ -3107,8 +3415,8 @@ return array(
 				'default' => array(
 					array(
 						'id' => 1,
-						'slideTitle' => 'Digital Innovation',
-						'slideDescription' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit accusantium consequatur alias sequi tenetur ratione odio quis vitae ab id dolores quas quidem ipsam nesciunt, quam sed minus nihil molestiae?',
+						'slideTitle' => 'Build',
+						'slideDescription' => 'We design and develop custom websites and applications that are tailored to your specific needs and goals.',
 						'slideUrl' => 'https://link.com',
 						'slideTags' => array(
 							'Digital',
@@ -3121,8 +3429,8 @@ return array(
 					),
 					array(
 						'id' => 2,
-						'slideTitle' => 'Startup Nights',
-						'slideDescription' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit accusantium consequatur alias sequi tenetur ratione odio quis vitae ab id dolores quas quidem ipsam nesciunt, quam sed minus nihil molestiae?',
+						'slideTitle' => 'Migrate',
+						'slideDescription' => 'Effortlessly move your data and systems to modern platforms with minimal downtime and maximum security.',
 						'slideUrl' => 'https://link.com',
 						'slideTags' => array(
 							'Client 1',
@@ -3135,8 +3443,8 @@ return array(
 					),
 					array(
 						'id' => 3,
-						'slideTitle' => 'APST Research',
-						'slideDescription' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit accusantium consequatur alias sequi tenetur ratione odio quis vitae ab id dolores quas quidem ipsam nesciunt, quam sed minus nihil molestiae?',
+						'slideTitle' => 'Maintain',
+						'slideDescription' => 'We provide ongoing maintenance and support to ensure your digital assets are always performing at their best.',
 						'slideUrl' => 'https://link.com',
 						'slideTags' => array(
 							'Monochrome',
@@ -3149,8 +3457,8 @@ return array(
 					),
 					array(
 						'id' => 4,
-						'slideTitle' => 'Future Tree',
-						'slideDescription' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit accusantium consequatur alias sequi tenetur ratione odio quis vitae ab id dolores quas quidem ipsam nesciunt, quam sed minus nihil molestiae?',
+						'slideTitle' => 'Support',
+						'slideDescription' => 'Our dedicated support team is always available to help you with any issues or questions you may have.',
 						'slideUrl' => 'https://link.com',
 						'slideTags' => array(
 							'Monochrome',
@@ -3163,8 +3471,8 @@ return array(
 					),
 					array(
 						'id' => 5,
-						'slideTitle' => 'Physio Und Sport',
-						'slideDescription' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit accusantium consequatur alias sequi tenetur ratione odio quis vitae ab id dolores quas quidem ipsam nesciunt, quam sed minus nihil molestiae?',
+						'slideTitle' => 'Host',
+						'slideDescription' => 'We offer reliable and secure hosting solutions to ensure your website is always online and performing optimally.',
 						'slideUrl' => 'https://link.com',
 						'slideTags' => array(
 							'Monochrome',
@@ -3247,7 +3555,7 @@ return array(
 			),
 			'previewText' => array(
 				'type' => 'string',
-				'default' => 'We:'
+				'default' => 'Services:'
 			),
 			'linkText' => array(
 				'type' => 'string',

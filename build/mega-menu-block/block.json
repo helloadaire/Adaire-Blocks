@@ -44,7 +44,7 @@
         {
           "id": "menu-item-1",
           "title": "Home",
-          "url": "#",
+          "url": "/",
           "isBold": false,
           "canvasImageUrl": "",
           "canvasImageAlt": "Canvas Image",
@@ -59,34 +59,26 @@
               "unit": "px"
             }
           },
-          "canvasImageHeight": 200,
+          "canvasImageHeight": {
+            "desktop": {
+              "value": 200,
+              "unit": "px"
+            },
+            "tablet": {
+              "value": 150,
+              "unit": "px"
+            },
+            "mobile": {
+              "value": 120,
+              "unit": "px"
+            }
+          },
           "children": []
         },
         {
           "id": "menu-item-2",
-          "title": "About",
-          "url": "#",
-          "isBold": false,
-          "canvasImageUrl": "",
-          "canvasImageAlt": "Canvas Image",
-          "canvasImagePosition": "left",
-          "canvasImageWidth": {
-            "desktop": {
-              "value": 300,
-              "unit": "px"
-            },
-            "tablet": {
-              "value": 250,
-              "unit": "px"
-            }
-          },
-          "canvasImageHeight": 200,
-          "children": []
-        },
-        {
-          "id": "menu-item-3",
           "title": "Services",
-          "url": "#",
+          "url": "/services",
           "isBold": false,
           "canvasImageUrl": "",
           "canvasImageAlt": "Canvas Image",
@@ -101,37 +93,295 @@
               "unit": "px"
             }
           },
-          "canvasImageHeight": 200,
+          "canvasImageHeight": {
+            "desktop": {
+              "value": 200,
+              "unit": "px"
+            },
+            "tablet": {
+              "value": 150,
+              "unit": "px"
+            },
+            "mobile": {
+              "value": 120,
+              "unit": "px"
+            }
+          },
           "children": [
             {
               "id": "sub-item-1",
-              "title": "Web Design",
-              "url": "#",
+              "title": "Web Development",
+              "url": "/services/web-development",
               "isBold": false,
-              "fontSize": 14,
+              "fontSize": 16,
               "fontWeight": "400",
               "hoverColor": "#428aff",
               "showHoverUnderline": true,
               "underlineWidth": 2,
               "underlineColor": "#428aff",
               "underlineBorderRadius": 0,
-              "children": []
+              "children": [
+                {
+                  "id": "tier3-item-1",
+                  "title": "Custom Websites",
+                  "url": "/services/web-development/custom-websites",
+                  "isBold": false,
+                  "fontSize": 14,
+                  "fontWeight": "400",
+                  "hoverColor": "#428aff",
+                  "showHoverUnderline": true,
+                  "underlineWidth": 2,
+                  "underlineColor": "#428aff",
+                  "underlineBorderRadius": 0,
+                  "children": []
+                },
+                {
+                  "id": "tier3-item-2",
+                  "title": "E-commerce",
+                  "url": "/services/web-development/ecommerce",
+                  "isBold": false,
+                  "fontSize": 14,
+                  "fontWeight": "400",
+                  "hoverColor": "#428aff",
+                  "showHoverUnderline": true,
+                  "underlineWidth": 2,
+                  "underlineColor": "#428aff",
+                  "underlineBorderRadius": 0,
+                  "children": []
+                },
+                {
+                  "id": "tier3-item-3",
+                  "title": "WordPress",
+                  "url": "/services/web-development/wordpress",
+                  "isBold": false,
+                  "fontSize": 14,
+                  "fontWeight": "400",
+                  "hoverColor": "#428aff",
+                  "showHoverUnderline": true,
+                  "underlineWidth": 2,
+                  "underlineColor": "#428aff",
+                  "underlineBorderRadius": 0,
+                  "children": []
+                }
+              ]
             },
             {
               "id": "sub-item-2",
-              "title": "Development",
-              "url": "#",
+              "title": "Digital Marketing",
+              "url": "/services/digital-marketing",
               "isBold": false,
-              "fontSize": 14,
+              "fontSize": 16,
               "fontWeight": "400",
               "hoverColor": "#428aff",
               "showHoverUnderline": true,
               "underlineWidth": 2,
               "underlineColor": "#428aff",
               "underlineBorderRadius": 0,
-              "children": []
+              "children": [
+                {
+                  "id": "tier3-item-4",
+                  "title": "SEO Services",
+                  "url": "/services/digital-marketing/seo",
+                  "isBold": false,
+                  "fontSize": 14,
+                  "fontWeight": "400",
+                  "hoverColor": "#428aff",
+                  "showHoverUnderline": true,
+                  "underlineWidth": 2,
+                  "underlineColor": "#428aff",
+                  "underlineBorderRadius": 0,
+                  "children": []
+                },
+                {
+                  "id": "tier3-item-5",
+                  "title": "Social Media",
+                  "url": "/services/digital-marketing/social-media",
+                  "isBold": false,
+                  "fontSize": 14,
+                  "fontWeight": "400",
+                  "hoverColor": "#428aff",
+                  "showHoverUnderline": true,
+                  "underlineWidth": 2,
+                  "underlineColor": "#428aff",
+                  "underlineBorderRadius": 0,
+                  "children": []
+                },
+                {
+                  "id": "tier3-item-6",
+                  "title": "PPC Advertising",
+                  "url": "/services/digital-marketing/ppc",
+                  "isBold": false,
+                  "fontSize": 14,
+                  "fontWeight": "400",
+                  "hoverColor": "#428aff",
+                  "showHoverUnderline": true,
+                  "underlineWidth": 2,
+                  "underlineColor": "#428aff",
+                  "underlineBorderRadius": 0,
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "sub-item-3",
+              "title": "Branding",
+              "url": "/services/branding",
+              "isBold": false,
+              "fontSize": 16,
+              "fontWeight": "400",
+              "hoverColor": "#428aff",
+              "showHoverUnderline": true,
+              "underlineWidth": 2,
+              "underlineColor": "#428aff",
+              "underlineBorderRadius": 0,
+              "children": [
+                {
+                  "id": "tier3-item-7",
+                  "title": "Logo Design",
+                  "url": "/services/branding/logo-design",
+                  "isBold": false,
+                  "fontSize": 14,
+                  "fontWeight": "400",
+                  "hoverColor": "#428aff",
+                  "showHoverUnderline": true,
+                  "underlineWidth": 2,
+                  "underlineColor": "#428aff",
+                  "underlineBorderRadius": 0,
+                  "children": []
+                },
+                {
+                  "id": "tier3-item-8",
+                  "title": "Brand Identity",
+                  "url": "/services/branding/brand-identity",
+                  "isBold": false,
+                  "fontSize": 14,
+                  "fontWeight": "400",
+                  "hoverColor": "#428aff",
+                  "showHoverUnderline": true,
+                  "underlineWidth": 2,
+                  "underlineColor": "#428aff",
+                  "underlineBorderRadius": 0,
+                  "children": []
+                },
+                {
+                  "id": "tier3-item-9",
+                  "title": "Print Design",
+                  "url": "/services/branding/print-design",
+                  "isBold": false,
+                  "fontSize": 14,
+                  "fontWeight": "400",
+                  "hoverColor": "#428aff",
+                  "showHoverUnderline": true,
+                  "underlineWidth": 2,
+                  "underlineColor": "#428aff",
+                  "underlineBorderRadius": 0,
+                  "children": []
+                }
+              ]
             }
           ]
+        },
+        {
+          "id": "menu-item-3",
+          "title": "Portfolio",
+          "url": "/portfolio",
+          "isBold": false,
+          "canvasImageUrl": "",
+          "canvasImageAlt": "Canvas Image",
+          "canvasImagePosition": "left",
+          "canvasImageWidth": {
+            "desktop": {
+              "value": 300,
+              "unit": "px"
+            },
+            "tablet": {
+              "value": 250,
+              "unit": "px"
+            }
+          },
+          "canvasImageHeight": {
+            "desktop": {
+              "value": 200,
+              "unit": "px"
+            },
+            "tablet": {
+              "value": 150,
+              "unit": "px"
+            },
+            "mobile": {
+              "value": 120,
+              "unit": "px"
+            }
+          },
+          "children": []
+        },
+        {
+          "id": "menu-item-4",
+          "title": "About",
+          "url": "/about",
+          "isBold": false,
+          "canvasImageUrl": "",
+          "canvasImageAlt": "Canvas Image",
+          "canvasImagePosition": "left",
+          "canvasImageWidth": {
+            "desktop": {
+              "value": 300,
+              "unit": "px"
+            },
+            "tablet": {
+              "value": 250,
+              "unit": "px"
+            }
+          },
+          "canvasImageHeight": {
+            "desktop": {
+              "value": 200,
+              "unit": "px"
+            },
+            "tablet": {
+              "value": 150,
+              "unit": "px"
+            },
+            "mobile": {
+              "value": 120,
+              "unit": "px"
+            }
+          },
+          "children": []
+        },
+        {
+          "id": "menu-item-5",
+          "title": "Contact",
+          "url": "/contact",
+          "isBold": false,
+          "canvasImageUrl": "",
+          "canvasImageAlt": "Canvas Image",
+          "canvasImagePosition": "left",
+          "canvasImageWidth": {
+            "desktop": {
+              "value": 300,
+              "unit": "px"
+            },
+            "tablet": {
+              "value": 250,
+              "unit": "px"
+            }
+          },
+          "canvasImageHeight": {
+            "desktop": {
+              "value": 200,
+              "unit": "px"
+            },
+            "tablet": {
+              "value": 150,
+              "unit": "px"
+            },
+            "mobile": {
+              "value": 120,
+              "unit": "px"
+            }
+          },
+          "children": []
         }
       ]
     },
@@ -333,6 +583,18 @@
         "bottom": 0,
         "left": 0
       }
+    },
+    "keepCanvasOpenOnClick": {
+      "type": "boolean",
+      "default": false
+    },
+    "increaseOpacity": {
+      "type": "boolean",
+      "default": false
+    },
+    "scrollBackgroundColor": {
+      "type": "string",
+      "default": "#ffffff"
     }
   },
   "icon": "<svg\r\n\t\t\twidth=\"24\"\r\n\t\t\theight=\"24\"\r\n\t\t\tviewBox=\"0 0 24 24\"\r\n\t\t\tfill=\"none\"\r\n\t\t\txmlns=\"http://www.w3.org/2000/svg\"\r\n\t\t>\r\n\t\t\t<g clip-path=\"url(#clip0_21_23)\">\r\n\t\t\t\t<rect width=\"24\" height=\"24\" rx=\"5\" fill=\"#F0F0F1\" />\r\n\t\t\t\t<g clip-path=\"url(#clip1_21_23)\">\r\n\t\t\t\t\t<path\r\n\t\t\t\t\t\td=\"M4 5H20\"\r\n\t\t\t\t\t\tstroke=\"black\"\r\n\t\t\t\t\t\tstroke-width=\"2\"\r\n\t\t\t\t\t\tstroke-linecap=\"round\"\r\n\t\t\t\t\t\tstroke-linejoin=\"round\"\r\n\t\t\t\t\t/>\r\n\t\t\t\t\t<path\r\n\t\t\t\t\t\td=\"M4 12H20\"\r\n\t\t\t\t\t\tstroke=\"#FF0000\"\r\n\t\t\t\t\t\tstroke-width=\"2\"\r\n\t\t\t\t\t\tstroke-linecap=\"round\"\r\n\t\t\t\t\t\tstroke-linejoin=\"round\"\r\n\t\t\t\t\t/>\r\n\t\t\t\t\t<path\r\n\t\t\t\t\t\td=\"M4 19H20\"\r\n\t\t\t\t\t\tstroke=\"black\"\r\n\t\t\t\t\t\tstroke-width=\"2\"\r\n\t\t\t\t\t\tstroke-linecap=\"round\"\r\n\t\t\t\t\t\tstroke-linejoin=\"round\"\r\n\t\t\t\t\t/>\r\n\t\t\t\t</g>\r\n\t\t\t</g>\r\n\t\t\t<defs>\r\n\t\t\t\t<clipPath id=\"clip0_21_23\">\r\n\t\t\t\t\t<rect width=\"24\" height=\"24\" rx=\"5\" fill=\"white\" />\r\n\t\t\t\t</clipPath>\r\n\t\t\t\t<clipPath id=\"clip1_21_23\">\r\n\t\t\t\t\t<rect width=\"24\" height=\"24\" fill=\"white\" />\r\n\t\t\t\t</clipPath>\r\n\t\t\t</defs>\r\n\t\t</svg>"
