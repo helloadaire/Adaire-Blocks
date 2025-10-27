@@ -1,1 +1,77 @@
-console.log("Counter Block - View Script Loaded"),document.addEventListener("DOMContentLoaded",function(){console.log("Counter Block - DOM Ready");const t=document.querySelectorAll(".ab-counter-block");console.log(`Found ${t.length} counter block(s)`),t.forEach(t=>{const e=parseFloat(t.dataset.startingNumber),o=parseFloat(t.dataset.endingNumber),n=parseFloat(t.dataset.duration);let a=parseFloat(t.dataset.delayTime);const r="true"===t.dataset.delayBool,s=t.dataset.counterDirection||"up",l=t.dataset.prefix||"",c=t.dataset.suffix||"",d=t.querySelector(".displayNumber");console.log("Counter settings:",{startingNumber:e,endingNumber:o,duration:n,counterDirection:s,prefix:l,suffix:c});const u=n/Math.abs(o-e);d&&(d.textContent=e,r||(a=0),setTimeout(()=>{let t=e;const n=setInterval(()=>{"down"===s?t--:t++,d.textContent=t,("down"===s&&t<=o||"up"===s&&t>=o)&&(d.textContent=o,clearInterval(n))},u)},a))})},{once:!0});
+/******/ (() => { // webpackBootstrap
+/*!***********************************!*\
+  !*** ./src/counter-block/view.js ***!
+  \***********************************/
+console.log("Counter Block - View Script Loaded");
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("Counter Block - DOM Ready");
+  // Select ALL counter block instances on the page
+  const counterBlocks = document.querySelectorAll(".ab-counter-block");
+  console.log(`Found ${counterBlocks.length} counter block(s)`);
+
+  // Loop through each block instance separately
+  counterBlocks.forEach(counterBlock => {
+    const startingNumber = parseFloat(counterBlock.dataset.startingNumber);
+    const endingNumber = parseFloat(counterBlock.dataset.endingNumber);
+    const duration = parseFloat(counterBlock.dataset.duration);
+    let delayTime = parseFloat(counterBlock.dataset.delayTime);
+    const delayEnabled = counterBlock.dataset.delayBool === 'true';
+    const counterDirection = counterBlock.dataset.counterDirection || 'up';
+    const prefix = counterBlock.dataset.prefix || '';
+    const suffix = counterBlock.dataset.suffix || '';
+    const displayNum = counterBlock.querySelector(".displayNumber");
+    console.log("Counter settings:", {
+      startingNumber,
+      endingNumber,
+      duration,
+      counterDirection,
+      prefix,
+      suffix
+    });
+
+    // Calculate interval based on the difference
+    const diff = Math.abs(endingNumber - startingNumber);
+    const interval = duration / diff;
+
+    // Counter logic
+    if (displayNum) {
+      // Set initial value
+      displayNum.textContent = startingNumber;
+
+      // If delay is disabled, set delay to 0
+      if (!delayEnabled) {
+        delayTime = 0;
+      }
+
+      // Run counter after delay
+      setTimeout(() => {
+        let currentNum = startingNumber;
+        const counterInterval = setInterval(() => {
+          // Count up or down based on direction
+          if (counterDirection === 'down') {
+            currentNum--;
+          } else {
+            currentNum++;
+          }
+
+          // Update display
+          displayNum.textContent = currentNum;
+
+          // Stop when we reach the target
+          if (counterDirection === 'down' && currentNum <= endingNumber) {
+            displayNum.textContent = endingNumber;
+            clearInterval(counterInterval);
+          } else if (counterDirection === 'up' && currentNum >= endingNumber) {
+            displayNum.textContent = endingNumber;
+            clearInterval(counterInterval);
+          }
+        }, interval);
+      }, delayTime);
+    }
+  });
+}, {
+  once: true
+});
+/******/ })()
+;
+//# sourceMappingURL=view.js.map

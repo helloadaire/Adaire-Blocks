@@ -147,6 +147,13 @@ A: The plugin is optimized for performance with efficient block registration and
 
 ## Changelog
 
+### Version 1.1.4 =
+* **Fixed** Mega Menu Block limit management system - replaced hardcoded limits with proper useBlockLimits hook integration
+* **Fixed** "Increase Opacity on Scroll" functionality with immediate response and improved CSS compatibility
+* **Enhanced** Scroll-based opacity animation performance with reduced scroll distance (50px vs 200px) for faster transitions
+* **Improved** Premium/Free tier integration for Mega Menu Block with proper limit validation and upgrade notices
+* **Optimized** Scroll trigger implementation with immediate response (removed scrub delay) for better user experience
+
 ### Version 1.1.3 =
 * **Fixed** Image rendering issue in Services Block component affecting visual asset display and layout integrity
 * **Added** User feedback mechanism for Questions Block with progress tracking and interactive state management

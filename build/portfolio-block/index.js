@@ -1,1 +1,1706 @@
-(()=>{"use strict";var e,o={400:()=>{const e=window.wp.blocks,o=window.wp.i18n,l=window.wp.blockEditor,t=window.wp.mediaUtils,i=window.wp.components,n=window.wp.element,a=window.ReactJSXRuntime,r=JSON.parse('{"UU":"create-block/portfolio-block"}'),s=(window.React,()=>(0,a.jsxs)("svg",{width:"24",height:"24",viewBox:"0 0 24 24",fill:"none",xmlns:"http://www.w3.org/2000/svg",children:[(0,a.jsxs)("g",{clipPath:"url(#clip0_4_33)",children:[(0,a.jsx)("path",{d:"M0 5C0 2.23858 2.23858 0 5 0H19C21.7614 0 24 2.23858 24 5V19C24 21.7614 21.7614 24 19 24H5C2.23858 24 0 21.7614 0 19V5Z",fill:"#F0F0F1"}),(0,a.jsx)("path",{d:"M12.9167 13.595C12.638 13.7559 12.3218 13.8406 12 13.8406C11.6782 13.8406 11.362 13.7559 11.0833 13.595L3.29167 9.13084C3.15059 9.05089 3.03325 8.93495 2.95162 8.79484C2.86998 8.65474 2.82697 8.49549 2.82697 8.33334C2.82697 8.17118 2.86998 8.01193 2.95162 7.87183C3.03325 7.73173 3.15059 7.61579 3.29167 7.53584L11.0833 3.07167C11.362 2.91076 11.6782 2.82605 12 2.82605C12.3218 2.82605 12.638 2.91076 12.9167 3.07167L20.7083 7.53584C20.8494 7.61579 20.9667 7.73173 21.0484 7.87183C21.13 8.01193 21.173 8.17118 21.173 8.33334C21.173 8.49549 21.13 8.65474 21.0484 8.79484C20.9667 8.93495 20.8494 9.05089 20.7083 9.13084L12.9167 13.595Z",fill:"#F0F0F1",stroke:"#FF0000",strokeWidth:"1.5",strokeLinecap:"round",strokeLinejoin:"round"}),(0,a.jsx)("path",{d:"M19.3333 14.0946L20.7083 14.8692C20.8494 14.9491 20.9667 15.0651 21.0484 15.2052C21.13 15.3453 21.173 15.5045 21.173 15.6667C21.173 15.8288 21.13 15.9881 21.0484 16.1282C20.9667 16.2683 20.8494 16.3842 20.7083 16.4642L12.9167 20.9284C12.638 21.0893 12.3218 21.174 12 21.174C11.6782 21.174 11.362 21.0893 11.0833 20.9284L3.29167 16.4642C3.15059 16.3842 3.03325 16.2683 2.95162 16.1282C2.86998 15.9881 2.82697 15.8288 2.82697 15.6667C2.82697 15.5045 2.86998 15.3453 2.95162 15.2052C3.03325 15.0651 3.15059 14.9491 3.29167 14.8692L4.66667 14.0946",fill:"#F0F0F1"}),(0,a.jsx)("path",{d:"M19.3333 14.0946L20.7083 14.8692C20.8494 14.9491 20.9667 15.0651 21.0484 15.2052C21.13 15.3453 21.173 15.5045 21.173 15.6667C21.173 15.8288 21.13 15.9881 21.0484 16.1282C20.9667 16.2683 20.8494 16.3842 20.7083 16.4642L12.9167 20.9284C12.638 21.0893 12.3218 21.174 12 21.174C11.6782 21.174 11.362 21.0893 11.0833 20.9284L3.29167 16.4642C3.15059 16.3842 3.03325 16.2683 2.95162 16.1282C2.86998 15.9881 2.82697 15.8288 2.82697 15.6667C2.82697 15.5045 2.86998 15.3453 2.95162 15.2052C3.03325 15.0651 3.15059 14.9491 3.29167 14.8692L4.66667 14.0946",stroke:"black",strokeWidth:"1.5",strokeLinecap:"round",strokeLinejoin:"round"})]}),(0,a.jsx)("defs",{children:(0,a.jsx)("clipPath",{id:"clip0_4_33",children:(0,a.jsx)("path",{d:"M0 5C0 2.23858 2.23858 0 5 0H19C21.7614 0 24 2.23858 24 5V19C24 21.7614 21.7614 24 19 24H5C2.23858 24 0 21.7614 0 19V5Z",fill:"white"})})})]}));(0,e.registerBlockType)(r.UU,{edit:function({attributes:e,setAttributes:r}){const{agencyTitle:s,agencyDescription:d,ctaButtonText:c,slides:p,backgroundColor:g,gradientType:x,gradientAngle:b,gradientColor1:h,gradientColor2:u,gradientColor3:f,gradientStop1:C,gradientStop2:m,gradientStop3:k,textColor:v,titleFontSize:_,titleFontFamily:j,textFontSize:y,textFontFamily:w,slideTitleFontSize:S,slideDescriptionFontSize:T,slideTagFontSize:B,buttonColor:N,buttonBackgroundColor:I,buttonHoverColor:F,buttonHoverBackgroundColor:z,buttonStyle:A,underlineColor:$,blurAmount:R,fontSize:L,showIcon:P,hoverAnimation:D,buttonPadding:M,buttonMargin:U,zIndex:O,borderRadius:H,fontWeight:W}=e,[E,G]=(0,n.useState)(0),V=(0,l.useBlockProps)({className:"wp-block-create-block-portfolio-block",style:{color:v||"#ffffff","--title-font-size":`${_}px`,"--text-font-size":`${y}px`,"--slide-title-font-size":`${S}px`,"--slide-description-font-size":`${T}px`,"--slide-tag-font-size":`${B}px`,"--button-color":N||"#ffffff","--button-bg-color":I||"transparent","--button-hover-color":F||"#ffffff","--button-hover-bg-color":z||"transparent","--button-underline-color":$||"#ff4242","--button-blur":R?`${R}px`:"0px","--button-font-size":L?`${L}px`:"1.1rem","--button-padding":M||"0.2em 0","--button-margin":U||"20px 0","--button-z-index":O||"1","--button-border-radius":H?`${H}px`:"0px","--button-font-weight":W||"500"}});(0,n.useEffect)(()=>{if(p&&p.length>0){const e=p.map(e=>{const o={...e};return o.hasOwnProperty("newTagInput")||(o.newTagInput=""),o.hasOwnProperty("slideTags")||(o.slideTags=[]),o});JSON.stringify(e)!==JSON.stringify(p)&&r({slides:e})}},[]),console.log("Block props style:",V.style),console.log("Current slides data:",p);const J=(e,o,l)=>{const t=[...p];t[e]={...t[e],[o]:l},console.log("Updated slide:",e,o,l,t[e]),console.log("All slides after update:",t),r({slides:t})},Z=(e,o)=>{if(!o||!o.trim())return;const l=o.trim(),t=p[e],i=Array.isArray(t.slideTags)?[...t.slideTags]:[];if(!i.some(e=>e.toLowerCase()===l.toLowerCase())){const o=[...p];o[e]={...t,slideTags:[...i,l],newTagInput:""},r({slides:o})}},X=()=>"linear"===x?f?`linear-gradient(${b}deg, ${h} ${C}%, ${u} ${m}%, ${f} ${k}%)`:`linear-gradient(${b}deg, ${h} ${C}%, ${u} ${m}%)`:f?`radial-gradient(circle, ${h} ${C}%, ${u} ${m}%, ${f} ${k}%)`:`radial-gradient(circle, ${h} ${C}%, ${u} ${m}%)`,K=()=>{const e=X();r({backgroundColor:e})};return(0,a.jsxs)(a.Fragment,{children:[(0,a.jsxs)(l.InspectorControls,{children:[(0,a.jsxs)(i.PanelBody,{title:(0,o.__)("Agency Section Settings","portfolio-block"),initialOpen:!0,children:[(0,a.jsx)(i.TextControl,{label:(0,o.__)("Section Title","portfolio-block"),value:s,onChange:e=>r({agencyTitle:e})}),(0,a.jsx)(i.TextareaControl,{label:(0,o.__)("Section Description","portfolio-block"),value:d,onChange:e=>r({agencyDescription:e}),rows:4}),(0,a.jsx)(i.TextControl,{label:(0,o.__)("CTA Button Text","portfolio-block"),value:c,onChange:e=>r({ctaButtonText:e})})]}),(0,a.jsxs)(i.PanelBody,{title:(0,o.__)("Styling Options","portfolio-block"),initialOpen:!0,children:[(0,a.jsx)(i.SelectControl,{label:(0,o.__)("Background Type","portfolio-block"),value:g?.includes("gradient")?"gradient":"solid",options:[{label:"Solid Color",value:"solid"},{label:"Gradient",value:"gradient"}],onChange:e=>{r("solid"===e?{backgroundColor:"#667eea",gradientType:"linear",gradientAngle:135,gradientColor1:"#667eea",gradientColor2:"#764ba2",gradientColor3:"",gradientStop1:0,gradientStop2:100,gradientStop3:50}:{backgroundColor:"linear-gradient(135deg, #667eea 0%, #764ba2 100%)",gradientType:"linear",gradientAngle:135,gradientColor1:"#667eea",gradientColor2:"#764ba2",gradientColor3:"",gradientStop1:0,gradientStop2:100,gradientStop3:50})}}),(!g||!g.includes("gradient"))&&(0,a.jsxs)(a.Fragment,{children:[(0,a.jsx)(i.ColorPicker,{label:(0,o.__)("Background Color","portfolio-block"),color:g,onChangeComplete:e=>r({backgroundColor:e.hex}),disableAlpha:!0}),(0,a.jsx)("div",{style:{background:g||"#667eea",padding:"10px",borderRadius:"4px",marginTop:"10px",border:"2px solid #ddd",textAlign:"center",color:"#fff",fontWeight:"bold",textShadow:"1px 1px 2px rgba(0,0,0,0.5)"},children:"Current Background Preview"})]}),g&&g.includes("gradient")&&(0,a.jsxs)(a.Fragment,{children:[(0,a.jsx)(i.SelectControl,{label:(0,o.__)("Gradient Type","portfolio-block"),value:x,options:[{label:"Linear",value:"linear"},{label:"Radial",value:"radial"}],onChange:e=>{r({gradientType:e}),K()}}),"linear"===x&&(0,a.jsx)(i.RangeControl,{label:(0,o.__)("Gradient Angle","portfolio-block"),value:b,onChange:e=>{r({gradientAngle:e}),K()},min:0,max:360,step:1}),(0,a.jsxs)("div",{style:{marginTop:"15px",padding:"10px",border:"1px solid #ddd",borderRadius:"4px"},children:[(0,a.jsx)("h4",{style:{margin:"0 0 10px 0"},children:(0,o.__)("Gradient Colors","portfolio-block")}),(0,a.jsx)(i.ColorPicker,{label:(0,o.__)("Color 1","portfolio-block"),color:h,onChangeComplete:e=>{r({gradientColor1:e.hex}),K()},disableAlpha:!0}),(0,a.jsx)(i.RangeControl,{label:(0,o.__)("Color 1 Stop (%)","portfolio-block"),value:C,onChange:e=>{r({gradientStop1:e}),K()},min:0,max:100,step:1}),(0,a.jsx)(i.ColorPicker,{label:(0,o.__)("Color 2","portfolio-block"),color:u,onChangeComplete:e=>{r({gradientColor2:e.hex}),K()},disableAlpha:!0}),(0,a.jsx)(i.RangeControl,{label:(0,o.__)("Color 2 Stop (%)","portfolio-block"),value:m,onChange:e=>{r({gradientStop2:e}),K()},min:0,max:100,step:1}),(0,a.jsx)(i.ToggleControl,{label:(0,o.__)("Add Third Color","portfolio-block"),checked:!!f,onChange:e=>{r(e?{gradientColor3:"#f093fb",gradientStop3:50}:{gradientColor3:"",gradientStop3:50}),K()}}),f&&(0,a.jsxs)(a.Fragment,{children:[(0,a.jsx)(i.ColorPicker,{label:(0,o.__)("Color 3","portfolio-block"),color:f,onChangeComplete:e=>{r({gradientColor3:e.hex}),K()},disableAlpha:!0}),(0,a.jsx)(i.RangeControl,{label:(0,o.__)("Color 3 Stop (%)","portfolio-block"),value:k,onChange:e=>{r({gradientStop3:e}),K()},min:0,max:100,step:1})]})]}),(0,a.jsx)("div",{style:{background:X(),padding:"10px",borderRadius:"4px",marginTop:"10px",border:"2px solid #ddd",textAlign:"center",color:"#fff",fontWeight:"bold",textShadow:"1px 1px 2px rgba(0,0,0,0.5)",minHeight:"40px"},children:"Current Gradient Preview"})]}),(0,a.jsx)(i.ColorPicker,{label:(0,o.__)("Text Color","portfolio-block"),color:v,onChangeComplete:e=>r({textColor:e.hex}),disableAlpha:!0}),(0,a.jsx)(i.RangeControl,{label:(0,o.__)("Title Font Size","portfolio-block"),value:_,onChange:e=>r({titleFontSize:e}),min:20,max:80}),(0,a.jsx)(i.RangeControl,{label:(0,o.__)("Text Font Size","portfolio-block"),value:y,onChange:e=>r({textFontSize:e}),min:12,max:32}),(0,a.jsx)(i.RangeControl,{label:(0,o.__)("Slide Title Font Size","portfolio-block"),value:S,onChange:e=>r({slideTitleFontSize:e}),min:40,max:200}),(0,a.jsx)(i.RangeControl,{label:(0,o.__)("Slide Description Font Size","portfolio-block"),value:T,onChange:e=>r({slideDescriptionFontSize:e}),min:12,max:40}),(0,a.jsx)(i.RangeControl,{label:(0,o.__)("Slide Tag Font Size","portfolio-block"),value:B,onChange:e=>r({slideTagFontSize:e}),min:12,max:40})]}),(0,a.jsxs)(i.PanelBody,{title:"Button Styling",initialOpen:!1,children:[(0,a.jsx)(i.BaseControl,{label:"Button Color",children:(0,a.jsx)(i.ColorPicker,{color:N,onChangeComplete:e=>r({buttonColor:e.hex}),disableAlpha:!0})}),(0,a.jsx)(i.BaseControl,{label:"Button Background Color",children:(0,a.jsx)(i.ColorPicker,{color:I,onChangeComplete:e=>r({buttonBackgroundColor:e.hex}),disableAlpha:!0})}),(0,a.jsx)(i.BaseControl,{label:"Hover Text Color",children:(0,a.jsx)(i.ColorPicker,{color:F,onChangeComplete:e=>r({buttonHoverColor:e.hex}),disableAlpha:!0})}),(0,a.jsx)(i.BaseControl,{label:"Hover Background Color",children:(0,a.jsx)(i.ColorPicker,{color:z,onChangeComplete:e=>r({buttonHoverBackgroundColor:e.hex}),disableAlpha:!0})}),(0,a.jsx)(i.BaseControl,{label:"Underline Color",children:(0,a.jsx)(i.ColorPicker,{color:$,onChangeComplete:e=>r({underlineColor:e.hex}),disableAlpha:!0})}),(0,a.jsx)(i.SelectControl,{label:"Button Style",value:A,options:[{label:"Underline",value:"underline"},{label:"Background Fill",value:"fill"},{label:"Border",value:"border"},{label:"Gradient",value:"gradient"},{label:"Glass Effect",value:"glass"}],onChange:e=>r({buttonStyle:e})}),(0,a.jsx)(i.RangeControl,{label:"Blur Amount (px)",value:R,onChange:e=>r({blurAmount:e}),min:0,max:20,step:1}),(0,a.jsx)(i.RangeControl,{label:"Font Size (px)",value:L,onChange:e=>r({fontSize:e}),min:12,max:48,step:1}),(0,a.jsx)(i.ToggleControl,{label:"Show Icon",checked:P,onChange:e=>r({showIcon:e}),help:P?"Icon will be visible":"Icon will be hidden"}),(0,a.jsx)(i.SelectControl,{label:"Hover Animation",value:D,options:[{label:"Slide Underline",value:"slide-underline"},{label:"Scale",value:"scale"},{label:"Bounce",value:"bounce"},{label:"Glow",value:"glow"},{label:"Shake",value:"shake"},{label:"None",value:"none"}],onChange:e=>r({hoverAnimation:e})}),(0,a.jsx)(i.TextControl,{label:"Button Padding",value:M,onChange:e=>r({buttonPadding:e}),placeholder:"e.g., 10px 20px",help:"CSS padding values (e.g., 10px 20px, 1em 2em)"}),(0,a.jsx)(i.TextControl,{label:"Button Margin",value:U,onChange:e=>r({buttonMargin:e}),placeholder:"e.g., 20px 0",help:"CSS margin values (e.g., 20px 0, 1em auto)"}),(0,a.jsx)(i.RangeControl,{label:"Z-Index",value:O,onChange:e=>r({zIndex:e}),min:0,max:100,step:1}),(0,a.jsx)(i.RangeControl,{label:"Border Radius (px)",value:H,onChange:e=>r({borderRadius:e}),min:0,max:50,step:1}),(0,a.jsx)(i.SelectControl,{label:"Font Weight",value:W,options:[{label:"Thin (100)",value:"100"},{label:"Extra Light (200)",value:"200"},{label:"Light (300)",value:"300"},{label:"Normal (400)",value:"400"},{label:"Medium (500)",value:"500"},{label:"Semi Bold (600)",value:"600"},{label:"Bold (700)",value:"700"},{label:"Extra Bold (800)",value:"800"},{label:"Black (900)",value:"900"}],onChange:e=>r({fontWeight:e}),help:"Choose the font weight for the button text."})]}),(0,a.jsxs)(i.PanelBody,{title:(0,o.__)("Portfolio Slides","portfolio-block"),initialOpen:!0,children:[(0,a.jsxs)("div",{style:{background:"#f0f6fc",padding:"10px",borderRadius:"4px",marginBottom:"15px",border:"1px solid #c3c4c7"},children:[(0,a.jsx)("strong",{children:"💡 Tip:"})," You can add unlimited slides! All slides will be displayed in the gallery and available in the modal slider."]}),(0,a.jsxs)("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"20px"},children:[(0,a.jsxs)("span",{style:{fontWeight:"bold"},children:[(0,o.__)("Total Slides:","portfolio-block")," ",p.length]}),(0,a.jsx)(i.Button,{variant:"primary",onClick:()=>{const e=(p.length>0?Math.max(...p.map(e=>e.id)):0)+1,o={id:e,slideTitle:`New Project ${e}`,slideDescription:"Add your project description here...",slideUrl:"https://example.com",slideTags:[],newTagInput:"",slideImg:"",slideImgId:0};console.log("Adding new slide with ID:",e),r({slides:[...p,o]})},style:{backgroundColor:"#007cba",borderColor:"#007cba",color:"white"},children:(0,o.__)("➕ Add New Slide","portfolio-block")})]}),p.map((e,l)=>(0,a.jsxs)("div",{style:{border:"1px solid #ddd",padding:"15px",marginBottom:"15px",borderRadius:"8px"},children:[(0,a.jsxs)("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"10px"},children:[(0,a.jsxs)("h4",{style:{margin:0},children:[(0,o.__)("Slide","portfolio-block")," ",l+1]}),(0,a.jsx)(i.Button,{variant:"secondary",isDestructive:!0,onClick:()=>(e=>{const o=p.filter((o,l)=>l!==e);r({slides:o})})(l),children:(0,o.__)("Remove","portfolio-block")})]}),(0,a.jsx)(i.TextControl,{label:(0,o.__)("Title","portfolio-block"),value:e.slideTitle,onChange:e=>J(l,"slideTitle",e)}),(0,a.jsx)(i.TextareaControl,{label:(0,o.__)("Description","portfolio-block"),value:e.slideDescription,onChange:e=>J(l,"slideDescription",e),rows:3}),(0,a.jsx)(i.TextControl,{label:(0,o.__)("Project URL","portfolio-block"),value:e.slideUrl,onChange:e=>J(l,"slideUrl",e)}),(0,a.jsxs)("div",{children:[(0,a.jsx)("label",{style:{display:"block",marginBottom:"5px",fontWeight:"500"},children:(0,o.__)("Tags","portfolio-block")}),(0,a.jsxs)("div",{style:{display:"flex",gap:"8px",marginBottom:"10px"},children:[(0,a.jsx)(i.TextControl,{value:e.newTagInput||"",onChange:e=>J(l,"newTagInput",e),onKeyDown:o=>{"Enter"===o.key&&(o.preventDefault(),Z(l,e.newTagInput||""))},placeholder:"Enter a tag...",style:{flex:1}}),(0,a.jsx)(i.Button,{variant:"secondary",onClick:()=>{Z(l,e.newTagInput||"")},children:"Add Tag"})]}),(0,a.jsx)("div",{style:{display:"flex",flexWrap:"wrap",gap:"5px",minHeight:"30px",padding:"5px",border:"1px solid #ddd",borderRadius:"4px",backgroundColor:"#f9f9f9"},children:Array.isArray(e.slideTags)&&e.slideTags.length>0?e.slideTags.map((o,t)=>(0,a.jsxs)("span",{style:{display:"inline-flex",alignItems:"center",gap:"5px",padding:"4px 8px",backgroundColor:"#007cba",color:"white",borderRadius:"12px",fontSize:"12px",fontWeight:"500"},children:[o,(0,a.jsx)("button",{onClick:e=>{e.preventDefault(),((e,o)=>{const l=p[e],t=Array.isArray(l.slideTags)?l.slideTags.filter(e=>e!==o):[],i=[...p];i[e]={...l,slideTags:t},r({slides:i})})(l,o)},style:{background:"none",border:"none",color:"white",cursor:"pointer",fontSize:"14px",fontWeight:"bold",padding:"0",marginLeft:"4px",lineHeight:"1"},title:"Remove tag",children:"×"})]},`${e.id}-${t}`)):(0,a.jsx)("span",{style:{color:"#666",fontStyle:"italic"},children:"No tags added yet"})}),(0,a.jsxs)("div",{style:{marginTop:"10px"},children:[(0,a.jsx)(i.Button,{variant:"secondary",onClick:()=>{Z(l,"Web Design"),Z(l,"Branding"),Z(l,"UI/UX")},style:{marginRight:"5px"},children:"Add Sample Tags"}),(0,a.jsx)(i.Button,{variant:"secondary",isDestructive:!0,onClick:()=>J(l,"slideTags",[]),children:"Clear All Tags"})]})]}),(0,a.jsxs)("div",{style:{marginTop:"10px"},children:[(0,a.jsx)("label",{style:{display:"block",marginBottom:"5px"},children:(0,o.__)("Project Image","portfolio-block")}),(0,a.jsx)(t.MediaUpload,{onSelect:e=>{console.log("MediaUpload onSelect called with:",e),((e,o)=>{if(console.log("Selected media:",o),o&&o.id){if(console.log("Setting image ID:",o.id),J(e,"slideImgId",o.id),o.url)console.log("Setting image URL:",o.url),J(e,"slideImg",o.url);else if(console.log("Fetching image URL for ID:",o.id),window.wp&&window.wp.media){const l=window.wp.media.attachment(o.id);l.fetch().then(()=>{const o=l.get("url");console.log("Fetched URL:",o),o&&J(e,"slideImg",o)}).catch(e=>{console.error("Error fetching image URL:",e)})}}else console.log("No valid media object received")})(l,e)},allowedTypes:["image"],value:e.slideImgId,render:({open:t})=>(console.log("MediaUpload render called, open function:",typeof t),(0,a.jsx)("div",{style:{display:"flex",gap:"10px",alignItems:"flex-start",flexWrap:"wrap"},children:e.slideImg&&""!==e.slideImg?(0,a.jsxs)(a.Fragment,{children:[(0,a.jsx)("img",{src:e.slideImg,alt:"",style:{width:"60px",height:"60px",objectFit:"cover",borderRadius:"4px",flexShrink:0}}),(0,a.jsxs)("div",{style:{display:"flex",flexDirection:"column",gap:"5px"},children:[(0,a.jsx)(i.Button,{variant:"secondary",onClick:t,children:(0,o.__)("Change Image","portfolio-block")}),(0,a.jsx)(i.Button,{variant:"secondary",isDestructive:!0,onClick:()=>(e=>{J(e,"slideImg",""),J(e,"slideImgId",0)})(l),children:(0,o.__)("Remove","portfolio-block")})]})]}):(0,a.jsx)(i.Button,{variant:"secondary",onClick:t,children:(0,o.__)("Select Image","portfolio-block")})}))}),!1]})]},e.id))]})]}),(0,a.jsx)("div",{...V,children:(0,a.jsx)("div",{className:"animation-component",style:{position:"relative",border:"2px solid red",padding:"10px",minHeight:"400px"},onClick:e=>{console.log("Portfolio block clicked!",e),e.stopPropagation()},onMouseEnter:e=>{console.log("Portfolio block mouse enter!",e)},children:(0,a.jsx)("section",{className:"ad-portfolio-block__agency-section",style:{background:g||"linear-gradient(135deg, #667eea 0%, #764ba2 100%)"},children:(0,a.jsx)("div",{className:"ad-portfolio-block__agency-container",children:(0,a.jsxs)("div",{className:"ad-portfolio-block__agency-content",children:[(0,a.jsxs)("div",{className:"ad-portfolio-block__agency-text",children:[(0,a.jsxs)("div",{className:"ad-portfolio-block__agency-description",children:[(0,a.jsx)("h2",{className:"ad-portfolio-block__agency-description-title",children:s}),(0,a.jsx)("p",{className:"ad-portfolio-block__agency-description-text",children:d})]}),(0,a.jsx)("div",{className:"ad-portfolio-block__agency-cta",children:(0,a.jsxs)("button",{className:"ad-portfolio-block__view-portfolio-btn",children:[(0,a.jsx)("span",{className:"ad-portfolio-block__button-text",children:c}),(0,a.jsx)("svg",{className:"ad-portfolio-block__button-arrow",width:"24",height:"24",viewBox:"0 0 24 24",fill:"none",xmlns:"http://www.w3.org/2000/svg",children:(0,a.jsx)("path",{d:"M7 17L17 7M17 7H7M17 7V17",stroke:"currentColor",strokeWidth:"2",strokeLinecap:"round",strokeLinejoin:"round"})})]})})]}),(0,a.jsx)("div",{className:"ad-portfolio-block__agency-gallery",children:(0,a.jsx)("div",{className:"ad-portfolio-block__gallery-grid",children:p.map((e,l)=>(0,a.jsxs)("div",{className:"ad-portfolio-block__gallery-item",children:[e.slideImg&&""!==e.slideImg?(0,a.jsx)("img",{className:"ad-portfolio-block__gallery-img",src:e.slideImg,alt:e.slideTitle,style:{width:"100%",height:"100%",objectFit:"cover"}}):(0,a.jsx)("div",{className:"ad-portfolio-block__gallery-placeholder",children:(0,a.jsx)("span",{children:(0,o.__)("No Image","portfolio-block")})}),(0,a.jsx)("div",{className:"ad-portfolio-block__gallery-overlay",children:(0,a.jsx)("span",{className:"ad-portfolio-block__gallery-overlay-text",children:e.slideTitle})})]},e.id))})})]})})})})})]})},save:function({attributes:e}){const{agencyTitle:o,agencyDescription:t,ctaButtonText:i,slides:n,backgroundColor:r,textColor:s,titleFontSize:d,textFontSize:c,slideTitleFontSize:p,slideDescriptionFontSize:g,slideTagFontSize:x,buttonColor:b,buttonBackgroundColor:h,buttonHoverColor:u,buttonHoverBackgroundColor:f,buttonStyle:C,underlineColor:m,blurAmount:k,fontSize:v,showIcon:_,hoverAnimation:j,buttonPadding:y,buttonMargin:w,zIndex:S,borderRadius:T,fontWeight:B}=e,N=l.useBlockProps.save({className:"ad-portfolio-block",style:{color:s||"#ffffff","--title-font-size":`${d}px`,"--text-font-size":`${c}px`,"--slide-title-font-size":`${p}px`,"--slide-description-font-size":`${g}px`,"--slide-tag-font-size":`${x}px`,"--button-color":b||"#ffffff","--button-bg-color":h||"transparent","--button-hover-color":u||"#ffffff","--button-hover-bg-color":f||"transparent","--button-underline-color":m||"#ff4242","--button-blur":k?`${k}px`:"0px","--button-font-size":v?`${v}px`:"1.1rem","--button-padding":y||"0.2em 0","--button-margin":w||"20px 0","--button-z-index":S||"1","--button-border-radius":T?`${T}px`:"0px","--button-font-weight":B||"500"},"data-slides":JSON.stringify(n),"data-button-style":C||"underline","data-hover-animation":j||"slide-underline"});return(0,a.jsxs)("div",{...N,children:[(0,a.jsx)("section",{className:"ad-portfolio-block__agency-section",style:{background:r||"linear-gradient(135deg, #667eea 0%, #764ba2 100%)"},children:(0,a.jsx)("div",{className:"ad-portfolio-block__agency-container",children:(0,a.jsxs)("div",{className:"ad-portfolio-block__agency-content",children:[(0,a.jsxs)("div",{className:"ad-portfolio-block__agency-text",children:[(0,a.jsxs)("div",{className:"ad-portfolio-block__agency-description",children:[(0,a.jsx)("h2",{className:"ad-portfolio-block__agency-description-title",children:o}),(0,a.jsx)("p",{className:"ad-portfolio-block__agency-description-text",children:t})]}),(0,a.jsx)("div",{className:"ad-portfolio-block__agency-cta",children:(0,a.jsxs)("button",{className:`ad-portfolio-block__view-portfolio-btn ad-portfolio-block__view-portfolio-btn--${C||"underline"} ad-portfolio-block__view-portfolio-btn--${j||"slide-underline"}`,children:[(0,a.jsx)("span",{className:"ad-portfolio-block__button-text",children:i}),(0,a.jsx)("svg",{className:"ad-portfolio-block__button-arrow",width:"24",height:"24",viewBox:"0 0 24 24",fill:"none",xmlns:"http://www.w3.org/2000/svg",children:(0,a.jsx)("path",{d:"M7 17L17 7M17 7H7M17 7V17",stroke:"currentColor",strokeWidth:"2",strokeLinecap:"round",strokeLinejoin:"round"})})]})})]}),(0,a.jsx)("div",{className:"ad-portfolio-block__agency-gallery",children:(0,a.jsx)("div",{className:"ad-portfolio-block__gallery-grid",children:n.map((e,o)=>(0,a.jsxs)("div",{className:"ad-portfolio-block__gallery-item","data-slide-index":o,children:[e.slideImg?(0,a.jsx)("img",{className:"ad-portfolio-block__gallery-img",src:e.slideImg,alt:e.slideTitle,style:{width:"100%",height:"100%",objectFit:"cover"}}):(0,a.jsx)("div",{className:"ad-portfolio-block__gallery-placeholder",children:(0,a.jsx)("span",{children:"No Image"})}),(0,a.jsx)("div",{className:"ad-portfolio-block__gallery-overlay",children:(0,a.jsx)("span",{className:"ad-portfolio-block__gallery-overlay-text",children:e.slideTitle})})]},e.id))})})]})})}),(0,a.jsx)("div",{className:"ad-portfolio-block__modal-overlay",style:{display:"none"},children:(0,a.jsxs)("div",{className:"ad-portfolio-block__modal-content",children:[(0,a.jsx)("button",{className:"ad-portfolio-block__modal-close-btn",children:(0,a.jsx)("svg",{width:"24",height:"24",viewBox:"0 0 24 24",fill:"none",xmlns:"http://www.w3.org/2000/svg",children:(0,a.jsx)("path",{d:"M18 6L6 18M6 6L18 18",stroke:"currentColor",strokeWidth:"2",strokeLinecap:"round",strokeLinejoin:"round"})})}),(0,a.jsx)("div",{className:"ad-portfolio-block__slider"})]})})]})},icon:s})}},l={};function t(e){var i=l[e];if(void 0!==i)return i.exports;var n=l[e]={exports:{}};return o[e](n,n.exports,t),n.exports}t.m=o,e=[],t.O=(o,l,i,n)=>{if(!l){var a=1/0;for(c=0;c<e.length;c++){for(var[l,i,n]=e[c],r=!0,s=0;s<l.length;s++)(!1&n||a>=n)&&Object.keys(t.O).every(e=>t.O[e](l[s]))?l.splice(s--,1):(r=!1,n<a&&(a=n));if(r){e.splice(c--,1);var d=i();void 0!==d&&(o=d)}}return o}n=n||0;for(var c=e.length;c>0&&e[c-1][2]>n;c--)e[c]=e[c-1];e[c]=[l,i,n]},t.o=(e,o)=>Object.prototype.hasOwnProperty.call(e,o),(()=>{var e={5364:0,76:0};t.O.j=o=>0===e[o];var o=(o,l)=>{var i,n,[a,r,s]=l,d=0;if(a.some(o=>0!==e[o])){for(i in r)t.o(r,i)&&(t.m[i]=r[i]);if(s)var c=s(t)}for(o&&o(l);d<a.length;d++)n=a[d],t.o(e,n)&&e[n]&&e[n][0](),e[n]=0;return t.O(c)},l=globalThis.webpackChunkadaire_blocks=globalThis.webpackChunkadaire_blocks||[];l.forEach(o.bind(null,0)),l.push=o.bind(null,l.push.bind(l))})();var i=t.O(void 0,[76],()=>t(400));i=t.O(i)})();
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/icons/portfolio.js":
+/*!********************************!*\
+  !*** ./src/icons/portfolio.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+
+
+const PortfolioIcon = () => {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("svg", {
+    width: "24",
+    height: "24",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("g", {
+      clipPath: "url(#clip0_4_33)",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+        d: "M0 5C0 2.23858 2.23858 0 5 0H19C21.7614 0 24 2.23858 24 5V19C24 21.7614 21.7614 24 19 24H5C2.23858 24 0 21.7614 0 19V5Z",
+        fill: "#F0F0F1"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+        d: "M12.9167 13.595C12.638 13.7559 12.3218 13.8406 12 13.8406C11.6782 13.8406 11.362 13.7559 11.0833 13.595L3.29167 9.13084C3.15059 9.05089 3.03325 8.93495 2.95162 8.79484C2.86998 8.65474 2.82697 8.49549 2.82697 8.33334C2.82697 8.17118 2.86998 8.01193 2.95162 7.87183C3.03325 7.73173 3.15059 7.61579 3.29167 7.53584L11.0833 3.07167C11.362 2.91076 11.6782 2.82605 12 2.82605C12.3218 2.82605 12.638 2.91076 12.9167 3.07167L20.7083 7.53584C20.8494 7.61579 20.9667 7.73173 21.0484 7.87183C21.13 8.01193 21.173 8.17118 21.173 8.33334C21.173 8.49549 21.13 8.65474 21.0484 8.79484C20.9667 8.93495 20.8494 9.05089 20.7083 9.13084L12.9167 13.595Z",
+        fill: "#F0F0F1",
+        stroke: "#FF0000",
+        strokeWidth: "1.5",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+        d: "M19.3333 14.0946L20.7083 14.8692C20.8494 14.9491 20.9667 15.0651 21.0484 15.2052C21.13 15.3453 21.173 15.5045 21.173 15.6667C21.173 15.8288 21.13 15.9881 21.0484 16.1282C20.9667 16.2683 20.8494 16.3842 20.7083 16.4642L12.9167 20.9284C12.638 21.0893 12.3218 21.174 12 21.174C11.6782 21.174 11.362 21.0893 11.0833 20.9284L3.29167 16.4642C3.15059 16.3842 3.03325 16.2683 2.95162 16.1282C2.86998 15.9881 2.82697 15.8288 2.82697 15.6667C2.82697 15.5045 2.86998 15.3453 2.95162 15.2052C3.03325 15.0651 3.15059 14.9491 3.29167 14.8692L4.66667 14.0946",
+        fill: "#F0F0F1"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+        d: "M19.3333 14.0946L20.7083 14.8692C20.8494 14.9491 20.9667 15.0651 21.0484 15.2052C21.13 15.3453 21.173 15.5045 21.173 15.6667C21.173 15.8288 21.13 15.9881 21.0484 16.1282C20.9667 16.2683 20.8494 16.3842 20.7083 16.4642L12.9167 20.9284C12.638 21.0893 12.3218 21.174 12 21.174C11.6782 21.174 11.362 21.0893 11.0833 20.9284L3.29167 16.4642C3.15059 16.3842 3.03325 16.2683 2.95162 16.1282C2.86998 15.9881 2.82697 15.8288 2.82697 15.6667C2.82697 15.5045 2.86998 15.3453 2.95162 15.2052C3.03325 15.0651 3.15059 14.9491 3.29167 14.8692L4.66667 14.0946",
+        stroke: "black",
+        strokeWidth: "1.5",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("defs", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("clipPath", {
+        id: "clip0_4_33",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+          d: "M0 5C0 2.23858 2.23858 0 5 0H19C21.7614 0 24 2.23858 24 5V19C24 21.7614 21.7614 24 19 24H5C2.23858 24 0 21.7614 0 19V5Z",
+          fill: "white"
+        })
+      })
+    })]
+  });
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PortfolioIcon);
+
+/***/ }),
+
+/***/ "./src/portfolio-block/block.json":
+/*!****************************************!*\
+  !*** ./src/portfolio-block/block.json ***!
+  \****************************************/
+/***/ ((module) => {
+
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/portfolio-block","version":"0.1.0","title":"Portfolio Block","category":"widgets","description":"A portfolio section with gallery and modal slider using GSAP animations.","example":{},"supports":{"html":false,"align":true,"alignWide":true,"anchor":true,"customClassName":true,"reusable":true},"textdomain":"portfolio-block","icon":"<svg\\r\\n\\t\\t\\twidth=\\"24\\"\\r\\n\\t\\t\\theight=\\"24\\"\\r\\n\\t\\t\\tviewBox=\\"0 0 24 24\\"\\r\\n\\t\\t\\tfill=\\"none\\"\\r\\n\\t\\t\\txmlns=\\"http://www.w3.org/2000/svg\\"\\r\\n\\t\\t>\\r\\n\\t\\t\\t<g clipPath=\\"url(#clip0_4_33)\\">\\r\\n\\t\\t\\t\\t<path\\r\\n\\t\\t\\t\\t\\td=\\"M0 5C0 2.23858 2.23858 0 5 0H19C21.7614 0 24 2.23858 24 5V19C24 21.7614 21.7614 24 19 24H5C2.23858 24 0 21.7614 0 19V5Z\\"\\r\\n\\t\\t\\t\\t\\tfill=\\"#F0F0F1\\"\\r\\n\\t\\t\\t\\t/>\\r\\n\\t\\t\\t\\t<path\\r\\n\\t\\t\\t\\t\\td=\\"M12.9167 13.595C12.638 13.7559 12.3218 13.8406 12 13.8406C11.6782 13.8406 11.362 13.7559 11.0833 13.595L3.29167 9.13084C3.15059 9.05089 3.03325 8.93495 2.95162 8.79484C2.86998 8.65474 2.82697 8.49549 2.82697 8.33334C2.82697 8.17118 2.86998 8.01193 2.95162 7.87183C3.03325 7.73173 3.15059 7.61579 3.29167 7.53584L11.0833 3.07167C11.362 2.91076 11.6782 2.82605 12 2.82605C12.3218 2.82605 12.638 2.91076 12.9167 3.07167L20.7083 7.53584C20.8494 7.61579 20.9667 7.73173 21.0484 7.87183C21.13 8.01193 21.173 8.17118 21.173 8.33334C21.173 8.49549 21.13 8.65474 21.0484 8.79484C20.9667 8.93495 20.8494 9.05089 20.7083 9.13084L12.9167 13.595Z\\"\\r\\n\\t\\t\\t\\t\\tfill=\\"#F0F0F1\\"\\r\\n\\t\\t\\t\\t\\tstroke=\\"#FF0000\\"\\r\\n\\t\\t\\t\\t\\tstrokeWidth=\\"1.5\\"\\r\\n\\t\\t\\t\\t\\tstrokeLinecap=\\"round\\"\\r\\n\\t\\t\\t\\t\\tstrokeLinejoin=\\"round\\"\\r\\n\\t\\t\\t\\t/>\\r\\n\\t\\t\\t\\t<path\\r\\n\\t\\t\\t\\t\\td=\\"M19.3333 14.0946L20.7083 14.8692C20.8494 14.9491 20.9667 15.0651 21.0484 15.2052C21.13 15.3453 21.173 15.5045 21.173 15.6667C21.173 15.8288 21.13 15.9881 21.0484 16.1282C20.9667 16.2683 20.8494 16.3842 20.7083 16.4642L12.9167 20.9284C12.638 21.0893 12.3218 21.174 12 21.174C11.6782 21.174 11.362 21.0893 11.0833 20.9284L3.29167 16.4642C3.15059 16.3842 3.03325 16.2683 2.95162 16.1282C2.86998 15.9881 2.82697 15.8288 2.82697 15.6667C2.82697 15.5045 2.86998 15.3453 2.95162 15.2052C3.03325 15.0651 3.15059 14.9491 3.29167 14.8692L4.66667 14.0946\\"\\r\\n\\t\\t\\t\\t\\tfill=\\"#F0F0F1\\"\\r\\n\\t\\t\\t\\t/>\\r\\n\\t\\t\\t\\t<path\\r\\n\\t\\t\\t\\t\\td=\\"M19.3333 14.0946L20.7083 14.8692C20.8494 14.9491 20.9667 15.0651 21.0484 15.2052C21.13 15.3453 21.173 15.5045 21.173 15.6667C21.173 15.8288 21.13 15.9881 21.0484 16.1282C20.9667 16.2683 20.8494 16.3842 20.7083 16.4642L12.9167 20.9284C12.638 21.0893 12.3218 21.174 12 21.174C11.6782 21.174 11.362 21.0893 11.0833 20.9284L3.29167 16.4642C3.15059 16.3842 3.03325 16.2683 2.95162 16.1282C2.86998 15.9881 2.82697 15.8288 2.82697 15.6667C2.82697 15.5045 2.86998 15.3453 2.95162 15.2052C3.03325 15.0651 3.15059 14.9491 3.29167 14.8692L4.66667 14.0946\\"\\r\\n\\t\\t\\t\\t\\tstroke=\\"black\\"\\r\\n\\t\\t\\t\\t\\tstrokeWidth=\\"1.5\\"\\r\\n\\t\\t\\t\\t\\tstrokeLinecap=\\"round\\"\\r\\n\\t\\t\\t\\t\\tstrokeLinejoin=\\"round\\"\\r\\n\\t\\t\\t\\t/>\\r\\n\\t\\t\\t</g>\\r\\n\\t\\t\\t<defs>\\r\\n\\t\\t\\t\\t<clipPath id=\\"clip0_4_33\\">\\r\\n\\t\\t\\t\\t\\t<path\\r\\n\\t\\t\\t\\t\\t\\td=\\"M0 5C0 2.23858 2.23858 0 5 0H19C21.7614 0 24 2.23858 24 5V19C24 21.7614 21.7614 24 19 24H5C2.23858 24 0 21.7614 0 19V5Z\\"\\r\\n\\t\\t\\t\\t\\t\\tfill=\\"white\\"\\r\\n\\t\\t\\t\\t\\t/>\\r\\n\\t\\t\\t\\t</clipPath>\\r\\n\\t\\t\\t</defs>\\r\\n\\t\\t</svg>","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js","attributes":{"agencyTitle":{"type":"string","default":"Our Work"},"agencyDescription":{"type":"string","default":"We\'ve collaborated with innovative brands and startups to create compelling visual narratives that drive engagement and deliver results. Our portfolio showcases our expertise in branding, digital design, and creative storytelling."},"ctaButtonText":{"type":"string","default":"View Full Portfolio"},"slides":{"type":"array","default":[{"id":1,"slideTitle":"Startup Nights","slideDescription":"Startup Nights is Switzerland’s leading startup event, held annually in Winterthur. Since launching in 2017, it has grown into a major two-day gathering that brings together over 8,500 founders, investors, and innovators.","slideUrl":"https://adaire.dev/ad/startup-nights/","slideTags":["Startup Ecosystem","Tech Conference","Networking Platform","Entrepreneurial Innovation"],"slideImg":"","slideImgId":0},{"id":2,"slideTitle":"APST Research","slideDescription":"A medical research company that focuses on improving the prognosis for patients afflicted with ALS/Lou Gehrig’s disease.","slideUrl":"https://adaire.dev/ad/apst","slideTags":["ALS Prognostic Platform","Medical Data Analytics","Blood Test Integration","Secure Patient Portal"],"slideImg":"","slideImgId":0},{"id":3,"slideTitle":"Future Tree","slideDescription":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit accusantium consequatur alias sequi tenetur ratione odio quis vitae ab id dolores quas quidem ipsam nesciunt, quam sed minus nihil molestiae?","slideUrl":"https://link.com","slideTags":["Monochrome","Editorial","Fashion","Visual Identity"],"slideImg":"","slideImgId":0},{"id":4,"slideTitle":"Physio und Sport","slideDescription":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit accusantium consequatur alias sequi tenetur ratione odio quis vitae ab id dolores quas quidem ipsam nesciunt, quam sed minus nihil molestiae?","slideUrl":"https://link.com","slideTags":["Monochrome","Editorial","Fashion","Visual Identity"],"slideImg":"","slideImgId":0}]},"backgroundColor":{"type":"string","default":"#667eea"},"gradientType":{"type":"string","default":"linear"},"gradientAngle":{"type":"number","default":135},"gradientColor1":{"type":"string","default":"#667eea"},"gradientColor2":{"type":"string","default":"#764ba2"},"gradientColor3":{"type":"string","default":""},"gradientStop1":{"type":"number","default":0},"gradientStop2":{"type":"number","default":100},"gradientStop3":{"type":"number","default":50},"textColor":{"type":"string","default":"#ffffff"},"titleFontSize":{"type":"number","default":40},"titleFontFamily":{"type":"string","default":"inherit"},"textFontSize":{"type":"number","default":18},"textFontFamily":{"type":"string","default":"inherit"},"slideTitleFontSize":{"type":"number","default":112},"slideDescriptionFontSize":{"type":"number","default":20},"slideTagFontSize":{"type":"number","default":20},"buttonColor":{"type":"string","default":"#ffffff"},"buttonBackgroundColor":{"type":"string","default":"transparent"},"buttonHoverColor":{"type":"string","default":"#ffffff"},"buttonHoverBackgroundColor":{"type":"string","default":"transparent"},"buttonStyle":{"type":"string","default":"underline"},"underlineColor":{"type":"string","default":"#ff4242"},"blurAmount":{"type":"number","default":0},"fontSize":{"type":"number","default":18},"showIcon":{"type":"boolean","default":true},"hoverAnimation":{"type":"string","default":"slide-underline"},"buttonPadding":{"type":"string","default":"0.2em 0"},"buttonMargin":{"type":"string","default":"20px 0"},"zIndex":{"type":"number","default":1},"borderRadius":{"type":"number","default":0},"fontWeight":{"type":"string","default":"500"}}}');
+
+/***/ }),
+
+/***/ "./src/portfolio-block/edit.js":
+/*!*************************************!*\
+  !*** ./src/portfolio-block/edit.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Edit)
+/* harmony export */ });
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_media_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/media-utils */ "@wordpress/media-utils");
+/* harmony import */ var _wordpress_media_utils__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_media_utils__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/portfolio-block/editor.scss");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
+
+
+
+
+function Edit({
+  attributes,
+  setAttributes
+}) {
+  const {
+    agencyTitle,
+    agencyDescription,
+    ctaButtonText,
+    slides,
+    backgroundColor,
+    gradientType,
+    gradientAngle,
+    gradientColor1,
+    gradientColor2,
+    gradientColor3,
+    gradientStop1,
+    gradientStop2,
+    gradientStop3,
+    textColor,
+    titleFontSize,
+    titleFontFamily,
+    textFontSize,
+    textFontFamily,
+    slideTitleFontSize,
+    slideDescriptionFontSize,
+    slideTagFontSize,
+    // Button styling attributes
+    buttonColor,
+    buttonBackgroundColor,
+    buttonHoverColor,
+    buttonHoverBackgroundColor,
+    buttonStyle,
+    underlineColor,
+    blurAmount,
+    fontSize,
+    showIcon,
+    hoverAnimation,
+    buttonPadding,
+    buttonMargin,
+    zIndex,
+    borderRadius,
+    fontWeight
+  } = attributes;
+
+  // Force re-renders when slides change
+  const [updateTrigger, setUpdateTrigger] = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useState)(0);
+  const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
+    className: "wp-block-create-block-portfolio-block",
+    style: {
+      color: textColor || "#ffffff",
+      "--title-font-size": `${titleFontSize}px`,
+      "--text-font-size": `${textFontSize}px`,
+      "--slide-title-font-size": `${slideTitleFontSize}px`,
+      "--slide-description-font-size": `${slideDescriptionFontSize}px`,
+      "--slide-tag-font-size": `${slideTagFontSize}px`,
+      // Button styling variables
+      "--button-color": buttonColor || "#ffffff",
+      "--button-bg-color": buttonBackgroundColor || "transparent",
+      "--button-hover-color": buttonHoverColor || "#ffffff",
+      "--button-hover-bg-color": buttonHoverBackgroundColor || "transparent",
+      "--button-underline-color": underlineColor || "#ff4242",
+      "--button-blur": blurAmount ? `${blurAmount}px` : "0px",
+      "--button-font-size": fontSize ? `${fontSize}px` : "1.1rem",
+      "--button-padding": buttonPadding || "0.2em 0",
+      "--button-margin": buttonMargin || "20px 0",
+      "--button-z-index": zIndex || "1",
+      "--button-border-radius": borderRadius ? `${borderRadius}px` : "0px",
+      "--button-font-weight": fontWeight || "500"
+    }
+  });
+
+  // Initialize fields for existing slides
+  (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(() => {
+    if (slides && slides.length > 0) {
+      const updatedSlides = slides.map(slide => {
+        const updatedSlide = {
+          ...slide
+        };
+        // Ensure all required fields exist
+        if (!updatedSlide.hasOwnProperty("newTagInput")) {
+          updatedSlide.newTagInput = "";
+        }
+        if (!updatedSlide.hasOwnProperty("slideTags")) {
+          updatedSlide.slideTags = [];
+        }
+        return updatedSlide;
+      });
+
+      // Only update if there are actual changes
+      if (JSON.stringify(updatedSlides) !== JSON.stringify(slides)) {
+        setAttributes({
+          slides: updatedSlides
+        });
+      }
+    }
+  }, []);
+  console.log("Block props style:", blockProps.style);
+  console.log("Current slides data:", slides);
+  const updateSlide = (index, field, value) => {
+    const newSlides = [...slides];
+    newSlides[index] = {
+      ...newSlides[index],
+      [field]: value
+    };
+    console.log("Updated slide:", index, field, value, newSlides[index]); // Debug log
+    console.log("All slides after update:", newSlides); // Debug log
+    setAttributes({
+      slides: newSlides
+    });
+  };
+  const addSlide = () => {
+    // Find the highest existing ID to avoid duplicates
+    const maxId = slides.length > 0 ? Math.max(...slides.map(slide => slide.id)) : 0;
+    const newId = maxId + 1;
+    const newSlide = {
+      id: newId,
+      slideTitle: `New Project ${newId}`,
+      slideDescription: "Add your project description here...",
+      slideUrl: "https://example.com",
+      slideTags: [],
+      newTagInput: "",
+      slideImg: "",
+      slideImgId: 0
+    };
+    console.log("Adding new slide with ID:", newId);
+    setAttributes({
+      slides: [...slides, newSlide]
+    });
+  };
+  const removeSlide = index => {
+    const newSlides = slides.filter((_, i) => i !== index);
+    setAttributes({
+      slides: newSlides
+    });
+  };
+  const updateSlideTags = (index, tagsString) => {
+    console.log("updateSlideTags called with:", tagsString);
+    const tags = tagsString.split(",").map(tag => tag.trim()).filter(tag => tag);
+    console.log("Processed tags:", tags);
+    updateSlide(index, "slideTags", tags);
+  };
+  const addTagToSlide = (index, newTag) => {
+    if (!newTag || !newTag.trim()) return;
+    const trimmedTag = newTag.trim();
+    const currentSlide = slides[index];
+
+    // Ensure slideTags exists
+    const currentTags = Array.isArray(currentSlide.slideTags) ? [...currentSlide.slideTags] : [];
+
+    // Check if tag already exists (case insensitive)
+    const tagExists = currentTags.some(tag => tag.toLowerCase() === trimmedTag.toLowerCase());
+    if (!tagExists) {
+      const newSlides = [...slides];
+      newSlides[index] = {
+        ...currentSlide,
+        slideTags: [...currentTags, trimmedTag],
+        newTagInput: ""
+      };
+      setAttributes({
+        slides: newSlides
+      });
+    }
+  };
+  const removeTagFromSlide = (index, tagToRemove) => {
+    const currentSlide = slides[index];
+    const currentTags = Array.isArray(currentSlide.slideTags) ? currentSlide.slideTags.filter(tag => tag !== tagToRemove) : [];
+    const newSlides = [...slides];
+    newSlides[index] = {
+      ...currentSlide,
+      slideTags: currentTags
+    };
+    setAttributes({
+      slides: newSlides
+    });
+  };
+
+  // Ensure all slides have the newTagInput field
+  const ensureSlideFields = (slide, index) => {
+    if (!slide.hasOwnProperty("newTagInput")) {
+      updateSlide(index, "newTagInput", "");
+    }
+    if (!slide.hasOwnProperty("slideTags")) {
+      updateSlide(index, "slideTags", []);
+    }
+  };
+  const onSelectImage = (index, media) => {
+    console.log("Selected media:", media); // Debug log
+    if (media && media.id) {
+      console.log("Setting image ID:", media.id);
+      updateSlide(index, "slideImgId", media.id);
+
+      // If we have a URL, use it immediately
+      if (media.url) {
+        console.log("Setting image URL:", media.url);
+        updateSlide(index, "slideImg", media.url);
+      } else {
+        // Fetch the URL immediately
+        console.log("Fetching image URL for ID:", media.id);
+        if (window.wp && window.wp.media) {
+          const attachment = window.wp.media.attachment(media.id);
+          attachment.fetch().then(() => {
+            const url = attachment.get("url");
+            console.log("Fetched URL:", url);
+            if (url) {
+              updateSlide(index, "slideImg", url);
+            }
+          }).catch(error => {
+            console.error("Error fetching image URL:", error);
+          });
+        }
+      }
+    } else {
+      console.log("No valid media object received");
+    }
+  };
+  const removeImage = index => {
+    updateSlide(index, "slideImg", "");
+    updateSlide(index, "slideImgId", 0);
+  };
+
+  // Function to get image URL from media ID
+  const getImageUrlFromId = mediaId => {
+    if (!mediaId) return "";
+
+    // Try to get the image URL from WordPress media library
+    if (window.wp && window.wp.media) {
+      const attachment = window.wp.media.attachment(mediaId);
+      if (attachment) {
+        attachment.fetch().then(() => {
+          console.log("Fetched attachment:", attachment);
+          return attachment.get("url");
+        });
+      }
+    }
+    return "";
+  };
+
+  // Helper function to generate gradient CSS
+  const generateGradientCSS = () => {
+    if (gradientType === "linear") {
+      if (gradientColor3) {
+        return `linear-gradient(${gradientAngle}deg, ${gradientColor1} ${gradientStop1}%, ${gradientColor2} ${gradientStop2}%, ${gradientColor3} ${gradientStop3}%)`;
+      } else {
+        return `linear-gradient(${gradientAngle}deg, ${gradientColor1} ${gradientStop1}%, ${gradientColor2} ${gradientStop2}%)`;
+      }
+    } else {
+      if (gradientColor3) {
+        return `radial-gradient(circle, ${gradientColor1} ${gradientStop1}%, ${gradientColor2} ${gradientStop2}%, ${gradientColor3} ${gradientStop3}%)`;
+      } else {
+        return `radial-gradient(circle, ${gradientColor1} ${gradientStop1}%, ${gradientColor2} ${gradientStop2}%)`;
+      }
+    }
+  };
+
+  // Helper function to update gradient
+  const updateGradient = () => {
+    const gradientCSS = generateGradientCSS();
+    setAttributes({
+      backgroundColor: gradientCSS
+    });
+  };
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Agency Section Settings", "portfolio-block"),
+        initialOpen: true,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Section Title", "portfolio-block"),
+          value: agencyTitle,
+          onChange: value => setAttributes({
+            agencyTitle: value
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextareaControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Section Description", "portfolio-block"),
+          value: agencyDescription,
+          onChange: value => setAttributes({
+            agencyDescription: value
+          }),
+          rows: 4
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("CTA Button Text", "portfolio-block"),
+          value: ctaButtonText,
+          onChange: value => setAttributes({
+            ctaButtonText: value
+          })
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Styling Options", "portfolio-block"),
+        initialOpen: true,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Background Type", "portfolio-block"),
+          value: backgroundColor?.includes("gradient") ? "gradient" : "solid",
+          options: [{
+            label: "Solid Color",
+            value: "solid"
+          }, {
+            label: "Gradient",
+            value: "gradient"
+          }],
+          onChange: value => {
+            if (value === "solid") {
+              setAttributes({
+                backgroundColor: "#667eea",
+                gradientType: "linear",
+                gradientAngle: 135,
+                gradientColor1: "#667eea",
+                gradientColor2: "#764ba2",
+                gradientColor3: "",
+                gradientStop1: 0,
+                gradientStop2: 100,
+                gradientStop3: 50
+              });
+            } else {
+              setAttributes({
+                backgroundColor: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                gradientType: "linear",
+                gradientAngle: 135,
+                gradientColor1: "#667eea",
+                gradientColor2: "#764ba2",
+                gradientColor3: "",
+                gradientStop1: 0,
+                gradientStop2: 100,
+                gradientStop3: 50
+              });
+            }
+          }
+        }), (!backgroundColor || !backgroundColor.includes("gradient")) && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPicker, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Background Color", "portfolio-block"),
+            color: backgroundColor,
+            onChangeComplete: color => setAttributes({
+              backgroundColor: color.hex
+            }),
+            disableAlpha: true
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            style: {
+              background: backgroundColor || "#667eea",
+              padding: "10px",
+              borderRadius: "4px",
+              marginTop: "10px",
+              border: "2px solid #ddd",
+              textAlign: "center",
+              color: "#fff",
+              fontWeight: "bold",
+              textShadow: "1px 1px 2px rgba(0,0,0,0.5)"
+            },
+            children: "Current Background Preview"
+          })]
+        }), backgroundColor && backgroundColor.includes("gradient") && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gradient Type", "portfolio-block"),
+            value: gradientType,
+            options: [{
+              label: "Linear",
+              value: "linear"
+            }, {
+              label: "Radial",
+              value: "radial"
+            }],
+            onChange: value => {
+              setAttributes({
+                gradientType: value
+              });
+              updateGradient();
+            }
+          }), gradientType === "linear" && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gradient Angle", "portfolio-block"),
+            value: gradientAngle,
+            onChange: value => {
+              setAttributes({
+                gradientAngle: value
+              });
+              updateGradient();
+            },
+            min: 0,
+            max: 360,
+            step: 1
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+            style: {
+              marginTop: "15px",
+              padding: "10px",
+              border: "1px solid #ddd",
+              borderRadius: "4px"
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
+              style: {
+                margin: "0 0 10px 0"
+              },
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Gradient Colors", "portfolio-block")
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPicker, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color 1", "portfolio-block"),
+              color: gradientColor1,
+              onChangeComplete: color => {
+                setAttributes({
+                  gradientColor1: color.hex
+                });
+                updateGradient();
+              },
+              disableAlpha: true
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color 1 Stop (%)", "portfolio-block"),
+              value: gradientStop1,
+              onChange: value => {
+                setAttributes({
+                  gradientStop1: value
+                });
+                updateGradient();
+              },
+              min: 0,
+              max: 100,
+              step: 1
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPicker, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color 2", "portfolio-block"),
+              color: gradientColor2,
+              onChangeComplete: color => {
+                setAttributes({
+                  gradientColor2: color.hex
+                });
+                updateGradient();
+              },
+              disableAlpha: true
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color 2 Stop (%)", "portfolio-block"),
+              value: gradientStop2,
+              onChange: value => {
+                setAttributes({
+                  gradientStop2: value
+                });
+                updateGradient();
+              },
+              min: 0,
+              max: 100,
+              step: 1
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+              label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Add Third Color", "portfolio-block"),
+              checked: !!gradientColor3,
+              onChange: checked => {
+                if (checked) {
+                  setAttributes({
+                    gradientColor3: "#f093fb",
+                    gradientStop3: 50
+                  });
+                } else {
+                  setAttributes({
+                    gradientColor3: "",
+                    gradientStop3: 50
+                  });
+                }
+                updateGradient();
+              }
+            }), gradientColor3 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPicker, {
+                label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color 3", "portfolio-block"),
+                color: gradientColor3,
+                onChangeComplete: color => {
+                  setAttributes({
+                    gradientColor3: color.hex
+                  });
+                  updateGradient();
+                },
+                disableAlpha: true
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+                label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Color 3 Stop (%)", "portfolio-block"),
+                value: gradientStop3,
+                onChange: value => {
+                  setAttributes({
+                    gradientStop3: value
+                  });
+                  updateGradient();
+                },
+                min: 0,
+                max: 100,
+                step: 1
+              })]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            style: {
+              background: generateGradientCSS(),
+              padding: "10px",
+              borderRadius: "4px",
+              marginTop: "10px",
+              border: "2px solid #ddd",
+              textAlign: "center",
+              color: "#fff",
+              fontWeight: "bold",
+              textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
+              minHeight: "40px"
+            },
+            children: "Current Gradient Preview"
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPicker, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Color", "portfolio-block"),
+          color: textColor,
+          onChangeComplete: color => setAttributes({
+            textColor: color.hex
+          }),
+          disableAlpha: true
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Title Font Size", "portfolio-block"),
+          value: titleFontSize,
+          onChange: value => setAttributes({
+            titleFontSize: value
+          }),
+          min: 20,
+          max: 80
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Text Font Size", "portfolio-block"),
+          value: textFontSize,
+          onChange: value => setAttributes({
+            textFontSize: value
+          }),
+          min: 12,
+          max: 32
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide Title Font Size", "portfolio-block"),
+          value: slideTitleFontSize,
+          onChange: value => setAttributes({
+            slideTitleFontSize: value
+          }),
+          min: 40,
+          max: 200
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide Description Font Size", "portfolio-block"),
+          value: slideDescriptionFontSize,
+          onChange: value => setAttributes({
+            slideDescriptionFontSize: value
+          }),
+          min: 12,
+          max: 40
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide Tag Font Size", "portfolio-block"),
+          value: slideTagFontSize,
+          onChange: value => setAttributes({
+            slideTagFontSize: value
+          }),
+          min: 12,
+          max: 40
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+        title: "Button Styling",
+        initialOpen: false,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.BaseControl, {
+          label: "Button Color",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPicker, {
+            color: buttonColor,
+            onChangeComplete: color => setAttributes({
+              buttonColor: color.hex
+            }),
+            disableAlpha: true
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.BaseControl, {
+          label: "Button Background Color",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPicker, {
+            color: buttonBackgroundColor,
+            onChangeComplete: color => setAttributes({
+              buttonBackgroundColor: color.hex
+            }),
+            disableAlpha: true
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.BaseControl, {
+          label: "Hover Text Color",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPicker, {
+            color: buttonHoverColor,
+            onChangeComplete: color => setAttributes({
+              buttonHoverColor: color.hex
+            }),
+            disableAlpha: true
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.BaseControl, {
+          label: "Hover Background Color",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPicker, {
+            color: buttonHoverBackgroundColor,
+            onChangeComplete: color => setAttributes({
+              buttonHoverBackgroundColor: color.hex
+            }),
+            disableAlpha: true
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.BaseControl, {
+          label: "Underline Color",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ColorPicker, {
+            color: underlineColor,
+            onChangeComplete: color => setAttributes({
+              underlineColor: color.hex
+            }),
+            disableAlpha: true
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+          label: "Button Style",
+          value: buttonStyle,
+          options: [{
+            label: 'Underline',
+            value: 'underline'
+          }, {
+            label: 'Background Fill',
+            value: 'fill'
+          }, {
+            label: 'Border',
+            value: 'border'
+          }, {
+            label: 'Gradient',
+            value: 'gradient'
+          }, {
+            label: 'Glass Effect',
+            value: 'glass'
+          }],
+          onChange: value => setAttributes({
+            buttonStyle: value
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+          label: "Blur Amount (px)",
+          value: blurAmount,
+          onChange: value => setAttributes({
+            blurAmount: value
+          }),
+          min: 0,
+          max: 20,
+          step: 1
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+          label: "Font Size (px)",
+          value: fontSize,
+          onChange: value => setAttributes({
+            fontSize: value
+          }),
+          min: 12,
+          max: 48,
+          step: 1
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.ToggleControl, {
+          label: "Show Icon",
+          checked: showIcon,
+          onChange: value => setAttributes({
+            showIcon: value
+          }),
+          help: showIcon ? 'Icon will be visible' : 'Icon will be hidden'
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+          label: "Hover Animation",
+          value: hoverAnimation,
+          options: [{
+            label: 'Slide Underline',
+            value: 'slide-underline'
+          }, {
+            label: 'Scale',
+            value: 'scale'
+          }, {
+            label: 'Bounce',
+            value: 'bounce'
+          }, {
+            label: 'Glow',
+            value: 'glow'
+          }, {
+            label: 'Shake',
+            value: 'shake'
+          }, {
+            label: 'None',
+            value: 'none'
+          }],
+          onChange: value => setAttributes({
+            hoverAnimation: value
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+          label: "Button Padding",
+          value: buttonPadding,
+          onChange: value => setAttributes({
+            buttonPadding: value
+          }),
+          placeholder: "e.g., 10px 20px",
+          help: "CSS padding values (e.g., 10px 20px, 1em 2em)"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+          label: "Button Margin",
+          value: buttonMargin,
+          onChange: value => setAttributes({
+            buttonMargin: value
+          }),
+          placeholder: "e.g., 20px 0",
+          help: "CSS margin values (e.g., 20px 0, 1em auto)"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+          label: "Z-Index",
+          value: zIndex,
+          onChange: value => setAttributes({
+            zIndex: value
+          }),
+          min: 0,
+          max: 100,
+          step: 1
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.RangeControl, {
+          label: "Border Radius (px)",
+          value: borderRadius,
+          onChange: value => setAttributes({
+            borderRadius: value
+          }),
+          min: 0,
+          max: 50,
+          step: 1
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+          label: "Font Weight",
+          value: fontWeight,
+          options: [{
+            label: 'Thin (100)',
+            value: '100'
+          }, {
+            label: 'Extra Light (200)',
+            value: '200'
+          }, {
+            label: 'Light (300)',
+            value: '300'
+          }, {
+            label: 'Normal (400)',
+            value: '400'
+          }, {
+            label: 'Medium (500)',
+            value: '500'
+          }, {
+            label: 'Semi Bold (600)',
+            value: '600'
+          }, {
+            label: 'Bold (700)',
+            value: '700'
+          }, {
+            label: 'Extra Bold (800)',
+            value: '800'
+          }, {
+            label: 'Black (900)',
+            value: '900'
+          }],
+          onChange: value => setAttributes({
+            fontWeight: value
+          }),
+          help: "Choose the font weight for the button text."
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Portfolio Slides", "portfolio-block"),
+        initialOpen: true,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          style: {
+            background: "#f0f6fc",
+            padding: "10px",
+            borderRadius: "4px",
+            marginBottom: "15px",
+            border: "1px solid #c3c4c7"
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("strong", {
+            children: "\uD83D\uDCA1 Tip:"
+          }), " You can add unlimited slides! All slides will be displayed in the gallery and available in the modal slider."]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          style: {
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "20px"
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
+            style: {
+              fontWeight: "bold"
+            },
+            children: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Total Slides:", "portfolio-block"), " ", slides.length]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+            variant: "primary",
+            onClick: addSlide,
+            style: {
+              backgroundColor: "#007cba",
+              borderColor: "#007cba",
+              color: "white"
+            },
+            children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("➕ Add New Slide", "portfolio-block")
+          })]
+        }), slides.map((slide, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+          style: {
+            border: "1px solid #ddd",
+            padding: "15px",
+            marginBottom: "15px",
+            borderRadius: "8px"
+          },
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+            style: {
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              marginBottom: "10px"
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("h4", {
+              style: {
+                margin: 0
+              },
+              children: [(0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide", "portfolio-block"), " ", index + 1]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+              variant: "secondary",
+              isDestructive: true,
+              onClick: () => removeSlide(index),
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Remove", "portfolio-block")
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Title", "portfolio-block"),
+            value: slide.slideTitle,
+            onChange: value => updateSlide(index, "slideTitle", value)
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextareaControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Description", "portfolio-block"),
+            value: slide.slideDescription,
+            onChange: value => updateSlide(index, "slideDescription", value),
+            rows: 3
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Project URL", "portfolio-block"),
+            value: slide.slideUrl,
+            onChange: value => updateSlide(index, "slideUrl", value)
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+              style: {
+                display: "block",
+                marginBottom: "5px",
+                fontWeight: "500"
+              },
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Tags", "portfolio-block")
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+              style: {
+                display: "flex",
+                gap: "8px",
+                marginBottom: "10px"
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.TextControl, {
+                value: slide.newTagInput || "",
+                onChange: value => updateSlide(index, "newTagInput", value),
+                onKeyDown: e => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    addTagToSlide(index, slide.newTagInput || "");
+                  }
+                },
+                placeholder: "Enter a tag...",
+                style: {
+                  flex: 1
+                }
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+                variant: "secondary",
+                onClick: () => {
+                  addTagToSlide(index, slide.newTagInput || "");
+                },
+                children: "Add Tag"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+              style: {
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "5px",
+                minHeight: "30px",
+                padding: "5px",
+                border: "1px solid #ddd",
+                borderRadius: "4px",
+                backgroundColor: "#f9f9f9"
+              },
+              children: Array.isArray(slide.slideTags) && slide.slideTags.length > 0 ? slide.slideTags.map((tag, tagIndex) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
+                style: {
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "5px",
+                  padding: "4px 8px",
+                  backgroundColor: "#007cba",
+                  color: "white",
+                  borderRadius: "12px",
+                  fontSize: "12px",
+                  fontWeight: "500"
+                },
+                children: [tag, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("button", {
+                  onClick: e => {
+                    e.preventDefault();
+                    removeTagFromSlide(index, tag);
+                  },
+                  style: {
+                    background: "none",
+                    border: "none",
+                    color: "white",
+                    cursor: "pointer",
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    padding: "0",
+                    marginLeft: "4px",
+                    lineHeight: "1"
+                  },
+                  title: "Remove tag",
+                  children: "\xD7"
+                })]
+              }, `${slide.id}-${tagIndex}`)) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                style: {
+                  color: "#666",
+                  fontStyle: "italic"
+                },
+                children: "No tags added yet"
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+              style: {
+                marginTop: "10px"
+              },
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+                variant: "secondary",
+                onClick: () => {
+                  addTagToSlide(index, "Web Design");
+                  addTagToSlide(index, "Branding");
+                  addTagToSlide(index, "UI/UX");
+                },
+                style: {
+                  marginRight: "5px"
+                },
+                children: "Add Sample Tags"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+                variant: "secondary",
+                isDestructive: true,
+                onClick: () => updateSlide(index, "slideTags", []),
+                children: "Clear All Tags"
+              })]
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+            style: {
+              marginTop: "10px"
+            },
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("label", {
+              style: {
+                display: "block",
+                marginBottom: "5px"
+              },
+              children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Project Image", "portfolio-block")
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_media_utils__WEBPACK_IMPORTED_MODULE_2__.MediaUpload, {
+              onSelect: media => {
+                console.log("MediaUpload onSelect called with:", media);
+                onSelectImage(index, media);
+              },
+              allowedTypes: ["image"],
+              value: slide.slideImgId,
+              render: ({
+                open
+              }) => {
+                console.log("MediaUpload render called, open function:", typeof open);
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                  style: {
+                    display: "flex",
+                    gap: "10px",
+                    alignItems: "flex-start",
+                    flexWrap: "wrap"
+                  },
+                  children: slide.slideImg && slide.slideImg !== "" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+                      src: slide.slideImg,
+                      alt: "",
+                      style: {
+                        width: "60px",
+                        height: "60px",
+                        objectFit: "cover",
+                        borderRadius: "4px",
+                        flexShrink: 0
+                      }
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                      style: {
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "5px"
+                      },
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+                        variant: "secondary",
+                        onClick: open,
+                        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Change Image", "portfolio-block")
+                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+                        variant: "secondary",
+                        isDestructive: true,
+                        onClick: () => removeImage(index),
+                        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Remove", "portfolio-block")
+                      })]
+                    })]
+                  }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.Button, {
+                    variant: "secondary",
+                    onClick: open,
+                    children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Select Image", "portfolio-block")
+                  })
+                });
+              }
+            }),  true && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+              style: {
+                fontSize: "12px",
+                color: "#666",
+                marginTop: "5px"
+              },
+              children: ["Image URL: ", slide.slideImg || "None", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("br", {}), "Image ID: ", slide.slideImgId || "None"]
+            })]
+          })]
+        }, slide.id))]
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      ...blockProps,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+        className: "animation-component",
+        style: {
+          position: "relative",
+          border: "2px solid red",
+          padding: "10px",
+          minHeight: "400px"
+        },
+        onClick: e => {
+          console.log("Portfolio block clicked!", e);
+          e.stopPropagation();
+        },
+        onMouseEnter: e => {
+          console.log("Portfolio block mouse enter!", e);
+        },
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("section", {
+          className: "ad-portfolio-block__agency-section",
+          style: {
+            background: backgroundColor || "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+          },
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "ad-portfolio-block__agency-container",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+              className: "ad-portfolio-block__agency-content",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                className: "ad-portfolio-block__agency-text",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                  className: "ad-portfolio-block__agency-description",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
+                    className: "ad-portfolio-block__agency-description-title",
+                    children: agencyTitle
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+                    className: "ad-portfolio-block__agency-description-text",
+                    children: agencyDescription
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                  className: "ad-portfolio-block__agency-cta",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("button", {
+                    className: "ad-portfolio-block__view-portfolio-btn",
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                      className: "ad-portfolio-block__button-text",
+                      children: ctaButtonText
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("svg", {
+                      className: "ad-portfolio-block__button-arrow",
+                      width: "24",
+                      height: "24",
+                      viewBox: "0 0 24 24",
+                      fill: "none",
+                      xmlns: "http://www.w3.org/2000/svg",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("path", {
+                        d: "M7 17L17 7M17 7H7M17 7V17",
+                        stroke: "currentColor",
+                        strokeWidth: "2",
+                        strokeLinecap: "round",
+                        strokeLinejoin: "round"
+                      })
+                    })]
+                  })
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                className: "ad-portfolio-block__agency-gallery",
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                  className: "ad-portfolio-block__gallery-grid",
+                  children: slides.map((slide, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+                    className: "ad-portfolio-block__gallery-item",
+                    children: [slide.slideImg && slide.slideImg !== "" ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("img", {
+                      className: "ad-portfolio-block__gallery-img",
+                      src: slide.slideImg,
+                      alt: slide.slideTitle,
+                      style: {
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover"
+                      }
+                    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                      className: "ad-portfolio-block__gallery-placeholder",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("No Image", "portfolio-block")
+                      })
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+                      className: "ad-portfolio-block__gallery-overlay",
+                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+                        className: "ad-portfolio-block__gallery-overlay-text",
+                        children: slide.slideTitle
+                      })
+                    })]
+                  }, slide.id))
+                })
+              })]
+            })
+          })
+        })
+      })
+    })]
+  });
+}
+
+/***/ }),
+
+/***/ "./src/portfolio-block/editor.scss":
+/*!*****************************************!*\
+  !*** ./src/portfolio-block/editor.scss ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/portfolio-block/index.js":
+/*!**************************************!*\
+  !*** ./src/portfolio-block/index.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style.scss */ "./src/portfolio-block/style.scss");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/portfolio-block/edit.js");
+/* harmony import */ var _save__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./save */ "./src/portfolio-block/save.js");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block.json */ "./src/portfolio-block/block.json");
+/* harmony import */ var _icons_portfolio__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../icons/portfolio */ "./src/icons/portfolio.js");
+/**
+ * Registers a new block provided a unique name and an object defining its behavior.
+ *
+ * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
+ */
+
+
+/**
+ * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
+ * All files containing `style` keyword are bundled together. The code used
+ * gets applied both to the front of your site and to the editor.
+ *
+ * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
+ */
+
+
+/**
+ * Internal dependencies
+ */
+
+
+
+
+// Import icon directly
+
+
+/**
+ * Register the portfolio block
+ */
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_4__.name, {
+  /**
+   * @see ./edit.js
+   */
+  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
+  /**
+   * @see ./save.js
+   */
+  save: _save__WEBPACK_IMPORTED_MODULE_3__["default"],
+  icon: _icons_portfolio__WEBPACK_IMPORTED_MODULE_5__["default"]
+});
+
+/***/ }),
+
+/***/ "./src/portfolio-block/save.js":
+/*!*************************************!*\
+  !*** ./src/portfolio-block/save.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ save)
+/* harmony export */ });
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function save({
+  attributes
+}) {
+  const {
+    agencyTitle,
+    agencyDescription,
+    ctaButtonText,
+    slides,
+    backgroundColor,
+    textColor,
+    titleFontSize,
+    textFontSize,
+    slideTitleFontSize,
+    slideDescriptionFontSize,
+    slideTagFontSize,
+    // Button styling attributes
+    buttonColor,
+    buttonBackgroundColor,
+    buttonHoverColor,
+    buttonHoverBackgroundColor,
+    buttonStyle,
+    underlineColor,
+    blurAmount,
+    fontSize,
+    showIcon,
+    hoverAnimation,
+    buttonPadding,
+    buttonMargin,
+    zIndex,
+    borderRadius,
+    fontWeight
+  } = attributes;
+
+  // Debug log in development
+  if (typeof console !== 'undefined' && "development" === 'development') {
+    console.log('Portfolio block save - slides:', slides);
+  }
+  const blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save({
+    className: 'ad-portfolio-block',
+    style: {
+      color: textColor || '#ffffff',
+      '--title-font-size': `${titleFontSize}px`,
+      '--text-font-size': `${textFontSize}px`,
+      '--slide-title-font-size': `${slideTitleFontSize}px`,
+      '--slide-description-font-size': `${slideDescriptionFontSize}px`,
+      '--slide-tag-font-size': `${slideTagFontSize}px`,
+      // Button styling variables
+      '--button-color': buttonColor || '#ffffff',
+      '--button-bg-color': buttonBackgroundColor || 'transparent',
+      '--button-hover-color': buttonHoverColor || '#ffffff',
+      '--button-hover-bg-color': buttonHoverBackgroundColor || 'transparent',
+      '--button-underline-color': underlineColor || '#ff4242',
+      '--button-blur': blurAmount ? `${blurAmount}px` : '0px',
+      '--button-font-size': fontSize ? `${fontSize}px` : '1.1rem',
+      '--button-padding': buttonPadding || '0.2em 0',
+      '--button-margin': buttonMargin || '20px 0',
+      '--button-z-index': zIndex || '1',
+      '--button-border-radius': borderRadius ? `${borderRadius}px` : '0px',
+      '--button-font-weight': fontWeight || '500'
+    },
+    'data-slides': JSON.stringify(slides),
+    'data-button-style': buttonStyle || 'underline',
+    'data-hover-animation': hoverAnimation || 'slide-underline'
+  });
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    ...blockProps,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("section", {
+      className: "ad-portfolio-block__agency-section",
+      style: {
+        background: backgroundColor || 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: "ad-portfolio-block__agency-container",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "ad-portfolio-block__agency-content",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+            className: "ad-portfolio-block__agency-text",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+              className: "ad-portfolio-block__agency-description",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h2", {
+                className: "ad-portfolio-block__agency-description-title",
+                children: agencyTitle
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+                className: "ad-portfolio-block__agency-description-text",
+                children: agencyDescription
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+              className: "ad-portfolio-block__agency-cta",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("button", {
+                className: `ad-portfolio-block__view-portfolio-btn ad-portfolio-block__view-portfolio-btn--${buttonStyle || 'underline'} ad-portfolio-block__view-portfolio-btn--${hoverAnimation || 'slide-underline'}`,
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                  className: "ad-portfolio-block__button-text",
+                  children: ctaButtonText
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
+                  className: "ad-portfolio-block__button-arrow",
+                  width: "24",
+                  height: "24",
+                  viewBox: "0 0 24 24",
+                  fill: "none",
+                  xmlns: "http://www.w3.org/2000/svg",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+                    d: "M7 17L17 7M17 7H7M17 7V17",
+                    stroke: "currentColor",
+                    strokeWidth: "2",
+                    strokeLinecap: "round",
+                    strokeLinejoin: "round"
+                  })
+                })]
+              })
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            className: "ad-portfolio-block__agency-gallery",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+              className: "ad-portfolio-block__gallery-grid",
+              children: slides.map((slide, index) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+                className: "ad-portfolio-block__gallery-item",
+                "data-slide-index": index,
+                children: [slide.slideImg ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+                  className: "ad-portfolio-block__gallery-img",
+                  src: slide.slideImg,
+                  alt: slide.slideTitle,
+                  style: {
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
+                  }
+                }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                  className: "ad-portfolio-block__gallery-placeholder",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                    children: "No Image"
+                  })
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+                  className: "ad-portfolio-block__gallery-overlay",
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+                    className: "ad-portfolio-block__gallery-overlay-text",
+                    children: slide.slideTitle
+                  })
+                })]
+              }, slide.id))
+            })
+          })]
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: "ad-portfolio-block__modal-overlay",
+      style: {
+        display: 'none'
+      },
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: "ad-portfolio-block__modal-content",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
+          className: "ad-portfolio-block__modal-close-btn",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("svg", {
+            width: "24",
+            height: "24",
+            viewBox: "0 0 24 24",
+            fill: "none",
+            xmlns: "http://www.w3.org/2000/svg",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("path", {
+              d: "M18 6L6 18M6 6L18 18",
+              stroke: "currentColor",
+              strokeWidth: "2",
+              strokeLinecap: "round",
+              strokeLinejoin: "round"
+            })
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "ad-portfolio-block__slider"
+        })]
+      })
+    })]
+  });
+}
+
+/***/ }),
+
+/***/ "./src/portfolio-block/style.scss":
+/*!****************************************!*\
+  !*** ./src/portfolio-block/style.scss ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "@wordpress/block-editor":
+/*!*************************************!*\
+  !*** external ["wp","blockEditor"] ***!
+  \*************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["blockEditor"];
+
+/***/ }),
+
+/***/ "@wordpress/blocks":
+/*!********************************!*\
+  !*** external ["wp","blocks"] ***!
+  \********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["blocks"];
+
+/***/ }),
+
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["components"];
+
+/***/ }),
+
+/***/ "@wordpress/element":
+/*!*********************************!*\
+  !*** external ["wp","element"] ***!
+  \*********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["element"];
+
+/***/ }),
+
+/***/ "@wordpress/i18n":
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["i18n"];
+
+/***/ }),
+
+/***/ "@wordpress/media-utils":
+/*!************************************!*\
+  !*** external ["wp","mediaUtils"] ***!
+  \************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["mediaUtils"];
+
+/***/ }),
+
+/***/ "react":
+/*!************************!*\
+  !*** external "React" ***!
+  \************************/
+/***/ ((module) => {
+
+module.exports = window["React"];
+
+/***/ }),
+
+/***/ "react/jsx-runtime":
+/*!**********************************!*\
+  !*** external "ReactJSXRuntime" ***!
+  \**********************************/
+/***/ ((module) => {
+
+module.exports = window["ReactJSXRuntime"];
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/chunk loaded */
+/******/ 	(() => {
+/******/ 		var deferred = [];
+/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
+/******/ 			if(chunkIds) {
+/******/ 				priority = priority || 0;
+/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
+/******/ 				deferred[i] = [chunkIds, fn, priority];
+/******/ 				return;
+/******/ 			}
+/******/ 			var notFulfilled = Infinity;
+/******/ 			for (var i = 0; i < deferred.length; i++) {
+/******/ 				var [chunkIds, fn, priority] = deferred[i];
+/******/ 				var fulfilled = true;
+/******/ 				for (var j = 0; j < chunkIds.length; j++) {
+/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
+/******/ 						chunkIds.splice(j--, 1);
+/******/ 					} else {
+/******/ 						fulfilled = false;
+/******/ 						if(priority < notFulfilled) notFulfilled = priority;
+/******/ 					}
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferred.splice(i--, 1)
+/******/ 					var r = fn();
+/******/ 					if (r !== undefined) result = r;
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"portfolio-block/index": 0,
+/******/ 			"portfolio-block/style-index": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var [chunkIds, moreModules, runtime] = data;
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 			return __webpack_require__.O(result);
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = globalThis["webpackChunkadaire_blocks"] = globalThis["webpackChunkadaire_blocks"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["portfolio-block/style-index"], () => (__webpack_require__("./src/portfolio-block/index.js")))
+/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+/******/ 	
+/******/ })()
+;
+//# sourceMappingURL=index.js.map
