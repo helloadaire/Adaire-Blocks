@@ -147,6 +147,13 @@ A: The plugin is optimized for performance with efficient block registration and
 
 ## Changelog
 
+### Version 1.1.5 =
+* **Overhauled** Free version generator to remove all license-related code and files
+* **Removed** Plugin Update Checker and rollback logic from FREE builds
+* **Stabilized** FREE build process by removing `prebuild` script and limiting build to enabled blocks
+* **Improved** Admin settings icons in FREE build to render exact SVGs with dashicon fallback
+* **Added** Comprehensive text section controls for Particles Block with improved alignment and positioning
+
 ### Version 1.1.4 =
 * **Fixed** Mega Menu Block limit management system - replaced hardcoded limits with proper useBlockLimits hook integration
 * **Fixed** "Increase Opacity on Scroll" functionality with immediate response and improved CSS compatibility

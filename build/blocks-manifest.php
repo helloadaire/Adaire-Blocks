@@ -1978,47 +1978,65 @@ return array(
 					array(
 						'id' => 1,
 						'title' => 'Meet the Team',
-						'description' => 'We’re a passionate team of creatives and technologists dedicated to crafting meaningful digital experiences that drive results.'
+						'description' => 'We’re a passionate team of creatives and technologists dedicated to crafting meaningful digital experiences that drive results.',
+						'appearAtPercent' => 0,
+						'disappearAtPercent' => 20
 					),
 					array(
 						'id' => 1,
 						'title' => 'Luthando',
-						'description' => 'Web Dev Lead'
+						'description' => 'Web Dev Lead',
+						'appearAtPercent' => 20,
+						'disappearAtPercent' => 35
 					),
 					array(
 						'id' => 2,
 						'title' => 'Reinhold',
-						'description' => 'Project Manager'
+						'description' => 'Project Manager',
+						'appearAtPercent' => 35,
+						'disappearAtPercent' => 50
 					),
 					array(
 						'id' => 3,
 						'title' => 'Daryn',
-						'description' => 'Project Manager'
+						'description' => 'Project Manager',
+						'appearAtPercent' => 50,
+						'disappearAtPercent' => 65
 					),
 					array(
 						'id' => 4,
 						'title' => 'Hilya',
-						'description' => 'Web Developer (WordPress, Bubble)'
+						'description' => 'Web Developer (WordPress, Bubble)',
+						'appearAtPercent' => 65,
+						'disappearAtPercent' => 75
 					),
 					array(
 						'id' => 5,
 						'title' => 'Patrick',
-						'description' => 'Web Developer (WordPress, Bubble)'
+						'description' => 'Web Developer (WordPress, Bubble)',
+						'appearAtPercent' => 75,
+						'disappearAtPercent' => 85
 					),
 					array(
 						'id' => 6,
 						'title' => 'Douglas',
-						'description' => 'Web Developer (WordPress, Custom)'
+						'description' => 'Web Developer (WordPress, Custom)',
+						'appearAtPercent' => 85,
+						'disappearAtPercent' => 92
 					),
 					array(
 						'id' => 7,
 						'title' => 'Marvel',
-						'description' => 'QA Tester'
+						'description' => 'QA Tester',
+						'appearAtPercent' => 92,
+						'disappearAtPercent' => 100
 					),
 					array(
 						'id' => 8,
 						'title' => 'Gideon',
-						'description' => 'Designer'
+						'description' => 'Designer',
+						'appearAtPercent' => 100,
+						'disappearAtPercent' => 110
 					)
 				)
 			),

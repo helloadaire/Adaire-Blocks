@@ -11,13 +11,24 @@
 			"enabled": true,
 			"upgradeMessage": "Upgrade to Premium for unlimited button styles and animations."
 		},
+		"call-to-action-block": {
+			"enabled": true,
+			"upgradeMessage": "Call to Action Block is a Free feature. Upgrade to create compelling CTAs."
+		},
 		"counter-block": {
-			"enabled": false,
+			"enabled": true,
 			"upgradeMessage": "Upgrade to Premium for advanced counter animations and features."
 		},
 		"cta-block": {
-			"enabled": false,
+			"enabled": true,
 			"upgradeMessage": "Upgrade to Premium for multiple buttons and advanced layouts."
+		},
+		"logos-block": {
+			"enabled": true,
+			"limits": {
+				"maxItems": 3
+			},
+			"upgradeMessage": "Go pro to add more logo items."
 		},
 		"testimonial-block": {
 			"enabled": true,
@@ -42,13 +53,7 @@
 			"enabled": false,
 			"upgradeMessage": "Services Block is a Premium feature. Upgrade to create professional service showcases."
 		},
-		"logos-block": {
-			"enabled": true,
-			"limits": {
-				"maxItems": 3
-			},
-			"upgradeMessage": "Go pro to add more logo items."
-		},
+
 		"posts-grid-block": {
 			"enabled": false,
 			"upgradeMessage": "Posts Grid Block is a Premium feature. Upgrade to create dynamic content grids."
@@ -62,24 +67,19 @@
 			"upgradeMessage": "Scroll Text Block is a Premium feature. Upgrade to add animated scrolling text effects."
 		},
 		"tabs-block": {
-			"enabled": true,
-			"limits": {
-				"maxItems": 3
-			},
+			"enabled": false,
+			"limits": {},
 			"upgradeMessage": "Go pro to add more tab items."
 		},
 		"tab-panel-block": {
-			"enabled": true,
+			"enabled": false,
 			"upgradeMessage": "Tab Panel Block works with the Tabs Block for creating tabbed interfaces."
 		},
 		"questions-block": {
 			"enabled": false,
 			"upgradeMessage": "Questions Block is a Premium feature. Upgrade to create interactive FAQ sections."
 		},
-		"call-to-action-block": {
-			"enabled": true,
-			"upgradeMessage": "Call to Action Block is a Free feature. Upgrade to create compelling CTAs."
-		},
+
 		"mega-menu-block": {
 			"enabled": false,
 			"upgradeMessage": "Mega Menu Block is available in the premium version."
@@ -268,10 +268,7 @@
 		"mega-menu-panel-block": {
 			"enabled": true,
 			"limits": {},
-			"features": [
-				"canvas-content",
-				"inner-blocks-support"
-			]
+			"features": ["canvas-content", "inner-blocks-support"]
 		}
 	}
 }
