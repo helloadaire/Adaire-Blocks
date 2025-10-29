@@ -4,7 +4,7 @@ Donate link: https://adaire.digital/
 Tags: blocks, gutenberg, gsap, animation, portfolio
 Requires at least: 6.7
 Tested up to: 6.8
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 Requires PHP: 7.4
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -114,6 +114,13 @@ For support, please visit our website at https://adaire.digital/ or contact us t
 
 == Changelog ==
 
+= 1.1.6 =
+* Fixed Free plugin generation process with improved build stability and error handling
+* Enhanced Mega Menu Block with refined menu item color controls and styling options
+* Improved Menu control interface with better color management and visual feedback
+* Optimized Build process for better compatibility across different WordPress environments
+* Fixed Menu item color inheritance and hover state management
+
 = 1.1.5 =
 * Overhauled Free version generator to remove all license-related code and files
 * Removed Plugin Update Checker and rollback logic from Free builds
@@ -203,6 +210,9 @@ For support, please visit our website at https://adaire.digital/ or contact us t
 * CTA Block with gradient backgrounds
 
 == Upgrade Notice ==
+
+= 1.1.6 =
+Important update with Mega Menu Block improvements including enhanced color controls and better menu item styling. Recommended upgrade for improved menu customization and build stability.
 
 = 1.1.5 =
 Important update ensuring the Free version is WordPress.org–compliant: removes license system code, update checker/rollback logic, and stabilizes Free builds. Recommended for all users distributing the Free build.

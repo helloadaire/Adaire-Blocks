@@ -20,7 +20,7 @@
 			"upgradeMessage": "Upgrade to Premium for advanced counter animations and features."
 		},
 		"cta-block": {
-			"enabled": true,
+			"enabled": false,
 			"upgradeMessage": "Upgrade to Premium for multiple buttons and advanced layouts."
 		},
 		"logos-block": {

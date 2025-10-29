@@ -1320,6 +1320,7 @@ return array(
 						'title' => 'Home',
 						'url' => '/',
 						'isBold' => false,
+						'openInNewTab' => false,
 						'canvasImageUrl' => '',
 						'canvasImageAlt' => 'Canvas Image',
 						'canvasImagePosition' => 'left',
@@ -1356,6 +1357,7 @@ return array(
 						'title' => 'Services',
 						'url' => '/services',
 						'isBold' => false,
+						'openInNewTab' => false,
 						'canvasImageUrl' => '',
 						'canvasImageAlt' => 'Canvas Image',
 						'canvasImagePosition' => 'left',
@@ -1405,10 +1407,6 @@ return array(
 										'fontSize' => 14,
 										'fontWeight' => '400',
 										'hoverColor' => '#428aff',
-										'showHoverUnderline' => true,
-										'underlineWidth' => 2,
-										'underlineColor' => '#428aff',
-										'underlineBorderRadius' => 0,
 										'children' => array(
 											
 										)
@@ -1421,10 +1419,6 @@ return array(
 										'fontSize' => 14,
 										'fontWeight' => '400',
 										'hoverColor' => '#428aff',
-										'showHoverUnderline' => true,
-										'underlineWidth' => 2,
-										'underlineColor' => '#428aff',
-										'underlineBorderRadius' => 0,
 										'children' => array(
 											
 										)
@@ -1437,10 +1431,6 @@ return array(
 										'fontSize' => 14,
 										'fontWeight' => '400',
 										'hoverColor' => '#428aff',
-										'showHoverUnderline' => true,
-										'underlineWidth' => 2,
-										'underlineColor' => '#428aff',
-										'underlineBorderRadius' => 0,
 										'children' => array(
 											
 										)
@@ -1468,10 +1458,6 @@ return array(
 										'fontSize' => 14,
 										'fontWeight' => '400',
 										'hoverColor' => '#428aff',
-										'showHoverUnderline' => true,
-										'underlineWidth' => 2,
-										'underlineColor' => '#428aff',
-										'underlineBorderRadius' => 0,
 										'children' => array(
 											
 										)
@@ -1484,10 +1470,6 @@ return array(
 										'fontSize' => 14,
 										'fontWeight' => '400',
 										'hoverColor' => '#428aff',
-										'showHoverUnderline' => true,
-										'underlineWidth' => 2,
-										'underlineColor' => '#428aff',
-										'underlineBorderRadius' => 0,
 										'children' => array(
 											
 										)
@@ -1500,10 +1482,6 @@ return array(
 										'fontSize' => 14,
 										'fontWeight' => '400',
 										'hoverColor' => '#428aff',
-										'showHoverUnderline' => true,
-										'underlineWidth' => 2,
-										'underlineColor' => '#428aff',
-										'underlineBorderRadius' => 0,
 										'children' => array(
 											
 										)
@@ -1531,10 +1509,6 @@ return array(
 										'fontSize' => 14,
 										'fontWeight' => '400',
 										'hoverColor' => '#428aff',
-										'showHoverUnderline' => true,
-										'underlineWidth' => 2,
-										'underlineColor' => '#428aff',
-										'underlineBorderRadius' => 0,
 										'children' => array(
 											
 										)
@@ -1547,10 +1521,6 @@ return array(
 										'fontSize' => 14,
 										'fontWeight' => '400',
 										'hoverColor' => '#428aff',
-										'showHoverUnderline' => true,
-										'underlineWidth' => 2,
-										'underlineColor' => '#428aff',
-										'underlineBorderRadius' => 0,
 										'children' => array(
 											
 										)
@@ -1563,10 +1533,6 @@ return array(
 										'fontSize' => 14,
 										'fontWeight' => '400',
 										'hoverColor' => '#428aff',
-										'showHoverUnderline' => true,
-										'underlineWidth' => 2,
-										'underlineColor' => '#428aff',
-										'underlineBorderRadius' => 0,
 										'children' => array(
 											
 										)
@@ -1580,6 +1546,7 @@ return array(
 						'title' => 'Portfolio',
 						'url' => '/portfolio',
 						'isBold' => false,
+						'openInNewTab' => false,
 						'canvasImageUrl' => '',
 						'canvasImageAlt' => 'Canvas Image',
 						'canvasImagePosition' => 'left',
@@ -1616,6 +1583,7 @@ return array(
 						'title' => 'About',
 						'url' => '/about',
 						'isBold' => false,
+						'openInNewTab' => false,
 						'canvasImageUrl' => '',
 						'canvasImageAlt' => 'Canvas Image',
 						'canvasImagePosition' => 'left',
@@ -1652,6 +1620,7 @@ return array(
 						'title' => 'Contact',
 						'url' => '/contact',
 						'isBold' => false,
+						'openInNewTab' => false,
 						'canvasImageUrl' => '',
 						'canvasImageAlt' => 'Canvas Image',
 						'canvasImagePosition' => 'left',
@@ -1729,37 +1698,39 @@ return array(
 				'type' => 'boolean',
 				'default' => true
 			),
-			'level2UnderlineWidth' => array(
-				'type' => 'number',
-				'default' => 2
-			),
-			'level2UnderlineColor' => array(
+			'level2HoverBgColor' => array(
 				'type' => 'string',
-				'default' => '#428aff'
+				'default' => 'rgba(0, 0, 0, 0.05)'
 			),
-			'level2UnderlineBorderRadius' => array(
-				'type' => 'number',
-				'default' => 0
+			'level2HoverPadding' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => 8,
+					'right' => 12,
+					'bottom' => 8,
+					'left' => 12
+				)
 			),
 			'level3HoverColor' => array(
 				'type' => 'string',
 				'default' => '#428aff'
 			),
+			'level3HoverBgColor' => array(
+				'type' => 'string',
+				'default' => 'rgba(0, 0, 0, 0.05)'
+			),
+			'level3HoverPadding' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => 8,
+					'right' => 12,
+					'bottom' => 8,
+					'left' => 12
+				)
+			),
 			'level3ShowHoverUnderline' => array(
 				'type' => 'boolean',
 				'default' => true
-			),
-			'level3UnderlineWidth' => array(
-				'type' => 'number',
-				'default' => 1
-			),
-			'level3UnderlineColor' => array(
-				'type' => 'string',
-				'default' => '#428aff'
-			),
-			'level3UnderlineBorderRadius' => array(
-				'type' => 'number',
-				'default' => 0
 			),
 			'level1FontSize' => array(
 				'type' => 'number',
@@ -1809,9 +1780,13 @@ return array(
 				'type' => 'string',
 				'default' => '#000000'
 			),
-			'canvasBorderRadius' => array(
+			'canvasImageBorderRadius' => array(
 				'type' => 'number',
 				'default' => 8
+			),
+			'menuCanvasBorderRadius' => array(
+				'type' => 'number',
+				'default' => 0
 			),
 			'menuBorderRadius' => array(
 				'type' => 'number',
@@ -1895,6 +1870,74 @@ return array(
 			'scrollBackgroundColor' => array(
 				'type' => 'string',
 				'default' => '#ffffff'
+			),
+			'menuItemsColorTop' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'menuItemsColorScroll' => array(
+				'type' => 'string',
+				'default' => '#000000'
+			),
+			'centerMenu' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'mobileMenuBgColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'mobileLevel1FontSize' => array(
+				'type' => 'number',
+				'default' => 16
+			),
+			'mobileLevel1FontWeight' => array(
+				'type' => 'string',
+				'default' => '600'
+			),
+			'mobileLevel1FontColor' => array(
+				'type' => 'string',
+				'default' => '#111111'
+			),
+			'mobileLevel2FontSize' => array(
+				'type' => 'number',
+				'default' => 15
+			),
+			'mobileLevel2FontWeight' => array(
+				'type' => 'string',
+				'default' => '500'
+			),
+			'mobileLevel2FontColor' => array(
+				'type' => 'string',
+				'default' => '#222222'
+			),
+			'mobileLevel3FontSize' => array(
+				'type' => 'number',
+				'default' => 14
+			),
+			'mobileLevel3FontWeight' => array(
+				'type' => 'string',
+				'default' => '400'
+			),
+			'mobileLevel3FontColor' => array(
+				'type' => 'string',
+				'default' => '#333333'
+			),
+			'mobileMenuItemBgColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'mobileMenuItemHoverBgColor' => array(
+				'type' => 'string',
+				'default' => '#f8f8f8'
+			),
+			'mobileChevronSize' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'mobileChevronColor' => array(
+				'type' => 'string',
+				'default' => '#666666'
 			)
 		),
 		'icon' => '<svg

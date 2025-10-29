@@ -147,6 +147,13 @@ A: The plugin is optimized for performance with efficient block registration and
 
 ## Changelog
 
+### Version 1.1.6 =
+* **Fixed** Free plugin generation process with improved build stability and error handling
+* **Enhanced** Mega Menu Block with refined menu item color controls and styling options
+* **Improved** Menu control interface with better color management and visual feedback
+* **Optimized** Build process for better compatibility across different WordPress environments
+* **Fixed** Menu item color inheritance and hover state management
+
 ### Version 1.1.5 =
 * **Overhauled** Free version generator to remove all license-related code and files
 * **Removed** Plugin Update Checker and rollback logic from FREE builds

@@ -46,6 +46,7 @@
           "title": "Home",
           "url": "/",
           "isBold": false,
+          "openInNewTab": false,
           "canvasImageUrl": "",
           "canvasImageAlt": "Canvas Image",
           "canvasImagePosition": "left",
@@ -80,6 +81,7 @@
           "title": "Services",
           "url": "/services",
           "isBold": false,
+          "openInNewTab": false,
           "canvasImageUrl": "",
           "canvasImageAlt": "Canvas Image",
           "canvasImagePosition": "left",
@@ -129,10 +131,6 @@
                   "fontSize": 14,
                   "fontWeight": "400",
                   "hoverColor": "#428aff",
-                  "showHoverUnderline": true,
-                  "underlineWidth": 2,
-                  "underlineColor": "#428aff",
-                  "underlineBorderRadius": 0,
                   "children": []
                 },
                 {
@@ -143,10 +141,6 @@
                   "fontSize": 14,
                   "fontWeight": "400",
                   "hoverColor": "#428aff",
-                  "showHoverUnderline": true,
-                  "underlineWidth": 2,
-                  "underlineColor": "#428aff",
-                  "underlineBorderRadius": 0,
                   "children": []
                 },
                 {
@@ -157,10 +151,6 @@
                   "fontSize": 14,
                   "fontWeight": "400",
                   "hoverColor": "#428aff",
-                  "showHoverUnderline": true,
-                  "underlineWidth": 2,
-                  "underlineColor": "#428aff",
-                  "underlineBorderRadius": 0,
                   "children": []
                 }
               ]
@@ -186,10 +176,6 @@
                   "fontSize": 14,
                   "fontWeight": "400",
                   "hoverColor": "#428aff",
-                  "showHoverUnderline": true,
-                  "underlineWidth": 2,
-                  "underlineColor": "#428aff",
-                  "underlineBorderRadius": 0,
                   "children": []
                 },
                 {
@@ -200,10 +186,6 @@
                   "fontSize": 14,
                   "fontWeight": "400",
                   "hoverColor": "#428aff",
-                  "showHoverUnderline": true,
-                  "underlineWidth": 2,
-                  "underlineColor": "#428aff",
-                  "underlineBorderRadius": 0,
                   "children": []
                 },
                 {
@@ -214,10 +196,6 @@
                   "fontSize": 14,
                   "fontWeight": "400",
                   "hoverColor": "#428aff",
-                  "showHoverUnderline": true,
-                  "underlineWidth": 2,
-                  "underlineColor": "#428aff",
-                  "underlineBorderRadius": 0,
                   "children": []
                 }
               ]
@@ -243,10 +221,6 @@
                   "fontSize": 14,
                   "fontWeight": "400",
                   "hoverColor": "#428aff",
-                  "showHoverUnderline": true,
-                  "underlineWidth": 2,
-                  "underlineColor": "#428aff",
-                  "underlineBorderRadius": 0,
                   "children": []
                 },
                 {
@@ -257,10 +231,6 @@
                   "fontSize": 14,
                   "fontWeight": "400",
                   "hoverColor": "#428aff",
-                  "showHoverUnderline": true,
-                  "underlineWidth": 2,
-                  "underlineColor": "#428aff",
-                  "underlineBorderRadius": 0,
                   "children": []
                 },
                 {
@@ -271,10 +241,6 @@
                   "fontSize": 14,
                   "fontWeight": "400",
                   "hoverColor": "#428aff",
-                  "showHoverUnderline": true,
-                  "underlineWidth": 2,
-                  "underlineColor": "#428aff",
-                  "underlineBorderRadius": 0,
                   "children": []
                 }
               ]
@@ -286,6 +252,7 @@
           "title": "Portfolio",
           "url": "/portfolio",
           "isBold": false,
+          "openInNewTab": false,
           "canvasImageUrl": "",
           "canvasImageAlt": "Canvas Image",
           "canvasImagePosition": "left",
@@ -320,6 +287,7 @@
           "title": "About",
           "url": "/about",
           "isBold": false,
+          "openInNewTab": false,
           "canvasImageUrl": "",
           "canvasImageAlt": "Canvas Image",
           "canvasImagePosition": "left",
@@ -354,6 +322,7 @@
           "title": "Contact",
           "url": "/contact",
           "isBold": false,
+          "openInNewTab": false,
           "canvasImageUrl": "",
           "canvasImageAlt": "Canvas Image",
           "canvasImagePosition": "left",
@@ -429,37 +398,39 @@
       "type": "boolean",
       "default": true
     },
-    "level2UnderlineWidth": {
-      "type": "number",
-      "default": 2
-    },
-    "level2UnderlineColor": {
+    "level2HoverBgColor": {
       "type": "string",
-      "default": "#428aff"
+      "default": "rgba(0, 0, 0, 0.05)"
     },
-    "level2UnderlineBorderRadius": {
-      "type": "number",
-      "default": 0
+    "level2HoverPadding": {
+      "type": "object",
+      "default": {
+        "top": 8,
+        "right": 12,
+        "bottom": 8,
+        "left": 12
+      }
     },
     "level3HoverColor": {
       "type": "string",
       "default": "#428aff"
     },
+    "level3HoverBgColor": {
+      "type": "string",
+      "default": "rgba(0, 0, 0, 0.05)"
+    },
+    "level3HoverPadding": {
+      "type": "object",
+      "default": {
+        "top": 8,
+        "right": 12,
+        "bottom": 8,
+        "left": 12
+      }
+    },
     "level3ShowHoverUnderline": {
       "type": "boolean",
       "default": true
-    },
-    "level3UnderlineWidth": {
-      "type": "number",
-      "default": 1
-    },
-    "level3UnderlineColor": {
-      "type": "string",
-      "default": "#428aff"
-    },
-    "level3UnderlineBorderRadius": {
-      "type": "number",
-      "default": 0
     },
     "level1FontSize": {
       "type": "number",
@@ -509,9 +480,13 @@
       "type": "string",
       "default": "#000000"
     },
-    "canvasBorderRadius": {
+    "canvasImageBorderRadius": {
       "type": "number",
       "default": 8
+    },
+    "menuCanvasBorderRadius": {
+      "type": "number",
+      "default": 0
     },
     "menuBorderRadius": {
       "type": "number",
@@ -595,6 +570,74 @@
     "scrollBackgroundColor": {
       "type": "string",
       "default": "#ffffff"
+    },
+    "menuItemsColorTop": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "menuItemsColorScroll": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "centerMenu": {
+      "type": "boolean",
+      "default": true
+    },
+    "mobileMenuBgColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "mobileLevel1FontSize": {
+      "type": "number",
+      "default": 16
+    },
+    "mobileLevel1FontWeight": {
+      "type": "string",
+      "default": "600"
+    },
+    "mobileLevel1FontColor": {
+      "type": "string",
+      "default": "#111111"
+    },
+    "mobileLevel2FontSize": {
+      "type": "number",
+      "default": 15
+    },
+    "mobileLevel2FontWeight": {
+      "type": "string",
+      "default": "500"
+    },
+    "mobileLevel2FontColor": {
+      "type": "string",
+      "default": "#222222"
+    },
+    "mobileLevel3FontSize": {
+      "type": "number",
+      "default": 14
+    },
+    "mobileLevel3FontWeight": {
+      "type": "string",
+      "default": "400"
+    },
+    "mobileLevel3FontColor": {
+      "type": "string",
+      "default": "#333333"
+    },
+    "mobileMenuItemBgColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "mobileMenuItemHoverBgColor": {
+      "type": "string",
+      "default": "#f8f8f8"
+    },
+    "mobileChevronSize": {
+      "type": "number",
+      "default": 20
+    },
+    "mobileChevronColor": {
+      "type": "string",
+      "default": "#666666"
     }
   },
   "icon": "<svg\r\n\t\t\twidth=\"24\"\r\n\t\t\theight=\"24\"\r\n\t\t\tviewBox=\"0 0 24 24\"\r\n\t\t\tfill=\"none\"\r\n\t\t\txmlns=\"http://www.w3.org/2000/svg\"\r\n\t\t>\r\n\t\t\t<g clip-path=\"url(#clip0_21_23)\">\r\n\t\t\t\t<rect width=\"24\" height=\"24\" rx=\"5\" fill=\"#F0F0F1\" />\r\n\t\t\t\t<g clip-path=\"url(#clip1_21_23)\">\r\n\t\t\t\t\t<path\r\n\t\t\t\t\t\td=\"M4 5H20\"\r\n\t\t\t\t\t\tstroke=\"black\"\r\n\t\t\t\t\t\tstroke-width=\"2\"\r\n\t\t\t\t\t\tstroke-linecap=\"round\"\r\n\t\t\t\t\t\tstroke-linejoin=\"round\"\r\n\t\t\t\t\t/>\r\n\t\t\t\t\t<path\r\n\t\t\t\t\t\td=\"M4 12H20\"\r\n\t\t\t\t\t\tstroke=\"#FF0000\"\r\n\t\t\t\t\t\tstroke-width=\"2\"\r\n\t\t\t\t\t\tstroke-linecap=\"round\"\r\n\t\t\t\t\t\tstroke-linejoin=\"round\"\r\n\t\t\t\t\t/>\r\n\t\t\t\t\t<path\r\n\t\t\t\t\t\td=\"M4 19H20\"\r\n\t\t\t\t\t\tstroke=\"black\"\r\n\t\t\t\t\t\tstroke-width=\"2\"\r\n\t\t\t\t\t\tstroke-linecap=\"round\"\r\n\t\t\t\t\t\tstroke-linejoin=\"round\"\r\n\t\t\t\t\t/>\r\n\t\t\t\t</g>\r\n\t\t\t</g>\r\n\t\t\t<defs>\r\n\t\t\t\t<clipPath id=\"clip0_21_23\">\r\n\t\t\t\t\t<rect width=\"24\" height=\"24\" rx=\"5\" fill=\"white\" />\r\n\t\t\t\t</clipPath>\r\n\t\t\t\t<clipPath id=\"clip1_21_23\">\r\n\t\t\t\t\t<rect width=\"24\" height=\"24\" fill=\"white\" />\r\n\t\t\t\t</clipPath>\r\n\t\t\t</defs>\r\n\t\t</svg>"
