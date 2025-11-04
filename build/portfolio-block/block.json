@@ -163,6 +163,46 @@
       "type": "number",
       "default": 20
     },
+    "agencyTitleColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "agencyTitleFontWeight": {
+      "type": "string",
+      "default": "600"
+    },
+    "agencyDescriptionColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "agencyDescriptionFontWeight": {
+      "type": "string",
+      "default": "400"
+    },
+    "modalTitleColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "modalTitleFontWeight": {
+      "type": "string",
+      "default": "700"
+    },
+    "modalDescriptionColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "modalDescriptionFontWeight": {
+      "type": "string",
+      "default": "400"
+    },
+    "modalTagColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "modalTagFontWeight": {
+      "type": "string",
+      "default": "400"
+    },
     "buttonColor": {
       "type": "string",
       "default": "#ffffff"

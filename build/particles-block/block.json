@@ -8,7 +8,8 @@
   "description": "A section with scattered images that move with scroll using GSAP.",
   "example": {},
   "supports": {
-    "html": false
+    "html": false,
+    "anchor": true
   },
   "textdomain": "particles-block",
   "editorScript": "file:./index.js",
@@ -307,6 +308,10 @@
         "startStop": 46,
         "endStop": 100
       }
+    },
+    "textAnimationDuration": {
+      "type": "number",
+      "default": 0.35
     },
     "blockId": {
       "type": "string",

@@ -83,6 +83,14 @@
 		"mega-menu-block": {
 			"enabled": false,
 			"upgradeMessage": "Mega Menu Block is available in the premium version."
+		},
+		"map-block": {
+			"enabled": false,
+			"upgradeMessage": "Map Block is available in the premium version."
+		},
+		"video-block": {
+			"enabled": true,
+			"upgradeMessage": "Map Block is available in the premium version."
 		}
 	},
 	"premium": {
@@ -269,6 +277,14 @@
 			"enabled": true,
 			"limits": {},
 			"features": ["canvas-content", "inner-blocks-support"]
+		},
+		"map-block": {
+			"enabled": true,
+			"upgradeMessage": "Map Block is available in the premium version."
+		},
+		"video-block": {
+			"enabled": true,
+			"upgradeMessage": "Map Block is available in the premium version."
 		}
 	}
 }

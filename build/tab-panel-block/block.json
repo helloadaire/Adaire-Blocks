@@ -12,7 +12,8 @@
   "supports": {
     "html": false,
     "reusable": false,
-    "inserter": false
+    "inserter": false,
+    "anchor": true
   },
   "textdomain": "tab-panel-block",
   "editorScript": "file:./index.js",

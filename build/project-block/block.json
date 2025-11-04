@@ -28,6 +28,10 @@
       "type": "string",
       "default": "#ffffff"
     },
+    "nextLabel": {
+      "type": "string",
+      "default": "Next"
+    },
     "textContent": {
       "type": "array",
       "default": [

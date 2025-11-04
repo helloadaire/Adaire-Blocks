@@ -1,0 +1,162 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/video-player-block",
+  "version": "0.1.0",
+  "title": "Video Player Block",
+  "category": "widgets",
+  "icon": "admin-settings",
+  "description": "Play videos from YouTube",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "customClassName": true
+  },
+  "textdomain": "video-player-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "attributes": {
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "containerMode": {
+      "type": "string",
+      "default": "full"
+    },
+    "containerMaxWidth": {
+      "type": "object",
+      "default": {
+        "desktop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 100,
+          "unit": "%"
+        },
+        "mobile": {
+          "value": 100,
+          "unit": "%"
+        }
+      }
+    },
+    "containerHeight": {
+      "type": "object",
+      "default": {
+        "value": 315,
+        "unit": "px"
+      }
+    },
+    "containerBorderRadius": {
+      "type": "number",
+      "default": 20
+    },
+    "marginTop": {
+      "type": "object",
+      "default": {
+        "desktop": 0,
+        "tablet": 0,
+        "mobile": 0
+      }
+    },
+    "marginRight": {
+      "type": "object",
+      "default": {
+        "desktop": 0,
+        "tablet": 0,
+        "mobile": 0
+      }
+    },
+    "marginBottom": {
+      "type": "object",
+      "default": {
+        "desktop": 0,
+        "tablet": 0,
+        "mobile": 0
+      }
+    },
+    "marginLeft": {
+      "type": "object",
+      "default": {
+        "desktop": 0,
+        "tablet": 0,
+        "mobile": 0
+      }
+    },
+    "paddingTop": {
+      "type": "object",
+      "default": {
+        "desktop": 0,
+        "tablet": 0,
+        "mobile": 0
+      }
+    },
+    "paddingRight": {
+      "type": "object",
+      "default": {
+        "desktop": 0,
+        "tablet": 0,
+        "mobile": 0
+      }
+    },
+    "paddingBottom": {
+      "type": "object",
+      "default": {
+        "desktop": 0,
+        "tablet": 0,
+        "mobile": 0
+      }
+    },
+    "paddingLeft": {
+      "type": "object",
+      "default": {
+        "desktop": 0,
+        "tablet": 0,
+        "mobile": 0
+      }
+    },
+    "videoType": {
+      "type": "string",
+      "default": "youtube"
+    },
+    "ytVideoId": {
+      "type": "string",
+      "default": "dQw4w9WgXcQ"
+    },
+    "vimeoVideoId": {
+      "type": "string",
+      "default": "1118056227"
+    },
+    "ytVideoUrl": {
+      "type": "string",
+      "default": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    "vimeoVideoUrl": {
+      "type": "string",
+      "default": "https://vimeo.com/1118056227"
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": true
+    },
+    "mute": {
+      "type": "boolean",
+      "default": true
+    },
+    "controls": {
+      "type": "boolean",
+      "default": false
+    },
+    "loop": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

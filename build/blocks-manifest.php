@@ -205,6 +205,162 @@ return array(
 			)
 		)
 	),
+	'animation-scroll-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/animation-scroll-block',
+		'version' => '0.1.0',
+		'title' => 'Animation on Scroll',
+		'category' => 'widgets',
+		'icon' => 'admin-settings',
+		'description' => 'Add scroll animations to any content with inner blocks',
+		'supports' => array(
+			'html' => false,
+			'anchor' => true,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'customClassName' => true,
+			'innerBlocks' => true
+		),
+		'textdomain' => 'animation-scroll-block',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'viewScript' => 'file:./view.js',
+		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'animationType' => array(
+				'type' => 'string',
+				'default' => 'fade-in'
+			),
+			'animationDuration' => array(
+				'type' => 'number',
+				'default' => 1000
+			),
+			'animationDelay' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'animationEasing' => array(
+				'type' => 'string',
+				'default' => 'ease-out'
+			),
+			'reverseOnScrollOut' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'animationDistance' => array(
+				'type' => 'number',
+				'default' => 50
+			),
+			'flipAxis' => array(
+				'type' => 'string',
+				'default' => 'horizontal'
+			),
+			'flipDirection' => array(
+				'type' => 'string',
+				'default' => 'clockwise'
+			),
+			'threshold' => array(
+				'type' => 'number',
+				'default' => 0.2
+			),
+			'once' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'containerMode' => array(
+				'type' => 'string',
+				'default' => 'full'
+			),
+			'containerMaxWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
+					)
+				)
+			),
+			'marginTop' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginRight' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginLeft' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingTop' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingRight' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingLeft' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			)
+		)
+	),
 	'button-block' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
@@ -217,7 +373,8 @@ return array(
 			
 		),
 		'supports' => array(
-			'html' => false
+			'html' => false,
+			'anchor' => true
 		),
 		'textdomain' => 'button-block',
 		'icon' => '<svg
@@ -1272,6 +1429,202 @@ return array(
 			</defs>
 		</svg>'
 	),
+	'map-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/map-block',
+		'version' => '0.1.0',
+		'title' => 'Map Block',
+		'category' => 'widgets',
+		'icon' => 'admin-settings',
+		'description' => 'Google Maps Addresses Block',
+		'supports' => array(
+			'html' => false,
+			'anchor' => true,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'customClassName' => true
+		),
+		'textdomain' => 'map-block',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'viewScript' => 'file:./view.js',
+		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'containerMode' => array(
+				'type' => 'string',
+				'default' => 'full'
+			),
+			'containerMaxWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
+					)
+				)
+			),
+			'marginTop' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginRight' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginLeft' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingTop' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingRight' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingLeft' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'locations' => array(
+				'type' => 'array',
+				'default' => array(
+					array(
+						'id' => 1,
+						'country' => 'Namibia',
+						'addressLines' => array(
+							'8 Bell Street',
+							'Windhoek',
+							'Namibia'
+						),
+						'phone' => '+264816124071',
+						'email' => 'info@adaire.com',
+						'mapEmbedUrl' => 'https://www.google.com/maps?output=embed&q=8%20Bell%20Street%20Windhoek%20Namibia'
+					),
+					array(
+						'id' => 2,
+						'country' => 'Switzerland',
+						'addressLines' => array(
+							'Sample Street 1',
+							'Zurich',
+							'Switzerland'
+						),
+						'phone' => '+41 00 000 00 00',
+						'email' => 'info@adaire.com',
+						'mapEmbedUrl' => 'https://www.google.com/maps?output=embed&q=Zurich%20Switzerland'
+					),
+					array(
+						'id' => 3,
+						'country' => 'United Kingdom',
+						'addressLines' => array(
+							'1 Example Road',
+							'Nottingham',
+							'United Kingdom'
+						),
+						'phone' => '+44 0000 000000',
+						'email' => 'info@adaire.com',
+						'mapEmbedUrl' => 'https://www.google.com/maps?output=embed&q=Nottingham%20United%20Kingdom'
+					),
+					array(
+						'id' => 4,
+						'country' => 'Ghana',
+						'addressLines' => array(
+							'Sample Ave',
+							'Accra',
+							'Ghana'
+						),
+						'phone' => '+233 000 000 000',
+						'email' => 'info@adaire.com',
+						'mapEmbedUrl' => 'https://www.google.com/maps?output=embed&q=Accra%20Ghana'
+					)
+				)
+			),
+			'activeIndex' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'navTextColor' => array(
+				'type' => 'string',
+				'default' => '#333333'
+			),
+			'navActiveBgColor' => array(
+				'type' => 'string',
+				'default' => '#d52d3a'
+			),
+			'navActiveTextColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'navFontWeight' => array(
+				'type' => 'string',
+				'default' => '600'
+			),
+			'singleMapMode' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'flyDuration' => array(
+				'type' => 'number',
+				'default' => 0.9
+			)
+		)
+	),
 	'mega-menu-block' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
@@ -1995,7 +2348,8 @@ return array(
 			
 		),
 		'supports' => array(
-			'html' => false
+			'html' => false,
+			'anchor' => true
 		),
 		'textdomain' => 'particles-block',
 		'editorScript' => 'file:./index.js',
@@ -2295,6 +2649,10 @@ return array(
 					'endStop' => 100
 				)
 			),
+			'textAnimationDuration' => array(
+				'type' => 'number',
+				'default' => 0.35
+			),
 			'blockId' => array(
 				'type' => 'string',
 				'default' => ''
@@ -2555,6 +2913,46 @@ return array(
 			'slideTagFontSize' => array(
 				'type' => 'number',
 				'default' => 20
+			),
+			'agencyTitleColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'agencyTitleFontWeight' => array(
+				'type' => 'string',
+				'default' => '600'
+			),
+			'agencyDescriptionColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'agencyDescriptionFontWeight' => array(
+				'type' => 'string',
+				'default' => '400'
+			),
+			'modalTitleColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'modalTitleFontWeight' => array(
+				'type' => 'string',
+				'default' => '700'
+			),
+			'modalDescriptionColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'modalDescriptionFontWeight' => array(
+				'type' => 'string',
+				'default' => '400'
+			),
+			'modalTagColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'modalTagFontWeight' => array(
+				'type' => 'string',
+				'default' => '400'
 			),
 			'buttonColor' => array(
 				'type' => 'string',
@@ -2984,6 +3382,10 @@ return array(
 			'textColor' => array(
 				'type' => 'string',
 				'default' => '#ffffff'
+			),
+			'nextLabel' => array(
+				'type' => 'string',
+				'default' => 'Next'
 			),
 			'textContent' => array(
 				'type' => 'array',
@@ -3751,7 +4153,8 @@ return array(
 		'supports' => array(
 			'html' => false,
 			'reusable' => false,
-			'inserter' => false
+			'inserter' => false,
+			'anchor' => true
 		),
 		'textdomain' => 'tab-panel-block',
 		'editorScript' => 'file:./index.js',
@@ -4029,7 +4432,8 @@ return array(
 			
 		),
 		'supports' => array(
-			'html' => false
+			'html' => false,
+			'anchor' => true
 		),
 		'textdomain' => 'testimonial-block',
 		'icon' => '<svg
@@ -4523,5 +4927,167 @@ return array(
 				strokeLinejoin="round"
 			/>
 		</svg>'
+	),
+	'video-player-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/video-player-block',
+		'version' => '0.1.0',
+		'title' => 'Video Player Block',
+		'category' => 'widgets',
+		'icon' => 'admin-settings',
+		'description' => 'Play videos from YouTube',
+		'supports' => array(
+			'html' => false,
+			'anchor' => true,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'customClassName' => true
+		),
+		'textdomain' => 'video-player-block',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'viewScript' => 'file:./view.js',
+		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'containerMode' => array(
+				'type' => 'string',
+				'default' => 'full'
+			),
+			'containerMaxWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
+					)
+				)
+			),
+			'containerHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'value' => 315,
+					'unit' => 'px'
+				)
+			),
+			'containerBorderRadius' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'marginTop' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginRight' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginLeft' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingTop' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingRight' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingLeft' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'videoType' => array(
+				'type' => 'string',
+				'default' => 'youtube'
+			),
+			'ytVideoId' => array(
+				'type' => 'string',
+				'default' => 'dQw4w9WgXcQ'
+			),
+			'vimeoVideoId' => array(
+				'type' => 'string',
+				'default' => '1118056227'
+			),
+			'ytVideoUrl' => array(
+				'type' => 'string',
+				'default' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+			),
+			'vimeoVideoUrl' => array(
+				'type' => 'string',
+				'default' => 'https://vimeo.com/1118056227'
+			),
+			'autoplay' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'mute' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'controls' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'loop' => array(
+				'type' => 'boolean',
+				'default' => true
+			)
+		)
 	)
 );

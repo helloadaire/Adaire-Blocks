@@ -9,7 +9,9 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 ### Available Blocks
 
 - **Accordion Block** - Create collapsible content sections with smooth animations, customizable styling, and responsive design
+- **Animation on Scroll Block** - Complete control over scroll-triggered animations with 12 animation types, configurable distance, flip options, and live editor preview
 - **Button Block** - Create customizable buttons with hover animations, multiple styles, and advanced styling options
+- **Map Block** - Display multiple locations with Google Maps integration, Leaflet fly mode, and interactive navigation
 - **Call to Action Block** - Build powerful call-to-action sections with animated carousels and gradient backgrounds
 - **Container Block** - Create flexible layout containers with constrained/full-width options and responsive settings
 - **CTA Block** - Build call-to-action sections with animated carousels and gradient backgrounds
@@ -24,6 +26,7 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 - **Tabs Block** - Create tabbed content sections with smooth GSAP animations, vertical/horizontal layouts, and customizable styling
 - **Testimonial Block** - Showcase client testimonials with customizable carousels and professional layouts
 - **Video Hero Block** - Create stunning video hero sections with YouTube/Vimeo integration, smooth transitions, and customizable overlays
+- **Video Player Block** - Embed YouTube and Vimeo videos with smart URL parsing, flexible playback controls, and responsive container options
 
 ## Technical Features
 
@@ -57,9 +60,9 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 
 Once activated, you'll find all Adaire Blocks in the Gutenberg block inserter under their respective categories:
 
-- **Media**: Video Hero Block, Logos Block
+- **Media**: Video Hero Block, Video Player Block, Logos Block
 - **Design**: Container Block, Accordion Block, Tabs Block
-- **Widgets**: Portfolio, Services, Project, Questions, Scroll Text, Particles, Button, CTA, Call to Action, Testimonial, Posts Grid
+- **Widgets**: Portfolio, Services, Project, Questions, Scroll Text, Particles, Button, CTA, Call to Action, Testimonial, Posts Grid, Animation on Scroll, Map Block
 - **Text**: Scroll Text Block
 
 Each block comes with extensive customization options accessible through the block editor sidebar, including:
@@ -146,6 +149,28 @@ A: Yes, each block instance is independent and can be customized separately thro
 A: The plugin is optimized for performance with efficient block registration and lazy loading of animation scripts. GSAP animations are hardware-accelerated for smooth performance.
 
 ## Changelog
+
+### Version 1.1.7 =
+* **Added** Animation on Scroll Block - Complete control over scroll-triggered animations
+* **Added** Video Player Block - Embed YouTube and Vimeo videos with smart URL parsing and flexible controls
+* **Added** Map Block - Display multiple locations with Google Maps integration and Leaflet fly mode
+* **Added** 12 animation types (fade, fly, grow, shrink, bounce, flip, rotate, blur)
+* **Added** Configurable animation distance for fly/fade animations (0-300px)
+* **Added** Flip axis controls (horizontal/vertical) and direction (clockwise/anti-clockwise)
+* **Added** Rotate animation type with customizable easing and duration
+* **Added** Live editor preview for real-time animation testing
+* **Added** Bidirectional reversal when scrolling in either direction
+* **Added** YouTube and Vimeo video embedding with automatic ID extraction from various URL formats
+* **Added** Video playback controls (autoplay, mute, controls, loop) for Video Player Block
+* **Added** Customizable container height and border radius for Video Player Block
+* **Added** Multiple location support for Map Block with country, address, phone, and email
+* **Added** Leaflet.js integration for smooth map fly animations between locations
+* **Added** Coordinate-based map navigation with latitude/longitude support
+* **Added** Customizable map appearance (navigation colors, font weight, fly speed)
+* **Added** Two display modes for Map Block (single map fly mode or multiple maps)
+* **Fixed** Threshold and delay interaction conflicts with smart race condition prevention
+* **Fixed** Flip perspective to prevent element overflow on page
+* **Fixed** Fade-left and fade-right reversal behavior
 
 ### Version 1.1.6 =
 * **Fixed** Free plugin generation process with improved build stability and error handling
