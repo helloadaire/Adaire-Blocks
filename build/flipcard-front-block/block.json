@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/flipcard-front-block",
+  "version": "0.1.0",
+  "title": "Flip Card Front",
+  "category": "widgets",
+  "parent": [
+    "create-block/flipcard-block"
+  ],
+  "description": "Content area for the front of a flip card.",
+  "supports": {
+    "html": false,
+    "reusable": false,
+    "inserter": false,
+    "anchor": false
+  },
+  "textdomain": "flipcard-front-block",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "attributes": {}
+}

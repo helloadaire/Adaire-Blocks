@@ -102,6 +102,18 @@
     "fontWeight": {
       "type": "string",
       "default": "500"
+    },
+    "borderWidth": {
+      "type": "number",
+      "default": 2
+    },
+    "borderColor": {
+      "type": "string",
+      "default": "#ff4242"
+    },
+    "borderStyle": {
+      "type": "string",
+      "default": "solid"
     }
   }
 }

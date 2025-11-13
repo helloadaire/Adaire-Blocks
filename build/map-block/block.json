@@ -124,6 +124,8 @@
           ],
           "phone": "+264816124071",
           "email": "info@adaire.com",
+          "lat": -22.5609,
+          "lng": 17.0658,
           "mapEmbedUrl": "https://www.google.com/maps?output=embed&q=8%20Bell%20Street%20Windhoek%20Namibia"
         },
         {
@@ -136,6 +138,8 @@
           ],
           "phone": "+41 00 000 00 00",
           "email": "info@adaire.com",
+          "lat": 47.3769,
+          "lng": 8.5417,
           "mapEmbedUrl": "https://www.google.com/maps?output=embed&q=Zurich%20Switzerland"
         },
         {
@@ -148,6 +152,8 @@
           ],
           "phone": "+44 0000 000000",
           "email": "info@adaire.com",
+          "lat": 52.9548,
+          "lng": -1.1581,
           "mapEmbedUrl": "https://www.google.com/maps?output=embed&q=Nottingham%20United%20Kingdom"
         },
         {
@@ -160,6 +166,8 @@
           ],
           "phone": "+233 000 000 000",
           "email": "info@adaire.com",
+          "lat": 5.6037,
+          "lng": -0.187,
           "mapEmbedUrl": "https://www.google.com/maps?output=embed&q=Accra%20Ghana"
         }
       ]

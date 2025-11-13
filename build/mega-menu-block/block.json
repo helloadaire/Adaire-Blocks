@@ -390,6 +390,23 @@
       "type": "number",
       "default": 0
     },
+    "level1HoverBorderRadius": {
+      "type": "number",
+      "default": 4
+    },
+    "level1HoverBgColor": {
+      "type": "string",
+      "default": "transparent"
+    },
+    "level1HoverPadding": {
+      "type": "object",
+      "default": {
+        "top": 10,
+        "right": 5,
+        "bottom": 10,
+        "left": 5
+      }
+    },
     "level2HoverColor": {
       "type": "string",
       "default": "#428aff"
@@ -578,6 +595,26 @@
     "menuItemsColorScroll": {
       "type": "string",
       "default": "#000000"
+    },
+    "menuImageAtTop": {
+      "type": "string",
+      "default": ""
+    },
+    "menuImageAtTopAlt": {
+      "type": "string",
+      "default": "Menu Image at Top"
+    },
+    "menuImageOnScroll": {
+      "type": "string",
+      "default": ""
+    },
+    "menuImageOnScrollAlt": {
+      "type": "string",
+      "default": "Menu Image on Scroll"
+    },
+    "menuImageSize": {
+      "type": "number",
+      "default": 40
     },
     "centerMenu": {
       "type": "boolean",

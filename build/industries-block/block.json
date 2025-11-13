@@ -1,0 +1,222 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/industries-block",
+  "version": "0.1.0",
+  "title": "Industries",
+  "category": "widgets",
+  "icon": "businessman",
+  "description": "Highlight key industries with responsive tiles, icons, and rich introductory copy.",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "customClassName": true
+  },
+  "textdomain": "industries-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "attributes": {
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "containerMode": {
+      "type": "string",
+      "default": "full"
+    },
+    "containerMaxWidth": {
+      "type": "object",
+      "default": {
+        "desktop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 100,
+          "unit": "%"
+        },
+        "mobile": {
+          "value": 100,
+          "unit": "%"
+        }
+      }
+    },
+    "headerLines": {
+      "type": "array",
+      "default": [
+        {
+          "id": "line-1",
+          "text": "Sharpen your edge."
+        },
+        {
+          "id": "line-2",
+          "text": "Lead your industry."
+        },
+        {
+          "id": "line-3",
+          "text": "Build the future."
+        }
+      ]
+    },
+    "introText": {
+      "type": "string",
+      "default": "We deliver what you need to own the competitive advantage. Move first. Remain first."
+    },
+    "descriptionText": {
+      "type": "string",
+      "default": "We deliver what you need to own the competitive advantage. Move first. Remain first."
+    },
+    "featureImage": {
+      "type": "object",
+      "default": {
+        "id": 0,
+        "url": "",
+        "alt": ""
+      }
+    },
+    "showTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "showIntroText": {
+      "type": "boolean",
+      "default": true
+    },
+    "showImage": {
+      "type": "boolean",
+      "default": true
+    },
+    "hideFirstTwoIndustries": {
+      "type": "boolean",
+      "default": false
+    },
+    "industries": {
+      "type": "array",
+      "default": [
+        {
+          "id": "industry-1",
+          "icon": "bi bi-basket2",
+          "label": "Consumer",
+          "linkUrl": "",
+          "openInNewTab": false
+        },
+        {
+          "id": "industry-2",
+          "icon": "bi bi-bank",
+          "label": "Financial Services",
+          "linkUrl": "",
+          "openInNewTab": false
+        },
+        {
+          "id": "industry-3",
+          "icon": "bi bi-activity",
+          "label": "Healthcare",
+          "linkUrl": "",
+          "openInNewTab": false
+        },
+        {
+          "id": "industry-4",
+          "icon": "bi bi-newspaper",
+          "label": "Telecommunications, media and technology",
+          "linkUrl": "",
+          "openInNewTab": false
+        },
+        {
+          "id": "industry-5",
+          "icon": "bi bi-activity",
+          "label": "Transportation & logistics",
+          "linkUrl": "",
+          "openInNewTab": false
+        },
+        {
+          "id": "industry-6",
+          "icon": "bi bi-basket2",
+          "label": "Private Equity",
+          "linkUrl": "",
+          "openInNewTab": false
+        }
+      ]
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "headerColor": {
+      "type": "string",
+      "default": "#ff4e4e"
+    },
+    "headerAccentColor": {
+      "type": "string",
+      "default": "#7e7c8a"
+    },
+    "headerFontWeight": {
+      "type": "string",
+      "default": "400"
+    },
+    "headerFontSize": {
+      "type": "number",
+      "default": 60
+    },
+    "introFontSize": {
+      "type": "number",
+      "default": 20
+    },
+    "descriptionFontSize": {
+      "type": "number",
+      "default": 24
+    },
+    "chevronColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "chevronSize": {
+      "type": "number",
+      "default": 24
+    },
+    "tilePadding": {
+      "type": "number",
+      "default": 70
+    },
+    "tilePaddingMobile": {
+      "type": "number",
+      "default": 10
+    },
+    "tileBorderRadius": {
+      "type": "number",
+      "default": 8
+    },
+    "tileBorderColor": {
+      "type": "string",
+      "default": "#bab8c6"
+    },
+    "tileIconColor": {
+      "type": "string",
+      "default": "#3f3f3f"
+    },
+    "tileIconBackground": {
+      "type": "string",
+      "default": "#f7f6fe"
+    },
+    "tileIconSize": {
+      "type": "number",
+      "default": 35
+    },
+    "tileTitleFontSize": {
+      "type": "number",
+      "default": 30
+    },
+    "tileHoverBackground": {
+      "type": "string",
+      "default": "#ff4e4e"
+    },
+    "tileHoverTextColor": {
+      "type": "string",
+      "default": "#ffffff"
+    }
+  }
+}

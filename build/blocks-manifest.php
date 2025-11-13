@@ -499,6 +499,18 @@ return array(
 			'fontWeight' => array(
 				'type' => 'string',
 				'default' => '500'
+			),
+			'borderWidth' => array(
+				'type' => 'number',
+				'default' => 2
+			),
+			'borderColor' => array(
+				'type' => 'string',
+				'default' => '#ff4242'
+			),
+			'borderStyle' => array(
+				'type' => 'string',
+				'default' => 'solid'
 			)
 		)
 	),
@@ -1082,7 +1094,8 @@ return array(
 			'alignWide' => true,
 			'anchor' => true,
 			'customClassName' => true,
-			'reusable' => true
+			'reusable' => true,
+			'innerBlocks' => true
 		),
 		'textdomain' => 'cta-block',
 		'editorScript' => 'file:./index.js',
@@ -1260,6 +1273,561 @@ return array(
 				</clipPath>
 			</defs>
 		</svg>'
+	),
+	'flipcard-back-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/flipcard-back-block',
+		'version' => '0.1.0',
+		'title' => 'Flip Card Back',
+		'category' => 'widgets',
+		'parent' => array(
+			'create-block/flipcard-block'
+		),
+		'description' => 'Content area for the back of a flip card.',
+		'supports' => array(
+			'html' => false,
+			'reusable' => false,
+			'inserter' => false,
+			'anchor' => false
+		),
+		'textdomain' => 'flipcard-back-block',
+		'editorScript' => 'file:./index.js',
+		'style' => 'file:./style-index.css',
+		'attributes' => array(
+			
+		)
+	),
+	'flipcard-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/flipcard-block',
+		'version' => '0.1.0',
+		'title' => 'Flip Card',
+		'category' => 'widgets',
+		'icon' => 'admin-page',
+		'description' => 'A card that flips on hover, allowing you to add blocks on both the front and back sides.',
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false,
+			'anchor' => true,
+			'customClassName' => true,
+			'align' => array(
+				'wide',
+				'full'
+			)
+		),
+		'textdomain' => 'flipcard-block',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'width' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => array(
+						'value' => 300,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
+					)
+				)
+			),
+			'height' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => array(
+						'value' => 300,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 300,
+						'unit' => 'px'
+					),
+					'mobile' => array(
+						'value' => 250,
+						'unit' => 'px'
+					)
+				)
+			),
+			'flipDirection' => array(
+				'type' => 'string',
+				'default' => 'horizontal'
+			),
+			'animationDuration' => array(
+				'type' => 'number',
+				'default' => 0.6
+			),
+			'animationEasing' => array(
+				'type' => 'string',
+				'default' => 'ease-in-out'
+			),
+			'frontBackgroundColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'backBackgroundColor' => array(
+				'type' => 'string',
+				'default' => '#f5f5f5'
+			),
+			'frontBorderColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'frontBorderWidth' => array(
+				'type' => 'number',
+				'default' => null
+			),
+			'backBorderColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'backBorderWidth' => array(
+				'type' => 'number',
+				'default' => null
+			),
+			'borderRadius' => array(
+				'type' => 'number',
+				'default' => 8
+			),
+			'padding' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'shadowIntensity' => array(
+				'type' => 'number',
+				'default' => 0.1
+			)
+		)
+	),
+	'flipcard-front-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/flipcard-front-block',
+		'version' => '0.1.0',
+		'title' => 'Flip Card Front',
+		'category' => 'widgets',
+		'parent' => array(
+			'create-block/flipcard-block'
+		),
+		'description' => 'Content area for the front of a flip card.',
+		'supports' => array(
+			'html' => false,
+			'reusable' => false,
+			'inserter' => false,
+			'anchor' => false
+		),
+		'textdomain' => 'flipcard-front-block',
+		'editorScript' => 'file:./index.js',
+		'style' => 'file:./style-index.css',
+		'attributes' => array(
+			
+		)
+	),
+	'icon-box-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/icon-box-block',
+		'version' => '0.1.0',
+		'title' => 'Icon Box Block',
+		'category' => 'widgets',
+		'icon' => '<svg
+			width="24"
+			height="24"
+			viewBox="0 0 24 24"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+		>
+			<rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2" fill="none"/>
+			<path d="M8 12h8M12 8v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+		</svg>',
+		'description' => 'Display an icon with customizable styling options using UXWing icons.',
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false,
+			'anchor' => true,
+			'align' => array(
+				'left',
+				'center',
+				'right'
+			),
+			'customClassName' => true
+		),
+		'textdomain' => 'icon-box-block',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'iconSvg' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'iconName' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'chosenIcon' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'iconSize' => array(
+				'type' => 'number',
+				'default' => 48
+			),
+			'iconColor' => array(
+				'type' => 'string',
+				'default' => '#333333'
+			),
+			'iconHoverColor' => array(
+				'type' => 'string',
+				'default' => '#000000'
+			),
+			'backgroundColor' => array(
+				'type' => 'string',
+				'default' => 'transparent'
+			),
+			'backgroundHoverColor' => array(
+				'type' => 'string',
+				'default' => 'transparent'
+			),
+			'padding' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => '20px',
+					'right' => '20px',
+					'bottom' => '20px',
+					'left' => '20px'
+				)
+			),
+			'borderRadius' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'borderWidth' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'borderColor' => array(
+				'type' => 'string',
+				'default' => '#333333'
+			),
+			'alignment' => array(
+				'type' => 'string',
+				'default' => 'center'
+			),
+			'linkUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'linkTarget' => array(
+				'type' => 'string',
+				'default' => '_self'
+			),
+			'marginTop' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginRight' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'marginLeft' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingTop' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingRight' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			),
+			'paddingLeft' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => 0,
+					'tablet' => 0,
+					'mobile' => 0
+				)
+			)
+		)
+	),
+	'industries-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/industries-block',
+		'version' => '0.1.0',
+		'title' => 'Industries',
+		'category' => 'widgets',
+		'icon' => 'businessman',
+		'description' => 'Highlight key industries with responsive tiles, icons, and rich introductory copy.',
+		'supports' => array(
+			'html' => false,
+			'anchor' => true,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'customClassName' => true
+		),
+		'textdomain' => 'industries-block',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'containerMode' => array(
+				'type' => 'string',
+				'default' => 'full'
+			),
+			'containerMaxWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
+					)
+				)
+			),
+			'headerLines' => array(
+				'type' => 'array',
+				'default' => array(
+					array(
+						'id' => 'line-1',
+						'text' => 'Sharpen your edge.'
+					),
+					array(
+						'id' => 'line-2',
+						'text' => 'Lead your industry.'
+					),
+					array(
+						'id' => 'line-3',
+						'text' => 'Build the future.'
+					)
+				)
+			),
+			'introText' => array(
+				'type' => 'string',
+				'default' => 'We deliver what you need to own the competitive advantage. Move first. Remain first.'
+			),
+			'descriptionText' => array(
+				'type' => 'string',
+				'default' => 'We deliver what you need to own the competitive advantage. Move first. Remain first.'
+			),
+			'featureImage' => array(
+				'type' => 'object',
+				'default' => array(
+					'id' => 0,
+					'url' => '',
+					'alt' => ''
+				)
+			),
+			'showTitle' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'showIntroText' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'showImage' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'hideFirstTwoIndustries' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'industries' => array(
+				'type' => 'array',
+				'default' => array(
+					array(
+						'id' => 'industry-1',
+						'icon' => 'bi bi-basket2',
+						'label' => 'Consumer',
+						'linkUrl' => '',
+						'openInNewTab' => false
+					),
+					array(
+						'id' => 'industry-2',
+						'icon' => 'bi bi-bank',
+						'label' => 'Financial Services',
+						'linkUrl' => '',
+						'openInNewTab' => false
+					),
+					array(
+						'id' => 'industry-3',
+						'icon' => 'bi bi-activity',
+						'label' => 'Healthcare',
+						'linkUrl' => '',
+						'openInNewTab' => false
+					),
+					array(
+						'id' => 'industry-4',
+						'icon' => 'bi bi-newspaper',
+						'label' => 'Telecommunications, media and technology',
+						'linkUrl' => '',
+						'openInNewTab' => false
+					),
+					array(
+						'id' => 'industry-5',
+						'icon' => 'bi bi-activity',
+						'label' => 'Transportation & logistics',
+						'linkUrl' => '',
+						'openInNewTab' => false
+					),
+					array(
+						'id' => 'industry-6',
+						'icon' => 'bi bi-basket2',
+						'label' => 'Private Equity',
+						'linkUrl' => '',
+						'openInNewTab' => false
+					)
+				)
+			),
+			'backgroundColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'headerColor' => array(
+				'type' => 'string',
+				'default' => '#ff4e4e'
+			),
+			'headerAccentColor' => array(
+				'type' => 'string',
+				'default' => '#7e7c8a'
+			),
+			'headerFontWeight' => array(
+				'type' => 'string',
+				'default' => '400'
+			),
+			'headerFontSize' => array(
+				'type' => 'number',
+				'default' => 60
+			),
+			'introFontSize' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'descriptionFontSize' => array(
+				'type' => 'number',
+				'default' => 24
+			),
+			'chevronColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'chevronSize' => array(
+				'type' => 'number',
+				'default' => 24
+			),
+			'tilePadding' => array(
+				'type' => 'number',
+				'default' => 70
+			),
+			'tilePaddingMobile' => array(
+				'type' => 'number',
+				'default' => 10
+			),
+			'tileBorderRadius' => array(
+				'type' => 'number',
+				'default' => 8
+			),
+			'tileBorderColor' => array(
+				'type' => 'string',
+				'default' => '#bab8c6'
+			),
+			'tileIconColor' => array(
+				'type' => 'string',
+				'default' => '#3f3f3f'
+			),
+			'tileIconBackground' => array(
+				'type' => 'string',
+				'default' => '#f7f6fe'
+			),
+			'tileIconSize' => array(
+				'type' => 'number',
+				'default' => 35
+			),
+			'tileTitleFontSize' => array(
+				'type' => 'number',
+				'default' => 30
+			),
+			'tileHoverBackground' => array(
+				'type' => 'string',
+				'default' => '#ff4e4e'
+			),
+			'tileHoverTextColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			)
+		)
 	),
 	'logos-block' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
@@ -1555,6 +2123,8 @@ return array(
 						),
 						'phone' => '+264816124071',
 						'email' => 'info@adaire.com',
+						'lat' => -22.5609,
+						'lng' => 17.0658,
 						'mapEmbedUrl' => 'https://www.google.com/maps?output=embed&q=8%20Bell%20Street%20Windhoek%20Namibia'
 					),
 					array(
@@ -1567,6 +2137,8 @@ return array(
 						),
 						'phone' => '+41 00 000 00 00',
 						'email' => 'info@adaire.com',
+						'lat' => 47.3769,
+						'lng' => 8.5417,
 						'mapEmbedUrl' => 'https://www.google.com/maps?output=embed&q=Zurich%20Switzerland'
 					),
 					array(
@@ -1579,6 +2151,8 @@ return array(
 						),
 						'phone' => '+44 0000 000000',
 						'email' => 'info@adaire.com',
+						'lat' => 52.9548,
+						'lng' => -1.1581,
 						'mapEmbedUrl' => 'https://www.google.com/maps?output=embed&q=Nottingham%20United%20Kingdom'
 					),
 					array(
@@ -1591,6 +2165,8 @@ return array(
 						),
 						'phone' => '+233 000 000 000',
 						'email' => 'info@adaire.com',
+						'lat' => 5.6037,
+						'lng' => -0.187,
 						'mapEmbedUrl' => 'https://www.google.com/maps?output=embed&q=Accra%20Ghana'
 					)
 				)
@@ -2043,6 +2619,23 @@ return array(
 				'type' => 'number',
 				'default' => 0
 			),
+			'level1HoverBorderRadius' => array(
+				'type' => 'number',
+				'default' => 4
+			),
+			'level1HoverBgColor' => array(
+				'type' => 'string',
+				'default' => 'transparent'
+			),
+			'level1HoverPadding' => array(
+				'type' => 'object',
+				'default' => array(
+					'top' => 10,
+					'right' => 5,
+					'bottom' => 10,
+					'left' => 5
+				)
+			),
 			'level2HoverColor' => array(
 				'type' => 'string',
 				'default' => '#428aff'
@@ -2232,6 +2825,26 @@ return array(
 				'type' => 'string',
 				'default' => '#000000'
 			),
+			'menuImageAtTop' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'menuImageAtTopAlt' => array(
+				'type' => 'string',
+				'default' => 'Menu Image at Top'
+			),
+			'menuImageOnScroll' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'menuImageOnScrollAlt' => array(
+				'type' => 'string',
+				'default' => 'Menu Image on Scroll'
+			),
+			'menuImageSize' => array(
+				'type' => 'number',
+				'default' => 40
+			),
 			'centerMenu' => array(
 				'type' => 'boolean',
 				'default' => true
@@ -2335,6 +2948,148 @@ return array(
 				</clipPath>
 			</defs>
 		</svg>'
+	),
+	'modal-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/modal-block',
+		'version' => '0.1.0',
+		'title' => 'Modal',
+		'category' => 'widgets',
+		'icon' => 'admin-settings',
+		'description' => 'A modal block with customizable trigger and content areas.',
+		'supports' => array(
+			'html' => false,
+			'anchor' => true,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'customClassName' => true
+		),
+		'textdomain' => 'modal-block',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'viewScript' => 'file:./view.js',
+		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'modalWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => array(
+						'value' => 600,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 90,
+						'unit' => '%'
+					),
+					'mobile' => array(
+						'value' => 90,
+						'unit' => '%'
+					)
+				)
+			),
+			'modalHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => array(
+						'value' => 400,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 400,
+						'unit' => 'px'
+					),
+					'mobile' => array(
+						'value' => 360,
+						'unit' => 'px'
+					)
+				)
+			),
+			'backgroundColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'overlayColor' => array(
+				'type' => 'string',
+				'default' => 'rgba(0, 0, 0, 0.6)'
+			),
+			'borderColor' => array(
+				'type' => 'string',
+				'default' => '#e0e0e0'
+			),
+			'borderWidth' => array(
+				'type' => 'number',
+				'default' => 1
+			),
+			'borderRadius' => array(
+				'type' => 'number',
+				'default' => 16
+			),
+			'padding' => array(
+				'type' => 'number',
+				'default' => 24
+			),
+			'closeButtonColor' => array(
+				'type' => 'string',
+				'default' => '#111111'
+			),
+			'closeButtonBackground' => array(
+				'type' => 'string',
+				'default' => 'rgba(255, 255, 255, 0.9)'
+			),
+			'closeButtonSize' => array(
+				'type' => 'number',
+				'default' => 36
+			)
+		)
+	),
+	'modal-content-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/modal-content-block',
+		'version' => '0.1.0',
+		'title' => 'Modal Content',
+		'category' => 'widgets',
+		'icon' => 'feedback',
+		'parent' => array(
+			'create-block/modal-block'
+		),
+		'description' => 'Defines the modal body content.',
+		'supports' => array(
+			'html' => false,
+			'inserter' => false
+		),
+		'textdomain' => 'modal-block',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css'
+	),
+	'modal-trigger-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/modal-trigger-block',
+		'version' => '0.1.0',
+		'title' => 'Modal Trigger',
+		'category' => 'widgets',
+		'icon' => 'button',
+		'parent' => array(
+			'create-block/modal-block'
+		),
+		'description' => 'Defines the trigger for opening the modal.',
+		'supports' => array(
+			'html' => false,
+			'inserter' => false
+		),
+		'textdomain' => 'modal-block',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css'
 	),
 	'particles-block' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
@@ -2724,7 +3479,8 @@ return array(
 			'alignWide' => true,
 			'anchor' => true,
 			'customClassName' => true,
-			'reusable' => true
+			'reusable' => true,
+			'innerBlocks' => true
 		),
 		'textdomain' => 'portfolio-block',
 		'icon' => '<svg
@@ -4138,6 +4894,80 @@ return array(
 				</clipPath>
 			</defs>
 		</svg>'
+	),
+	'social-banner-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/social-banner-block',
+		'version' => '0.1.0',
+		'title' => 'Social Banner Block',
+		'category' => 'widgets',
+		'icon' => 'share',
+		'description' => 'Display a sticky social media banner on the side of the screen with customizable icons, colors, and links.',
+		'example' => array(
+			
+		),
+		'supports' => array(
+			'html' => false,
+			'anchor' => true,
+			'customClassName' => true
+		),
+		'textdomain' => 'social-banner-block',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'position' => array(
+				'type' => 'string',
+				'default' => 'right'
+			),
+			'offsetFrom' => array(
+				'type' => 'string',
+				'default' => 'top'
+			),
+			'offset' => array(
+				'type' => 'number',
+				'default' => 100
+			),
+			'offsetUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'iconEntries' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			),
+			'iconSize' => array(
+				'type' => 'number',
+				'default' => 24
+			),
+			'spacing' => array(
+				'type' => 'number',
+				'default' => 10
+			),
+			'borderRadius' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'hoverAnimation' => array(
+				'type' => 'string',
+				'default' => 'up'
+			),
+			'animationDuration' => array(
+				'type' => 'number',
+				'default' => 0.3
+			),
+			'animationEasing' => array(
+				'type' => 'string',
+				'default' => 'ease'
+			)
+		)
 	),
 	'tab-panel-block' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/modal-content-block",
+  "version": "0.1.0",
+  "title": "Modal Content",
+  "category": "widgets",
+  "icon": "feedback",
+  "parent": [
+    "create-block/modal-block"
+  ],
+  "description": "Defines the modal body content.",
+  "supports": {
+    "html": false,
+    "inserter": false
+  },
+  "textdomain": "modal-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/flipcard-back-block",
+  "version": "0.1.0",
+  "title": "Flip Card Back",
+  "category": "widgets",
+  "parent": [
+    "create-block/flipcard-block"
+  ],
+  "description": "Content area for the back of a flip card.",
+  "supports": {
+    "html": false,
+    "reusable": false,
+    "inserter": false,
+    "anchor": false
+  },
+  "textdomain": "flipcard-back-block",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "attributes": {}
+}

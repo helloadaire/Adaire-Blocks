@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/modal-trigger-block",
+  "version": "0.1.0",
+  "title": "Modal Trigger",
+  "category": "widgets",
+  "icon": "button",
+  "parent": [
+    "create-block/modal-block"
+  ],
+  "description": "Defines the trigger for opening the modal.",
+  "supports": {
+    "html": false,
+    "inserter": false
+  },
+  "textdomain": "modal-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

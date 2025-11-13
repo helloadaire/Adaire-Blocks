@@ -20,7 +20,6 @@ class AdaireBlocksSettings {
         add_action('admin_menu', array($this, 'add_admin_menu'));
         add_action('admin_init', array($this, 'init_settings'));
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
-        add_action('admin_head', array($this, 'add_admin_head_styles'));
         add_action('wp_ajax_adaire_blocks_save_settings', array($this, 'ajax_save_settings'));
         add_action('wp_ajax_adaire_blocks_reset_settings', array($this, 'ajax_reset_settings'));
         add_filter('plugin_action_links', array($this, 'add_plugin_settings_link'), 10, 2);
@@ -184,45 +183,42 @@ class AdaireBlocksSettings {
      * Enqueue admin scripts and styles
      */
     public function enqueue_admin_scripts($hook) {
+        wp_register_style('adaire-blocks-admin-menu', false);
+        wp_enqueue_style('adaire-blocks-admin-menu');
+        wp_add_inline_style(
+            'adaire-blocks-admin-menu',
+            '#adminmenu .toplevel_page_adaire-blocks-settings .wp-menu-image:before,' . PHP_EOL .
+            '#adminmenu .current .toplevel_page_adaire-blocks-settings div.wp-menu-image:before,' . PHP_EOL .
+            '#adminmenu .wp-has-current-submenu .toplevel_page_adaire-blocks-settings div.wp-menu-image:before,' . PHP_EOL .
+            '#adminmenu a.current:hover .toplevel_page_adaire-blocks-settings div.wp-menu-image:before,' . PHP_EOL .
+            '#adminmenu a.wp-has-current-submenu:hover .toplevel_page_adaire-blocks-settings div.wp-menu-image:before,' . PHP_EOL .
+            '#adminmenu li.wp-has-current-submenu a:focus .toplevel_page_adaire-blocks-settings div.wp-menu-image:before,' . PHP_EOL .
+            '#adminmenu li.wp-has-current-submenu.opensub .toplevel_page_adaire-blocks-settings div.wp-menu-image:before,' . PHP_EOL .
+            '#adminmenu li.wp-has-current-submenu:hover .toplevel_page_adaire-blocks-settings div.wp-menu-image:before {' . PHP_EOL .
+            '    display: none !important;' . PHP_EOL .
+            '}'
+        );
+
         if ($hook !== 'toplevel_page_adaire-blocks-settings') {
             return;
         }
         
-        wp_enqueue_style(
+        wp_register_style(
             'adaire-blocks-admin',
             plugin_dir_url(__FILE__) . 'css/admin-settings.css',
             array(),
             '1.0.0'
         );
+        wp_enqueue_style('adaire-blocks-admin');
         
-        wp_enqueue_script(
+        wp_register_script(
             'adaire-blocks-admin',
             plugin_dir_url(__FILE__) . 'js/admin-settings.js',
             array('jquery'),
             '1.0.0',
             true
         );
-    }
-    
-    /**
-     * Add admin head styles to hide dashicons for our menu item
-     */
-    public function add_admin_head_styles() {
-        echo '<style>
-            /* Hide the dashicon overlay that appears on top of our custom SVG */
-            #adminmenu .toplevel_page_adaire-blocks-settings .wp-menu-image:before {
-                display: none !important;
-            }
-            #adminmenu .current .toplevel_page_adaire-blocks-settings div.wp-menu-image:before,
-            #adminmenu .wp-has-current-submenu .toplevel_page_adaire-blocks-settings div.wp-menu-image:before,
-            #adminmenu a.current:hover .toplevel_page_adaire-blocks-settings div.wp-menu-image:before,
-            #adminmenu a.wp-has-current-submenu:hover .toplevel_page_adaire-blocks-settings div.wp-menu-image:before,
-            #adminmenu li.wp-has-current-submenu a:focus .toplevel_page_adaire-blocks-settings div.wp-menu-image:before,
-            #adminmenu li.wp-has-current-submenu.opensub .toplevel_page_adaire-blocks-settings div.wp-menu-image:before,
-            #adminmenu li.wp-has-current-submenu:hover .toplevel_page_adaire-blocks-settings div.wp-menu-image:before {
-                display: none !important;
-            }
-        </style>';
+        wp_enqueue_script('adaire-blocks-admin');
     }
     
     /**
@@ -262,113 +258,6 @@ class AdaireBlocksSettings {
                 </svg>
                 <?php echo esc_html(get_admin_page_title()); ?>
             </h1>
-            
-            <style>
-            /* Ensure toggle switches are visible */
-            .adaire-toggle-switch {
-                position: relative;
-                display: inline-block;
-                width: 50px;
-                height: 24px;
-            }
-            .adaire-toggle-switch input {
-                opacity: 0;
-                width: 0;
-                height: 0;
-            }
-            .adaire-toggle-slider {
-                position: absolute;
-                cursor: pointer;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background-color: #ccc;
-                transition: .4s;
-                border-radius: 24px;
-            }
-            .adaire-toggle-slider:before {
-                position: absolute;
-                content: "";
-                height: 18px;
-                width: 18px;
-                left: 3px;
-                bottom: 3px;
-                background-color: white;
-                transition: .4s;
-                border-radius: 50%;
-            }
-            .adaire-toggle-switch input:checked + .adaire-toggle-slider {
-                background-color: #0073aa;
-            }
-            .adaire-toggle-switch input:checked + .adaire-toggle-slider:before {
-                transform: translateX(26px);
-            }
-            
-            /* Premium block styles */
-            .adaire-block-premium {
-                opacity: 0.6;
-                position: relative;
-                background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-                border: 2px dashed #dee2e6;
-            }
-            
-            .adaire-block-premium-badge {
-                position: absolute;
-                top: -8px;
-                right: -8px;
-                background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-                color: #333;
-                padding: 4px 8px;
-                border-radius: 12px;
-                font-size: 11px;
-                font-weight: 600;
-                text-transform: uppercase;
-                letter-spacing: 0.5px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                z-index: 10;
-            }
-            
-            .adaire-block-premium-badge .dashicons {
-                font-size: 12px;
-                margin-right: 2px;
-                vertical-align: middle;
-            }
-            
-            .adaire-block-upgrade-prompt {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: 24px;
-            }
-            
-            .adaire-upgrade-button {
-                background: linear-gradient(135deg, #0073aa 0%, #005177 100%);
-                color: white;
-                padding: 6px 12px;
-                border-radius: 4px;
-                text-decoration: none;
-                font-size: 12px;
-                font-weight: 600;
-                display: inline-flex;
-                align-items: center;
-                gap: 4px;
-                transition: all 0.2s ease;
-                box-shadow: 0 2px 4px rgba(0,115,170,0.2);
-            }
-            
-            .adaire-upgrade-button:hover {
-                background: linear-gradient(135deg, #005177 0%, #003d5c 100%);
-                color: white;
-                text-decoration: none;
-                transform: translateY(-1px);
-                box-shadow: 0 4px 8px rgba(0,115,170,0.3);
-            }
-            
-            .adaire-upgrade-button .dashicons {
-                font-size: 12px;
-            }
-            </style>
             
             <div class="adaire-blocks-settings-container">
                 <div class="adaire-blocks-header">

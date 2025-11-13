@@ -24,6 +24,23 @@ function adaire_blocks_add_migration_menu() {
 add_action('admin_menu', 'adaire_blocks_add_migration_menu');
 
 /**
+ * Enqueue migration page styles
+ */
+function adaire_blocks_enqueue_migration_styles($hook) {
+    if ($hook !== 'adaire-blocks_page_adaire-blocks-migration') {
+        return;
+    }
+    
+    wp_enqueue_style(
+        'adaire-blocks-migration',
+        plugin_dir_url(__FILE__) . 'css/block-migration.css',
+        array(),
+        defined('ADAIRE_BLOCKS_VERSION') ? ADAIRE_BLOCKS_VERSION : '1.0.0'
+    );
+}
+add_action('admin_enqueue_scripts', 'adaire_blocks_enqueue_migration_styles');
+
+/**
  * Migration page HTML
  */
 function adaire_blocks_migration_page() {
@@ -37,19 +54,19 @@ function adaire_blocks_migration_page() {
         <div class="card" style="max-width: 800px; margin-top: 20px;">
             <h2> Update All Blocks (Queue-Based Migration)</h2>
             <p>
-                This tool uses a fast queue-based system to find all posts and pages that contain Adaire Blocks 
+                This tool uses a fast queue-based system to find all posts, pages, and reusable block patterns that contain Adaire Blocks 
                 and re-save them with the current block structure. This is useful when you've made changes to block 
                 code that cause validation errors.
             </p>
             
             <p><strong>What this does:</strong></p>
             <ul>
-                <li> Finds all posts/pages with Adaire Blocks</li>
-                <li> Processes each post one at a time in a queue</li>
+                <li> Finds all posts/pages and patterns with Adaire Blocks</li>
+                <li> Processes each item one at a time in a queue</li>
                 <li> Automatically recovers and fixes validation errors</li>
-                <li> Re-saves each post with the current block structure</li>
+                <li> Re-saves each item with the current block structure</li>
                 <li> Preserves all block settings and content</li>
-                <li> Cleans up resources after each post for optimal performance</li>
+                <li> Cleans up resources after each item for optimal performance</li>
             </ul>
             
             <p><strong>⚠️ Important:</strong></p>
@@ -97,6 +114,10 @@ function adaire_blocks_migration_page() {
                     Cancel
                 </button>
             </p>
+            
+            <p style="margin-top: 20px; font-size: 13px; color: #666;">
+                <strong>Note:</strong> This tool will process both posts/pages and reusable block patterns (wp_block) that contain Adaire Blocks.
+            </p>
         </div>
     </div>
 
@@ -104,24 +125,24 @@ function adaire_blocks_migration_page() {
     // Migration Queue System
     let migrationQueue = [];
     let currentIndex = 0;
-    let totalPosts = 0;
-    let processedPosts = 0;
-    let failedPosts = 0;
+    let totalItems = 0;
+    let processedItems = 0;
+    let failedItems = 0;
     let migrationCancelled = false;
     let hiddenIframe = null;
     let currentMessageHandler = null;
     let currentTimeout = null;
 
     function startMigration() {
-        if (!confirm('Are you sure you want to start the migration? This will update all posts with Adaire Blocks.')) {
+        if (!confirm('Are you sure you want to start the migration? This will update all posts, pages, and patterns with Adaire Blocks.')) {
             return;
         }
 
         // Reset state
         migrationQueue = [];
         currentIndex = 0;
-        processedPosts = 0;
-        failedPosts = 0;
+        processedItems = 0;
+        failedItems = 0;
         migrationCancelled = false;
 
         document.getElementById('start-migration').style.display = 'none';
@@ -131,9 +152,9 @@ function adaire_blocks_migration_page() {
         document.getElementById('migration-complete').style.display = 'none';
         
         addLog('🚀 Starting migration...');
-        addLog('📋 Fetching posts to migrate...');
+        addLog('📋 Fetching posts, pages, and patterns to migrate...');
         
-        // Get posts to migrate
+        // Get items to migrate
         fetch('<?php echo admin_url('admin-ajax.php'); ?>', {
             method: 'POST',
             headers: {
@@ -144,12 +165,30 @@ function adaire_blocks_migration_page() {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                migrationQueue = data.data.posts;
-                totalPosts = migrationQueue.length;
+                migrationQueue = data.data.items;
+                totalItems = migrationQueue.length;
                 
-                addLog(`✅ Found ${totalPosts} post${totalPosts !== 1 ? 's' : ''} to migrate`);
+                const postsCount = data.data.posts_count || 0;
+                const patternsCount = data.data.patterns_count || 0;
                 
-                if (totalPosts === 0) {
+                // Log detailed breakdown
+                addLog(`📊 Search Results:`);
+                addLog(`   - Posts/Pages checked: ${data.data.posts_checked || 0}`);
+                addLog(`   - Patterns checked: ${data.data.patterns_checked || 0}`);
+                addLog(`   - Posts/Pages with Adaire Blocks: ${postsCount}`);
+                addLog(`   - Patterns with Adaire Blocks: ${patternsCount}`);
+                
+                if (postsCount > 0 && patternsCount > 0) {
+                    addLog(`✅ Found ${totalItems} item${totalItems !== 1 ? 's' : ''} to migrate (${postsCount} post${postsCount !== 1 ? 's' : ''}, ${patternsCount} pattern${patternsCount !== 1 ? 's' : ''})`);
+                } else if (postsCount > 0) {
+                    addLog(`✅ Found ${totalItems} post${totalItems !== 1 ? 's' : ''} to migrate`);
+                } else if (patternsCount > 0) {
+                    addLog(`✅ Found ${totalItems} pattern${totalItems !== 1 ? 's' : ''} to migrate`);
+                } else {
+                    addLog(`ℹ️ No items found with Adaire Blocks to migrate`);
+                }
+                
+                if (totalItems === 0) {
                     completeMigration();
                     return;
                 }
@@ -163,7 +202,7 @@ function adaire_blocks_migration_page() {
             }
         })
         .catch(error => {
-            addLog('❌ Error fetching posts: ' + error.message, 'error');
+            addLog('❌ Error fetching items: ' + error.message, 'error');
             resetButtons();
         });
     }
@@ -185,44 +224,52 @@ function adaire_blocks_migration_page() {
             return;
         }
 
-        const post = migrationQueue[currentIndex];
+        const item = migrationQueue[currentIndex];
         const progress = currentIndex + 1;
+        const itemType = item.type === 'pattern' ? 'Pattern' : 'Post';
         
-        updateProgress(progress, totalPosts, `Processing: ${post.title}`);
-        addLog(`[${progress}/${totalPosts}] 📄 Processing: ${post.title} (ID: ${post.id})`);
+        updateProgress(progress, totalItems, `Processing: ${item.title}`);
+        addLog(`[${progress}/${totalItems}] 📄 Processing ${itemType}: ${item.title} (ID: ${item.id})`);
 
         // Clean up previous iframe if it exists
         cleanupIframe();
 
-        // Create fresh iframe for this post
+        // Create fresh iframe for this item
         hiddenIframe = document.createElement('iframe');
         hiddenIframe.style.display = 'none';
-        hiddenIframe.id = 'migration-iframe-' + post.id;
+        hiddenIframe.id = 'migration-iframe-' + item.id;
         document.body.appendChild(hiddenIframe);
 
-        // Set up message handler for this specific post
-        setupMessageHandler(post);
+        // Set up message handler for this specific item
+        setupMessageHandler(item);
 
         // Set timeout (reduced to 15 seconds for faster processing)
         currentTimeout = setTimeout(() => {
-            addLog(`⏱️ Timeout for: ${post.title}`, 'warn');
-            failedPosts++;
-            moveToNextPost();
+            addLog(`⏱️ Timeout for: ${item.title}`, 'warn');
+            failedItems++;
+            moveToNextItem();
         }, 15000);
 
-        // Load the post in the iframe
-        const editorUrl = '<?php echo admin_url('post.php'); ?>?post=' + post.id + '&action=edit&adaire_auto_migrate=1';
-        addLog(`  Loading editor for post ${post.id}...`);
+        // Load the item in the iframe
+        let editorUrl;
+        if (item.type === 'pattern') {
+            // Patterns use wp_block post type
+            editorUrl = '<?php echo admin_url('post.php'); ?>?post=' + item.id + '&action=edit&post_type=wp_block&adaire_auto_migrate=1';
+            addLog(`  Loading editor for pattern ${item.id}...`);
+        } else {
+            editorUrl = '<?php echo admin_url('post.php'); ?>?post=' + item.id + '&action=edit&adaire_auto_migrate=1';
+            addLog(`  Loading editor for post ${item.id}...`);
+        }
         hiddenIframe.src = editorUrl;
     }
 
-    function setupMessageHandler(post) {
+    function setupMessageHandler(item) {
         // Remove previous handler if exists
         if (currentMessageHandler) {
             window.removeEventListener('message', currentMessageHandler);
         }
 
-        // Create new handler for this post
+        // Create new handler for this item
         currentMessageHandler = function(event) {
             // Only process messages from our migration
             if (!event.data || !event.data.type) {
@@ -238,16 +285,16 @@ function adaire_blocks_migration_page() {
                 }
                 
                 if (event.data.success) {
-                    processedPosts++;
+                    processedItems++;
                     const blocks = event.data.blocksRecovered || 0;
                     addLog(`  ✅ Success: ${blocks} block${blocks !== 1 ? 's' : ''} recovered and saved`);
                 } else {
-                    failedPosts++;
+                    failedItems++;
                     addLog(`  ❌ Failed: ${event.data.error || 'Unknown error'}`, 'error');
                 }
                 
-                // Move to next post after a short delay
-                setTimeout(() => moveToNextPost(), 500);
+                // Move to next item after a short delay
+                setTimeout(() => moveToNextItem(), 500);
             }
             
             // Handle log messages from iframe (optional, can be verbose)
@@ -259,11 +306,11 @@ function adaire_blocks_migration_page() {
         window.addEventListener('message', currentMessageHandler);
     }
 
-    function moveToNextPost() {
+    function moveToNextItem() {
         // Increment index
         currentIndex++;
         
-        // Process next post
+        // Process next item
         setTimeout(() => processNextInQueue(), 100);
     }
 
@@ -304,7 +351,7 @@ function adaire_blocks_migration_page() {
         }
         
         // Update stats
-        document.getElementById('stats-text').textContent = `✅ ${processedPosts} | ❌ ${failedPosts}`;
+        document.getElementById('stats-text').textContent = `✅ ${processedItems} | ❌ ${failedItems}`;
     }
 
     function addLog(message, type = 'info') {
@@ -332,26 +379,26 @@ function adaire_blocks_migration_page() {
     function completeMigration() {
         addLog('');
         addLog('=== MIGRATION COMPLETE ===');
-        addLog(`📊 Total posts: ${totalPosts}`);
-        addLog(`✅ Successful: ${processedPosts}`);
-        addLog(`❌ Failed: ${failedPosts}`);
-        addLog(`⏭️ Skipped: ${totalPosts - processedPosts - failedPosts}`);
+        addLog(`📊 Total items: ${totalItems}`);
+        addLog(`✅ Successful: ${processedItems}`);
+        addLog(`❌ Failed: ${failedItems}`);
+        addLog(`⏭️ Skipped: ${totalItems - processedItems - failedItems}`);
         
         document.getElementById('migration-progress').style.display = 'none';
         document.getElementById('migration-complete').style.display = 'block';
         
-        const successRate = totalPosts > 0 ? Math.round((processedPosts / totalPosts) * 100) : 0;
+        const successRate = totalItems > 0 ? Math.round((processedItems / totalItems) * 100) : 0;
         document.getElementById('completion-summary').innerHTML = 
             `<strong>Migration Results:</strong><br>` +
-            `✅ ${processedPosts} successfully migrated<br>` +
-            `❌ ${failedPosts} failed<br>` +
+            `✅ ${processedItems} successfully migrated<br>` +
+            `❌ ${failedItems} failed<br>` +
             `📈 Success rate: ${successRate}%`;
         
         resetButtons();
     }
 
     function cancelMigration() {
-        if (confirm('Are you sure you want to cancel the migration? Posts already processed will remain migrated.')) {
+        if (confirm('Are you sure you want to cancel the migration? Items already processed will remain migrated.')) {
             migrationCancelled = true;
             addLog('🛑 Cancelling migration...', 'warn');
             cleanupIframe();
@@ -367,18 +414,11 @@ function adaire_blocks_migration_page() {
         document.getElementById('cancel-migration').style.display = 'none';
     }
     </script>
-
-    <style>
-    #migration-log > div {
-        padding: 4px 0;
-        border-bottom: 1px solid #f0f0f1;
-    }
-    </style>
     <?php
 }
 
 /**
- * AJAX: Get posts that need migration
+ * AJAX: Get posts and patterns that need migration
  */
 function adaire_get_posts_to_migrate() {
     check_ajax_referer('adaire_migration', 'nonce');
@@ -386,6 +426,10 @@ function adaire_get_posts_to_migrate() {
     if (!current_user_can('manage_options')) {
         wp_send_json_error(['message' => 'Unauthorized']);
     }
+
+    $items_to_migrate = [];
+    $posts_count = 0;
+    $patterns_count = 0;
 
     // Get all posts and pages that might contain blocks
     $args = [
@@ -396,7 +440,7 @@ function adaire_get_posts_to_migrate() {
     ];
 
     $all_posts = get_posts($args);
-    $posts_to_migrate = [];
+    $posts_checked = count($all_posts);
 
     // Filter posts that contain Adaire Blocks
     foreach ($all_posts as $post_id) {
@@ -407,15 +451,53 @@ function adaire_get_posts_to_migrate() {
             $blocks = parse_blocks($content);
             if (adaire_has_adaire_blocks($blocks)) {
                 $post = get_post($post_id);
-                $posts_to_migrate[] = [
+                $items_to_migrate[] = [
                     'id' => $post_id,
                     'title' => $post->post_title,
+                    'type' => 'post',
                 ];
+                $posts_count++;
             }
         }
     }
 
-    wp_send_json_success(['posts' => $posts_to_migrate]);
+    // Get all reusable blocks/patterns (wp_block post type)
+    $pattern_args = [
+        'post_type' => 'wp_block',
+        'post_status' => ['publish', 'draft', 'pending', 'private'],
+        'posts_per_page' => -1,
+        'fields' => 'ids',
+    ];
+
+    $all_patterns = get_posts($pattern_args);
+    $patterns_checked = count($all_patterns);
+
+    // Filter patterns that contain Adaire Blocks
+    foreach ($all_patterns as $pattern_id) {
+        $content = get_post_field('post_content', $pattern_id);
+        
+        // Check if pattern contains any Adaire Blocks
+        if (has_blocks($content)) {
+            $blocks = parse_blocks($content);
+            if (adaire_has_adaire_blocks($blocks)) {
+                $pattern = get_post($pattern_id);
+                $items_to_migrate[] = [
+                    'id' => $pattern_id,
+                    'title' => $pattern->post_title ? $pattern->post_title : 'Untitled Pattern',
+                    'type' => 'pattern',
+                ];
+                $patterns_count++;
+            }
+        }
+    }
+
+    wp_send_json_success([
+        'items' => $items_to_migrate,
+        'posts_count' => $posts_count,
+        'patterns_count' => $patterns_count,
+        'posts_checked' => $posts_checked,
+        'patterns_checked' => $patterns_checked,
+    ]);
 }
 add_action('wp_ajax_adaire_get_posts_to_migrate', 'adaire_get_posts_to_migrate');
 

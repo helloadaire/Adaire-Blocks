@@ -88,6 +88,10 @@
 			"enabled": false,
 			"upgradeMessage": "Map Block is available in the premium version."
 		},
+		"industries-block": {
+			"enabled": false,
+			"upgradeMessage": "Industries Block is a Premium feature. Upgrade to showcase industry verticals with rich layouts."
+		},
 		"video-block": {
 			"enabled": true,
 			"upgradeMessage": "Map Block is available in the premium version."
@@ -281,6 +285,16 @@
 		"map-block": {
 			"enabled": true,
 			"upgradeMessage": "Map Block is available in the premium version."
+		},
+		"industries-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"industry-tiles",
+				"icon-picker",
+				"responsive-layouts",
+				"advanced-styling"
+			]
 		},
 		"video-block": {
 			"enabled": true,

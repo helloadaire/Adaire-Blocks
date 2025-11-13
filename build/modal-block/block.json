@@ -1,0 +1,100 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/modal-block",
+  "version": "0.1.0",
+  "title": "Modal",
+  "category": "widgets",
+  "icon": "admin-settings",
+  "description": "A modal block with customizable trigger and content areas.",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "customClassName": true
+  },
+  "textdomain": "modal-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "attributes": {
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "modalWidth": {
+      "type": "object",
+      "default": {
+        "desktop": {
+          "value": 600,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 90,
+          "unit": "%"
+        },
+        "mobile": {
+          "value": 90,
+          "unit": "%"
+        }
+      }
+    },
+    "modalHeight": {
+      "type": "object",
+      "default": {
+        "desktop": {
+          "value": 400,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 400,
+          "unit": "px"
+        },
+        "mobile": {
+          "value": 360,
+          "unit": "px"
+        }
+      }
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "overlayColor": {
+      "type": "string",
+      "default": "rgba(0, 0, 0, 0.6)"
+    },
+    "borderColor": {
+      "type": "string",
+      "default": "#e0e0e0"
+    },
+    "borderWidth": {
+      "type": "number",
+      "default": 1
+    },
+    "borderRadius": {
+      "type": "number",
+      "default": 16
+    },
+    "padding": {
+      "type": "number",
+      "default": 24
+    },
+    "closeButtonColor": {
+      "type": "string",
+      "default": "#111111"
+    },
+    "closeButtonBackground": {
+      "type": "string",
+      "default": "rgba(255, 255, 255, 0.9)"
+    },
+    "closeButtonSize": {
+      "type": "number",
+      "default": 36
+    }
+  }
+}

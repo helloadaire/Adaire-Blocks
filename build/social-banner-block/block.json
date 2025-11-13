@@ -1,0 +1,70 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/social-banner-block",
+  "version": "0.1.0",
+  "title": "Social Banner Block",
+  "category": "widgets",
+  "icon": "share",
+  "description": "Display a sticky social media banner on the side of the screen with customizable icons, colors, and links.",
+  "example": {},
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "customClassName": true
+  },
+  "textdomain": "social-banner-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "attributes": {
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "position": {
+      "type": "string",
+      "default": "right"
+    },
+    "offsetFrom": {
+      "type": "string",
+      "default": "top"
+    },
+    "offset": {
+      "type": "number",
+      "default": 100
+    },
+    "offsetUnit": {
+      "type": "string",
+      "default": "px"
+    },
+    "iconEntries": {
+      "type": "array",
+      "default": []
+    },
+    "iconSize": {
+      "type": "number",
+      "default": 24
+    },
+    "spacing": {
+      "type": "number",
+      "default": 10
+    },
+    "borderRadius": {
+      "type": "number",
+      "default": 0
+    },
+    "hoverAnimation": {
+      "type": "string",
+      "default": "up"
+    },
+    "animationDuration": {
+      "type": "number",
+      "default": 0.3
+    },
+    "animationEasing": {
+      "type": "string",
+      "default": "ease"
+    }
+  }
+}

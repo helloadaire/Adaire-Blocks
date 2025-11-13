@@ -1,10 +1,10 @@
 === Adaire Blocks ===
-Contributors: adaire
+Contributors: adairedigital
 Donate link: https://adaire.digital/
 Tags: blocks, gutenberg, gsap, animation, portfolio
 Requires at least: 6.7
 Tested up to: 6.8
-Stable tag: 1.1.7
+Stable tag: 1.1.8
 Requires PHP: 7.4
 License: GPL-3.0
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -15,6 +15,7 @@ A powerful WordPress plugin for creating visually stunning, high-performance web
 
 Adaire Blocks is a comprehensive WordPress plugin that provides a collection of custom Gutenberg blocks designed to create visually stunning, high-performance websites. Built with modern web technologies including GSAP, React, and optimized for performance, this plugin offers a seamless experience for developers and designers working within the WordPress Gutenberg editor.
 
+
 **Available Blocks:**
 
 * **Accordion Block** - Create collapsible content sections with smooth animations, customizable styling, and responsive design
@@ -24,7 +25,9 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 * **Call to Action Block** - Build powerful call-to-action sections with animated carousels and gradient backgrounds
 * **Counter Block** - Display animated counters that count up or down to a target number, with customizable prefixes, suffixes, and captions for showcasing statistics and achievements
 * **CTA Block** - Build call-to-action sections with animated carousels and gradient backgrounds
+* **Industries Block** - Showcase industries with responsive tiles, customizable icons, link functionality, and flexible layouts
 * **Logos Block** - Display partner/client logos with customizable sliders, smooth animations, and responsive breakpoints
+* **Modal Block** - Create customizable modal dialogs with trigger buttons, responsive dimensions, and flexible content areas
 * **Particles Block** - Add dynamic particle effects with scroll-controlled animations and customizable positioning
 * **Portfolio Block** - Showcase your work with elegant portfolio layouts, gallery modals, and GSAP animations
 * **Posts Grid Block** - Display WordPress posts in beautiful grid layouts with filtering, pagination, and FLIP animations
@@ -116,6 +119,29 @@ For support, please visit our website at https://adaire.digital/ or contact us t
 6. Posts Grid Block with filtering and pagination
 
 == Changelog ==
+
+= 1.1.8 =
+* Added Modal Block - Create customizable modal dialogs with trigger and content blocks
+* Added Industries Block - Showcase industries with responsive tiles, icon picker, and flexible layouts
+* Added Responsive dimension controls for desktop, tablet, and mobile devices
+* Added Flexible inner blocks system supporting any Gutenberg blocks in trigger and content
+* Added Customizable styling options including colors, borders, padding, and close button
+* Added Live editor preview to see modal appearance before publishing
+* Added Accessibility features including keyboard navigation, focus management, and ARIA attributes
+* Added Inline block display to minimize obstruction when adding to pages
+* Added CSS custom properties for efficient styling and theming
+* Added JavaScript event system for programmatic modal control
+* Added Industry management controls - Add, remove, and reorder industries with intuitive interface
+* Added Bootstrap Icons picker integration for visual icon selection
+* Added Link functionality for industries with URL and new tab options
+* Added Visibility toggles for title, intro text, and image with smart space management
+* Added Option to hide first two industries from layout for flexible display
+* Added Dynamic layout system supporting unlimited industries with automatic column distribution
+* Fixed Trigger block visibility on frontend
+* Fixed Dimension controls to correctly control modal content div
+* Fixed Inline display behavior for unobtrusive page integration
+* Fixed Industries layout to support unlimited industries beyond initial 6
+* Fixed Visibility toggles to preserve space on desktop and collapse on mobile
 
 = 1.1.7 =
 * Added Animation on Scroll Block - Complete control over scroll-triggered animations
@@ -235,6 +261,9 @@ For support, please visit our website at https://adaire.digital/ or contact us t
 * CTA Block with gradient backgrounds
 
 == Upgrade Notice ==
+
+= 1.1.8 =
+Major update adding Modal Block with comprehensive customization options, responsive controls, and accessibility features. Recommended upgrade for enhanced dialog functionality.
 
 = 1.1.6 =
 Important update with Mega Menu Block improvements including enhanced color controls and better menu item styling. Recommended upgrade for improved menu customization and build stability.

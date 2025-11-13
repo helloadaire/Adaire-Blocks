@@ -15,7 +15,9 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 - **Call to Action Block** - Build powerful call-to-action sections with animated carousels and gradient backgrounds
 - **Container Block** - Create flexible layout containers with constrained/full-width options and responsive settings
 - **CTA Block** - Build call-to-action sections with animated carousels and gradient backgrounds
+- **Industries Block** - Showcase industries with responsive tiles, customizable icons, link functionality, and flexible layouts
 - **Logos Block** - Display partner/client logos with customizable sliders, smooth animations, and responsive breakpoints
+- **Modal Block** - Create customizable modal dialogs with trigger buttons, responsive dimensions, and flexible content areas
 - **Particles Block** - Add dynamic particle effects with scroll-controlled animations and customizable positioning
 - **Portfolio Block** - Showcase your work with elegant portfolio layouts, gallery modals, and GSAP animations
 - **Posts Grid Block** - Display WordPress posts in beautiful grid layouts with filtering, pagination, and FLIP animations
@@ -149,6 +151,29 @@ A: Yes, each block instance is independent and can be customized separately thro
 A: The plugin is optimized for performance with efficient block registration and lazy loading of animation scripts. GSAP animations are hardware-accelerated for smooth performance.
 
 ## Changelog
+
+### Version 1.1.8 =
+* **Added** Modal Block - Create customizable modal dialogs with trigger and content blocks
+* **Added** Industries Block - Showcase industries with responsive tiles, icon picker, and flexible layouts
+* **Added** Responsive dimension controls for desktop, tablet, and mobile devices
+* **Added** Flexible inner blocks system supporting any Gutenberg blocks in trigger and content
+* **Added** Customizable styling options including colors, borders, padding, and close button
+* **Added** Live editor preview to see modal appearance before publishing
+* **Added** Accessibility features including keyboard navigation, focus management, and ARIA attributes
+* **Added** Inline block display to minimize obstruction when adding to pages
+* **Added** CSS custom properties for efficient styling and theming
+* **Added** JavaScript event system for programmatic modal control
+* **Added** Industry management controls - Add, remove, and reorder industries with intuitive interface
+* **Added** Bootstrap Icons picker integration for visual icon selection
+* **Added** Link functionality for industries with URL and new tab options
+* **Added** Visibility toggles for title, intro text, and image with smart space management
+* **Added** Option to hide first two industries from layout for flexible display
+* **Added** Dynamic layout system supporting unlimited industries with automatic column distribution
+* **Fixed** Trigger block visibility on frontend
+* **Fixed** Dimension controls to correctly control modal content div
+* **Fixed** Inline display behavior for unobtrusive page integration
+* **Fixed** Industries layout to support unlimited industries beyond initial 6
+* **Fixed** Visibility toggles to preserve space on desktop and collapse on mobile
 
 ### Version 1.1.7 =
 * **Added** Animation on Scroll Block - Complete control over scroll-triggered animations
