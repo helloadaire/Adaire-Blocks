@@ -2,10 +2,11 @@
  * Adaire Blocks Admin Settings JavaScript
  */
 
-(function($) {
+(function($, window) {
     'use strict';
     
     $(document).ready(function() {
+        const ajaxData = window.AdaireBlocksAdminData || {};
         
         // Initialize settings
         initSettings();
@@ -44,8 +45,39 @@
         });
         
         // Form submission
-        $('.adaire-blocks-form').on('submit', function() {
-            $(this).addClass('loading');
+        $('.adaire-blocks-form').on('submit', function(e) {
+            const $form = $(this);
+            if (!ajaxData || !ajaxData.nonce) {
+                // Fallback to default submission if AJAX data unavailable
+                $form.addClass('loading');
+                return;
+            }
+
+            e.preventDefault();
+
+            const serializedForm = $form.serialize();
+            $form.addClass('loading');
+
+            handleAjaxRequest(
+                'save_settings',
+                { formData: serializedForm },
+                function(response) {
+                    $form.removeClass('loading');
+                    const message =
+                        (response && response.message) ||
+                        (ajaxData.strings && ajaxData.strings.saveSuccess) ||
+                        'Settings saved successfully!';
+                    showNotification(message, 'success');
+                },
+                function(errorMessage) {
+                    $form.removeClass('loading');
+                    const message =
+                        errorMessage ||
+                        (ajaxData.strings && ajaxData.strings.saveError) ||
+                        'Unable to save settings. Please try again.';
+                    showNotification(message, 'error');
+                }
+            );
         });
         
         /**
@@ -89,9 +121,9 @@
         /**
          * Handle AJAX requests
          */
-        function handleAjaxRequest(action, data, callback) {
+        function handleAjaxRequest(action, data, onSuccess, onError) {
             $.ajax({
-                url: ajaxData.ajaxurl,
+                url: ajaxData.ajaxUrl || ajaxurl,
                 type: 'POST',
                 data: {
                     action: 'adaire_blocks_' + action,
@@ -100,13 +132,22 @@
                 },
                 success: function(response) {
                     if (response.success) {
-                        callback(response.data);
+                        if (typeof onSuccess === 'function') {
+                            onSuccess(response.data);
+                        }
                     } else {
-                        showNotification('Error: ' + response.data, 'error');
+                        const message = (response && response.data) ? response.data : 'An error occurred.';
+                        showNotification('Error: ' + message, 'error');
+                        if (typeof onError === 'function') {
+                            onError(message);
+                        }
                     }
                 },
                 error: function() {
                     showNotification('An error occurred. Please try again.', 'error');
+                    if (typeof onError === 'function') {
+                        onError();
+                    }
                 }
             });
         }
@@ -152,12 +193,6 @@
             $(this).attr('title', isEnabled ? 'Click to disable this block' : 'Click to enable this block');
         });
         
-        // Localize script data
-        var ajaxData = {
-            ajaxurl: ajaxurl,
-            nonce: $('#adaire_blocks_nonce').val()
-        };
-        
     });
     
-})(jQuery);
+})(jQuery, window);

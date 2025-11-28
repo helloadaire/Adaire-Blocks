@@ -1,0 +1,75 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "adaire/swiper-slide",
+  "version": "0.1.0",
+  "title": "Swiper Slide",
+  "category": "adaire-blocks",
+  "parent": [
+    "adaire/swiper-carousel"
+  ],
+  "icon": "format-image",
+  "description": "A single slide for the Swiper Carousel.",
+  "supports": {
+    "html": false,
+    "reusable": false
+  },
+  "textdomain": "adaire-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "attributes": {
+    "imageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "imageId": {
+      "type": "number",
+      "default": 0
+    },
+    "header": {
+      "type": "string",
+      "default": "Slide Header"
+    },
+    "text": {
+      "type": "string",
+      "default": "Slide description text goes here."
+    },
+    "overlayType": {
+      "type": "string",
+      "default": "color"
+    },
+    "overlayColor": {
+      "type": "string",
+      "default": "rgba(0,0,0,0.5)"
+    },
+    "overlayGradient": {
+      "type": "string",
+      "default": "linear-gradient(135deg,rgb(6,147,227) 0%,rgb(155,81,224) 100%)"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "backgroundSize": {
+      "type": "string",
+      "default": "cover"
+    },
+    "backgroundPosition": {
+      "type": "string",
+      "default": "center"
+    },
+    "backgroundRepeat": {
+      "type": "string",
+      "default": "no-repeat"
+    },
+    "slideBorderRadius": {
+      "type": "number",
+      "default": 0
+    },
+    "slideHoverBorderRadius": {
+      "type": "number",
+      "default": 0
+    }
+  }
+}

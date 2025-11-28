@@ -20,7 +20,7 @@ define('ADAIRE_BLOCKS_PREMIUM_MARKER', true);
 
 /**
  * This file enables:
- * - All premium blocks (video-hero, portfolio, particles, services, posts-grid, etc.)
+ * - All premium blocks (video-hero, portfolio, particles, services, posts-grid, project, industries, modal, etc.)
  * - Unlimited items in all blocks (no limits)
  * - Advanced features and animations
  * - Custom styling options

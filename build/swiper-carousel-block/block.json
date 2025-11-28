@@ -1,0 +1,64 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "adaire/swiper-carousel",
+  "version": "0.1.0",
+  "title": "Swiper Carousel",
+  "category": "adaire-blocks",
+  "icon": "images-alt2",
+  "description": "A draggable image carousel using Swiper.js.",
+  "supports": {
+    "html": false,
+    "align": [
+      "full",
+      "wide"
+    ]
+  },
+  "textdomain": "adaire-blocks",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "attributes": {
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "speed": {
+      "type": "number",
+      "default": 600
+    },
+    "loop": {
+      "type": "boolean",
+      "default": true
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": false
+    },
+    "autoplayDelay": {
+      "type": "number",
+      "default": 3000
+    },
+    "effect": {
+      "type": "string",
+      "default": "slide"
+    },
+    "borderRadius": {
+      "type": "number",
+      "default": 0
+    },
+    "carouselHeight": {
+      "type": "number",
+      "default": 50
+    },
+    "cursorOverlayBg": {
+      "type": "string",
+      "default": "#ff0000"
+    },
+    "cursorOverlayText": {
+      "type": "string",
+      "default": "drg"
+    }
+  }
+}

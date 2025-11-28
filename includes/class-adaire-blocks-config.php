@@ -120,7 +120,18 @@ class AdaireBlocksConfig {
      */
     public function get_block_config($block_name) {
         $version_config = $this->config_data[$this->plugin_version] ?? array();
-        return $version_config[$block_name] ?? array();
+        
+        // Check if block exists in current version config
+        if (isset($version_config[$block_name])) {
+            return $version_config[$block_name];
+        }
+        
+        // For premium users, also check the plus category
+        if ($this->plugin_version === 'premium' && isset($this->config_data['plus'][$block_name])) {
+            return $this->config_data['plus'][$block_name];
+        }
+        
+        return array();
     }
     
     /**
@@ -209,6 +220,15 @@ class AdaireBlocksConfig {
         foreach ($version_config as $block_name => $config) {
             if (isset($config['enabled']) && $config['enabled']) {
                 $available_blocks[] = $block_name;
+            }
+        }
+        
+        // For premium users, also include plus blocks
+        if ($this->plugin_version === 'premium' && isset($this->config_data['plus'])) {
+            foreach ($this->config_data['plus'] as $block_name => $config) {
+                if (isset($config['enabled']) && $config['enabled']) {
+                    $available_blocks[] = $block_name;
+                }
             }
         }
         

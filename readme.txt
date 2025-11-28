@@ -4,9 +4,10 @@ Donate link: https://adaire.digital/
 Tags: blocks, gutenberg, gsap, animation, portfolio
 Requires at least: 6.7
 Tested up to: 6.8
-Stable tag: 1.1.8
+Stable tag: 1.1.9
 Requires PHP: 7.4
 License: GPL-3.0
+Source Code: https://github.com/helloadaire/Adaire-Blocks-Free
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 A powerful WordPress plugin for creating visually stunning, high-performance websites with custom Gutenberg blocks and GSAP animations.
@@ -35,6 +36,10 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 * **Questions Block** - Create animated FAQ sections with GSAP pinning and smooth transitions
 * **Scroll Text Block** - Add scroll-triggered text animations with customizable speed and direction
 * **Services Block** - Display your services with interactive carousel layouts, scroll-triggered animations, and smooth transitions
+* **Our Process Block** - Showcase your delivery process with responsive multi-column layouts, clickable steps, and per-step icon/link controls
+* **Content Toggle Block** - Let visitors flip between content panels using pill-style toggles, GSAP animations, and responsive containers
+* **Swiper Carousel Block** - Build Swiper.js carousels with draggable slides, autoplay, loop, and per-slide overlays via Swiper Slide blocks
+* **Testimonial 2 Block** - Feature long-form testimonials with portrait photography, company logos, and keyboard-accessible carousel navigation
 * **Tabs Block** - Create tabbed content sections with smooth GSAP animations, vertical/horizontal layouts, and customizable styling
 * **Testimonial Block** - Showcase client testimonials with customizable carousels and professional layouts
 * **Video Hero Block** - Create stunning video hero sections with YouTube/Vimeo integration, smooth transitions, and customizable overlays
@@ -50,6 +55,7 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 * Locomotive Scroll support for smooth scrolling experiences
 * Responsive design with mobile-first approach
 * GPL-2.0 licensed for maximum flexibility
+* Unified SVG icon system for every Free, Plus, and Premium block so the editor, admin UI, and docs share the same polished visuals
 
 **Animation & Interaction Features:**
 
@@ -119,6 +125,13 @@ For support, please visit our website at https://adaire.digital/ or contact us t
 6. Posts Grid Block with filtering and pagination
 
 == Changelog ==
+
+= 1.1.9 =
+* Added the Our Process Block with responsive multi-column layouts, per-device column/gap controls, icon picker, and clickable steps.
+* Added the Content Toggle Block with pill-style toggles, GSAP-powered transitions, container width controls, and typography settings.
+* Added Swiper Carousel & Swiper Slide Blocks for draggable Swiper.js carousels with autoplay, loop, overlay, and border radius controls.
+* Added the Testimonial 2 Block featuring portrait imagery, company logos, keyboard-accessible nav arrows, and responsive typography.
+* Refreshed every block icon (Free, Plus, Premium tiers) so Gutenberg, block management, and documentation all display the same polished SVG artwork.
 
 = 1.1.8 =
 * Added Modal Block - Create customizable modal dialogs with trigger and content blocks

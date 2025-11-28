@@ -1,0 +1,158 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/content-toggle-block",
+  "version": "0.1.0",
+  "title": "Content Toggle",
+  "category": "widgets",
+  "icon": "controls-forward",
+  "description": "Display content with pill-style toggles for switching between different states.",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "customClassName": true
+  },
+  "textdomain": "content-toggle-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "attributes": {
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "containerMode": {
+      "type": "string",
+      "default": "constrained"
+    },
+    "containerMaxWidth": {
+      "type": "object",
+      "default": {
+        "desktop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 100,
+          "unit": "%"
+        },
+        "mobile": {
+          "value": 100,
+          "unit": "%"
+        }
+      }
+    },
+    "toggles": {
+      "type": "array",
+      "default": [
+        {
+          "id": "toggle-1",
+          "label": "Services"
+        },
+        {
+          "id": "toggle-2",
+          "label": "Approach"
+        },
+        {
+          "id": "toggle-3",
+          "label": "Outcomes"
+        }
+      ]
+    },
+    "activeToggle": {
+      "type": "number",
+      "default": 0
+    },
+    "pillStyle": {
+      "type": "string",
+      "default": "default"
+    },
+    "pillBackgroundColor": {
+      "type": "string",
+      "default": "transparent"
+    },
+    "pillActiveBackgroundColor": {
+      "type": "string",
+      "default": "#3b82f6"
+    },
+    "pillTextColor": {
+      "type": "string",
+      "default": "#94a3b8"
+    },
+    "pillActiveTextColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "pillBorderColor": {
+      "type": "string",
+      "default": "#475569"
+    },
+    "pillActiveBorderColor": {
+      "type": "string",
+      "default": "#3b82f6"
+    },
+    "pillBorderRadius": {
+      "type": "number",
+      "default": 24
+    },
+    "pillPadding": {
+      "type": "object",
+      "default": {
+        "top": 12,
+        "right": 24,
+        "bottom": 12,
+        "left": 24
+      }
+    },
+    "pillGap": {
+      "type": "number",
+      "default": 16
+    },
+    "pillFontSize": {
+      "type": "number",
+      "default": 16
+    },
+    "pillFontWeight": {
+      "type": "string",
+      "default": "500"
+    },
+    "pillActiveFontWeight": {
+      "type": "string",
+      "default": "600"
+    },
+    "contentBackgroundColor": {
+      "type": "string",
+      "default": "#0a0e27"
+    },
+    "contentPadding": {
+      "type": "object",
+      "default": {
+        "top": 40,
+        "right": 40,
+        "bottom": 40,
+        "left": 40
+      }
+    },
+    "contentBorderRadius": {
+      "type": "number",
+      "default": 16
+    },
+    "togglePosition": {
+      "type": "string",
+      "default": "top"
+    },
+    "animationDuration": {
+      "type": "number",
+      "default": 0.5
+    },
+    "animationEase": {
+      "type": "string",
+      "default": "power2.out"
+    }
+  }
+}

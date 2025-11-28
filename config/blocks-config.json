@@ -13,22 +13,36 @@
 		},
 		"call-to-action-block": {
 			"enabled": true,
-			"upgradeMessage": "Call to Action Block is a Free feature. Upgrade to create compelling CTAs."
+			"limits": {
+				"layoutType": "horizontal"
+			},
+			"upgradeMessage": "Upgrade to Premium for vertical and stacked layouts."
 		},
 		"counter-block": {
 			"enabled": true,
-			"upgradeMessage": "Upgrade to Premium for advanced counter animations and features."
+			"limits": {
+				"counterDirection": "up"
+			},
+			"upgradeMessage": "Upgrade to Premium for countdown functionality."
 		},
-		"cta-block": {
-			"enabled": false,
-			"upgradeMessage": "Upgrade to Premium for multiple buttons and advanced layouts."
-		},
-		"logos-block": {
+		"map-block": {
 			"enabled": true,
 			"limits": {
-				"maxItems": 3
+				"singleMapMode": true
 			},
-			"upgradeMessage": "Go pro to add more logo items."
+			"upgradeMessage": "Upgrade to Premium for interactive flying map animations."
+		},
+		"video-player-block": {
+			"enabled": true,
+			"upgradeMessage": "Upgrade to Premium for advanced video player features."
+		},
+		"icon-box-block": {
+			"enabled": true,
+			"upgradeMessage": "Upgrade to Premium for advanced icon box features."
+		},
+		"social-banner-block": {
+			"enabled": true,
+			"upgradeMessage": "Upgrade to Premium for advanced social banner features."
 		},
 		"testimonial-block": {
 			"enabled": true,
@@ -37,64 +51,72 @@
 			},
 			"upgradeMessage": "Go pro to add more testimonial items."
 		},
-		"video-hero-block": {
-			"enabled": false,
-			"upgradeMessage": "Video Hero Block is a Premium feature. Upgrade to create stunning video backgrounds."
+		"testimonial2-block": {
+			"enabled": true,
+			"limits": {
+				"maxItems": 4
+			},
+			"upgradeMessage": "Go pro to add more testimonial items."
 		},
-		"portfolio-block": {
-			"enabled": false,
-			"upgradeMessage": "Portfolio Block is a Premium feature. Upgrade to showcase your work professionally."
+		"posts-grid-block": {
+			"enabled": true,
+			"upgradeMessage": "Upgrade to Premium for advanced filtering and custom templates."
+		},
+		"tabs-block": {
+			"enabled": true,
+			"upgradeMessage": "Upgrade to Premium for unlimited tabs and advanced features."
+		},
+		"tab-panel-block": {
+			"enabled": true,
+			"upgradeMessage": "Tab Panel Block works with the Tabs Block for creating tabbed interfaces."
 		},
 		"particles-block": {
 			"enabled": false,
 			"upgradeMessage": "Particles Block is a Premium feature. Upgrade to add interactive particle effects."
 		},
-		"services-block": {
-			"enabled": false,
-			"upgradeMessage": "Services Block is a Premium feature. Upgrade to create professional service showcases."
-		},
-
-		"posts-grid-block": {
-			"enabled": false,
-			"upgradeMessage": "Posts Grid Block is a Premium feature. Upgrade to create dynamic content grids."
-		},
 		"project-block": {
 			"enabled": false,
 			"upgradeMessage": "Project Block is a Premium feature. Upgrade to showcase projects with advanced layouts."
-		},
-		"scroll-text-block": {
-			"enabled": false,
-			"upgradeMessage": "Scroll Text Block is a Premium feature. Upgrade to add animated scrolling text effects."
-		},
-		"tabs-block": {
-			"enabled": false,
-			"limits": {},
-			"upgradeMessage": "Go pro to add more tab items."
-		},
-		"tab-panel-block": {
-			"enabled": false,
-			"upgradeMessage": "Tab Panel Block works with the Tabs Block for creating tabbed interfaces."
-		},
-		"questions-block": {
-			"enabled": false,
-			"upgradeMessage": "Questions Block is a Premium feature. Upgrade to create interactive FAQ sections."
-		},
-
-		"mega-menu-block": {
-			"enabled": false,
-			"upgradeMessage": "Mega Menu Block is available in the premium version."
-		},
-		"map-block": {
-			"enabled": false,
-			"upgradeMessage": "Map Block is available in the premium version."
 		},
 		"industries-block": {
 			"enabled": false,
 			"upgradeMessage": "Industries Block is a Premium feature. Upgrade to showcase industry verticals with rich layouts."
 		},
+		"modal-block": {
+			"enabled": false,
+			"upgradeMessage": "Modal Block is a Premium feature. Upgrade to build fully customizable dialogs with triggers and flexible content."
+		},
 		"video-block": {
 			"enabled": true,
-			"upgradeMessage": "Map Block is available in the premium version."
+			"upgradeMessage": "Upgrade to Premium for advanced video features."
+		},
+		"questions-block": {
+			"enabled": false,
+			"upgradeMessage": "Questions Plus Block is a Plus feature. Upgrade to Premium to create interactive FAQ sections."
+		},
+		"portfolio-block": {
+			"enabled": false,
+			"upgradeMessage": "Portfolio Plus Block is a Plus feature. Upgrade to Premium to showcase your work professionally."
+		},
+		"services-block": {
+			"enabled": false,
+			"upgradeMessage": "Services Plus Block is a Plus feature. Upgrade to Premium to create professional service showcases."
+		},
+		"logos-block": {
+			"enabled": false,
+			"upgradeMessage": "Logos Plus Block is a Plus feature. Upgrade to Premium to add unlimited logo items."
+		},
+		"video-hero-block": {
+			"enabled": false,
+			"upgradeMessage": "Video Hero Plus Block is a Plus feature. Upgrade to Premium to create stunning video backgrounds."
+		},
+		"scroll-text-block": {
+			"enabled": false,
+			"upgradeMessage": "Scroll Text Plus Block is a Plus feature. Upgrade to Premium to add animated scrolling text effects."
+		},
+		"mega-menu-block": {
+			"enabled": false,
+			"upgradeMessage": "Mega Menu Plus Block is a Plus feature. Upgrade to Premium for advanced mega menu functionality."
 		}
 	},
 	"premium": {
@@ -118,24 +140,61 @@
 				"advanced-effects"
 			]
 		},
+		"call-to-action-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"all-layouts",
+				"vertical-layout",
+				"stacked-layout",
+				"advanced-styling"
+			]
+		},
 		"counter-block": {
 			"enabled": true,
 			"limits": {},
 			"features": [
-				"unlimited-duration",
+				"count-up",
+				"count-down",
 				"advanced-animations",
-				"conditional-triggers",
 				"custom-easing"
 			]
 		},
-		"cta-block": {
+		"map-block": {
 			"enabled": true,
 			"limits": {},
 			"features": [
-				"unlimited-buttons",
-				"advanced-layouts",
-				"conditional-display",
-				"A/B-testing"
+				"interactive-maps",
+				"flying-animations",
+				"multiple-locations",
+				"custom-markers"
+			]
+		},
+		"video-player-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"advanced-controls",
+				"custom-styling",
+				"playlist-support"
+			]
+		},
+		"icon-box-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"advanced-styling",
+				"custom-animations",
+				"hover-effects"
+			]
+		},
+		"social-banner-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"unlimited-social-links",
+				"custom-styling",
+				"advanced-layouts"
 			]
 		},
 		"testimonial-block": {
@@ -148,54 +207,14 @@
 				"custom-templates"
 			]
 		},
-		"video-hero-block": {
+		"testimonial2-block": {
 			"enabled": true,
 			"limits": {},
 			"features": [
-				"multiple-videos",
-				"advanced-controls",
-				"overlay-effects",
-				"responsive-optimization"
-			]
-		},
-		"portfolio-block": {
-			"enabled": true,
-			"limits": {},
-			"features": [
-				"unlimited-projects",
-				"advanced-filtering",
-				"lightbox-effects",
-				"custom-layouts"
-			]
-		},
-		"particles-block": {
-			"enabled": true,
-			"limits": {},
-			"features": [
-				"custom-particles",
-				"interactive-effects",
-				"performance-optimization",
-				"custom-shapes"
-			]
-		},
-		"services-block": {
-			"enabled": true,
-			"limits": {},
-			"features": [
-				"unlimited-services",
-				"advanced-animations",
-				"custom-icons",
-				"conditional-display"
-			]
-		},
-		"logos-block": {
-			"enabled": true,
-			"limits": {},
-			"features": [
-				"unlimited-logos",
-				"advanced-animations",
-				"hover-effects",
-				"custom-styling"
+				"unlimited-testimonials",
+				"advanced-carousel",
+				"filtering",
+				"custom-templates"
 			]
 		},
 		"posts-grid-block": {
@@ -206,26 +225,6 @@
 				"advanced-filtering",
 				"custom-templates",
 				"infinite-scroll"
-			]
-		},
-		"project-block": {
-			"enabled": true,
-			"limits": {},
-			"features": [
-				"unlimited-projects",
-				"advanced-layouts",
-				"custom-galleries",
-				"interactive-effects"
-			]
-		},
-		"scroll-text-block": {
-			"enabled": true,
-			"limits": {},
-			"features": [
-				"custom-animations",
-				"multiple-texts",
-				"advanced-timing",
-				"responsive-controls"
 			]
 		},
 		"tabs-block": {
@@ -248,6 +247,50 @@
 				"responsive-behavior"
 			]
 		},
+		"particles-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"custom-particles",
+				"interactive-effects",
+				"performance-optimization",
+				"custom-shapes"
+			]
+		},
+		"project-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"unlimited-projects",
+				"advanced-layouts",
+				"custom-galleries",
+				"interactive-effects"
+			]
+		},
+		"industries-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"industry-tiles",
+				"icon-picker",
+				"responsive-layouts",
+				"advanced-styling"
+			]
+		},
+		"modal-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"nested-trigger-and-content-blocks",
+				"device-specific-dimensions",
+				"custom-overlay-and-close-button",
+				"accessibility-controls"
+			]
+		},
+		"video-block": {
+			"enabled": true,
+			"upgradeMessage": "Map Block is available in the premium version."
+		},
 		"questions-block": {
 			"enabled": true,
 			"limits": {},
@@ -258,14 +301,54 @@
 				"custom-styling"
 			]
 		},
-		"call-to-action-block": {
+		"portfolio-block": {
 			"enabled": true,
 			"limits": {},
 			"features": [
-				"unlimited-ctas",
-				"advanced-layouts",
-				"conditional-display",
-				"A/B-testing"
+				"unlimited-projects",
+				"advanced-filtering",
+				"lightbox-effects",
+				"custom-layouts"
+			]
+		},
+		"services-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"unlimited-services",
+				"advanced-animations",
+				"custom-icons",
+				"conditional-display"
+			]
+		},
+		"logos-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"unlimited-logos",
+				"advanced-animations",
+				"hover-effects",
+				"custom-styling"
+			]
+		},
+		"video-hero-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"multiple-videos",
+				"advanced-controls",
+				"overlay-effects",
+				"responsive-optimization"
+			]
+		},
+		"scroll-text-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"custom-animations",
+				"multiple-texts",
+				"advanced-timing",
+				"responsive-controls"
 			]
 		},
 		"mega-menu-block": {
@@ -280,25 +363,81 @@
 		"mega-menu-panel-block": {
 			"enabled": true,
 			"limits": {},
-			"features": ["canvas-content", "inner-blocks-support"]
-		},
-		"map-block": {
-			"enabled": true,
-			"upgradeMessage": "Map Block is available in the premium version."
-		},
-		"industries-block": {
+			"features": [
+				"canvas-content",
+				"inner-blocks-support"
+			]
+		}
+	},
+	"plus": {
+		"questions-block": {
 			"enabled": true,
 			"limits": {},
 			"features": [
-				"industry-tiles",
-				"icon-picker",
-				"responsive-layouts",
-				"advanced-styling"
+				"unlimited-questions",
+				"advanced-animations",
+				"conditional-logic",
+				"custom-styling"
 			]
 		},
-		"video-block": {
+		"portfolio-block": {
 			"enabled": true,
-			"upgradeMessage": "Map Block is available in the premium version."
+			"limits": {},
+			"features": [
+				"unlimited-projects",
+				"advanced-filtering",
+				"lightbox-effects",
+				"custom-layouts"
+			]
+		},
+		"services-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"unlimited-services",
+				"advanced-animations",
+				"custom-icons",
+				"conditional-display"
+			]
+		},
+		"logos-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"unlimited-logos",
+				"advanced-animations",
+				"hover-effects",
+				"custom-styling"
+			]
+		},
+		"video-hero-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"multiple-videos",
+				"advanced-controls",
+				"overlay-effects",
+				"responsive-optimization"
+			]
+		},
+		"scroll-text-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"custom-animations",
+				"multiple-texts",
+				"advanced-timing",
+				"responsive-controls"
+			]
+		},
+		"mega-menu-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"unlimited-menu-items",
+				"advanced-styling",
+				"mobile-optimization"
+			]
 		}
 	}
 }

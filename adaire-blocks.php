@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Adaire Blocks
  * Description:       A powerful WordPress plugin that helps developers and designers create visually stunning, high-performance websites with ease right inside the Gutenberg editor.
- * Version:           1.1.8
+ * Version:           1.1.9
  * Requires at least: 6.7
  * Requires PHP:      7.4
  * Author:            <a href="https://adaire.digital" target="_blank">Adaire Digital</a>
@@ -15,6 +15,40 @@
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
+}
+
+if ( ! function_exists( 'adaire_blocks_hex_to_rgba' ) ) {
+	/**
+	 * Convert hex color values to rgba string.
+	 *
+	 * @param string $color Hex color string.
+	 * @param float  $alpha Alpha channel between 0 and 1.
+	 *
+	 * @return string
+	 */
+	function adaire_blocks_hex_to_rgba( $color, $alpha = 1 ) {
+		$color = trim( (string) $color );
+		if ( '' === $color ) {
+			$color = '#000000';
+		}
+
+		$alpha = max( 0, min( 1, floatval( $alpha ) ) );
+		$color = ltrim( $color, '#' );
+
+		if ( 3 === strlen( $color ) ) {
+			$color = preg_replace( '/(.)/', '$1$1', $color );
+		}
+
+		if ( 6 !== strlen( $color ) ) {
+			return sprintf( 'rgba(0, 0, 0, %.3f)', $alpha );
+		}
+
+		$r = hexdec( substr( $color, 0, 2 ) );
+		$g = hexdec( substr( $color, 2, 2 ) );
+		$b = hexdec( substr( $color, 4, 2 ) );
+
+		return sprintf( 'rgba(%d, %d, %d, %.3f)', $r, $g, $b, $alpha );
+	}
 }
 
 // =========================
@@ -135,7 +169,7 @@ add_action('admin_post_my_plugin_rollback', function () {
     }
 
     // URL to the previous version ZIP
-    $previous_version_zip = 'https://github.com/helloadaire/Adaire-Blocks/releases/download/v1.1.7.alpha/adaire-blocks.1.1.7.alpha.zip';
+    $previous_version_zip = 'https://github.com/helloadaire/Adaire-Blocks/releases/download/v1.1.8.alpha/adaire-blocks.1.1.8.alpha.zip';
     error_log('[Adaire Blocks Rollback] Attempting rollback to: ' . $previous_version_zip);
 
     require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
@@ -193,7 +227,7 @@ add_action('admin_notices', function () {
 // End of version rollback code
 
 // Define plugin constants
-define('ADAIRE_BLOCKS_VERSION', '1.1.8');
+define('ADAIRE_BLOCKS_VERSION', '1.1.9');
 define('ADAIRE_BLOCKS_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('ADAIRE_BLOCKS_PLUGIN_PATH', plugin_dir_path(__FILE__));
 
@@ -274,7 +308,7 @@ function adaire_blocks_license_error_notice($message) {
  * Helper function to render blocks with upgrade notices
  * Use this in your render callbacks to automatically handle free/premium differences
  */
-function adaire_render_block_with_notice($block_name, $attributes, $render_callback) {
+function adaire_render_block_with_notice($block_name, $attributes, $render_callback, $content = '') {
     $config = AdaireBlocksConfig::get_instance();
     $license_manager = AdaireBlocksLicense::get_instance();
     
@@ -303,8 +337,20 @@ function adaire_render_block_with_notice($block_name, $attributes, $render_callb
         return $config->render_upgrade_notice($block_name);
     }
     
-    // Render the block normally
-    return call_user_func($render_callback, $attributes);
+    // Render the block, respecting the callback's expected parameters
+    $callable = $render_callback;
+    if (is_array($callable)) {
+        $reflection = new ReflectionMethod($callable[0], $callable[1]);
+    } else {
+        $reflection = new ReflectionFunction($callable);
+    }
+    $param_count = $reflection->getNumberOfParameters();
+
+    if ($param_count >= 2) {
+        return call_user_func($callable, $attributes, $content);
+    }
+
+    return call_user_func($callable, $attributes);
 }
 
 /**
@@ -476,11 +522,12 @@ function render_counter_block($attributes) {
  */
 function render_mega_menu_block($attributes, $content) {
     // Use the helper function to automatically handle upgrade notices
-    return adaire_render_block_with_notice('mega-menu-block', $attributes, function($attrs) use ($content) {
+    return adaire_render_block_with_notice('mega-menu-block', $attributes, function($attrs, $inner_content) {
         // Extract all attributes with defaults
         $block_id = $attrs['blockId'] ?? '';
         $logo_url = $attrs['logoUrl'] ?? '';
         $logo_alt = $attrs['logoAlt'] ?? 'Logo';
+        $logo_link_url = $attrs['logoLinkUrl'] ?? '/';
         $logo_size = $attrs['logoSize'] ?? 40;
         $menu_items = $attrs['menuItems'] ?? array();
         $backgroundColor = $attrs['backgroundColor'] ?? '#ffffff';
@@ -495,11 +542,16 @@ function render_mega_menu_block($attributes, $content) {
         $level1HoverBgColor = $attrs['level1HoverBgColor'] ?? 'transparent';
         $level1HoverPadding = $attrs['level1HoverPadding'] ?? array('top' => 10, 'right' => 5, 'bottom' => 10, 'left' => 5);
         $level2HoverColor = $attrs['level2HoverColor'] ?? '#428aff';
+        $level2HoverTextColorEnabled = $attrs['level2HoverTextColorEnabled'] ?? false;
         $level2ShowHoverUnderline = $attrs['level2ShowHoverUnderline'] ?? true;
         $level2HoverBgColor = $attrs['level2HoverBgColor'] ?? 'rgba(0, 0, 0, 0.05)';
         $level2HoverPadding = $attrs['level2HoverPadding'] ?? array('top' => 8, 'right' => 12, 'bottom' => 8, 'left' => 12);
+        $level2HeaderSpacing = $attrs['level2HeaderSpacing'] ?? 16;
         $level3HoverColor = $attrs['level3HoverColor'] ?? '#428aff';
         $level3ShowHoverUnderline = $attrs['level3ShowHoverUnderline'] ?? true;
+        $level3ItemSpacing = $attrs['level3ItemSpacing'] ?? 8;
+        $level3UnderlineWidth = $attrs['level3UnderlineWidth'] ?? 3;
+        $level3UnderlineColor = $attrs['level3UnderlineColor'] ?? '#428aff';
         $level3HoverBgColor = $attrs['level3HoverBgColor'] ?? 'rgba(0, 0, 0, 0.05)';
         $level3HoverPadding = $attrs['level3HoverPadding'] ?? array('top' => 8, 'right' => 12, 'bottom' => 8, 'left' => 12);
         $level1FontSize = $attrs['level1FontSize'] ?? 16;
@@ -534,12 +586,122 @@ function render_mega_menu_block($attributes, $content) {
         $scrollBackgroundColor = $attrs['scrollBackgroundColor'] ?? '#ffffff';
         $menuItemsColorTop = $attrs['menuItemsColorTop'] ?? '#ffffff';
         $menuItemsColorScroll = $attrs['menuItemsColorScroll'] ?? '#000000';
+        $menuItemsUnderlineColorTop = $attrs['menuItemsUnderlineColorTop'] ?? $level1UnderlineColor;
+        $menuItemsUnderlineColorScroll = $attrs['menuItemsUnderlineColorScroll'] ?? $level1UnderlineColor;
         $menuImageAtTop = $attrs['menuImageAtTop'] ?? '';
         $menuImageAtTopAlt = $attrs['menuImageAtTopAlt'] ?? 'Menu Image at Top';
         $menuImageOnScroll = $attrs['menuImageOnScroll'] ?? '';
         $menuImageOnScrollAlt = $attrs['menuImageOnScrollAlt'] ?? 'Menu Image on Scroll';
         $menuImageSize = $attrs['menuImageSize'] ?? 40;
+        $ribbonEnabled = $attrs['ribbonEnabled'] ?? false;
+        $ribbonText = $attrs['ribbonText'] ?? __("We're celebrating 25 years of innovation.", "mega-menu-block");
+        $ribbonBackgroundColor = $attrs['ribbonBackgroundColor'] ?? '#111111';
+        $ribbonTextColor = $attrs['ribbonTextColor'] ?? '#ffffff';
+        $ribbonFontSize = $attrs['ribbonFontSize'] ?? 14;
+        $ribbonFontWeight = $attrs['ribbonFontWeight'] ?? '500';
+        $ribbonLinkLabel = $attrs['ribbonLinkLabel'] ?? __("Learn more", "mega-menu-block");
+        $ribbonLinkUrl = $attrs['ribbonLinkUrl'] ?? '';
+        $ribbonLinkColor = $attrs['ribbonLinkColor'] ?? '#ffffff';
+        $ribbonLinkFontWeight = $attrs['ribbonLinkFontWeight'] ?? '600';
+        $ribbonLinkOpenInNewTab = $attrs['ribbonLinkOpenInNewTab'] ?? false;
+        $ribbonHeight = $attrs['ribbonHeight'] ?? 48;
+        $ribbonPaddingTop = $attrs['ribbonPaddingTop'] ?? 8;
+        $ribbonPaddingBottom = $attrs['ribbonPaddingBottom'] ?? 8;
         $centerMenu = $attrs['centerMenu'] ?? true;
+        $ctaButtonEnabled = $attrs['ctaButtonEnabled'] ?? true;
+        $ctaButtonText = $attrs['ctaButtonText'] ?? __('Contact us', 'mega-menu-block');
+        $ctaButtonLink = $attrs['ctaButtonLink'] ?? '#';
+        $ctaButtonOpenInNewTab = $attrs['ctaButtonOpenInNewTab'] ?? false;
+        $ctaButtonShowIcon = $attrs['ctaButtonShowIcon'] ?? true;
+        $ctaButtonStyle = $attrs['ctaButtonStyle'] ?? 'border';
+        $ctaButtonHoverAnimation = $attrs['ctaButtonHoverAnimation'] ?? 'none';
+        $ctaButtonFontSize = $attrs['ctaButtonFontSize'] ?? 16;
+        $ctaButtonFontWeight = $attrs['ctaButtonFontWeight'] ?? '600';
+        $ctaButtonColor = $attrs['ctaButtonColor'] ?? '#111111';
+        $ctaButtonBackgroundColor = $attrs['ctaButtonBackgroundColor'] ?? 'transparent';
+        $ctaButtonHoverColor = $attrs['ctaButtonHoverColor'] ?? '#ffffff';
+        $ctaButtonHoverBackgroundColor = $attrs['ctaButtonHoverBackgroundColor'] ?? '#111111';
+        $ctaButtonUnderlineColor = $attrs['ctaButtonUnderlineColor'] ?? '#111111';
+        $ctaButtonBlurAmount = $attrs['ctaButtonBlurAmount'] ?? 0;
+        $ctaButtonBorderRadius = $attrs['ctaButtonBorderRadius'] ?? 999;
+        $ctaButtonBorderWidth = $attrs['ctaButtonBorderWidth'] ?? 1;
+        $ctaButtonBorderColor = $attrs['ctaButtonBorderColor'] ?? '#111111';
+        $ctaButtonHoverBorderColor = $attrs['ctaButtonHoverBorderColor'] ?? '#111111';
+        $ctaButtonBorderStyle = $attrs['ctaButtonBorderStyle'] ?? 'solid';
+        $ctaButtonPadding = $attrs['ctaButtonPadding'] ?? array(
+            'top' => '10px',
+            'right' => '24px',
+            'bottom' => '10px',
+            'left' => '24px',
+        );
+        $ctaButtonMargin = $attrs['ctaButtonMargin'] ?? array(
+            'top' => '0px',
+            'right' => '0px',
+            'bottom' => '0px',
+            'left' => '0px',
+        );
+        $ctaButtonColorScroll = $attrs['ctaButtonColorScroll'] ?? '#ffffff';
+        $ctaButtonBackgroundColorScroll = $attrs['ctaButtonBackgroundColorScroll'] ?? '#111111';
+        $ctaButtonBorderColorScroll = $attrs['ctaButtonBorderColorScroll'] ?? '#111111';
+        $ctaButtonHoverColorScroll = $attrs['ctaButtonHoverColorScroll'] ?? '#111111';
+        $ctaButtonHoverBackgroundColorScroll = $attrs['ctaButtonHoverBackgroundColorScroll'] ?? '#ffffff';
+        $ctaButtonHoverBorderColorScroll = $attrs['ctaButtonHoverBorderColorScroll'] ?? '#ffffff';
+        $ctaMobileUseSeparateStyles = $attrs['ctaMobileUseSeparateStyles'] ?? false;
+        $ctaMobileButtonColor = $attrs['ctaMobileButtonColor'] ?? '';
+        $ctaMobileButtonBackgroundColor = $attrs['ctaMobileButtonBackgroundColor'] ?? '';
+        $ctaMobileButtonBorderColor = $attrs['ctaMobileButtonBorderColor'] ?? '';
+        $ctaMobileButtonHoverColor = $attrs['ctaMobileButtonHoverColor'] ?? '';
+        $ctaMobileButtonHoverBackgroundColor = $attrs['ctaMobileButtonHoverBackgroundColor'] ?? '';
+        $ctaMobileButtonHoverBorderColor = $attrs['ctaMobileButtonHoverBorderColor'] ?? '';
+        $ctaMobileButtonBorderRadius = $attrs['ctaMobileButtonBorderRadius'] ?? 999;
+        $ctaMobileButtonBorderWidth = $attrs['ctaMobileButtonBorderWidth'] ?? 1;
+        $ctaMobileButtonPadding = $attrs['ctaMobileButtonPadding'] ?? array(
+            'top' => '10px',
+            'right' => '24px',
+            'bottom' => '10px',
+            'left' => '24px',
+        );
+        $ctaMobileButtonFontSize = $attrs['ctaMobileButtonFontSize'] ?? 16;
+        $ctaMobileButtonFontWeight = $attrs['ctaMobileButtonFontWeight'] ?? '';
+        $ctaMobileButtonShowIcon = array_key_exists('ctaMobileButtonShowIcon', $attrs) ? $attrs['ctaMobileButtonShowIcon'] : true;
+        $ctaMobileButtonStyle = $attrs['ctaMobileButtonStyle'] ?? 'inherit';
+        $ctaMobileButtonHoverAnimation = $attrs['ctaMobileButtonHoverAnimation'] ?? 'inherit';
+        $menuPanelGap = $attrs['menuPanelGap'] ?? 16;
+        $menuPanelPaddingBottom = $attrs['menuPanelPaddingBottom'] ?? 16;
+        $canvasBannerBackgroundColor = $attrs['canvasBannerBackgroundColor'] ?? '#ff3131';
+        $canvasBannerWidth = $attrs['canvasBannerWidth'] ?? 100;
+        $canvasBannerPaddingTop = $attrs['canvasBannerPaddingTop'] ?? 10;
+        $canvasBannerPaddingBottom = $attrs['canvasBannerPaddingBottom'] ?? 10;
+        $canvasBannerPaddingLeft = $attrs['canvasBannerPaddingLeft'] ?? 20;
+        $canvasBannerPaddingRight = $attrs['canvasBannerPaddingRight'] ?? 20;
+        $canvasBannerTitleFontSize = $attrs['canvasBannerTitleFontSize'] ?? 30;
+        $canvasBannerTitleColor = $attrs['canvasBannerTitleColor'] ?? '#ffffff';
+        $canvasBannerTitleFontWeight = $attrs['canvasBannerTitleFontWeight'] ?? '300';
+        $canvasBannerDescriptionFontSize = $attrs['canvasBannerDescriptionFontSize'] ?? 20;
+        $canvasBannerDescriptionColor = $attrs['canvasBannerDescriptionColor'] ?? '#ffffff';
+        $canvasBannerDescriptionFontWeight = $attrs['canvasBannerDescriptionFontWeight'] ?? '300';
+        $canvasListPaddingLeft = $attrs['canvasListPaddingLeft'] ?? 20;
+        $canvasListPaddingRight = $attrs['canvasListPaddingRight'] ?? 20;
+        $canvasStoryTitleFontSize = $attrs['canvasStoryTitleFontSize'] ?? 28;
+        $canvasStoryTitleFontWeight = $attrs['canvasStoryTitleFontWeight'] ?? '600';
+        $canvasStoryTitleColor = $attrs['canvasStoryTitleColor'] ?? '#1a1a1a';
+        $canvasStoryTitleMarginTop = $attrs['canvasStoryTitleMarginTop'] ?? 0;
+        $canvasStoryTitleMarginBottom = $attrs['canvasStoryTitleMarginBottom'] ?? 12;
+        $canvasStoryDescriptionFontSize = $attrs['canvasStoryDescriptionFontSize'] ?? 16;
+        $canvasStoryDescriptionFontWeight = $attrs['canvasStoryDescriptionFontWeight'] ?? '400';
+        $canvasStoryDescriptionColor = $attrs['canvasStoryDescriptionColor'] ?? '#3d3d3d';
+        $canvasStoryDescriptionMarginTop = $attrs['canvasStoryDescriptionMarginTop'] ?? 12;
+        $canvasStoryDescriptionMarginBottom = $attrs['canvasStoryDescriptionMarginBottom'] ?? 16;
+        $canvasStoryLinkFontSize = $attrs['canvasStoryLinkFontSize'] ?? 15;
+        $canvasStoryLinkFontWeight = $attrs['canvasStoryLinkFontWeight'] ?? '600';
+        $canvasStoryLinkColor = $attrs['canvasStoryLinkColor'] ?? '#4b2aad';
+        $canvasStoryLinkMarginTop = $attrs['canvasStoryLinkMarginTop'] ?? 6;
+        $canvasStoryLinkMarginBottom = $attrs['canvasStoryLinkMarginBottom'] ?? 0;
+        $canvasStoryDividerEnabled = $attrs['canvasStoryDividerEnabled'] ?? false;
+        $canvasStoryDividerWidth = $attrs['canvasStoryDividerWidth'] ?? 2;
+        $canvasStoryDividerHeight = $attrs['canvasStoryDividerHeight'] ?? 70;
+        $canvasStoryDividerColor = $attrs['canvasStoryDividerColor'] ?? '#d7d7d7';
+        $canvasStoryDividerAlpha = $attrs['canvasStoryDividerAlpha'] ?? 0.4;
         $mobileMenuBgColor = $attrs['mobileMenuBgColor'] ?? '#ffffff';
         $mobileLevel1FontSize = $attrs['mobileLevel1FontSize'] ?? 16;
         $mobileLevel1FontWeight = $attrs['mobileLevel1FontWeight'] ?? '600';
@@ -554,9 +716,12 @@ function render_mega_menu_block($attributes, $content) {
         $mobileMenuItemHoverBgColor = $attrs['mobileMenuItemHoverBgColor'] ?? '#f8f8f8';
         $mobileChevronSize = $attrs['mobileChevronSize'] ?? 20;
         $mobileChevronColor = $attrs['mobileChevronColor'] ?? '#666666';
+        $mobileMenuIconColor = $attrs['mobileMenuIconColor'] ?? '#111111';
+        $mobileMenuIconColorScroll = $attrs['mobileMenuIconColorScroll'] ?? '#ffffff';
+        $menuDropdownOffset = $attrs['menuDropdownOffset'] ?? 70;
 
         // Helper function to get level colors
-        $getLevelColors = function($level) use ($level1HoverColor, $level1ShowHoverUnderline, $level1UnderlineWidth, $level1UnderlineColor, $level1UnderlineBorderRadius, $level1FontSize, $level1FontWeight, $level1FontColor, $level2HoverColor, $level2ShowHoverUnderline, $level2FontSize, $level2FontWeight, $level2FontColor, $level3HoverColor, $level3ShowHoverUnderline, $level3FontSize, $level3FontWeight, $level3FontColor) {
+        $getLevelColors = function($level) use ($level1HoverColor, $level1ShowHoverUnderline, $level1UnderlineWidth, $level1UnderlineColor, $level1UnderlineBorderRadius, $level1FontSize, $level1FontWeight, $level1FontColor, $level2HoverColor, $level2ShowHoverUnderline, $level2FontSize, $level2FontWeight, $level2FontColor, $level3HoverColor, $level3ShowHoverUnderline, $level3UnderlineWidth, $level3UnderlineColor, $level3FontSize, $level3FontWeight, $level3FontColor) {
             switch ($level) {
                 case 0:
                     return array(
@@ -581,6 +746,9 @@ function render_mega_menu_block($attributes, $content) {
                     return array(
                         'hoverColor' => $level3HoverColor,
                         'showHoverUnderline' => $level3ShowHoverUnderline,
+                        'underlineWidth' => $level3UnderlineWidth,
+                        'underlineColor' => $level3UnderlineColor,
+                        'underlineBorderRadius' => 0,
                         'fontSize' => $level3FontSize,
                         'fontWeight' => $level3FontWeight,
                         'fontColor' => $level3FontColor,
@@ -664,6 +832,9 @@ function render_mega_menu_block($attributes, $content) {
             '--mobile-menu-item-hover-bg' => $mobileMenuItemHoverBgColor,
             '--mobile-chevron-size' => $mobileChevronSize . 'px',
             '--mobile-chevron-color' => $mobileChevronColor,
+            '--mobile-menu-icon-color' => $mobileMenuIconColor,
+            '--mobile-menu-icon-color-scroll' => $mobileMenuIconColorScroll ?: $mobileMenuIconColor,
+            '--mobile-menu-icon-color-current' => $mobileMenuIconColor,
             '--level1-hover-bg-color' => $level1HoverBgColor,
             '--level1-hover-padding-top' => ($level1HoverPadding['top'] ?? 10) . 'px',
             '--level1-hover-padding-right' => ($level1HoverPadding['right'] ?? 5) . 'px',
@@ -675,11 +846,143 @@ function render_mega_menu_block($attributes, $content) {
             '--level2-hover-padding-right' => ($level2HoverPadding['right'] ?? 12) . 'px',
             '--level2-hover-padding-bottom' => ($level2HoverPadding['bottom'] ?? 8) . 'px',
             '--level2-hover-padding-left' => ($level2HoverPadding['left'] ?? 12) . 'px',
+            '--level2-header-spacing' => $level2HeaderSpacing . 'px',
             '--level3-hover-bg-color' => $level3HoverBgColor,
             '--level3-hover-padding-top' => ($level3HoverPadding['top'] ?? 8) . 'px',
             '--level3-hover-padding-right' => ($level3HoverPadding['right'] ?? 12) . 'px',
             '--level3-hover-padding-bottom' => ($level3HoverPadding['bottom'] ?? 8) . 'px',
             '--level3-hover-padding-left' => ($level3HoverPadding['left'] ?? 12) . 'px',
+            '--level3-item-spacing' => $level3ItemSpacing . 'px',
+            '--menu-items-underline-color-top' => $menuItemsUnderlineColorTop ?? $level1UnderlineColor,
+            '--menu-items-underline-color-scroll' => $menuItemsUnderlineColorScroll ?? $level1UnderlineColor,
+            '--ribbon-bg-color' => $ribbonBackgroundColor,
+            '--ribbon-text-color' => $ribbonTextColor,
+            '--ribbon-font-size' => $ribbonFontSize . 'px',
+            '--ribbon-font-weight' => $ribbonFontWeight,
+            '--ribbon-link-color' => $ribbonLinkColor,
+            '--ribbon-link-font-weight' => $ribbonLinkFontWeight ?? '600',
+            '--ribbon-height' => $ribbonHeight . 'px',
+            '--mega-menu-navbar-offset' => $ribbonEnabled ? $ribbonHeight . 'px' : '0px',
+            '--ribbon-padding-top' => $ribbonPaddingTop . 'px',
+            '--ribbon-padding-bottom' => $ribbonPaddingBottom . 'px',
+            '--mega-menu-dropdown-top' => $menuDropdownOffset . 'px',
+            '--cta-button-color-top' => $ctaButtonColor,
+            '--cta-button-color-scroll' => $ctaButtonColorScroll ?: $ctaButtonColor,
+            '--cta-button-bg-top' => $ctaButtonBackgroundColor,
+            '--cta-button-bg-scroll' => $ctaButtonBackgroundColorScroll ?: $ctaButtonBackgroundColor,
+            '--cta-button-border-color-top' => $ctaButtonBorderColor,
+            '--cta-button-border-color-scroll' => $ctaButtonBorderColorScroll ?: $ctaButtonBorderColor,
+            '--cta-button-hover-color-top' => $ctaButtonHoverColor,
+            '--cta-button-hover-color-scroll' => $ctaButtonHoverColorScroll ?: $ctaButtonHoverColor,
+            '--cta-button-hover-bg-top' => $ctaButtonHoverBackgroundColor ?: $ctaButtonBackgroundColor,
+            '--cta-button-hover-bg-scroll' => $ctaButtonHoverBackgroundColorScroll ?: $ctaButtonHoverBackgroundColor ?: $ctaButtonBackgroundColor,
+            '--cta-button-hover-border-color-top' => $ctaButtonHoverBorderColor ?: $ctaButtonBorderColor,
+            '--cta-button-hover-border-color-scroll' => $ctaButtonHoverBorderColorScroll ?: $ctaButtonHoverBorderColor ?: $ctaButtonBorderColor,
+            '--cta-button-underline-color' => $ctaButtonUnderlineColor,
+            '--cta-button-font-size' => $ctaButtonFontSize . 'px',
+            '--cta-button-font-weight-top' => $ctaButtonFontWeight,
+            '--cta-button-font-weight-scroll' => $ctaButtonFontWeight,
+            '--cta-button-blur' => $ctaButtonBlurAmount . 'px',
+            '--cta-button-border-radius' => $ctaButtonBorderRadius . 'px',
+            '--cta-button-border-width' => $ctaButtonBorderWidth . 'px',
+            '--cta-button-border-style' => $ctaButtonBorderStyle,
+            '--cta-button-padding-top' => $ctaButtonPadding['top'] ?? '10px',
+            '--cta-button-padding-right' => $ctaButtonPadding['right'] ?? '24px',
+            '--cta-button-padding-bottom' => $ctaButtonPadding['bottom'] ?? '10px',
+            '--cta-button-padding-left' => $ctaButtonPadding['left'] ?? '24px',
+            '--cta-button-margin-top' => $ctaButtonMargin['top'] ?? '0px',
+            '--cta-button-margin-right' => $ctaButtonMargin['right'] ?? '0px',
+            '--cta-button-margin-bottom' => $ctaButtonMargin['bottom'] ?? '0px',
+            '--cta-button-margin-left' => $ctaButtonMargin['left'] ?? '0px',
+            '--cta-button-color-current' => $ctaButtonColor,
+            '--cta-button-bg-current' => $ctaButtonBackgroundColor,
+            '--cta-button-border-color-current' => $ctaButtonBorderColor,
+            '--cta-button-hover-color-current' => $ctaButtonHoverColor,
+            '--cta-button-hover-bg-current' => $ctaButtonHoverBackgroundColor ?: $ctaButtonBackgroundColor,
+            '--cta-button-hover-border-color-current' => $ctaButtonHoverBorderColor ?: $ctaButtonBorderColor,
+            '--cta-mobile-button-color' => $ctaMobileUseSeparateStyles
+                ? ($ctaMobileButtonColor !== '' ? $ctaMobileButtonColor : ($ctaButtonColorScroll ?: $ctaButtonColor ?: '#111111'))
+                : ($ctaButtonColorScroll ?: $ctaButtonColor ?: '#111111'),
+            '--cta-mobile-button-bg' => $ctaMobileUseSeparateStyles
+                ? ($ctaMobileButtonBackgroundColor !== '' ? $ctaMobileButtonBackgroundColor : ($ctaButtonBackgroundColorScroll ?: $ctaButtonBackgroundColor ?: 'transparent'))
+                : ($ctaButtonBackgroundColorScroll ?: $ctaButtonBackgroundColor ?: 'transparent'),
+            '--cta-mobile-button-border-color' => $ctaMobileUseSeparateStyles
+                ? ($ctaMobileButtonBorderColor !== '' ? $ctaMobileButtonBorderColor : ($ctaButtonBorderColorScroll ?: $ctaButtonBorderColor ?: '#111111'))
+                : ($ctaButtonBorderColorScroll ?: $ctaButtonBorderColor ?: '#111111'),
+            '--cta-mobile-button-hover-color' => $ctaMobileUseSeparateStyles
+                ? ($ctaMobileButtonHoverColor !== '' ? $ctaMobileButtonHoverColor : ($ctaButtonHoverColorScroll ?: $ctaButtonHoverColor ?: '#ffffff'))
+                : ($ctaButtonHoverColorScroll ?: $ctaButtonHoverColor ?: '#ffffff'),
+            '--cta-mobile-button-hover-bg' => $ctaMobileUseSeparateStyles
+                ? ($ctaMobileButtonHoverBackgroundColor !== '' ? $ctaMobileButtonHoverBackgroundColor : ($ctaButtonHoverBackgroundColorScroll ?: $ctaButtonHoverBackgroundColor ?: $ctaButtonBackgroundColor ?: 'transparent'))
+                : ($ctaButtonHoverBackgroundColorScroll ?: $ctaButtonHoverBackgroundColor ?: $ctaButtonBackgroundColor ?: 'transparent'),
+            '--cta-mobile-button-hover-border-color' => $ctaMobileUseSeparateStyles
+                ? ($ctaMobileButtonHoverBorderColor !== '' ? $ctaMobileButtonHoverBorderColor : ($ctaButtonHoverBorderColorScroll ?: $ctaButtonHoverBorderColor ?: $ctaButtonBorderColor))
+                : ($ctaButtonHoverBorderColorScroll ?: $ctaButtonHoverBorderColor ?: $ctaButtonBorderColor),
+            '--cta-mobile-button-border-radius' => ($ctaMobileUseSeparateStyles
+                ? ($ctaMobileButtonBorderRadius ?? $ctaButtonBorderRadius ?? 999)
+                : ($ctaButtonBorderRadius ?? 999)) . 'px',
+            '--cta-mobile-button-border-width' => ($ctaMobileUseSeparateStyles
+                ? ($ctaMobileButtonBorderWidth ?? $ctaButtonBorderWidth ?? 1)
+                : ($ctaButtonBorderWidth ?? 1)) . 'px',
+            '--cta-mobile-button-padding-top' => $ctaMobileUseSeparateStyles
+                ? ($ctaMobileButtonPadding['top'] ?? $ctaButtonPadding['top'] ?? '10px')
+                : ($ctaButtonPadding['top'] ?? '10px'),
+            '--cta-mobile-button-padding-right' => $ctaMobileUseSeparateStyles
+                ? ($ctaMobileButtonPadding['right'] ?? $ctaButtonPadding['right'] ?? '24px')
+                : ($ctaButtonPadding['right'] ?? '24px'),
+            '--cta-mobile-button-padding-bottom' => $ctaMobileUseSeparateStyles
+                ? ($ctaMobileButtonPadding['bottom'] ?? $ctaButtonPadding['bottom'] ?? '10px')
+                : ($ctaButtonPadding['bottom'] ?? '10px'),
+            '--cta-mobile-button-padding-left' => $ctaMobileUseSeparateStyles
+                ? ($ctaMobileButtonPadding['left'] ?? $ctaButtonPadding['left'] ?? '24px')
+                : ($ctaButtonPadding['left'] ?? '24px'),
+            '--cta-mobile-button-font-size' => ($ctaMobileUseSeparateStyles
+                ? ($ctaMobileButtonFontSize ?? $ctaButtonFontSize ?? 16)
+                : ($ctaButtonFontSize ?? 16)) . 'px',
+            '--cta-mobile-button-font-weight' => $ctaMobileUseSeparateStyles
+                ? ($ctaMobileButtonFontWeight !== '' ? $ctaMobileButtonFontWeight : ($ctaButtonFontWeight ?? '600'))
+                : ($ctaButtonFontWeight ?? '600'),
+            '--menu-panel-gap' => ($menuPanelGap ?? 16) . 'px',
+            '--menu-panel-padding-bottom' => ($menuPanelPaddingBottom ?? 16) . 'px',
+            '--canvas-banner-bg-color' => $canvasBannerBackgroundColor ?: '#ff3131',
+            '--canvas-banner-width' => ($canvasBannerWidth ?? 100) . '%',
+            '--canvas-banner-padding-top' => ($canvasBannerPaddingTop ?? 10) . 'px',
+            '--canvas-banner-padding-bottom' => ($canvasBannerPaddingBottom ?? 10) . 'px',
+            '--canvas-banner-padding-left' => ($canvasBannerPaddingLeft ?? 20) . 'px',
+            '--canvas-banner-padding-right' => ($canvasBannerPaddingRight ?? 20) . 'px',
+            '--canvas-banner-title-font-size' => ($canvasBannerTitleFontSize ?? 30) . 'px',
+            '--canvas-banner-title-color' => $canvasBannerTitleColor ?: '#ffffff',
+            '--canvas-banner-title-font-weight' => $canvasBannerTitleFontWeight ?: '300',
+            '--canvas-banner-description-font-size' => ($canvasBannerDescriptionFontSize ?? 20) . 'px',
+            '--canvas-banner-description-color' => $canvasBannerDescriptionColor ?: '#ffffff',
+            '--canvas-banner-description-font-weight' => $canvasBannerDescriptionFontWeight ?: '300',
+            '--canvas-list-padding-left' => ($canvasListPaddingLeft ?? 20) . 'px',
+            '--canvas-list-padding-right' => ($canvasListPaddingRight ?? 20) . 'px',
+            '--canvas-story-title-font-size' => ($canvasStoryTitleFontSize ?? 28) . 'px',
+            '--canvas-story-title-font-weight' => $canvasStoryTitleFontWeight ?? '600',
+            '--canvas-story-title-color' => $canvasStoryTitleColor ?? '#1a1a1a',
+            '--canvas-story-title-margin-top' => ($canvasStoryTitleMarginTop ?? 0) . 'px',
+            '--canvas-story-title-margin-bottom' => ($canvasStoryTitleMarginBottom ?? 12) . 'px',
+            '--canvas-story-description-font-size' => ($canvasStoryDescriptionFontSize ?? 16) . 'px',
+            '--canvas-story-description-font-weight' => $canvasStoryDescriptionFontWeight ?? '400',
+            '--canvas-story-description-color' => $canvasStoryDescriptionColor ?? '#3d3d3d',
+            '--canvas-story-description-margin-top' => ($canvasStoryDescriptionMarginTop ?? 12) . 'px',
+            '--canvas-story-description-margin-bottom' => ($canvasStoryDescriptionMarginBottom ?? 16) . 'px',
+            '--canvas-story-link-font-size' => ($canvasStoryLinkFontSize ?? 15) . 'px',
+            '--canvas-story-link-font-weight' => $canvasStoryLinkFontWeight ?? '600',
+            '--canvas-story-link-color' => $canvasStoryLinkColor ?? '#4b2aad',
+            '--canvas-story-link-margin-top' => ($canvasStoryLinkMarginTop ?? 6) . 'px',
+            '--canvas-story-link-margin-bottom' => ($canvasStoryLinkMarginBottom ?? 0) . 'px',
+            '--canvas-story-link-hover-color' => $canvasStoryLinkHoverColor ?? $canvasStoryLinkColor ?? '#4b2aad',
+            '--canvas-story-link-underline-color' => $canvasStoryLinkUnderlineColor ?? $canvasStoryLinkColor ?? '#4b2aad',
+            '--canvas-story-link-underline-height' => ($canvasStoryLinkUnderlineHeight ?? 2) . 'px',
+            '--canvas-story-link-underline-radius' => ($canvasStoryLinkUnderlineBorderRadius ?? 0) . 'px',
+            '--canvas-story-divider-width' => ($canvasStoryDividerWidth ?? 2) . 'px',
+            '--canvas-story-divider-height' => ($canvasStoryDividerHeight ?? 70) . '%',
+            '--canvas-story-divider-color' => adaire_blocks_hex_to_rgba(
+                $canvasStoryDividerColor ?? '#d7d7d7',
+                $canvasStoryDividerAlpha ?? 0.4
+            ),
         );
 
         $style_string = '';
@@ -687,9 +990,108 @@ function render_mega_menu_block($attributes, $content) {
             $style_string .= esc_attr($prop) . ':' . esc_attr($value) . ';';
         }
 
+        $render_cta_button = function( $extra_class = '', $is_mobile = false ) use (
+            $ctaButtonEnabled,
+            $ctaButtonText,
+            $ctaButtonLink,
+            $ctaButtonOpenInNewTab,
+            $ctaButtonShowIcon,
+            $ctaButtonStyle,
+            $ctaButtonHoverAnimation,
+            $ctaMobileUseSeparateStyles,
+            $ctaMobileButtonStyle,
+            $ctaMobileButtonHoverAnimation,
+            $ctaMobileButtonShowIcon
+        ) {
+            if ( ! $ctaButtonEnabled ) {
+                return '';
+            }
+
+            $button_style = $ctaButtonStyle ?: 'underline';
+            $hover_animation = $ctaButtonHoverAnimation ?: 'none';
+            $show_icon = $ctaButtonShowIcon !== false;
+
+            if ( $is_mobile && $ctaMobileUseSeparateStyles ) {
+                if ( ! empty( $ctaMobileButtonStyle ) && 'inherit' !== $ctaMobileButtonStyle ) {
+                    $button_style = $ctaMobileButtonStyle;
+                }
+                if ( ! empty( $ctaMobileButtonHoverAnimation ) && 'inherit' !== $ctaMobileButtonHoverAnimation ) {
+                    $hover_animation = $ctaMobileButtonHoverAnimation;
+                }
+                $show_icon = $ctaMobileButtonShowIcon !== false;
+            }
+
+            if ( ! $button_style || 'inherit' === $button_style ) {
+                $button_style = $ctaButtonStyle ?: 'underline';
+            }
+
+            if ( ! $hover_animation ) {
+                $hover_animation = 'none';
+            }
+
+            $classes = array(
+                'adaire-mega-menu__action-button',
+            );
+
+            $classes[] = 'adaire-mega-menu__action-button--' . sanitize_html_class( $button_style );
+
+            if ( $hover_animation && 'none' !== $hover_animation ) {
+                $classes[] = 'adaire-mega-menu__action-button--' . sanitize_html_class( $hover_animation );
+            }
+
+            if ( ! empty( $extra_class ) ) {
+                $classes[] = $extra_class;
+            }
+
+            ob_start();
+            ?>
+            <a
+                class="<?php echo esc_attr( implode( ' ', $classes ) ); ?>"
+                href="<?php echo esc_url( $ctaButtonLink ?: '#' ); ?>"
+                <?php if ( $ctaButtonOpenInNewTab ) : ?>
+                    target="_blank" rel="noopener noreferrer"
+                <?php endif; ?>
+            >
+                <span class="adaire-mega-menu__action-button-label">
+                    <?php echo esc_html( $ctaButtonText ); ?>
+                </span>
+                <?php if ( $show_icon ) : ?>
+                    <span class="adaire-mega-menu__action-button-icon" aria-hidden="true">
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M7 17L17 7M17 7H7M17 7V17"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            />
+                        </svg>
+                    </span>
+                <?php endif; ?>
+            </a>
+            <?php
+            return ob_get_clean();
+        };
+
         ob_start();
+        $root_classes = array(
+            'adaire-mega-menu',
+            'wp-block-create-block-mega-menu-block',
+            'testagain',
+        );
+
+        if ( $level2HoverTextColorEnabled ) {
+            $root_classes[] = 'adaire-mega-menu--level2-hover-text';
+        }
+
         ?>
-        <div class="adaire-mega-menu wp-block-create-block-mega-menu-block testagain" 
+        <div class="<?php echo esc_attr( implode( ' ', $root_classes ) ); ?>" 
              style="<?php echo esc_attr($style_string); ?>"
              data-block-id="<?php echo esc_attr($block_id); ?>"
              data-sticky="<?php echo esc_attr($isSticky ? 'true' : 'false'); ?>"
@@ -697,33 +1099,49 @@ function render_mega_menu_block($attributes, $content) {
              data-increase-opacity="<?php echo esc_attr($increaseOpacity ? 'true' : 'false'); ?>"
              data-scroll-bg-color="<?php echo esc_attr($scrollBackgroundColor); ?>"
              data-menu-item-color-top="<?php echo esc_attr($menuItemsColorTop); ?>"
-             data-menu-items-color-scroll="<?php echo esc_attr($menuItemsColorScroll); ?>"
+            data-menu-items-color-scroll="<?php echo esc_attr($menuItemsColorScroll); ?>"
+            data-menu-items-underline-color-top="<?php echo esc_attr($menuItemsUnderlineColorTop); ?>"
+            data-menu-items-underline-color-scroll="<?php echo esc_attr($menuItemsUnderlineColorScroll); ?>"
              data-menu-image-at-top="<?php echo esc_attr($menuImageAtTop); ?>"
              data-menu-image-on-scroll="<?php echo esc_attr($menuImageOnScroll); ?>">
             <div class="adaire-mega-menu__container testagain">
+                <?php if ( $ribbonEnabled ) : ?>
+                    <div class="adaire-mega-menu__ribbon">
+                        <div class="adaire-mega-menu__ribbon-content">
+                            <span class="adaire-mega-menu__ribbon-text"><?php echo esc_html( $ribbonText ); ?></span>
+                            <?php if ( ! empty( $ribbonLinkUrl ) ) : ?>
+                                <a class="adaire-mega-menu__ribbon-link" href="<?php echo esc_url( $ribbonLinkUrl ); ?>" <?php if ( $ribbonLinkOpenInNewTab ) : ?>target="_blank" rel="noopener noreferrer"<?php endif; ?>>
+                                    <?php echo esc_html( $ribbonLinkLabel ?: __( 'Learn more', 'mega-menu-block' ) ); ?>
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
                 <nav class="adaire-mega-menu__navbar <?php echo ($containerMode === 'constrained' ? 'is-constrained' : ''); ?> <?php echo ($containerMode === 'constrained' && $centerMenu ? 'center-menu' : ''); ?>">
                     <div class="adaire-mega-menu__brand">
-                        <?php if ($menuImageAtTop): ?>
-                            <img src="<?php echo esc_url($menuImageAtTop); ?>" 
-                                 alt="<?php echo esc_attr($menuImageAtTopAlt); ?>" 
-                                 class="adaire-mega-menu__menu-image adaire-mega-menu__menu-image--top"
-                                 style="--mega-menu-image-size: <?php echo esc_attr($menuImageSize); ?>px;">
-                        <?php endif; ?>
-                        <?php if ($menuImageOnScroll): ?>
-                            <img src="<?php echo esc_url($menuImageOnScroll); ?>" 
-                                 alt="<?php echo esc_attr($menuImageOnScrollAlt); ?>" 
-                                 class="adaire-mega-menu__menu-image adaire-mega-menu__menu-image--scroll"
-                                 style="--mega-menu-image-size: <?php echo esc_attr($menuImageSize); ?>px;">
-                        <?php endif; ?>
-                        <?php if (!$menuImageAtTop && !$menuImageOnScroll): ?>
-                            <?php if ($logo_url): ?>
-                                <img src="<?php echo esc_url($logo_url); ?>" 
-                                     alt="<?php echo esc_attr($logo_alt); ?>" 
-                                     class="adaire-mega-menu__logo">
-                            <?php else: ?>
-                                <span class="adaire-mega-menu__brand-text">Brand</span>
+                        <a class="adaire-mega-menu__brand-link" href="<?php echo esc_url( $logo_link_url ?: '/' ); ?>">
+                            <?php if ($menuImageAtTop): ?>
+                                <img src="<?php echo esc_url($menuImageAtTop); ?>" 
+                                     alt="<?php echo esc_attr($menuImageAtTopAlt); ?>" 
+                                     class="adaire-mega-menu__menu-image adaire-mega-menu__menu-image--top"
+                                     style="--mega-menu-image-size: <?php echo esc_attr($menuImageSize); ?>px;">
                             <?php endif; ?>
-                        <?php endif; ?>
+                            <?php if ($menuImageOnScroll): ?>
+                                <img src="<?php echo esc_url($menuImageOnScroll); ?>" 
+                                     alt="<?php echo esc_attr($menuImageOnScrollAlt); ?>" 
+                                     class="adaire-mega-menu__menu-image adaire-mega-menu__menu-image--scroll"
+                                     style="--mega-menu-image-size: <?php echo esc_attr($menuImageSize); ?>px;">
+                            <?php endif; ?>
+                            <?php if (!$menuImageAtTop && !$menuImageOnScroll): ?>
+                                <?php if ($logo_url): ?>
+                                    <img src="<?php echo esc_url($logo_url); ?>" 
+                                         alt="<?php echo esc_attr($logo_alt); ?>" 
+                                         class="adaire-mega-menu__logo">
+                                <?php else: ?>
+                                    <span class="adaire-mega-menu__brand-text">Brand</span>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </a>
                     </div>
 
                     <div class="adaire-mega-menu__menu-container">
@@ -741,12 +1159,24 @@ function render_mega_menu_block($attributes, $content) {
                                 $item_canvas_image_position = $item['canvasImagePosition'] ?? 'left';
                                 $item_canvas_image_width = $item['canvasImageWidth'] ?? array('desktop' => array('value' => 300, 'unit' => 'px'));
                                 $item_canvas_image_height = $item['canvasImageHeight'] ?? array('desktop' => array('value' => 200, 'unit' => 'px'));
+                                $item_banner_description = $item['bannerDescription'] ?? '';
+                                $item_canvas_story_title = $item['canvasStoryTitle'] ?? '';
+                                $item_canvas_story_description = $item['canvasStoryDescription'] ?? '';
+                                $item_canvas_story_link_label = $item['canvasStoryLinkLabel'] ?? '';
+                                $item_canvas_story_link_url = $item['canvasStoryLinkUrl'] ?? '';
+                                $item_canvas_story_link_new_tab = $item['canvasStoryLinkOpenInNewTab'] ?? false;
+                                $item_canvas_banner_enabled = array_key_exists('canvasBannerEnabled', $item) ? (bool) $item['canvasBannerEnabled'] : true;
+                                $item_canvas_is_smallest = ! empty( $item['canvasIsSmallest'] );
+                                $should_render_canvas_story = ! empty( $item_canvas_image_url )
+                                    || '' !== trim( (string) $item_canvas_story_title )
+                                    || '' !== trim( (string) $item_canvas_story_description )
+                                    || '' !== trim( (string) $item_canvas_story_link_label );
                             ?>
                                 <li class="adaire-mega-menu__dropdown">
                                     <a href="<?php echo esc_url($item_url); ?>" 
                                        class="adaire-mega-menu__dropdown-header"
                                        <?php if ($item_open_in_new_tab): ?>target="_blank" rel="noopener noreferrer"<?php endif; ?>
-                                       style="font-size: <?php echo esc_attr($level0Colors['fontSize']); ?>px; font-weight: <?php echo esc_attr($level0Colors['fontWeight']); ?>; color: <?php echo esc_attr($level0Colors['fontColor']); ?>; --item-hover-color: <?php echo esc_attr($level0Colors['hoverColor']); ?>; --item-underline-color: <?php echo esc_attr($level0Colors['underlineColor'] ?? '#428aff'); ?>; --item-underline-width: <?php echo esc_attr($level0Colors['underlineWidth'] ?? 3); ?>px; --item-underline-border-radius: <?php echo esc_attr($level0Colors['underlineBorderRadius'] ?? 0); ?>px; --item-underline-enabled: <?php echo ($level0Colors['showHoverUnderline'] ? 1 : 0); ?>;">
+                                       style="font-size: <?php echo esc_attr($level0Colors['fontSize']); ?>px; font-weight: <?php echo esc_attr($level0Colors['fontWeight']); ?>; --item-color: <?php echo esc_attr($level0Colors['fontColor']); ?>; --item-hover-color: <?php echo esc_attr($level0Colors['hoverColor']); ?>; --item-underline-color: <?php echo esc_attr($level0Colors['underlineColor'] ?? '#428aff'); ?>; --item-underline-width: <?php echo esc_attr($level0Colors['underlineWidth'] ?? 3); ?>px; --item-underline-border-radius: <?php echo esc_attr($level0Colors['underlineBorderRadius'] ?? 0); ?>px; --item-underline-enabled: <?php echo ($level0Colors['showHoverUnderline'] ? 1 : 0); ?>;">
                                         <span class="<?php echo ($item_is_bold ? 'adaire-mega-menu__bold' : ''); ?>">
                                             <?php echo esc_html($item_title); ?>
                                         </span>
@@ -755,7 +1185,30 @@ function render_mega_menu_block($attributes, $content) {
                                         <?php endif; ?>
                                     </a>
                                     <?php if (!empty($item_children)): ?>
-                                        <ul class="adaire-mega-menu__menu">
+                                        <?php
+                                            $menu_classes = array('adaire-mega-menu__menu');
+                                            if ( ! empty( $item['canvasIsSmaller'] ) ) {
+                                                $menu_classes[] = 'smaller';
+                                            }
+                                            if ( $item_canvas_is_smallest ) {
+                                                $menu_classes[] = 'smallest';
+                                            }
+                                            if ( ! $item_canvas_banner_enabled ) {
+                                                $menu_classes[] = 'no-banner';
+                                            }
+                                        ?>
+                                        <div class="<?php echo esc_attr( implode( ' ', $menu_classes ) ); ?>">
+                                            <?php if ( $item_canvas_banner_enabled ) : ?>
+                                                <div class="adaire-mega-menu__menu__banner">
+                                                    <h1 class="adaire-mega-menu__menu__banner__title"><?php echo esc_html($item_title); ?></h1>
+                                                    <?php if ( ! empty( $item_banner_description ) ) : ?>
+                                                        <p class="adaire-mega-menu__menu__banner__description">
+                                                            <?php echo esc_html( $item_banner_description ); ?>
+                                                        </p>
+                                                    <?php endif; ?>
+                                                </div>
+                                            <?php endif; ?>
+                                        <ul class="adaire-mega-menu__menu__list">
                                             <?php if ($showCanvasTitle): ?>
                                                 <li>
                                                     <a href="<?php echo esc_url($item_url); ?>" 
@@ -778,7 +1231,7 @@ function render_mega_menu_block($attributes, $content) {
                                                     <a href="<?php echo esc_url($child_url); ?>" 
                                                        class="adaire-mega-menu__sub-dropdown-header"
                                                        <?php if ($child_open_in_new_tab): ?>target="_blank" rel="noopener noreferrer"<?php endif; ?>
-                                                       style="font-size: <?php echo esc_attr($level1Colors['fontSize']); ?>px; font-weight: <?php echo esc_attr($level1Colors['fontWeight']); ?>; color: <?php echo esc_attr($level1Colors['fontColor']); ?>; --item-hover-color: <?php echo esc_attr($level1Colors['hoverColor']); ?>;">
+                                                       style="font-size: <?php echo esc_attr($level1Colors['fontSize']); ?>px; font-weight: <?php echo esc_attr($level1Colors['fontWeight']); ?>; --item-color: <?php echo esc_attr($level1Colors['fontColor']); ?>; --item-hover-color: <?php echo esc_attr($level1Colors['hoverColor']); ?>;">
                                                         <span class="<?php echo ($child_is_bold ? 'adaire-mega-menu__bold' : ''); ?>">
                                                             <?php echo esc_html($child_title); ?>
                                                         </span>
@@ -797,7 +1250,7 @@ function render_mega_menu_block($attributes, $content) {
                                                                     <a href="<?php echo esc_url($grandchild_url); ?>" 
                                                                        class="<?php echo ($grandchild_is_bold ? 'adaire-mega-menu__bold' : ''); ?>"
                                                                        <?php if ($grandchild_open_in_new_tab): ?>target="_blank" rel="noopener noreferrer"<?php endif; ?>
-                                                                       style="font-size: <?php echo esc_attr($level2Colors['fontSize']); ?>px; font-weight: <?php echo esc_attr($level2Colors['fontWeight']); ?>; color: <?php echo esc_attr($level2Colors['fontColor']); ?>; --item-hover-color: <?php echo esc_attr($level2Colors['hoverColor']); ?>;">
+                                                                       style="font-size: <?php echo esc_attr($level2Colors['fontSize']); ?>px; font-weight: <?php echo esc_attr($level2Colors['fontWeight']); ?>; --item-color: <?php echo esc_attr($level2Colors['fontColor']); ?>; --item-hover-color: <?php echo esc_attr($level2Colors['hoverColor']); ?>; --item-underline-color: <?php echo esc_attr($level2Colors['underlineColor'] ?? $level3UnderlineColor); ?>; --item-underline-width: <?php echo esc_attr($level2Colors['underlineWidth'] ?? $level3UnderlineWidth); ?>px; --item-underline-border-radius: <?php echo esc_attr($level2Colors['underlineBorderRadius'] ?? 0); ?>px; --item-underline-enabled: <?php echo ($level2Colors['showHoverUnderline'] ? 1 : 0); ?>;">
                                                                         <?php echo esc_html($grandchild_title); ?>
                                                                     </a>
                                                                 </li>
@@ -807,14 +1260,43 @@ function render_mega_menu_block($attributes, $content) {
                                                 </li>
                                             <?php endforeach; ?>
                                             
-                                            <?php if ($item_canvas_image_url): ?>
-                                                <li class="adaire-mega-menu__canvas-image adaire-mega-menu__canvas-image--<?php echo esc_attr($item_canvas_image_position); ?>">
-                                                    <img src="<?php echo esc_url($item_canvas_image_url); ?>" 
-                                                         alt="<?php echo esc_attr($item_canvas_image_alt); ?>"
-                                                         style="width: <?php echo esc_attr(($item_canvas_image_width['desktop']['value'] ?? 300) . ($item_canvas_image_width['desktop']['unit'] ?? 'px')); ?>; height: <?php echo esc_attr(($item_canvas_image_height['desktop']['value'] ?? 200) . ($item_canvas_image_height['desktop']['unit'] ?? 'px')); ?>; border-radius: <?php echo esc_attr($canvasImageBorderRadius); ?>px; object-fit: cover;">
+                                            <?php if ( $should_render_canvas_story ) : ?>
+                                                <?php if ( $canvasStoryDividerEnabled ) : ?>
+                                                    <li class="adaire-mega-menu__canvas-divider adaire-mega-menu__canvas-divider--<?php echo esc_attr( $item_canvas_image_position ); ?>" aria-hidden="true"></li>
+                                                <?php endif; ?>
+                                                <li class="adaire-mega-menu__canvas-story adaire-mega-menu__canvas-story--<?php echo esc_attr( $item_canvas_image_position ); ?>">
+                                                    <?php if ( '' !== trim( (string) $item_canvas_story_title ) ) : ?>
+                                                        <h3 class="adaire-mega-menu__canvas-story-title">
+                                                            <?php echo esc_html( $item_canvas_story_title ); ?>
+                                                        </h3>
+                                                    <?php endif; ?>
+
+                                                    <?php if ( $item_canvas_image_url ) : ?>
+                                                        <div class="adaire-mega-menu__canvas-story-media">
+                                                            <img src="<?php echo esc_url( $item_canvas_image_url ); ?>"
+                                                                alt="<?php echo esc_attr( $item_canvas_image_alt ); ?>"
+                                                                style="width: <?php echo esc_attr( ( $item_canvas_image_width['desktop']['value'] ?? 300 ) . ( $item_canvas_image_width['desktop']['unit'] ?? 'px' ) ); ?>; height: <?php echo esc_attr( ( $item_canvas_image_height['desktop']['value'] ?? 200 ) . ( $item_canvas_image_height['desktop']['unit'] ?? 'px' ) ); ?>; border-radius: <?php echo esc_attr( $canvasImageBorderRadius ); ?>px; object-fit: cover;">
+                                                        </div>
+                                                    <?php endif; ?>
+
+                                                    <?php if ( '' !== trim( (string) $item_canvas_story_description ) ) : ?>
+                                                        <p class="adaire-mega-menu__canvas-story-description">
+                                                            <?php echo esc_html( $item_canvas_story_description ); ?>
+                                                        </p>
+                                                    <?php endif; ?>
+
+                                                    <?php if ( '' !== trim( (string) $item_canvas_story_link_label ) ) : ?>
+                                                        <a class="adaire-mega-menu__canvas-story-link"
+                                                            href="<?php echo esc_url( $item_canvas_story_link_url ?: '#' ); ?>"
+                                                            <?php if ( $item_canvas_story_link_new_tab ) : ?>target="_blank" rel="noopener noreferrer"<?php endif; ?>>
+                                                            <?php echo esc_html( $item_canvas_story_link_label ); ?>
+                                                        </a>
+                                                    <?php endif; ?>
                                                 </li>
                                             <?php endif; ?>
                                         </ul>
+                                        </div>
+
                                     <?php endif; ?>
                                 </li>
                             <?php endforeach; ?>
@@ -822,7 +1304,7 @@ function render_mega_menu_block($attributes, $content) {
                     </div>
 
                     <div class="adaire-mega-menu__buttons">
-                        <?php echo $content; // InnerBlocks content ?>
+                        <?php echo $render_cta_button(); ?>
                         <button class="adaire-mega-menu__menu-btn">
                             <span class="adaire-mega-menu__menu-icon">☰</span>
                         </button>
@@ -830,18 +1312,21 @@ function render_mega_menu_block($attributes, $content) {
                 </nav>
 
                 <!-- Mobile Menu Overlay -->
-                <div class="adaire-mega-menu__mobile-overlay">
-                    <div class="adaire-mega-menu__mobile-container">
-                        <div class="adaire-mega-menu__mobile-content">
-                            <!-- Mobile menu content will be dynamically rendered here -->
+                    <div class="adaire-mega-menu__mobile-overlay">
+                        <div class="adaire-mega-menu__mobile-container">
+                            <div class="adaire-mega-menu__mobile-content">
+                                <!-- Mobile menu content will be dynamically rendered here -->
+                            </div>
+                            <div class="adaire-mobile-menu__inner-blocks">
+                                <?php echo $render_cta_button('adaire-mega-menu__action-button--mobile', true); ?>
+                            </div>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
         <?php
         return ob_get_clean();
-    });
+    }, $content);
 }
 
 /**

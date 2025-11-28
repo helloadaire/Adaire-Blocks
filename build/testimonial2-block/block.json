@@ -1,0 +1,220 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/testimonial2-block",
+  "version": "0.1.0",
+  "title": "Testimonial 2",
+  "category": "widgets",
+  "icon": "format-quote",
+  "description": "Display customer testimonials in an elegant carousel with person images and company logos.",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "customClassName": true
+  },
+  "textdomain": "testimonial2-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "attributes": {
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "containerMode": {
+      "type": "string",
+      "default": "constrained"
+    },
+    "containerMaxWidth": {
+      "type": "object",
+      "default": {
+        "desktop": {
+          "value": 80,
+          "unit": "%"
+        },
+        "tablet": {
+          "value": 90,
+          "unit": "%"
+        },
+        "mobile": {
+          "value": 100,
+          "unit": "%"
+        }
+      }
+    },
+    "testimonials": {
+      "type": "array",
+      "default": [
+        {
+          "id": "testimonial-1",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+          "name": "John Doe",
+          "title": "CEO",
+          "personImage": {
+            "id": 0,
+            "url": "",
+            "alt": ""
+          },
+          "logoImage": {
+            "id": 0,
+            "url": "",
+            "alt": ""
+          }
+        }
+      ]
+    },
+    "quoteImage": {
+      "type": "object",
+      "default": {
+        "id": 0,
+        "url": "",
+        "alt": "Quote"
+      }
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#ff4545"
+    },
+    "cardBackgroundColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "navButtonBackground": {
+      "type": "string",
+      "default": "rgba(255, 255, 255, 0.9)"
+    },
+    "navButtonHoverBackground": {
+      "type": "string",
+      "default": "rgba(255, 255, 255, 1)"
+    },
+    "navButtonSize": {
+      "type": "number",
+      "default": 50
+    },
+    "navArrowSize": {
+      "type": "number",
+      "default": 20
+    },
+    "quoteImageWidth": {
+      "type": "number",
+      "default": 60
+    },
+    "quoteImageOpacity": {
+      "type": "number",
+      "default": 0.2
+    },
+    "logoWidth": {
+      "type": "number",
+      "default": 150
+    },
+    "personImageSize": {
+      "type": "object",
+      "default": {
+        "desktop": {
+          "value": 300,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 200,
+          "unit": "px"
+        },
+        "mobile": {
+          "value": 150,
+          "unit": "px"
+        }
+      }
+    },
+    "personImageBorderRadius": {
+      "type": "number",
+      "default": 50
+    },
+    "descriptionFontSize": {
+      "type": "object",
+      "default": {
+        "desktop": {
+          "value": 18,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 16,
+          "unit": "px"
+        },
+        "mobile": {
+          "value": 14,
+          "unit": "px"
+        }
+      }
+    },
+    "descriptionFontWeight": {
+      "type": "string",
+      "default": "300"
+    },
+    "descriptionColor": {
+      "type": "string",
+      "default": "#ff4545"
+    },
+    "nameFontSize": {
+      "type": "object",
+      "default": {
+        "desktop": {
+          "value": 22,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 20,
+          "unit": "px"
+        },
+        "mobile": {
+          "value": 18,
+          "unit": "px"
+        }
+      }
+    },
+    "nameFontWeight": {
+      "type": "string",
+      "default": "500"
+    },
+    "nameColor": {
+      "type": "string",
+      "default": "#ff4545"
+    },
+    "titleFontSize": {
+      "type": "object",
+      "default": {
+        "desktop": {
+          "value": 16,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 14,
+          "unit": "px"
+        },
+        "mobile": {
+          "value": 12,
+          "unit": "px"
+        }
+      }
+    },
+    "titleFontWeight": {
+      "type": "string",
+      "default": "600"
+    },
+    "titleColor": {
+      "type": "string",
+      "default": "#ff4545"
+    },
+    "carouselSpeed": {
+      "type": "number",
+      "default": 600
+    },
+    "spaceBetween": {
+      "type": "number",
+      "default": 40
+    }
+  }
+}

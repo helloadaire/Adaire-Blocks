@@ -11,6 +11,17 @@
 		const isInIframe = window.parent && window.parent !== window;
 		const urlParams = new URLSearchParams( window.location.search );
 		const isMigrationMode = urlParams.get( 'adaire_auto_migrate' ) === '1';
+		const ADAIRE_BLOCK_PREFIXES = [ 'create-block/', 'adaire/', 'adaire-blocks/' ];
+		
+		function isAdaireBlockName( name ) {
+			if ( typeof name !== 'string' ) {
+				return false;
+			}
+			
+			return ADAIRE_BLOCK_PREFIXES.some( function( prefix ) {
+				return name.startsWith( prefix );
+			} );
+		}
 		
 		// Helper function to log to both console and parent window
 		function logToParent( message, level = 'info' ) {
@@ -41,15 +52,48 @@
 		logToParent( '[Adaire Blocks] wp.blocks available: ' + (typeof wp !== 'undefined' && typeof wp.blocks !== 'undefined') );
 
 	// Check if wp.data is available
+	// In migration mode, wait for WordPress to load instead of failing immediately
 	if ( typeof wp === 'undefined' || typeof wp.data === 'undefined' ) {
-		logToParent( '[Adaire Blocks] ❌ FAILED: wp.data is not available', 'error' );
-		logToParent( '[Adaire Blocks] This usually means the script loaded before WordPress dependencies', 'error' );
-		return;
+		if ( isMigrationMode ) {
+			logToParent( '[Adaire Blocks Migration] ⏳ WordPress not ready yet - waiting for dependencies...', 'warn' );
+			
+			// Wait for WordPress to load (up to 20 seconds)
+			let wpWaitCount = 0;
+			const MAX_WP_WAIT = 200; // Check 200 times over 20 seconds (100ms intervals)
+			const wpWaitInterval = setInterval( function() {
+				wpWaitCount++;
+				
+				if ( typeof wp !== 'undefined' && typeof wp.data !== 'undefined' ) {
+					clearInterval( wpWaitInterval );
+					logToParent( '[Adaire Blocks Migration] ✅ WordPress dependencies loaded after ' + (wpWaitCount * 100) + 'ms' );
+					// Continue with initialization
+					initializeRecovery();
+				} else if ( wpWaitCount >= MAX_WP_WAIT ) {
+					clearInterval( wpWaitInterval );
+					logToParent( '[Adaire Blocks Migration] ❌ WordPress dependencies failed to load after 20 seconds', 'error' );
+					notifyMigrationComplete( false, 0, 'WordPress dependencies not available after 20 seconds' );
+				}
+			}, 100 );
+			
+			// Don't return - let the wait interval handle it
+			return;
+		} else {
+			logToParent( '[Adaire Blocks] ❌ FAILED: wp.data is not available', 'error' );
+			logToParent( '[Adaire Blocks] This usually means the script loaded before WordPress dependencies', 'error' );
+			return;
+		}
 	}
 
 	logToParent( '[Adaire Blocks] ✅ wp.data is available' );
-
-	if ( isMigrationMode ) {
+	
+	// Initialize recovery if WordPress is ready
+	initializeRecovery();
+	
+	/**
+	 * Initialize the recovery process (called after WordPress is confirmed ready)
+	 */
+	function initializeRecovery() {
+		if ( isMigrationMode ) {
 		logToParent( '[Adaire Blocks Migration] 🔄 Migration mode activated' );
 		
 		// Disable "leave site" warning during migration
@@ -77,34 +121,57 @@
 		logToParent( '[Adaire Blocks] 📝 Normal editor mode (not migration)' );
 	}
 
-	// Timeout to prevent infinite waiting
-	logToParent( '[Adaire Blocks] ⏱️ Setting 10-second timeout for editor ready check' );
+	// Timeout to prevent infinite waiting (increased to allow more time for editor to load)
+	logToParent( '[Adaire Blocks] ⏱️ Setting 30-second timeout for editor ready check' );
 	let editorReadyTimeout = setTimeout( function() {
-		logToParent( '[Adaire Blocks] ⚠️ Editor ready timeout reached (10 seconds) - forcing recovery attempt', 'warn' );
+		logToParent( '[Adaire Blocks] ⚠️ Editor ready timeout reached (30 seconds) - forcing recovery attempt', 'warn' );
 		if ( typeof unsubscribe === 'function' ) {
 			unsubscribe();
 		}
 		attemptAutoRecovery();
-	}, 10000 ); // 10 second timeout
+	}, 30000 ); // 30 second timeout (increased from 10 seconds)
 
 	// Wait for the editor to be ready
 	logToParent( '[Adaire Blocks] 👂 Subscribing to editor store changes...' );
 	let subscriptionCount = 0;
+	let editorReadyCheckCount = 0;
+	const MAX_EDITOR_CHECKS = 50; // Maximum number of times to check for editor readiness
 	
 	const unsubscribe = wp.data.subscribe( function() {
 		subscriptionCount++;
+		editorReadyCheckCount++;
 		
 		// Get the block editor store
 		const editor = wp.data.select( 'core/block-editor' );
 		const dispatch = wp.data.dispatch( 'core/block-editor' );
 		
 		if ( ! editor ) {
+			// If we've checked many times and editor still not available, proceed anyway
+			if ( editorReadyCheckCount > MAX_EDITOR_CHECKS ) {
+				logToParent( '[Adaire Blocks] ⚠️ Editor store not available after ' + MAX_EDITOR_CHECKS + ' checks - proceeding anyway', 'warn' );
+				clearTimeout( editorReadyTimeout );
+				unsubscribe();
+				setTimeout( function() {
+					attemptAutoRecovery();
+				}, 500 );
+			}
 			return;
 		}
 
 		// Check if editor is fully initialized
 		const blocks = editor.getBlocks();
+		
+		// For empty posts/patterns, proceed after a few checks to avoid infinite waiting
 		if ( ! blocks || blocks.length === 0 ) {
+			// If we've checked multiple times and still no blocks, it's likely an empty post
+			if ( editorReadyCheckCount > 10 ) {
+				logToParent( '[Adaire Blocks] ℹ️ No blocks found after ' + editorReadyCheckCount + ' checks - treating as empty post/pattern' );
+				clearTimeout( editorReadyTimeout );
+				unsubscribe();
+				setTimeout( function() {
+					attemptAutoRecovery();
+				}, 500 );
+			}
 			return;
 		}
 
@@ -122,6 +189,7 @@
 			attemptAutoRecovery();
 		}, 500 );
 	} );
+	} // End initializeRecovery function
 
 	/**
 	 * Recursively recover blocks in a tree structure
@@ -139,7 +207,7 @@
 		const needsRecovery = ! block.isValid || 
 			( block.validationIssues && block.validationIssues.length > 0 );
 		
-		if ( needsRecovery && block.name && block.name.startsWith( 'create-block/' ) ) {
+		if ( needsRecovery && isAdaireBlockName( block.name ) ) {
 			// Create a new recovered block
 			try {
 				return wp.blocks.createBlock(
@@ -263,7 +331,7 @@
 		allBlocksWithPaths.forEach( function( item, i ) {
 			const indent = '  '.repeat( item.depth );
 			const status = item.block.isValid ? '✅' : '❌';
-			const isAdaire = item.block.name.startsWith( 'create-block/' );
+			const isAdaire = isAdaireBlockName( item.block.name );
 			const marker = isAdaire ? ' [ADAIRE]' : '';
 			logToParent( '[Adaire Blocks] ' + indent + status + ' ' + item.path + marker );
 		} );
@@ -299,7 +367,7 @@
 			
 			if ( needsRecovery ) {
 				invalidBlocksCount++;
-				const isAdaireBlock = block.name && block.name.startsWith( 'create-block/' );
+				const isAdaireBlock = isAdaireBlockName( block.name );
 				if ( ! isAdaireBlock ) {
 					skippedCount++;
 				}
@@ -316,7 +384,7 @@
 				
 				// Check if this block was recovered (clientId will be different)
 				if ( originalBlock.clientId !== recoveredBlock.clientId && 
-					 originalBlock.name && originalBlock.name.startsWith( 'create-block/' ) &&
+					 isAdaireBlockName( originalBlock.name ) &&
 					 ! originalBlock.isValid ) {
 					count++;
 					if ( ! isMigrationMode ) {
@@ -384,25 +452,52 @@
 					coreEditor.savePost();
 					
 					// Wait for save to complete
+					let saveCheckCount = 0;
+					const MAX_SAVE_CHECKS = 100; // Maximum checks before timeout
 					const saveUnsubscribe = wp.data.subscribe( function() {
+						saveCheckCount++;
 						const isSaving = wp.data.select( 'core/editor' ).isSavingPost();
 						const didSave = wp.data.select( 'core/editor' ).didPostSaveRequestSucceed();
+						const saveError = wp.data.select( 'core/editor' ).didPostSaveRequestFail ? wp.data.select( 'core/editor' ).didPostSaveRequestFail() : false;
 						
+						// If save completed successfully
 						if ( ! isSaving && didSave ) {
 							saveUnsubscribe();
-							
+							logToParent( '[Adaire Blocks Migration] ✅ Save completed successfully' );
 							// Small delay before notifying to ensure all is settled
 							setTimeout( function() {
 								notifyMigrationComplete( true, recoveredCount );
 							}, 200 );
+							return;
+						}
+						
+						// If save failed, still notify completion (blocks were recovered even if save failed)
+						if ( ! isSaving && saveError ) {
+							saveUnsubscribe();
+							logToParent( '[Adaire Blocks Migration] ⚠️ Save failed, but blocks were recovered', 'warn' );
+							setTimeout( function() {
+								notifyMigrationComplete( true, recoveredCount );
+							}, 200 );
+							return;
+						}
+						
+						// If we've checked many times and still saving, something might be wrong
+						if ( saveCheckCount > MAX_SAVE_CHECKS ) {
+							saveUnsubscribe();
+							logToParent( '[Adaire Blocks Migration] ⚠️ Save check timeout - assuming completion', 'warn' );
+							setTimeout( function() {
+								notifyMigrationComplete( true, recoveredCount );
+							}, 200 );
+							return;
 						}
 					} );
 					
-					// Timeout fallback (reduced to 3 seconds)
+					// Timeout fallback (increased to 10 seconds to allow more time for save to complete)
 					setTimeout( function() {
 						saveUnsubscribe();
+						logToParent( '[Adaire Blocks Migration] ⏱️ Save timeout reached - assuming completion', 'warn' );
 						notifyMigrationComplete( true, recoveredCount );
-					}, 3000 );
+					}, 10000 );
 				}, 300 );
 			} else {
 				// Normal mode - show a notice and clear the dirty state

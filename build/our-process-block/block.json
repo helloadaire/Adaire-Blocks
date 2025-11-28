@@ -1,0 +1,218 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/our-process-block",
+  "version": "0.1.0",
+  "title": "Our Process",
+  "category": "widgets",
+  "icon": "list-view",
+  "description": "Showcase your process steps with icons, titles, and descriptions in a responsive grid layout.",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "customClassName": true
+  },
+  "textdomain": "our-process-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "attributes": {
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "containerMode": {
+      "type": "string",
+      "default": "constrained"
+    },
+    "containerMaxWidth": {
+      "type": "object",
+      "default": {
+        "desktop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 100,
+          "unit": "%"
+        },
+        "mobile": {
+          "value": 100,
+          "unit": "%"
+        }
+      }
+    },
+    "heading": {
+      "type": "string",
+      "default": "Our AI-first digital solutions"
+    },
+    "subheading": {
+      "type": "string",
+      "default": "Preparing data to become AI-ready, improving the digital customer experience, leveraging the cloud, data strategy, and engineering — we partner with you to overcome your biggest challenges with digital product development."
+    },
+    "processSteps": {
+      "type": "array",
+      "default": [
+        {
+          "id": "step-1",
+          "icon": "bi bi-robot",
+          "title": "AI, ML, LLM",
+          "description": ""
+        },
+        {
+          "id": "step-2",
+          "icon": "bi bi-shield-check",
+          "title": "Application development",
+          "description": ""
+        },
+        {
+          "id": "step-3",
+          "icon": "bi bi-box",
+          "title": "Data modernization",
+          "description": ""
+        },
+        {
+          "id": "step-4",
+          "icon": "bi bi-cloud",
+          "title": "Cloud and infrastructure",
+          "description": ""
+        },
+        {
+          "id": "step-5",
+          "icon": "bi bi-grid-3x3",
+          "title": "Tech strategy and advisory",
+          "description": ""
+        },
+        {
+          "id": "step-6",
+          "icon": "bi bi-palette",
+          "title": "UX and UI Design",
+          "description": ""
+        }
+      ]
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#0a0e27"
+    },
+    "headingColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "subheadingColor": {
+      "type": "string",
+      "default": "#94a3b8"
+    },
+    "boxBackgroundColor": {
+      "type": "string",
+      "default": "#1a1f3a"
+    },
+    "boxBorderColor": {
+      "type": "string",
+      "default": "#2d3454"
+    },
+    "boxHoverBackgroundColor": {
+      "type": "string",
+      "default": "#252b4a"
+    },
+    "boxHoverBorderColor": {
+      "type": "string",
+      "default": "#4a5578"
+    },
+    "iconColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "titleColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "headingFontSize": {
+      "type": "object",
+      "default": {
+        "desktop": {
+          "value": 48,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 36,
+          "unit": "px"
+        },
+        "mobile": {
+          "value": 28,
+          "unit": "px"
+        }
+      }
+    },
+    "subheadingFontSize": {
+      "type": "object",
+      "default": {
+        "desktop": {
+          "value": 18,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 16,
+          "unit": "px"
+        },
+        "mobile": {
+          "value": 14,
+          "unit": "px"
+        }
+      }
+    },
+    "titleFontSize": {
+      "type": "object",
+      "default": {
+        "desktop": {
+          "value": 18,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 16,
+          "unit": "px"
+        },
+        "mobile": {
+          "value": 14,
+          "unit": "px"
+        }
+      }
+    },
+    "iconSize": {
+      "type": "number",
+      "default": 32
+    },
+    "boxPadding": {
+      "type": "number",
+      "default": 24
+    },
+    "boxBorderRadius": {
+      "type": "number",
+      "default": 8
+    },
+    "boxBorderWidth": {
+      "type": "number",
+      "default": 1
+    },
+    "gridColumns": {
+      "type": "object",
+      "default": {
+        "desktop": 3,
+        "tablet": 2,
+        "mobile": 1
+      }
+    },
+    "gridGap": {
+      "type": "object",
+      "default": {
+        "desktop": 16,
+        "tablet": 16,
+        "mobile": 16
+      }
+    }
+  }
+}

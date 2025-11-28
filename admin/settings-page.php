@@ -67,8 +67,10 @@ class AdaireBlocksSettings {
         // Get default settings
         $this->settings = get_option($this->option_name, $this->get_default_settings());
         
-        // Debug: Log settings
-        error_log('Adaire Blocks Settings: ' . print_r($this->settings, true));
+        // // Debug: Log settings (only in debug mode)
+        // if (defined('WP_DEBUG') && WP_DEBUG) {
+        //     error_log('Adaire Blocks Settings: ' . print_r($this->settings, true));
+        // }
     }
     
     /**
@@ -90,8 +92,10 @@ class AdaireBlocksSettings {
      * Sanitize settings
      */
     public function sanitize_settings($input) {
-        // Debug: Log what's being submitted
-        error_log('Adaire Blocks Sanitize Input: ' . print_r($input, true));
+        // // Debug: Log what's being submitted (only in debug mode)
+        // if (defined('WP_DEBUG') && WP_DEBUG) {
+        //     error_log('Adaire Blocks Sanitize Input: ' . print_r($input, true));
+        // }
         
         $sanitized = array();
         $available_blocks = $this->get_available_blocks();
@@ -105,8 +109,10 @@ class AdaireBlocksSettings {
             $sanitized[$block_key] = isset($input[$block_key]) && $input[$block_key] ? true : false;
         }
         
-        // Debug: Log what's being saved
-        error_log('Adaire Blocks Sanitized Output: ' . print_r($sanitized, true));
+        // // Debug: Log what's being saved (only in debug mode)
+        // if (defined('WP_DEBUG') && WP_DEBUG) {
+        //     error_log('Adaire Blocks Sanitized Output: ' . print_r($sanitized, true));
+        // }
         
         return $sanitized;
     }
@@ -161,8 +167,10 @@ class AdaireBlocksSettings {
             // Determine if this is a premium block (disabled in free version)
             $is_premium_block = !$config->is_premium() && !$config->is_block_enabled($block_name);
             
-            // Debug: Log block status
-            error_log("Adaire Blocks Settings: Block $block_name - enabled: " . ($config->is_block_enabled($block_name) ? 'true' : 'false') . ", premium: " . ($is_premium_block ? 'true' : 'false'));
+            // // Debug: Log block status (only in debug mode)
+            // if (defined('WP_DEBUG') && WP_DEBUG) {
+            //     error_log("Adaire Blocks Settings: Block $block_name - enabled: " . ($config->is_block_enabled($block_name) ? 'true' : 'false') . ", premium: " . ($is_premium_block ? 'true' : 'false'));
+            // }
             
             $blocks[$settings_key] = array(
                 'name' => $name,
@@ -178,12 +186,123 @@ class AdaireBlocksSettings {
         
         return $blocks;
     }
+
+    /**
+     * Allowed SVG tags/attributes for block icons.
+     */
+    private function get_allowed_svg_tags() {
+        static $allowed_svg = null;
+
+        if ($allowed_svg !== null) {
+            return $allowed_svg;
+        }
+
+        $shared_attributes = array(
+            'fill' => true,
+            'stroke' => true,
+            'stroke-width' => true,
+            'stroke-linecap' => true,
+            'stroke-linejoin' => true,
+            'stroke-miterlimit' => true,
+            'stroke-dasharray' => true,
+            'stroke-dashoffset' => true,
+            'strokewidth' => true,
+            'strokelinecap' => true,
+            'strokelinejoin' => true,
+            'opacity' => true,
+            'fill-opacity' => true,
+            'stroke-opacity' => true,
+            'style' => true,
+            'class' => true,
+            'id' => true,
+            'transform' => true,
+            'clip-path' => true,
+            'clip-rule' => true,
+            'mask' => true,
+            'vector-effect' => true
+        );
+
+        $allowed_svg = array(
+            'svg' => array_merge(
+                $shared_attributes,
+                array(
+                    'xmlns' => true,
+                    'xmlns:xlink' => true,
+                    'width' => true,
+                    'height' => true,
+                    'viewbox' => true,
+                    'viewBox' => true,
+                    'preserveAspectRatio' => true,
+                    'aria-hidden' => true,
+                    'role' => true,
+                    'focusable' => true
+                )
+            ),
+            'g' => $shared_attributes,
+            'path' => array_merge($shared_attributes, array('d' => true)),
+            'rect' => array_merge($shared_attributes, array('x' => true, 'y' => true, 'width' => true, 'height' => true, 'rx' => true, 'ry' => true)),
+            'circle' => array_merge($shared_attributes, array('cx' => true, 'cy' => true, 'r' => true)),
+            'ellipse' => array_merge($shared_attributes, array('cx' => true, 'cy' => true, 'rx' => true, 'ry' => true)),
+            'line' => array_merge($shared_attributes, array('x1' => true, 'y1' => true, 'x2' => true, 'y2' => true)),
+            'polyline' => array_merge($shared_attributes, array('points' => true)),
+            'polygon' => array_merge($shared_attributes, array('points' => true)),
+            'defs' => $shared_attributes,
+            'lineargradient' => array_merge(
+                $shared_attributes,
+                array(
+                    'id' => true,
+                    'gradientunits' => true,
+                    'gradienttransform' => true,
+                    'x1' => true,
+                    'x2' => true,
+                    'y1' => true,
+                    'y2' => true
+                )
+            ),
+            'radialgradient' => array_merge(
+                $shared_attributes,
+                array(
+                    'id' => true,
+                    'gradientunits' => true,
+                    'gradienttransform' => true,
+                    'cx' => true,
+                    'cy' => true,
+                    'r' => true,
+                    'fx' => true,
+                    'fy' => true
+                )
+            ),
+            'stop' => array(
+                'offset' => true,
+                'stop-color' => true,
+                'stop-opacity' => true,
+                'style' => true
+            ),
+            'clippath' => array_merge($shared_attributes, array('id' => true)),
+            'mask' => array_merge($shared_attributes, array('id' => true, 'x' => true, 'y' => true, 'width' => true, 'height' => true)),
+            'title' => array(),
+            'desc' => array(),
+            'use' => array_merge($shared_attributes, array('xlink:href' => true, 'href' => true)),
+            'symbol' => array_merge($shared_attributes, array('viewbox' => true, 'viewBox' => true)),
+            'pattern' => array_merge($shared_attributes, array('id' => true, 'patternunits' => true, 'patterntransform' => true, 'width' => true, 'height' => true))
+        );
+
+        return $allowed_svg;
+    }
     
     /**
      * Enqueue admin scripts and styles
      */
     public function enqueue_admin_scripts($hook) {
-        wp_register_style('adaire-blocks-admin-menu', false);
+        // Get plugin version for cache busting
+        $main_plugin_file = dirname(dirname(__FILE__)) . '/adaire-blocks.php';
+        $plugin_version = '1.0.0';
+        if (file_exists($main_plugin_file)) {
+            $plugin_data = get_file_data($main_plugin_file, array('Version' => 'Version'), false);
+            $plugin_version = !empty($plugin_data['Version']) ? $plugin_data['Version'] : '1.0.0';
+        }
+        
+        wp_register_style('adaire-blocks-admin-menu', false, array(), $plugin_version);
         wp_enqueue_style('adaire-blocks-admin-menu');
         wp_add_inline_style(
             'adaire-blocks-admin-menu',
@@ -207,7 +326,7 @@ class AdaireBlocksSettings {
             'adaire-blocks-admin',
             plugin_dir_url(__FILE__) . 'css/admin-settings.css',
             array(),
-            '1.0.0'
+            $plugin_version
         );
         wp_enqueue_style('adaire-blocks-admin');
         
@@ -219,6 +338,19 @@ class AdaireBlocksSettings {
             true
         );
         wp_enqueue_script('adaire-blocks-admin');
+        wp_localize_script(
+            'adaire-blocks-admin',
+            'AdaireBlocksAdminData',
+            array(
+                'ajaxUrl'    => admin_url('admin-ajax.php'),
+                'nonce'      => wp_create_nonce('adaire_blocks_settings'),
+                'optionName' => $this->option_name,
+                'strings'    => array(
+                    'saveSuccess' => esc_html__('Settings saved successfully!', 'adaire-blocks'),
+                    'saveError'   => esc_html__('Unable to save settings. Please try again.', 'adaire-blocks'),
+                ),
+            )
+        );
     }
     
     /**
@@ -237,17 +369,47 @@ class AdaireBlocksSettings {
             wp_die('Error: Adaire Blocks configuration not loaded. Please try refreshing the page.');
         }
         
-        // Debug: Log config status
-        error_log('Adaire Blocks Settings: Config loaded - is_premium: ' . ($config->is_premium() ? 'true' : 'false'));
-        error_log('Adaire Blocks Settings: Plugin version: ' . $config->get_plugin_version());
+        // // Debug: Log config status (only in debug mode)
+        // if (defined('WP_DEBUG') && WP_DEBUG) {
+        //     error_log('Adaire Blocks Settings: Config loaded - is_premium: ' . ($config->is_premium() ? 'true' : 'false'));
+        //     error_log('Adaire Blocks Settings: Plugin version: ' . $config->get_plugin_version());
+        // }
         
         
         $available_blocks = $this->get_available_blocks();
         $settings = get_option($this->option_name, $this->get_default_settings());
         
         // Show success message if settings were just saved
-        if (isset($_GET['settings-updated']) && $_GET['settings-updated']) {
-            echo '<div class="notice notice-success is-dismissible"><p>Settings saved successfully!</p></div>';
+        // Note: WordPress core handles nonce verification during form submission via settings_fields().
+        // The settings-updated parameter is set by WordPress core on redirect after successful save.
+        // We verify both capability and nonce/referer to ensure security.
+        if (isset($_GET['settings-updated']) && current_user_can('manage_options')) {
+            // Verify nonce if present, or check admin referer
+            // On redirect, nonce may not be in URL, so we check referer as fallback
+            $nonce_action = 'adaire_blocks_settings_group-options';
+            $nonce_verified = false;
+            
+            if (isset($_REQUEST['_wpnonce'])) {
+                $nonce = sanitize_text_field(wp_unslash($_REQUEST['_wpnonce']));
+                if (wp_verify_nonce($nonce, $nonce_action)) {
+                    $nonce_verified = true;
+                }
+            }
+            
+            if (!$nonce_verified && check_admin_referer($nonce_action, '', false)) {
+                // check_admin_referer with false parameter only checks referer, not nonce
+                $nonce_verified = true;
+            }
+            
+            // Only proceed if nonce/referer is verified
+            if ($nonce_verified) {
+                // Sanitize and verify the input
+                $settings_updated = sanitize_text_field(wp_unslash($_GET['settings-updated']));
+                // Only show message if value is 'true' or '1' (WordPress core sets it to 'true')
+                if ($settings_updated === 'true' || $settings_updated === '1') {
+                    echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('Settings saved successfully!', 'adaire-blocks') . '</p></div>';
+                }
+            }
         }
         ?>
         <div class="wrap">
@@ -279,9 +441,9 @@ class AdaireBlocksSettings {
                                 }
                             }
                             
-                            echo $total_blocks . ' blocks available';
+                            echo esc_html( $total_blocks ) . ' blocks available';
                             if ($config && !$config->is_premium()) {
-                                echo " ($free_blocks free, $premium_blocks premium)";
+                                echo ' (' . esc_html( $free_blocks ) . ' free, ' . esc_html( $premium_blocks ) . ' premium)';
                             }
                             ?>
                         </p>
@@ -300,26 +462,25 @@ class AdaireBlocksSettings {
                                     }
                                 }
                             }
-                            echo $enabled_count . ' enabled, ' . ($total_free - $enabled_count) . ' disabled';
+                            echo esc_html( $enabled_count ) . ' enabled, ' . esc_html( $total_free - $enabled_count ) . ' disabled';
                             if ($config && !$config->is_premium() && $premium_blocks > 0) {
-                                echo " ($premium_blocks premium blocks require upgrade)";
+                                echo ' (' . esc_html( $premium_blocks ) . ' premium blocks require upgrade)';
                             }
                             ?>
                         </p>
                     </div>
                 </div>
                 
-                <form method="post" action="options.php" class="adaire-blocks-form">
+                <form method="post" action="options.php" class="adaire-blocks-form" data-option-name="<?php echo esc_attr($this->option_name); ?>">
                     <input type="hidden" name="redirect_to" value="<?php echo esc_url(admin_url('admin.php?page=adaire-blocks-settings&settings-updated=1')); ?>" />
                     <?php
                     settings_fields('adaire_blocks_settings_group');
                     do_settings_sections('adaire_blocks_settings_group');
-                    wp_nonce_field('adaire_blocks_settings', 'adaire_blocks_nonce');
                     ?>
                     
                     <div class="adaire-blocks-controls">
                         <div class="adaire-blocks-bulk-actions">
-                            <button type="button" class="button" id="enable-all-blocks">Enable All Free Blocks</button>
+                            <button type="button" class="button" id="enable-all-blocks">Enable Available Blocks</button>
                             <button type="button" class="button" id="disable-all-blocks">Disable All Free Blocks</button>
                             <button type="button" class="button" id="reset-to-defaults">Reset to Defaults</button>
                         </div>
@@ -337,14 +498,14 @@ class AdaireBlocksSettings {
                                 <div class="adaire-block-header">
                                     <div class="adaire-block-icon">
                                         <?php 
+                                        $allowed_svg = $this->get_allowed_svg_tags();
                                         // Check if icon is SVG content (starts with <svg)
                                         if (strpos($block_data['icon'], '<svg') === 0) {
-                                            // Render the actual SVG content
-                                            echo $block_data['icon'];
+                                            echo wp_kses( $block_data['icon'], $allowed_svg );
                                         } elseif (strpos($block_data['icon'], 'data:image/svg+xml;base64,') === 0) {
                                             // Decode base64 SVG and render it (fallback for old format)
                                             $svg_data = base64_decode(str_replace('data:image/svg+xml;base64,', '', $block_data['icon']));
-                                            echo $svg_data;
+                                            echo wp_kses( $svg_data, $allowed_svg );
                                         } else {
                                             // Use dashicon for non-SVG icons
                                             echo '<span class="dashicons dashicons-' . esc_attr($block_data['icon']) . '"></span>';
@@ -429,11 +590,19 @@ class AdaireBlocksSettings {
             wp_die('Insufficient permissions');
         }
         
-        $settings = $this->sanitize_settings($_POST);
+        $form_data = isset($_POST['formData']) ? wp_unslash($_POST['formData']) : '';
+        if (empty($form_data)) {
+            wp_send_json_error(esc_html__('No settings data received.', 'adaire-blocks'));
+        }
+
+        parse_str($form_data, $parsed_form);
+        $input_settings = isset($parsed_form[$this->option_name]) ? (array) $parsed_form[$this->option_name] : array();
+
+        $settings = $this->sanitize_settings($input_settings);
         update_option($this->option_name, $settings);
         
         wp_send_json_success(array(
-            'message' => 'Settings saved successfully!',
+            'message' => esc_html__('Settings saved successfully!', 'adaire-blocks'),
             'settings' => $settings
         ));
     }
