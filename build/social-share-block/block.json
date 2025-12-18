@@ -1,0 +1,120 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/social-share-block",
+  "version": "0.1.0",
+  "title": "Social Share Block (Free)",
+  "category": "adaire-blocks-free",
+  "description": "A customizable social share button with platform selection and tooltip.",
+  "example": {},
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "left",
+      "center",
+      "right"
+    ],
+    "customClassName": true
+  },
+  "textdomain": "social-share-block",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "attributes": {
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "buttonIcon": {
+      "type": "string",
+      "default": "bi bi-share"
+    },
+    "iconColor": {
+      "type": "string",
+      "default": "#333333"
+    },
+    "iconSize": {
+      "type": "number",
+      "default": 24
+    },
+    "buttonBackgroundColor": {
+      "type": "string",
+      "default": "transparent"
+    },
+    "buttonHoverBackgroundColor": {
+      "type": "string",
+      "default": "transparent"
+    },
+    "buttonPadding": {
+      "type": "object",
+      "default": {
+        "top": "12px",
+        "right": "12px",
+        "bottom": "12px",
+        "left": "12px"
+      }
+    },
+    "borderRadius": {
+      "type": "number",
+      "default": 0
+    },
+    "borderWidth": {
+      "type": "number",
+      "default": 0
+    },
+    "borderColor": {
+      "type": "string",
+      "default": "#333333"
+    },
+    "alignment": {
+      "type": "string",
+      "default": "left"
+    },
+    "enabledPlatforms": {
+      "type": "object",
+      "default": {
+        "facebook": true,
+        "x": true,
+        "linkedin": true,
+        "whatsapp": true,
+        "telegram": true,
+        "reddit": true,
+        "pinterest": true,
+        "email": true
+      }
+    },
+    "platformIcons": {
+      "type": "object",
+      "default": {
+        "facebook": "bi bi-facebook",
+        "x": "bi bi-twitter-x",
+        "linkedin": "bi bi-linkedin",
+        "whatsapp": "bi bi-whatsapp",
+        "telegram": "bi bi-telegram",
+        "reddit": "bi bi-reddit",
+        "pinterest": "bi bi-pinterest",
+        "email": "bi bi-envelope"
+      }
+    },
+    "platformLabels": {
+      "type": "object",
+      "default": {
+        "facebook": "Facebook",
+        "x": "X (Twitter)",
+        "linkedin": "LinkedIn",
+        "whatsapp": "WhatsApp",
+        "telegram": "Telegram",
+        "reddit": "Reddit",
+        "pinterest": "Pinterest",
+        "email": "Email"
+      }
+    },
+    "tooltipPosition": {
+      "type": "string",
+      "default": "top"
+    }
+  },
+  "icon": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n<rect width=\"24\" height=\"24\" rx=\"5\" fill=\"#F0F0F1\"/>\r\n<path d=\"M18 16.08C17.24 16.08 16.56 16.38 16.04 16.85L8.91 12.7C8.96 12.47 9 12.24 9 12C9 11.76 8.96 11.53 8.91 11.3L15.96 7.19C16.5 7.69 17.21 8 18 8C19.66 8 21 6.66 21 5C21 3.34 19.66 2 18 2C16.34 2 15 3.34 15 5C15 5.24 15.04 5.47 15.09 5.7L8.04 9.81C7.5 9.31 6.79 9 6 9C4.34 9 3 10.34 3 12C3 13.66 4.34 15 6 15C6.79 15 7.5 14.69 8.04 14.19L15.16 18.34C15.11 18.55 15.08 18.77 15.08 19C15.08 20.61 16.39 21.92 18 21.92C19.61 21.92 20.92 20.61 20.92 19C20.92 17.39 19.61 16.08 18 16.08Z\" fill=\"#D52940\"/>\r\n</svg>"
+}

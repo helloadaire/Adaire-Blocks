@@ -4,7 +4,7 @@ Donate link: https://adaire.digital/
 Tags: blocks, gutenberg, gsap, animation, portfolio
 Requires at least: 6.7
 Tested up to: 6.8
-Stable tag: 1.1.9
+Stable tag: 1.2.0
 Requires PHP: 7.4
 License: GPL-3.0
 Source Code: https://github.com/helloadaire/Adaire-Blocks-Free
@@ -22,6 +22,10 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 * **Accordion Block** - Create collapsible content sections with smooth animations, customizable styling, and responsive design
 * **Animation on Scroll Block** - Complete control over scroll-triggered animations with 12 animation types, configurable distance, flip options, and live editor preview
 * **Button Block** - Create customizable buttons with hover animations, multiple styles, and advanced styling options
+* **Flip Card Block** - Create interactive flip cards with front and back content, customizable hover effects, and smooth 3D transitions
+* **Pricing Table Block** - Build responsive pricing tables with monthly/yearly toggle, customizable cards, feature lists, and button styling
+* **Progress Block** - Display scroll-based progress indicators with bar or ring variants, fixed positioning, and customizable colors
+* **Social Share Block** - Add social sharing buttons with customizable platforms, tooltip interface, and one-click sharing functionality
 * **Map Block** - Display multiple locations with Google Maps integration, Leaflet fly mode, and interactive navigation
 * **Call to Action Block** - Build powerful call-to-action sections with animated carousels and gradient backgrounds
 * **Counter Block** - Display animated counters that count up or down to a target number, with customizable prefixes, suffixes, and captions for showcasing statistics and achievements
@@ -39,7 +43,8 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 * **Our Process Block** - Showcase your delivery process with responsive multi-column layouts, clickable steps, and per-step icon/link controls
 * **Content Toggle Block** - Let visitors flip between content panels using pill-style toggles, GSAP animations, and responsive containers
 * **Swiper Carousel Block** - Build Swiper.js carousels with draggable slides, autoplay, loop, and per-slide overlays via Swiper Slide blocks
-* **Testimonial 2 Block** - Feature long-form testimonials with portrait photography, company logos, and keyboard-accessible carousel navigation
+* **Testimonial (Plus)** - Feature long-form testimonials with portrait photography, company logos, and keyboard-accessible carousel navigation
+* **Testimonial (Premium)** - Premium testimonial carousel with draggable interface, purple background styling, white cards, and profile images
 * **Tabs Block** - Create tabbed content sections with smooth GSAP animations, vertical/horizontal layouts, and customizable styling
 * **Testimonial Block** - Showcase client testimonials with customizable carousels and professional layouts
 * **Video Hero Block** - Create stunning video hero sections with YouTube/Vimeo integration, smooth transitions, and customizable overlays
@@ -125,6 +130,17 @@ For support, please visit our website at https://adaire.digital/ or contact us t
 6. Posts Grid Block with filtering and pagination
 
 == Changelog ==
+
+= 1.2.0 =
+* Added Flip Card Block (Plus) - Interactive flip cards with front and back content areas, customizable hover effects, smooth 3D transitions, and full inner blocks support
+* Added Pricing Table Block (Plus) - Responsive pricing tables with monthly/yearly billing toggle, customizable pricing cards, feature lists, button styling, and grid layout controls
+* Added Progress Block (Plus) - Scroll-based progress indicators with bar and ring variants, fixed positioning controls, customizable colors, and responsive sizing
+* Added Animation on Scroll Block (Free) - Complete scroll-triggered animation system with 12 animation types, configurable distance, flip options, and live editor preview
+* Added Social Share Block (Free) - Social sharing functionality with customizable platform selection, tooltip interface, Bootstrap icon integration, and one-click sharing
+* Added Testimonial 3 Block (Premium) - Premium testimonial carousel with draggable interface, purple background styling, white cards, profile images, and advanced customization options
+* Enhanced block management interface with organized tier-based categorization (Free, Plus, Premium)
+* Improved admin settings page with hidden auxiliary blocks and improved parent-child block synchronization
+* Updated all block icons with consistent SVG artwork across editor, admin interface, and documentation
 
 = 1.1.9 =
 * Added the Our Process Block with responsive multi-column layouts, per-device column/gap controls, icon picker, and clickable steps.

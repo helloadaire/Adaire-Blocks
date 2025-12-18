@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Adaire Blocks
  * Description:       A powerful WordPress plugin that helps developers and designers create visually stunning, high-performance websites with ease right inside the Gutenberg editor.
- * Version:           1.1.9
+ * Version:           1.2.0
  * Requires at least: 6.7
  * Requires PHP:      7.4
  * Author:            <a href="https://adaire.digital" target="_blank">Adaire Digital</a>
@@ -169,7 +169,7 @@ add_action('admin_post_my_plugin_rollback', function () {
     }
 
     // URL to the previous version ZIP
-    $previous_version_zip = 'https://github.com/helloadaire/Adaire-Blocks/releases/download/v1.1.8.alpha/adaire-blocks.1.1.8.alpha.zip';
+    $previous_version_zip = 'https://github.com/helloadaire/Adaire-Blocks/releases/download/v1.1.9.alpha/adaire-blocks.1.1.9.alpha.zip';
     error_log('[Adaire Blocks Rollback] Attempting rollback to: ' . $previous_version_zip);
 
     require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
@@ -1375,8 +1375,13 @@ function create_block_gsap_hero_block_block_init() {
 		
 		foreach ( $manifest_data as $block_name => $block_data ) {
 			$block_key = array_search( $block_name, $block_mapping );
-			if ( $block_key !== false && isset( $block_settings[ $block_key ] ) && $block_settings[ $block_key ] ) {
-				$filtered_manifest[ $block_name ] = $block_data;
+			// If block is in mapping and enabled, or if it's a new block not yet in settings (enable by default)
+			if ( $block_key !== false ) {
+				// Check if enabled in settings, or if not in settings yet (new block - enable by default)
+				$is_enabled = isset( $block_settings[ $block_key ] ) ? $block_settings[ $block_key ] : true;
+				if ( $is_enabled ) {
+					$filtered_manifest[ $block_name ] = $block_data;
+				}
 			}
 		}
 		
@@ -1516,6 +1521,33 @@ function create_block_gsap_hero_block_block_init() {
 }
 add_action( 'init', 'create_block_gsap_hero_block_block_init' );
 
+/**
+ * Register custom block categories for Adaire Blocks (Free, Plus, Premium)
+ */
+function adaire_blocks_register_block_categories( $categories, $editor_context ) {
+	// Register three categories (Premium first so it appears at top)
+	array_unshift(
+		$categories,
+		array(
+			'slug'  => 'adaire-blocks-premium',
+			'title' => __( 'ADAIRE BLOCKS PREMIUM', 'adaire-blocks' ),
+			'icon'  => null,
+		),
+		array(
+			'slug'  => 'adaire-blocks-plus',
+			'title' => __( 'ADAIRE BLOCKS PLUS', 'adaire-blocks' ),
+			'icon'  => null,
+		),
+		array(
+			'slug'  => 'adaire-blocks-free',
+			'title' => __( 'ADAIRE BLOCKS FREE', 'adaire-blocks' ),
+			'icon'  => null,
+		)
+	);
+	return $categories;
+}
+add_filter( 'block_categories_all', 'adaire_blocks_register_block_categories', 10, 2 );
+
 // Filter to prevent disabled blocks from appearing in the block editor
 add_filter( 'block_editor_rest_api_preload_paths', 'adaire_blocks_filter_block_editor_blocks' );
 function adaire_blocks_filter_block_editor_blocks( $preload_paths ) {
@@ -1625,7 +1657,7 @@ function enqueue_locomotive_scroll_assets() {
 }
 add_action( 'wp_enqueue_scripts', 'enqueue_locomotive_scroll_assets' );
 
-// Enqueue Bootstrap Icons CSS if the icon-box-block or social-banner-block is present on the page
+// Enqueue Bootstrap Icons CSS if any block that uses Bootstrap icons is present on the page
 function enqueue_bootstrap_icons_assets() {
     if ( is_admin() ) {
         return;
@@ -1637,7 +1669,8 @@ function enqueue_bootstrap_icons_assets() {
     if (
         has_block( 'create-block/icon-box-block', $post ) ||
         has_block( 'create-block/social-banner-block', $post ) ||
-        has_block( 'create-block/industries-block', $post )
+        has_block( 'create-block/industries-block', $post ) ||
+        has_block( 'create-block/our-process-block', $post )
     ) {
         // Enqueue Bootstrap Icons CSS from CDN
         wp_enqueue_style(
@@ -1874,7 +1907,7 @@ function adaire_blocks_enqueue_auto_recovery() {
 	wp_enqueue_script(
 		'adaire-auto-block-recovery',
 		ADAIRE_BLOCKS_PLUGIN_URL . 'admin/js/auto-block-recovery.js',
-		array( 'wp-blocks', 'wp-data', 'wp-block-editor', 'wp-notices', 'wp-element' ),
+		array( 'wp-blocks', 'wp-data', 'wp-block-editor', 'wp-notices', 'wp-element', 'wp-editor' ),
 		ADAIRE_BLOCKS_VERSION,
 		true // Load in footer to ensure dependencies are loaded
 	);

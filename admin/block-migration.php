@@ -260,4 +260,3 @@ function adaire_has_adaire_blocks($blocks) {
 // Note: Migration now happens via JavaScript in hidden iframes
 // Each post is loaded in the editor context where auto-recovery runs
 // This ensures blocks are actually recovered using the current save.js
-

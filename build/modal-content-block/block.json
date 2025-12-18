@@ -4,7 +4,7 @@
   "name": "create-block/modal-content-block",
   "version": "0.1.0",
   "title": "Modal Content",
-  "category": "widgets",
+  "category": "adaire-blocks-premium",
   "icon": "feedback",
   "parent": [
     "create-block/modal-block"

@@ -51,37 +51,37 @@
 		logToParent( '[Adaire Blocks] wp.data available: ' + (typeof wp !== 'undefined' && typeof wp.data !== 'undefined') );
 		logToParent( '[Adaire Blocks] wp.blocks available: ' + (typeof wp !== 'undefined' && typeof wp.blocks !== 'undefined') );
 
-	// Check if wp.data is available
-	// In migration mode, wait for WordPress to load instead of failing immediately
+	// Check if wp.data is available.
+	// If it's not ready yet, wait for WordPress to load (both in migration mode and normal editor mode)
 	if ( typeof wp === 'undefined' || typeof wp.data === 'undefined' ) {
-		if ( isMigrationMode ) {
-			logToParent( '[Adaire Blocks Migration] ⏳ WordPress not ready yet - waiting for dependencies...', 'warn' );
+		const isMigration = isMigrationMode;
+		const contextLabel = isMigration ? 'Migration' : 'Editor';
+		
+		logToParent( `[Adaire Blocks ${contextLabel}] ⏳ WordPress not ready yet - waiting for dependencies...`, 'warn' );
+
+		let wpWaitCount = 0;
+		const MAX_WP_WAIT = 200; // Check 200 times over 20 seconds (100ms intervals)
+		const wpWaitInterval = setInterval( function() {
+			wpWaitCount++;
 			
-			// Wait for WordPress to load (up to 20 seconds)
-			let wpWaitCount = 0;
-			const MAX_WP_WAIT = 200; // Check 200 times over 20 seconds (100ms intervals)
-			const wpWaitInterval = setInterval( function() {
-				wpWaitCount++;
+			if ( typeof wp !== 'undefined' && typeof wp.data !== 'undefined' ) {
+				clearInterval( wpWaitInterval );
+				logToParent( `[Adaire Blocks ${contextLabel}] ✅ WordPress dependencies loaded after ` + (wpWaitCount * 100) + 'ms' );
+				// Continue with initialization
+				initializeRecovery();
+			} else if ( wpWaitCount >= MAX_WP_WAIT ) {
+				clearInterval( wpWaitInterval );
+				logToParent( `[Adaire Blocks ${contextLabel}] ❌ WordPress dependencies failed to load after 20 seconds`, 'error' );
 				
-				if ( typeof wp !== 'undefined' && typeof wp.data !== 'undefined' ) {
-					clearInterval( wpWaitInterval );
-					logToParent( '[Adaire Blocks Migration] ✅ WordPress dependencies loaded after ' + (wpWaitCount * 100) + 'ms' );
-					// Continue with initialization
-					initializeRecovery();
-				} else if ( wpWaitCount >= MAX_WP_WAIT ) {
-					clearInterval( wpWaitInterval );
-					logToParent( '[Adaire Blocks Migration] ❌ WordPress dependencies failed to load after 20 seconds', 'error' );
+				// Only notify parent in migration mode; in normal editor mode just stop silently
+				if ( isMigration ) {
 					notifyMigrationComplete( false, 0, 'WordPress dependencies not available after 20 seconds' );
 				}
-			}, 100 );
-			
-			// Don't return - let the wait interval handle it
-			return;
-		} else {
-			logToParent( '[Adaire Blocks] ❌ FAILED: wp.data is not available', 'error' );
-			logToParent( '[Adaire Blocks] This usually means the script loaded before WordPress dependencies', 'error' );
-			return;
-		}
+			}
+		}, 100 );
+		
+		// Don't continue now - let the wait interval handle initialization
+		return;
 	}
 
 	logToParent( '[Adaire Blocks] ✅ wp.data is available' );
@@ -161,16 +161,13 @@
 		// Check if editor is fully initialized
 		const blocks = editor.getBlocks();
 		
-		// For empty posts/patterns, proceed after a few checks to avoid infinite waiting
+		// If there are no blocks yet, keep waiting – many themes/editors populate
+		// blocks asynchronously. We'll either see blocks later via this subscription,
+		// or fall back to the 30s timeout above.
 		if ( ! blocks || blocks.length === 0 ) {
-			// If we've checked multiple times and still no blocks, it's likely an empty post
-			if ( editorReadyCheckCount > 10 ) {
-				logToParent( '[Adaire Blocks] ℹ️ No blocks found after ' + editorReadyCheckCount + ' checks - treating as empty post/pattern' );
-				clearTimeout( editorReadyTimeout );
-				unsubscribe();
-				setTimeout( function() {
-					attemptAutoRecovery();
-				}, 500 );
+			// Optional debug logging so we can see that we're still waiting
+			if ( editorReadyCheckCount % 10 === 0 ) {
+				logToParent( '[Adaire Blocks] ⏳ Editor store available but no blocks yet (check ' + editorReadyCheckCount + ')' );
 			}
 			return;
 		}
@@ -207,15 +204,34 @@
 		const needsRecovery = ! block.isValid || 
 			( block.validationIssues && block.validationIssues.length > 0 );
 		
-		if ( needsRecovery && isAdaireBlockName( block.name ) ) {
-			// Create a new recovered block
+		// In normal editor mode, attempt recovery for ANY invalid block (not just Adaire blocks)
+		// In migration mode, keep it scoped to Adaire blocks to avoid touching third‑party content.
+		const isTargetBlock = ! isMigrationMode || isAdaireBlockName( block.name );
+		
+		if ( needsRecovery && isTargetBlock ) {
+			// Try WordPress's built-in recovery first
 			try {
+				// Use WordPress's native recovery mechanism if available
+				if ( typeof wp.blocks.recoverBlock === 'function' ) {
+					const recovered = wp.blocks.recoverBlock( block.parsedContent, block.name );
+					if ( recovered && recovered.innerBlocks ) {
+						recovered.innerBlocks = recoveredInnerBlocks;
+					}
+					return recovered || wp.blocks.createBlock(
+						block.name,
+						block.attributes,
+						recoveredInnerBlocks
+					);
+				}
+				
+				// Fallback to creating a new block
 				return wp.blocks.createBlock(
 					block.name,
 					block.attributes,
 					recoveredInnerBlocks
 				);
 			} catch ( error ) {
+				logToParent( '[Adaire Blocks] ⚠️ Recovery failed for ' + block.name + ': ' + error.message, 'warn' );
 				// If recovery fails, return the original block with recovered inner blocks
 				return {
 					...block,
@@ -281,6 +297,7 @@
 		const editor = wp.data.select( 'core/block-editor' );
 		const dispatch = wp.data.dispatch( 'core/block-editor' );
 		const coreEditor = wp.data.dispatch( 'core/editor' );
+		const coreEditorSelect = wp.data.select( 'core/editor' );
 		
 		if ( ! editor || ! dispatch ) {
 			logToParent( '[Adaire Blocks] ❌ CRITICAL: Editor or dispatch not available', 'error' );
@@ -314,7 +331,34 @@
 			return allBlocks;
 		}
 		
-		const topLevelBlocks = editor.getBlocks();
+		// Get top-level blocks from the block editor store
+		let topLevelBlocks = editor.getBlocks();
+		
+		// Fallback: if the block editor store reports no blocks but the post has content,
+		// try parsing the edited post content to reconstruct the block list. This helps
+		// in cases where the editor store isn't populated yet or when using alternative
+		// editors/layouts.
+		if ( ( ! topLevelBlocks || topLevelBlocks.length === 0 ) &&
+			 coreEditorSelect &&
+			 typeof coreEditorSelect.getEditedPostContent === 'function' &&
+			 typeof wp.blocks !== 'undefined' &&
+			 typeof wp.blocks.parse === 'function' ) {
+			try {
+				const rawContent = coreEditorSelect.getEditedPostContent();
+				if ( rawContent && typeof rawContent === 'string' && rawContent.trim().length > 0 ) {
+					logToParent( '[Adaire Blocks] ℹ️ No blocks from editor store, attempting fallback parse of post content...' );
+					const parsedBlocks = wp.blocks.parse( rawContent );
+					if ( parsedBlocks && parsedBlocks.length > 0 ) {
+						topLevelBlocks = parsedBlocks;
+						logToParent( '[Adaire Blocks] ✅ Fallback parse successful, found ' + parsedBlocks.length + ' top-level block(s)' );
+					} else {
+						logToParent( '[Adaire Blocks] ℹ️ Fallback parse returned no blocks' );
+					}
+				}
+			} catch ( e ) {
+				logToParent( '[Adaire Blocks] ⚠️ Error during fallback block parsing: ' + e.message, 'warn' );
+			}
+		}
 		const allBlocksWithPaths = getAllBlocks( topLevelBlocks );
 		const allBlocks = allBlocksWithPaths.map( function( item ) { return item.block; } );
 		
@@ -322,13 +366,58 @@
 		logToParent( '[Adaire Blocks] 📊 Total blocks including nested: ' + allBlocks.length );
 		
 		// Get detailed validation info from block editor
-		const blockValidationErrors = editor.getBlockValidationErrors ? editor.getBlockValidationErrors() : {};
+		let blockValidationErrors = {};
+		try {
+			// Try multiple methods to get validation errors
+			if ( editor.getBlockValidationErrors ) {
+				blockValidationErrors = editor.getBlockValidationErrors() || {};
+			}
+			
+			// Also check for validation errors in block metadata
+			allBlocks.forEach( function( block ) {
+				if ( ! block.isValid ) {
+					blockValidationErrors[ block.clientId ] = blockValidationErrors[ block.clientId ] || {
+						type: 'invalid',
+						message: 'Block validation failed'
+					};
+				}
+			} );
+		} catch ( error ) {
+			logToParent( '[Adaire Blocks] ⚠️ Error getting validation errors: ' + error.message, 'warn' );
+		}
 		
 		logToParent( '[Adaire Blocks] 🔍 Block validation errors from store: ' + Object.keys( blockValidationErrors ).length );
 		
+		// Also try to validate blocks using WordPress's validation
+		// This helps catch blocks that haven't been validated yet
+		if ( typeof wp.blocks.validateBlock !== 'undefined' ) {
+			let validatedBlocks = 0;
+			allBlocks.forEach( function( block ) {
+				// In normal mode, validate all invalid blocks; in migration mode, only Adaire blocks
+				const isTargetBlock = ! isMigrationMode || isAdaireBlockName( block.name );
+				if ( isTargetBlock ) {
+					try {
+						const validationResult = wp.blocks.validateBlock( block );
+						if ( ! validationResult && ! block.isValid ) {
+							validatedBlocks++;
+							blockValidationErrors[ block.clientId ] = blockValidationErrors[ block.clientId ] || {
+								type: 'invalid',
+								message: 'Block failed validation'
+							};
+						}
+					} catch ( e ) {
+						// Validation check failed, skip
+					}
+				}
+			} );
+			if ( validatedBlocks > 0 && ! isMigrationMode ) {
+				logToParent( '[Adaire Blocks] 🔍 Validated blocks, found ' + validatedBlocks + ' invalid Adaire blocks' );
+			}
+		}
+		
 		// Log nested structure with more details
 		logToParent( '[Adaire Blocks] 🌳 Block Tree Structure:' );
-		allBlocksWithPaths.forEach( function( item, i ) {
+			allBlocksWithPaths.forEach( function( item, i ) {
 			const indent = '  '.repeat( item.depth );
 			const status = item.block.isValid ? '✅' : '❌';
 			const isAdaire = isAdaireBlockName( item.block.name );
@@ -358,12 +447,14 @@
 		}
 		
 		// Count invalid blocks for logging
-		allBlocksWithPaths.forEach( function( item ) {
+			allBlocksWithPaths.forEach( function( item ) {
 			const block = item.block;
 			const hasValidationError = blockValidationErrors[ block.clientId ];
 			const hasValidationIssues = block.validationIssues && block.validationIssues.length > 0;
 			const isInvalid = ! block.isValid;
-			const needsRecovery = isInvalid || hasValidationError || hasValidationIssues;
+				const needsRecovery = isInvalid || hasValidationError || hasValidationIssues;
+				// In normal mode, treat all invalid blocks as candidates; in migration mode, Adaire only
+				const isTargetBlock = ! isMigrationMode || isAdaireBlockName( block.name );
 			
 			if ( needsRecovery ) {
 				invalidBlocksCount++;
@@ -375,17 +466,20 @@
 		} );
 		
 		// Process top-level blocks with tree recovery
-		const recoveredBlocks = topLevelBlocks.map( function( block ) {
+			const recoveredBlocks = topLevelBlocks.map( function( block ) {
 			const recovered = recoverBlockTree( block );
 			
 			// Check if anything was recovered in this tree
 			function countRecoveredInTree( originalBlock, recoveredBlock ) {
 				let count = 0;
 				
-				// Check if this block was recovered (clientId will be different)
-				if ( originalBlock.clientId !== recoveredBlock.clientId && 
-					 isAdaireBlockName( originalBlock.name ) &&
-					 ! originalBlock.isValid ) {
+				// Check if this block was recovered
+				// A block is considered recovered if it was invalid and is now valid, or if it was recreated
+				// In normal mode we consider all invalid blocks; in migration mode we scope to Adaire blocks.
+				const isTargetBlock = ! isMigrationMode || isAdaireBlockName( originalBlock.name );
+				if ( isTargetBlock &&
+					 ! originalBlock.isValid &&
+					 ( recoveredBlock.isValid || originalBlock.clientId !== recoveredBlock.clientId ) ) {
 					count++;
 					if ( ! isMigrationMode ) {
 						logToParent( '[Adaire Blocks] ✅ Recovered: ' + originalBlock.name );
@@ -418,10 +512,73 @@
 			}
 			
 			try {
-				dispatch.resetBlocks( recoveredBlocks );
-				
-				if ( ! isMigrationMode ) {
-					logToParent( '[Adaire Blocks] ✅ Editor updated successfully' );
+				// Use WordPress's built-in recovery mechanism if available
+				// This ensures blocks are properly recovered using WordPress's native methods
+				if ( typeof dispatch.replaceBlocks !== 'undefined' ) {
+					// Get client IDs of blocks that need recovery
+					const invalidBlockIds = [];
+					allBlocksWithPaths.forEach( function( item ) {
+						const block = item.block;
+						const hasValidationError = blockValidationErrors[ block.clientId ];
+						const hasValidationIssues = block.validationIssues && block.validationIssues.length > 0;
+						const isInvalid = ! block.isValid;
+						const needsRecovery = isInvalid || hasValidationError || hasValidationIssues;
+						// In normal editor mode, recover any invalid block; in migration mode, Adaire only
+						const isTargetBlock = ! isMigrationMode || isAdaireBlockName( block.name );
+						
+						if ( needsRecovery && isTargetBlock ) {
+							invalidBlockIds.push( block.clientId );
+						}
+					} );
+					
+					// Recover each invalid block individually using WordPress's method
+					if ( invalidBlockIds.length > 0 ) {
+						let actuallyRecovered = 0;
+						invalidBlockIds.forEach( function( clientId ) {
+							try {
+								// Try to use WordPress's built-in recovery
+								if ( typeof dispatch.replaceBlock !== 'undefined' ) {
+									const blockToRecover = allBlocks.find( function( b ) { return b.clientId === clientId; } );
+									if ( blockToRecover ) {
+										const recoveredBlock = recoverBlockTree( blockToRecover );
+										// Only replace if the block actually needs recovery
+										if ( ! blockToRecover.isValid || 
+											 ( blockToRecover.validationIssues && blockToRecover.validationIssues.length > 0 ) ||
+											 blockValidationErrors[ blockToRecover.clientId ] ) {
+											dispatch.replaceBlock( clientId, recoveredBlock );
+											actuallyRecovered++;
+											if ( ! isMigrationMode ) {
+												logToParent( '[Adaire Blocks] ✅ Recovered block: ' + blockToRecover.name );
+											}
+										}
+									}
+								}
+							} catch ( e ) {
+								logToParent( '[Adaire Blocks] ⚠️ Failed to recover block ' + clientId + ': ' + e.message, 'warn' );
+							}
+						} );
+						
+						// Update recoveredCount with actual number recovered
+						recoveredCount = actuallyRecovered;
+						
+						if ( ! isMigrationMode ) {
+							logToParent( '[Adaire Blocks] ✅ Recovered ' + actuallyRecovered + ' block(s) using WordPress recovery' );
+						}
+					} else {
+						// Fallback to resetBlocks for tree-based recovery
+						dispatch.resetBlocks( recoveredBlocks );
+						
+						if ( ! isMigrationMode ) {
+							logToParent( '[Adaire Blocks] ✅ Editor updated successfully' );
+						}
+					}
+				} else {
+					// Fallback to resetBlocks
+					dispatch.resetBlocks( recoveredBlocks );
+					
+					if ( ! isMigrationMode ) {
+						logToParent( '[Adaire Blocks] ✅ Editor updated successfully' );
+					}
 				}
 			} catch ( error ) {
 				logToParent( '[Adaire Blocks] ❌ Failed to update editor: ' + error.message, 'error' );
@@ -500,7 +657,7 @@
 					}, 10000 );
 				}, 300 );
 			} else {
-				// Normal mode - show a notice and clear the dirty state
+				// Normal mode - show a notice and auto-save the post
 				wp.data.dispatch( 'core/notices' ).createNotice(
 					'success',
 					`Adaire Blocks: Automatically recovered ${recoveredCount} block(s).`,
@@ -510,15 +667,33 @@
 					}
 				);
 
-				// Reset the dirty state so the "leave site" prompt doesn't appear
-				setTimeout( function() {
-					// Reset edit count to clear unsaved changes prompt
-					if ( wp.data.select( 'core/editor' ) && wp.data.dispatch( 'core/editor' ).resetEditorBlocks ) {
-						const currentBlocks = wp.data.select( 'core/block-editor' ).getBlocks();
-						wp.data.dispatch( 'core/editor' ).resetEditorBlocks( currentBlocks );
-						logToParent( '[Adaire Blocks] ✅ Reset editor state' );
-					}
-				}, 100 );
+				// Auto-save the post after recovery in normal mode
+				if ( coreEditor && typeof coreEditor.savePost === 'function' ) {
+					logToParent( '[Adaire Blocks] 💾 Auto-saving post after recovery...' );
+					
+					// Wait a moment for blocks to settle, then save
+					setTimeout( function() {
+						// Clear dirty state before saving to prevent warnings
+						if ( wp.data.dispatch( 'core/editor' ).resetEditorBlocks ) {
+							const currentBlocks = wp.data.select( 'core/block-editor' ).getBlocks();
+							wp.data.dispatch( 'core/editor' ).resetEditorBlocks( currentBlocks );
+						}
+						
+						// Save the post
+						coreEditor.savePost();
+						logToParent( '[Adaire Blocks] ✅ Post saved after recovery' );
+					}, 500 );
+				} else {
+					// Fallback: Reset the dirty state so the "leave site" prompt doesn't appear
+					setTimeout( function() {
+						// Reset edit count to clear unsaved changes prompt
+						if ( wp.data.select( 'core/editor' ) && wp.data.dispatch( 'core/editor' ).resetEditorBlocks ) {
+							const currentBlocks = wp.data.select( 'core/block-editor' ).getBlocks();
+							wp.data.dispatch( 'core/editor' ).resetEditorBlocks( currentBlocks );
+							logToParent( '[Adaire Blocks] ✅ Reset editor state' );
+						}
+					}, 100 );
+				}
 			}
 		} else {
 			// No blocks recovered
@@ -574,4 +749,3 @@
 	}
 
 } )();
-

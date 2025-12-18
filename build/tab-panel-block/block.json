@@ -3,8 +3,8 @@
   "apiVersion": 3,
   "name": "create-block/tab-panel-block",
   "version": "0.1.0",
-  "title": "Tab Panel",
-  "category": "widgets",
+  "title": "Tab Panel (Free)",
+  "category": "adaire-blocks-free",
   "parent": [
     "create-block/tabs-block"
   ],

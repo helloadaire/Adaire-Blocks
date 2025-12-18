@@ -4,7 +4,7 @@
   "name": "create-block/modal-trigger-block",
   "version": "0.1.0",
   "title": "Modal Trigger",
-  "category": "widgets",
+  "category": "adaire-blocks-premium",
   "icon": "button",
   "parent": [
     "create-block/modal-block"

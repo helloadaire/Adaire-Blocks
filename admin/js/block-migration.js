@@ -289,4 +289,3 @@ function resetButtons() {
     document.getElementById('start-migration').style.display = 'inline-block';
     document.getElementById('cancel-migration').style.display = 'none';
 }
-

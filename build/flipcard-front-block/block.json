@@ -4,7 +4,7 @@
   "name": "create-block/flipcard-front-block",
   "version": "0.1.0",
   "title": "Flip Card Front",
-  "category": "widgets",
+  "category": "adaire-blocks-plus",
   "parent": [
     "create-block/flipcard-block"
   ],

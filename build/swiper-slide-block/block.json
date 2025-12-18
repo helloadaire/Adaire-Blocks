@@ -4,7 +4,7 @@
   "name": "adaire/swiper-slide",
   "version": "0.1.0",
   "title": "Swiper Slide",
-  "category": "adaire-blocks",
+  "category": "adaire-blocks-plus",
   "parent": [
     "adaire/swiper-carousel"
   ],

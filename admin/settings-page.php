@@ -80,7 +80,8 @@ class AdaireBlocksSettings {
         $defaults = array();
         $available_blocks = $this->get_available_blocks();
         
-        // Set all available blocks to enabled by default
+        // Set all available blocks (including auxiliary child blocks) to enabled by default.
+        // Auxiliary blocks are always synced to their parent, but still need a stored setting.
         foreach ($available_blocks as $block_key => $block_data) {
             $defaults[$block_key] = true;
         }
@@ -103,10 +104,25 @@ class AdaireBlocksSettings {
         // Get current settings to preserve disabled blocks
         $current_settings = get_option($this->option_name, $this->get_default_settings());
         
+        // First, read the submitted values for all blocks.
         foreach ($available_blocks as $block_key => $block_data) {
-            // If the checkbox is checked, it will be in the input array
-            // If it's unchecked, it won't be in the input array, so we set it to false
+            // If the checkbox is checked, it will be in the input array.
+            // If it's unchecked, it won't be in the input array, so we set it to false.
             $sanitized[$block_key] = isset($input[$block_key]) && $input[$block_key] ? true : false;
+        }
+
+        // Ensure auxiliary/child blocks always follow their parent block's setting.
+        foreach ($available_blocks as $block_key => $block_data) {
+            if (!empty($block_data['is_auxiliary']) && !empty($block_data['parent_key'])) {
+                $parent_key = $block_data['parent_key'];
+
+                if (isset($sanitized[$parent_key])) {
+                    $sanitized[$block_key] = $sanitized[$parent_key];
+                } else {
+                    // If for some reason the parent is missing, default the child to enabled.
+                    $sanitized[$block_key] = true;
+                }
+            }
         }
         
         // // Debug: Log what's being saved (only in debug mode)
@@ -155,10 +171,46 @@ class AdaireBlocksSettings {
             $settings_key = str_replace('-', '_', $block_name);
             
             // Get block metadata
-            $name = isset($block_data['title']) ? $block_data['title'] : ucwords(str_replace('-', ' ', $block_name));
+            $name        = isset($block_data['title']) ? $block_data['title'] : ucwords(str_replace('-', ' ', $block_name));
             $description = isset($block_data['description']) ? $block_data['description'] : 'Custom block for ' . $name;
-            $category = isset($block_data['category']) ? ucfirst($block_data['category']) : 'Widgets';
+
+            // Raw category slug from block.json (e.g. adaire-blocks-free / adaire-blocks-plus / adaire-blocks-premium).
+            $category_slug = isset($block_data['category']) ? $block_data['category'] : '';
+
+            // Human-readable category label for display.
+            switch ($category_slug) {
+                case 'adaire-blocks-free':
+                    $category_label = 'Free';
+                    break;
+                case 'adaire-blocks-plus':
+                    $category_label = 'Plus';
+                    break;
+                case 'adaire-blocks-premium':
+                    $category_label = 'Premium';
+                    break;
+                default:
+                    $category_label = $category_slug ? ucwords(str_replace('-', ' ', $category_slug)) : 'Widgets';
+                    break;
+            }
+
             $icon = isset($block_data['icon']) ? $block_data['icon'] : 'admin-generic';
+            
+            // Determine if this is an auxiliary "child" block that should be hidden in the UI
+            // but still follow its parent block's enabled/disabled state.
+            $is_auxiliary = false;
+            $parent_key   = null;
+
+            if (isset($block_data['parent']) && is_array($block_data['parent']) && !empty($block_data['parent'])) {
+                // Use the first declared parent as the "owning" block.
+                $parent_name = $block_data['parent'][0];
+
+                // Normalise to the slug used for build directory (strip common prefixes).
+                $parent_slug = preg_replace('#^(create-block/|adaire/|adaire-blocks/)#', '', $parent_name);
+                $parent_key  = str_replace('-', '_', $parent_slug);
+
+                // Treat any block with a parent as an auxiliary block for settings UI purposes.
+                $is_auxiliary = true;
+            }
             
             // Add upgrade message if block has limitations
             $upgrade_message = $config->get_upgrade_message($block_name);
@@ -173,14 +225,18 @@ class AdaireBlocksSettings {
             // }
             
             $blocks[$settings_key] = array(
-                'name' => $name,
-                'description' => $description,
-                'category' => $category,
-                'icon' => $icon,
-                'block_name' => $block_name,
+                'name'            => $name,
+                'description'     => $description,
+                'category'        => $category_label,
+                'category_slug'   => $category_slug,
+                'icon'            => $icon,
+                'block_name'      => $block_name,
                 'upgrade_message' => $upgrade_message,
-                'limits' => $limits,
-                'is_premium' => $is_premium_block
+                'limits'          => $limits,
+                'is_premium'      => $is_premium_block,
+                // Auxiliary (child/inner) blocks are hidden from the UI but kept in settings.
+                'is_auxiliary'    => $is_auxiliary,
+                'parent_key'      => $parent_key,
             );
         }
         
@@ -429,11 +485,18 @@ class AdaireBlocksSettings {
                         <p class="description" style="font-size: 12px; color: #666; margin-top: 10px;">
                             <strong>Available Blocks:</strong> 
                             <?php 
-                            $total_blocks = count($available_blocks);
+                            // Only count non-auxiliary blocks in the summary to match what is shown below.
+                            $total_blocks = 0;
                             $free_blocks = 0;
                             $premium_blocks = 0;
                             
                             foreach ($available_blocks as $block_key => $block_data) {
+                                if (!empty($block_data['is_auxiliary'])) {
+                                    continue;
+                                }
+
+                                $total_blocks++;
+
                                 if ($block_data['is_premium']) {
                                     $premium_blocks++;
                                 } else {
@@ -453,12 +516,19 @@ class AdaireBlocksSettings {
                             $enabled_count = 0;
                             $total_free = 0;
                             foreach ($settings as $key => $value) {
-                                // Only count settings for free blocks
+                                // Only count settings for free, non-auxiliary blocks.
                                 if (isset($available_blocks[$key])) {
                                     $block_data = $available_blocks[$key];
+
+                                    if (!empty($block_data['is_auxiliary'])) {
+                                        continue;
+                                    }
+
                                     if (!$block_data['is_premium']) {
                                         $total_free++;
-                                        if ($value) $enabled_count++;
+                                        if ($value) {
+                                            $enabled_count++;
+                                        }
                                     }
                                 }
                             }
@@ -480,69 +550,113 @@ class AdaireBlocksSettings {
                     
                     <div class="adaire-blocks-controls">
                         <div class="adaire-blocks-bulk-actions">
-                            <button type="button" class="button" id="enable-all-blocks">Enable Available Blocks</button>
-                            <button type="button" class="button" id="disable-all-blocks">Disable All Free Blocks</button>
+                            <button type="button" class="button" id="enable-all-blocks">Enable All Blocks</button>
+                            <button type="button" class="button" id="disable-all-blocks">Disable All Blocks</button>
                             <button type="button" class="button" id="reset-to-defaults">Reset to Defaults</button>
                         </div>
                     </div>
                     
-                    <div class="adaire-blocks-grid">
-                        <?php foreach ($available_blocks as $block_key => $block_data): ?>
-                            <div class="adaire-block-card <?php echo $block_data['is_premium'] ? 'adaire-block-premium' : ''; ?>">
-                                <?php if ($block_data['is_premium']): ?>
-                                    <div class="adaire-block-premium-badge">
-                                        <span class="dashicons dashicons-star-filled"></span>
-                                        Premium
-                                    </div>
-                                <?php endif; ?>
-                                <div class="adaire-block-header">
-                                    <div class="adaire-block-icon">
-                                        <?php 
-                                        $allowed_svg = $this->get_allowed_svg_tags();
-                                        // Check if icon is SVG content (starts with <svg)
-                                        if (strpos($block_data['icon'], '<svg') === 0) {
-                                            echo wp_kses( $block_data['icon'], $allowed_svg );
-                                        } elseif (strpos($block_data['icon'], 'data:image/svg+xml;base64,') === 0) {
-                                            // Decode base64 SVG and render it (fallback for old format)
-                                            $svg_data = base64_decode(str_replace('data:image/svg+xml;base64,', '', $block_data['icon']));
-                                            echo wp_kses( $svg_data, $allowed_svg );
-                                        } else {
+                    <?php
+                    // Group non-auxiliary blocks by tier/category for clearer management UI.
+                    $grouped_blocks = array(
+                        'adaire-blocks-free'    => array(),
+                        'adaire-blocks-plus'    => array(),
+                        'adaire-blocks-premium' => array(),
+                        'other'                 => array(),
+                    );
+
+                    foreach ($available_blocks as $block_key => $block_data) {
+                        if (!empty($block_data['is_auxiliary'])) {
+                            continue;
+                        }
+
+                        $slug = !empty($block_data['category_slug']) ? $block_data['category_slug'] : 'other';
+                        if (!isset($grouped_blocks[$slug])) {
+                            $grouped_blocks[$slug] = array();
+                        }
+                        $grouped_blocks[$slug][$block_key] = $block_data;
+                    }
+
+                    /**
+                     * Helper closure to render a tier section.
+                     */
+                    $render_tier = function( $title, $blocks_for_tier ) use ( $settings ) {
+                        if (empty($blocks_for_tier)) {
+                            return;
+                        }
+                        ?>
+                        <h2 class="adaire-blocks-tier-heading"><?php echo esc_html( $title ); ?></h2>
+                        <div class="adaire-blocks-grid">
+                            <?php foreach ($blocks_for_tier as $block_key => $block_data): ?>
+                                <div class="adaire-block-card <?php echo $block_data['is_premium'] ? 'adaire-block-premium' : ''; ?>">
+                                    <?php if ($block_data['is_premium']): ?>
+                                        <div class="adaire-block-premium-badge">
+                                            <span class="dashicons dashicons-star-filled"></span>
+                                            Premium
+                                        </div>
+                                    <?php endif; ?>
+                                    <div class="adaire-block-header">
+                                        <div class="adaire-block-icon">
+                                            <?php 
+                                            $allowed_svg = $this->get_allowed_svg_tags();
+                                            // Check if icon is SVG content (starts with <svg)
+                                            if (strpos($block_data['icon'], '<svg') === 0) {
+                                                echo wp_kses( $block_data['icon'], $allowed_svg );
+                                            } elseif (strpos($block_data['icon'], 'data:image/svg+xml;base64,') === 0) {
+                                                // Decode base64 SVG and render it (fallback for old format)
+                                                $svg_data = base64_decode(str_replace('data:image/svg+xml;base64,', '', $block_data['icon']));
+                                                echo wp_kses( $svg_data, $allowed_svg );
+                                            } else {
                                             // Use dashicon for non-SVG icons
-                                            echo '<span class="dashicons dashicons-' . esc_attr($block_data['icon']) . '"></span>';
-                                        }
-                                        ?>
+                                                echo '<span class="dashicons dashicons-' . esc_attr($block_data['icon']) . '"></span>';
+                                            }
+                                            ?>
+                                        </div>
+                                        <div class="adaire-block-info">
+                                            <h3><?php echo esc_html($block_data['name']); ?></h3>
+                                            <span class="adaire-block-category"><?php echo esc_html($block_data['category']); ?></span>
+                                        </div>
+                                        <div class="adaire-block-toggle">
+                                            <?php if ($block_data['is_premium']): ?>
+                                                <div class="adaire-block-upgrade-prompt">
+                                                    <a href="https://adaire.digital/shop-blocks" target="_blank" class="adaire-upgrade-button">
+                                                        <span class="dashicons dashicons-external"></span>
+                                                        Upgrade
+                                                    </a>
+                                                </div>
+                                            <?php else: ?>
+                                                <label class="adaire-toggle-switch">
+                                                    <!-- Hidden input to ensure unchecked boxes send a value -->
+                                                    <input type="hidden" name="<?php echo esc_attr($this->option_name); ?>[<?php echo esc_attr($block_key); ?>]" value="0" />
+                                                    <input type="checkbox" 
+                                                        name="<?php echo esc_attr($this->option_name); ?>[<?php echo esc_attr($block_key); ?>]" 
+                                                        value="1" 
+                                                        <?php checked(isset($settings[$block_key]) ? $settings[$block_key] : true, true); ?>>
+                                                    <span class="adaire-toggle-slider"></span>
+                                                </label>
+                                            <?php endif; ?>
+                                        </div>
                                     </div>
-                                    <div class="adaire-block-info">
-                                        <h3><?php echo esc_html($block_data['name']); ?></h3>
-                                        <span class="adaire-block-category"><?php echo esc_html($block_data['category']); ?></span>
-                                    </div>
-                                    <div class="adaire-block-toggle">
-                                        <?php if ($block_data['is_premium']): ?>
-                                            <div class="adaire-block-upgrade-prompt">
-                                                <a href="https://adaire.digital/shop-blocks" target="_blank" class="adaire-upgrade-button">
-                                                    <span class="dashicons dashicons-external"></span>
-                                                    Upgrade
-                                                </a>
-                                            </div>
-                                        <?php else: ?>
-                                            <label class="adaire-toggle-switch">
-                                                <!-- Hidden input to ensure unchecked boxes send a value -->
-                                                <input type="hidden" name="<?php echo esc_attr($this->option_name); ?>[<?php echo esc_attr($block_key); ?>]" value="0" />
-                                                <input type="checkbox" 
-                                                       name="<?php echo esc_attr($this->option_name); ?>[<?php echo esc_attr($block_key); ?>]" 
-                                                       value="1" 
-                                                       <?php checked(isset($settings[$block_key]) ? $settings[$block_key] : true, true); ?>>
-                                                <span class="adaire-toggle-slider"></span>
-                                            </label>
-                                        <?php endif; ?>
+                                    <div class="adaire-block-description">
+                                        <p><?php echo esc_html($block_data['description']); ?></p>
                                     </div>
                                 </div>
-                                <div class="adaire-block-description">
-                                    <p><?php echo esc_html($block_data['description']); ?></p>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <?php
+                    };
+
+                    // Render tiers in the desired order: Free, Plus, Premium, then any others.
+                    $render_tier( 'Free Blocks',    $grouped_blocks['adaire-blocks-free'] );
+                    $render_tier( 'Plus Blocks',    $grouped_blocks['adaire-blocks-plus'] );
+                    $render_tier( 'Premium Blocks', $grouped_blocks['adaire-blocks-premium'] );
+
+                    // Render any non-standard categories under "Other Blocks".
+                    $other_blocks = $grouped_blocks['other'];
+                    if (!empty($other_blocks)) {
+                        $render_tier( 'Other Blocks', $other_blocks );
+                    }
+                    ?>
                     
                     <div class="adaire-blocks-footer">
                         <?php submit_button('Save Settings', 'primary', 'submit', false); ?>
@@ -559,9 +673,31 @@ class AdaireBlocksSettings {
     
     /**
      * Get settings
+     * Automatically merges in new blocks that aren't in saved settings (enabled by default)
      */
     public function get_settings() {
-        return get_option($this->option_name, $this->get_default_settings());
+        $saved_settings = get_option($this->option_name, array());
+        $default_settings = $this->get_default_settings();
+        $has_new_blocks = false;
+        
+        // Start with saved settings, then add any new blocks from defaults
+        $merged_settings = $saved_settings;
+        
+        // Check for new blocks that exist in defaults but not in saved settings
+        foreach ($default_settings as $block_key => $default_value) {
+            if (!isset($saved_settings[$block_key])) {
+                // New block detected - enable it by default
+                $merged_settings[$block_key] = true;
+                $has_new_blocks = true;
+            }
+        }
+        
+        // Save the merged settings if new blocks were added (to persist the defaults)
+        if ($has_new_blocks) {
+            update_option($this->option_name, $merged_settings);
+        }
+        
+        return $merged_settings;
     }
     
     /**
