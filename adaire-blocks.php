@@ -1670,7 +1670,8 @@ function enqueue_bootstrap_icons_assets() {
         has_block( 'create-block/icon-box-block', $post ) ||
         has_block( 'create-block/social-banner-block', $post ) ||
         has_block( 'create-block/industries-block', $post ) ||
-        has_block( 'create-block/our-process-block', $post )
+        has_block( 'create-block/our-process-block', $post ) ||
+        has_block( 'create-block/social-share-block', $post )
     ) {
         // Enqueue Bootstrap Icons CSS from CDN
         wp_enqueue_style(
