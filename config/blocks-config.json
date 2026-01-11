@@ -60,33 +60,14 @@
 			"enabled": true,
 			"upgradeMessage": "Content Toggle Panel Block works with the Content Toggle Block."
 		},
-		"flipcard-block": {
-			"enabled": true,
-			"upgradeMessage": "Upgrade to Premium for advanced flip card features."
-		},
-		"flipcard-front-block": {
-			"enabled": true,
-			"upgradeMessage": "Flip Card Front Block works with the Flip Card Block."
-		},
-		"flipcard-back-block": {
-			"enabled": true,
-			"upgradeMessage": "Flip Card Back Block works with the Flip Card Block."
-		},
-		"swiper-carousel-block": {
-			"enabled": true,
-			"upgradeMessage": "Upgrade to Premium for advanced carousel features."
-		},
-		"swiper-slide-block": {
-			"enabled": true,
-			"upgradeMessage": "Swiper Slide Block works with the Swiper Carousel Block."
-		},
-		"our-process-block": {
-			"enabled": true,
-			"upgradeMessage": "Upgrade to Premium for advanced process showcase features."
-		},
 		"social-share-block": {
 			"enabled": true,
 			"upgradeMessage": "Upgrade to Premium for advanced social sharing features."
+		},
+	
+		"infogrid-block": {
+			"enabled": true,
+			"upgradeMessage": "Upgrade to Premium for advanced grid layouts and features."
 		}
 	},
 	"premium": {
@@ -116,6 +97,10 @@
 				"conditional-logic",
 				"advanced-effects"
 			]
+		},
+		"case-studies-block": {
+			"enabled": true,
+			"upgradeMessage": "Upgrade to Premium for additional layouts and animations."
 		},
 		"call-to-action-block": {
 			"enabled": true,

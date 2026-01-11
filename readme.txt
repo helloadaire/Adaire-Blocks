@@ -4,7 +4,7 @@ Donate link: https://adaire.digital/
 Tags: blocks, gutenberg, gsap, animation, portfolio
 Requires at least: 6.7
 Tested up to: 6.8
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 Requires PHP: 7.4
 License: GPL-3.0
 Source Code: https://github.com/helloadaire/Adaire-Blocks-Free
@@ -130,6 +130,12 @@ For support, please visit our website at https://adaire.digital/ or contact us t
 6. Posts Grid Block with filtering and pagination
 
 == Changelog ==
+
+= 1.2.1 =
+* Improved icon management system with unified mapping configuration for easier maintenance
+* Fixed Progress Block icon path to use correct Plus tier icon
+* Enhanced build scripts to use centralized icon mapping configuration
+* Improved developer experience with editable icon mapping file
 
 = 1.2.0 =
 * Added Flip Card Block (Plus) - Interactive flip cards with front and back content areas, customizable hover effects, smooth 3D transitions, and full inner blocks support

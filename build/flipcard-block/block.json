@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "title": "Flip Card (Plus)",
   "category": "adaire-blocks-plus",
-  "icon": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n<g clip-path=\"url(#clip0_77_2)\">\r\n<rect width=\"24\" height=\"24\" rx=\"5\" fill=\"#D52940\"/>\r\n<g clip-path=\"url(#clip1_77_2)\">\r\n<rect x=\"3.5\" y=\"3.5\" width=\"11\" height=\"13\" fill=\"none\" stroke=\"white\"/>\r\n<rect x=\"9.5\" y=\"8.5\" width=\"11\" height=\"13\" fill=\"none\" stroke=\"white\"/>\r\n</g>\r\n</g>\r\n<defs>\r\n<clipPath id=\"clip0_77_2\">\r\n<rect width=\"24\" height=\"24\" rx=\"5\" fill=\"white\"/>\r\n</clipPath>\r\n<clipPath id=\"clip1_77_2\">\r\n<rect width=\"24\" height=\"24\" fill=\"white\"/>\r\n</clipPath>\r\n</defs>\r\n</svg>",
+  "icon": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\r\n<g clip-path=\"url(#clip0_77_2)\">\r\n<rect width=\"24\" height=\"24\" rx=\"5\" fill=\"#D52940\"/>\r\n<g clip-path=\"url(#clip1_77_2)\">\r\n<rect x=\"3.5\" y=\"3.5\" width=\"11\" height=\"13\" stroke=\"white\"/>\r\n<rect x=\"9.5\" y=\"8.5\" width=\"11\" height=\"13\" stroke=\"white\"/>\r\n</g>\r\n</g>\r\n<defs>\r\n<clipPath id=\"clip0_77_2\">\r\n<rect width=\"24\" height=\"24\" rx=\"5\" fill=\"white\"/>\r\n</clipPath>\r\n<clipPath id=\"clip1_77_2\">\r\n<rect width=\"24\" height=\"24\" fill=\"white\"/>\r\n</clipPath>\r\n</defs>\r\n</svg>",
   "description": "A card that flips on hover, allowing you to add blocks on both the front and back sides.",
   "example": {},
   "supports": {
