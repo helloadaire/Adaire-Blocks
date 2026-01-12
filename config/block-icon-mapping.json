@@ -16,7 +16,7 @@
 		"flipcard-back-block": "flip-card",
 		"icon-box-block": "icon-box",
 		"industries-block": "industries",
-		"infogrid-block": "icon-box",
+		"infogrid-block": "info-grid",
 		"logos-block": "logos",
 		"map-block": "map",
 		"mega-menu-block": "mega-menu",
@@ -27,7 +27,7 @@
 		"particles-block": "particles",
 		"portfolio-block": "portfolio",
 		"posts-grid-block": "posts-grid",
-		"posts-carousel-block": "posts-grid",
+		"posts-carousel-block": "posts-carousel",
 		"pricing-table-block": "pricing-table",
 		"progress-block": "progress",
 		"project-block": "project",
@@ -78,6 +78,8 @@
 		"swiper-carousel-block": "Plus Blocks/swiper-carousel-plus-block.svg",
 		"tabs-block": "Free Blocks/tabs-block.svg",
 		"testimonial-block": "Free Blocks/testimonial-block.svg",
+		"testimonial2-block": "newer-icons/testimonial-plus-block.svg",
+		"testimonial3-block": "newer-icons/testimonial-premium-block.svg",
 		"video-hero-block": "Plus Blocks/video-hero-plus-block.svg",
 		"video-player-block": "Free Blocks/video-block.svg"
 	}
