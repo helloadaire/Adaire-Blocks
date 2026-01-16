@@ -10,31 +10,52 @@ Adaire Blocks is a comprehensive WordPress plugin that provides a collection of 
 
 ### Available Blocks
 
+**Free Blocks:**
 - **Accordion Block** - Create collapsible content sections with smooth animations, customizable styling, and responsive design
 - **Animation on Scroll Block** - Complete control over scroll-triggered animations with 12 animation types, configurable distance, flip options, and live editor preview
 - **Button Block** - Create customizable buttons with hover animations, multiple styles, and advanced styling options
-- **Map Block** - Display multiple locations with Google Maps integration, Leaflet fly mode, and interactive navigation
-- **Call to Action Block** - Build powerful call-to-action sections with animated carousels and gradient backgrounds
-- **Container Block** - Create flexible layout containers with constrained/full-width options and responsive settings
-- **CTA Block** - Build call-to-action sections with animated carousels and gradient backgrounds
-- **Industries Block** - Showcase industries with responsive tiles, customizable icons, link functionality, and flexible layouts
-- **Logos Block** - Display partner/client logos with customizable sliders, smooth animations, and responsive breakpoints
-- **Modal Block** - Create customizable modal dialogs with trigger buttons, responsive dimensions, and flexible content areas
-- **Particles Block** - Add dynamic particle effects with scroll-controlled animations and customizable positioning
-- **Portfolio Block** - Showcase your work with elegant portfolio layouts, gallery modals, and GSAP animations
-- **Posts Grid Block** - Display WordPress posts in beautiful grid layouts with filtering, pagination, and FLIP animations
-- **Project Block** - Highlight your projects with interactive showcases, particle effects, and dynamic content
-- **Questions Block** - Create animated FAQ sections with GSAP pinning and smooth transitions
-- **Scroll Text Block** - Add scroll-triggered text animations with customizable speed and direction
-- **Services Block** - Display your services with interactive carousel layouts, scroll-triggered animations, and smooth transitions
-- **Our Process Block** - Showcase multi-step processes with clickable tiles, responsive column controls, and per-step icon/link management
-- **Content Toggle Block** - Switch between rich content panels using pill-style toggles, GSAP-powered animations, and responsive container controls
-- **Swiper Carousel Block** - Build draggable, autoplay-ready Swiper.js carousels using paired Swiper Slide blocks with overlay/custom height settings
-- **Testimonial 2 Block** - Present long-form testimonials with hero photography, company logos, and nav arrows inside a responsive carousel
-- **Tabs Block** - Create tabbed content sections with smooth GSAP animations, vertical/horizontal layouts, and customizable styling
-- **Testimonial Block** - Showcase client testimonials with customizable carousels and professional layouts
-- **Video Hero Block** - Create stunning video hero sections with YouTube/Vimeo integration, smooth transitions, and customizable overlays
 - **Video Player Block** - Embed YouTube and Vimeo videos with smart URL parsing, flexible playback controls, and responsive container options
+- **Icon Box Block** - Display icons with text content in customizable box layouts
+- **Social Banner Block** - Display a sticky social media banner on the side of the screen with customizable icons, colors, and links
+- **Social Share Block** - Add social sharing buttons with customizable platforms, tooltip interface, and one-click sharing functionality
+- **Testimonial Block** - Showcase client testimonials with customizable carousels and professional layouts
+- **Posts Grid Block** - Display WordPress posts in beautiful grid layouts with filtering, pagination, and FLIP animations
+- **Posts Carousel Block** - Display WordPress posts in a carousel layout with smooth animations
+- **Tabs Block** - Create tabbed content sections with smooth GSAP animations, vertical/horizontal layouts, and customizable styling
+- **Content Toggle Block** - Let visitors flip between content panels using pill-style toggles, GSAP animations, and responsive containers
+- **Flip Card Block** - Create interactive flip cards with front and back content, customizable hover effects, and smooth 3D transitions
+- **Swiper Carousel Block** - Build Swiper.js carousels with draggable slides, autoplay, loop, and per-slide overlays via Swiper Slide blocks
+- **Our Process Block** - Showcase your delivery process with responsive multi-column layouts, clickable steps, and per-step icon/link controls
+- **Hero 1 Block** - A responsive hero block with configurable settings for all breakpoints, featuring flexible layout controls, responsive padding, and max-width settings
+- **Info Grid Block** - A beautiful info grid with hover-expandable items featuring title, tagline, and description
+- **Info Grid 2 Block** - Advanced grid layout with customizable items, backgrounds, and overlay options
+- **Image Composition Block** - Create collage-style compositions of images in an asymmetric grid layout
+
+**Plus Blocks (available in Plus and Premium versions):**
+- **Call to Action Block** - Build powerful call-to-action sections with animated carousels and gradient backgrounds
+- **Counter Block** - Display animated counters that count up or down to a target number, with customizable prefixes, suffixes, and captions
+- **Map Block** - Display multiple locations with Google Maps integration, Leaflet fly mode, and interactive navigation
+- **Questions Block** - Create animated FAQ sections with GSAP pinning and smooth transitions
+- **Portfolio Block** - Showcase your work with elegant portfolio layouts, gallery modals, and GSAP animations
+- **Services Block** - Display your services with interactive carousel layouts, scroll-triggered animations, and smooth transitions
+- **Logos Block** - Display partner/client logos with customizable sliders, smooth animations, and responsive breakpoints
+- **Video Hero Block** - Create stunning video hero sections with YouTube/Vimeo integration, smooth transitions, and customizable overlays
+- **Scroll Text Block** - Add scroll-triggered text animations with customizable speed and direction
+- **Mega Menu Block** - Create advanced mega menu navigation with customizable layouts and styling
+- **Testimonial 2 Block (Plus)** - Feature long-form testimonials with portrait photography, company logos, and keyboard-accessible carousel navigation
+- **Pricing Table Block** - Build responsive pricing tables with monthly/yearly toggle, customizable cards, feature lists, and button styling
+- **Progress Block** - Display scroll-based progress indicators with bar or ring variants, fixed positioning, and customizable colors
+- **Info Grid 3 Block** - A responsive 2-row grid block with a three-column sub-section and background options
+- **Info Grid 4 Block** - A 2x2 grid block with configurable colors, typography, and background SVG icon support
+- **Case Studies Block** - A dynamic case studies grid with GSAP FLIP animations, filtering by Industry and Capabilities, and load more functionality
+- **Video Carousel Block** - A draggable video carousel with custom drag cursor and smooth scrolling cards
+
+**Premium Blocks (only available in Premium version):**
+- **Particles Block** - Add dynamic particle effects with scroll-controlled animations and customizable positioning
+- **Project Block** - Highlight your projects with interactive showcases, particle effects, and dynamic content
+- **Industries Block** - Showcase industries with responsive tiles, customizable icons, link functionality, and flexible layouts
+- **Modal Block** - Create customizable modal dialogs with trigger buttons, responsive dimensions, and flexible content areas
+- **Testimonial 3 Block (Premium)** - Premium testimonial carousel with draggable interface, purple background styling, white cards, and profile images
 
 ## Technical Features
 
