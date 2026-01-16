@@ -64,10 +64,21 @@
 			"enabled": true,
 			"upgradeMessage": "Upgrade to Premium for advanced social sharing features."
 		},
-	
 		"infogrid-block": {
 			"enabled": true,
 			"upgradeMessage": "Upgrade to Premium for advanced grid layouts and features."
+		},
+		"container-block": {
+			"enabled": true,
+			"upgradeMessage": "Upgrade to Premium for advanced container features and unlimited custom breakpoints."
+		},
+		"infogrid-2-block": {
+			"enabled": true,
+			"upgradeMessage": "Upgrade to Premium for even more advanced grid features."
+		},
+		"image-composition-block": {
+			"enabled": true,
+			"upgradeMessage": "Create beautiful collage layouts with your favourite images."
 		}
 	},
 	"premium": {
@@ -440,6 +451,26 @@
 				"custom-platforms",
 				"analytics-tracking"
 			]
+		},
+		"infogrid-3-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"two-row-case-study-layout",
+				"headline-and-summary-area",
+				"three-column-outcomes-row",
+				"responsive-spacing-and-typography"
+			]
+		},
+		"infogrid-4-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"2x2-difference-grid",
+				"full-color-and-typography-controls",
+				"background-svg-icon-support",
+				"responsive-layout-configuration"
+			]
 		}
 	},
 	"plus": {
@@ -747,6 +778,36 @@
 				"advanced-social-sharing",
 				"custom-platforms",
 				"analytics-tracking"
+			]
+		},
+		"infogrid-3-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"two-row-case-study-layout",
+				"headline-and-summary-area",
+				"three-column-outcomes-row",
+				"responsive-spacing-and-typography"
+			]
+		},
+		"infogrid-4-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"2x2-difference-grid",
+				"full-color-and-typography-controls",
+				"background-svg-icon-support",
+				"responsive-layout-configuration"
+			]
+		},
+		"video-carousel-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"draggable-video-cards",
+				"custom-drag-cursor",
+				"consistent-card-sizing",
+				"single-video-playback"
 			]
 		}
 	}

@@ -32,37 +32,49 @@
           "id": 1,
           "title": "FOOD & BEVERAGE",
           "tagline": "Faster, safer supply chains",
-          "description": "Automate production and distribution workflows, improve traceability, and reduce stockouts while meeting compliance across labeling and safety standards."
+          "description": "Automate production and distribution workflows, improve traceability, and reduce stockouts while meeting compliance across labeling and safety standards.",
+          "useIcon": false,
+          "iconClass": ""
         },
         {
           "id": 2,
           "title": "PERSONAL & HOUSEHOLD CARE",
           "tagline": "Trusted products, lower cost",
-          "description": "Streamline product development cycles, optimize ingredient sourcing, and ensure regulatory compliance across global markets."
+          "description": "Streamline product development cycles, optimize ingredient sourcing, and ensure regulatory compliance across global markets.",
+          "useIcon": false,
+          "iconClass": ""
         },
         {
           "id": 3,
           "title": "APPAREL, FASHION & LUXURY",
           "tagline": "Fewer returns, higher margin",
-          "description": "Enhance customer experience with accurate sizing, reduce returns through better product information, and optimize inventory management."
+          "description": "Enhance customer experience with accurate sizing, reduce returns through better product information, and optimize inventory management.",
+          "useIcon": false,
+          "iconClass": ""
         },
         {
           "id": 4,
           "title": "DURABLES & HOME PRODUCTS",
           "tagline": "Simpler service journeys",
-          "description": "Improve customer service with comprehensive product documentation, spare parts management, and streamlined warranty processes."
+          "description": "Improve customer service with comprehensive product documentation, spare parts management, and streamlined warranty processes.",
+          "useIcon": false,
+          "iconClass": ""
         },
         {
           "id": 5,
           "title": "RETAIL & E-COMMERCE",
           "tagline": "More profitable growth",
-          "description": "Drive conversion with rich product content, optimize merchandising decisions, and create seamless omnichannel experiences."
+          "description": "Drive conversion with rich product content, optimize merchandising decisions, and create seamless omnichannel experiences.",
+          "useIcon": false,
+          "iconClass": ""
         },
         {
           "id": 6,
           "title": "CONSUMER HEALTH & WELLNESS",
           "tagline": "Compliant, tailored engagement",
-          "description": "Navigate complex regulatory requirements, personalize customer communications, and build trust through transparency."
+          "description": "Navigate complex regulatory requirements, personalize customer communications, and build trust through transparency.",
+          "useIcon": false,
+          "iconClass": ""
         }
       ]
     },
@@ -102,6 +114,14 @@
       "type": "string",
       "default": "#8b7cf7"
     },
+    "iconSize": {
+      "type": "number",
+      "default": 28
+    },
+    "hoverIconColor": {
+      "type": "string",
+      "default": "#1a1a2e"
+    },
     "borderColor": {
       "type": "string",
       "default": "#2a2a4e"
@@ -130,6 +150,10 @@
       "type": "number",
       "default": 1
     },
+    "layoutStyle": {
+      "type": "string",
+      "default": "default"
+    },
     "containerMode": {
       "type": "string",
       "default": "full"
@@ -137,17 +161,60 @@
     "containerMaxWidth": {
       "type": "object",
       "default": {
-        "desktop": {
-          "value": 1200,
-          "unit": "px"
+        "mobile": {
+          "value": 100,
+          "unit": "%"
         },
         "tablet": {
           "value": 100,
           "unit": "%"
         },
+        "smallLaptop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "desktop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "bigDesktop": {
+          "value": 1200,
+          "unit": "px"
+        }
+      }
+    },
+    "responsivePadding": {
+      "type": "object",
+      "default": {
         "mobile": {
-          "value": 100,
-          "unit": "%"
+          "top": "40px",
+          "right": "20px",
+          "bottom": "40px",
+          "left": "20px"
+        },
+        "tablet": {
+          "top": "60px",
+          "right": "40px",
+          "bottom": "60px",
+          "left": "40px"
+        },
+        "smallLaptop": {
+          "top": "80px",
+          "right": "60px",
+          "bottom": "80px",
+          "left": "60px"
+        },
+        "desktop": {
+          "top": "100px",
+          "right": "80px",
+          "bottom": "100px",
+          "left": "80px"
+        },
+        "bigDesktop": {
+          "top": "100px",
+          "right": "80px",
+          "bottom": "100px",
+          "left": "80px"
         }
       }
     }

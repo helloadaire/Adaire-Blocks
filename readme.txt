@@ -1,10 +1,10 @@
 === Adaire Blocks ===
 Contributors: adairedigital
-Donate link: https://adaire.digital/
+Donate link: https://adaireblocks.com/
 Tags: blocks, gutenberg, gsap, animation, portfolio
 Requires at least: 6.7
 Tested up to: 6.8
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 Requires PHP: 7.4
 License: GPL-3.0
 Source Code: https://github.com/helloadaire/Adaire-Blocks-Free
@@ -118,7 +118,7 @@ The plugin is optimized for performance with efficient block registration and la
 
 = How do I get support? =
 
-For support, please visit our website at https://adaire.digital/ or contact us through the WordPress.org support forums.
+For support, please visit our website at https://adaireblocks.com/ or contact us through the WordPress.org support forums.
 
 == Screenshots ==
 
@@ -130,6 +130,16 @@ For support, please visit our website at https://adaire.digital/ or contact us t
 6. Posts Grid Block with filtering and pagination
 
 == Changelog ==
+
+= 1.2.2 =
+* Unified layout settings across infogrid, infogrid2, infogrid3, and infogrid4 blocks for consistent controls
+* Standardized responsive breakpoints (mobile, tablet, small-laptop, desktop, big-desktop) across all blocks
+* Added responsive padding and max-width controls to infogrid (free) and infogrid2 blocks
+* Enhanced Call to Action block with layout settings matching infogrid blocks (max-width and block padding)
+* Fixed black outline border issue in infogrid2 block for cleaner visual appearance
+* Updated all blocks to use consistent 5-breakpoint system aligned with hero1 block
+* Improved editor preview with real-time updates for layout settings
+* Updated validation server endpoint to adaireblocks.com for license management
 
 = 1.2.1 =
 * Improved icon management system with unified mapping configuration for easier maintenance
@@ -325,7 +335,7 @@ Initial release of Adaire Blocks.
 
 **Made with ❤️ by Adaire Digital**
 
-Visit [Adaire Digital](https://adaire.digital/ "Professional WordPress Development") for more information about our services and products.
+Visit [Adaire Blocks](https://adaireblocks.com/ "Professional WordPress Development") for more information about our services and products.
 
 **Support and Documentation**
 

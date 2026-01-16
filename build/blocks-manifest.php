@@ -888,23 +888,66 @@ return array(
 			'containerMaxWidth' => array(
 				'type' => 'object',
 				'default' => array(
-					'desktop' => array(
-						'value' => 1200,
-						'unit' => 'px'
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
 					),
 					'tablet' => array(
 						'value' => 100,
 						'unit' => '%'
 					),
-					'mobile' => array(
-						'value' => 100,
-						'unit' => '%'
+					'smallLaptop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'bigDesktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
 					)
 				)
 			),
 			'contentBorderRadius' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'responsivePadding' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => array(
+						'top' => '40px',
+						'right' => '20px',
+						'bottom' => '40px',
+						'left' => '20px'
+					),
+					'tablet' => array(
+						'top' => '60px',
+						'right' => '40px',
+						'bottom' => '60px',
+						'left' => '40px'
+					),
+					'smallLaptop' => array(
+						'top' => '80px',
+						'right' => '60px',
+						'bottom' => '80px',
+						'left' => '60px'
+					),
+					'desktop' => array(
+						'top' => '100px',
+						'right' => '80px',
+						'bottom' => '100px',
+						'left' => '80px'
+					),
+					'bigDesktop' => array(
+						'top' => '100px',
+						'right' => '80px',
+						'bottom' => '100px',
+						'left' => '80px'
+					)
+				)
 			)
 		),
 		'icon' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2007,6 +2050,599 @@ return array(
 </defs>
 </svg>'
 	),
+	'hero-1-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/hero-1-block',
+		'version' => '0.1.0',
+		'title' => 'Hero 1 (Free)',
+		'category' => 'adaire-blocks-free',
+		'description' => 'A responsive hero block with configurable settings for all breakpoints.',
+		'supports' => array(
+			'html' => false,
+			'anchor' => true,
+			'customClassName' => true,
+			'innerBlocks' => true
+		),
+		'textdomain' => 'hero-1-block',
+		'icon' => 'admin-site',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'breadcrumbsText' => array(
+				'type' => 'string',
+				'default' => 'Home / Hero'
+			),
+			'breadcrumbsItems' => array(
+				'type' => 'array',
+				'default' => array(
+					array(
+						'text' => 'Home',
+						'url' => '/'
+					),
+					array(
+						'text' => 'Hero',
+						'url' => ''
+					)
+				)
+			),
+			'headingText' => array(
+				'type' => 'string',
+				'default' => 'A radically engaged technology team'
+			),
+			'textContent' => array(
+				'type' => 'string',
+				'default' => 'At Lumenalta, we build AI-first software solutions that deliver big business impact.'
+			),
+			'showBreadcrumbs' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'iconImageUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'iconImageId' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'showIcon' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'iconPosition' => array(
+				'type' => 'string',
+				'default' => 'right'
+			),
+			'iconVerticalPosition' => array(
+				'type' => 'string',
+				'default' => 'top'
+			),
+			'responsiveIconVerticalOffset' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '0px',
+					'tablet' => '0px',
+					'smallLaptop' => '0px',
+					'desktop' => '0px',
+					'bigDesktop' => '0px'
+				)
+			),
+			'responsiveIconHorizontalOffset' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '0px',
+					'tablet' => '0px',
+					'smallLaptop' => '0px',
+					'desktop' => '0px',
+					'bigDesktop' => '0px'
+				)
+			),
+			'backgroundGradient' => array(
+				'type' => 'string',
+				'default' => 'linear-gradient(90deg,rgb(3,0,46) 0%,rgb(31,0,87) 100%)'
+			),
+			'responsiveBackgroundGradient' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'linear-gradient(90deg,rgb(3,0,46) 0%,rgb(31,0,87) 100%)',
+					'tablet' => 'linear-gradient(90deg,rgb(3,0,46) 0%,rgb(31,0,87) 100%)',
+					'smallLaptop' => 'linear-gradient(90deg,rgb(3,0,46) 0%,rgb(31,0,87) 100%)',
+					'desktop' => 'linear-gradient(90deg,rgb(3,0,46) 0%,rgb(31,0,87) 100%)',
+					'bigDesktop' => 'linear-gradient(90deg,rgb(3,0,46) 0%,rgb(31,0,87) 100%)'
+				)
+			),
+			'responsiveJustifyContent' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'center',
+					'tablet' => 'flex-start',
+					'smallLaptop' => 'flex-start',
+					'desktop' => 'flex-start',
+					'bigDesktop' => 'flex-start'
+				)
+			),
+			'breadcrumbsColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'responsiveBreadcrumbTopOffset' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '20px',
+					'tablet' => '40px',
+					'smallLaptop' => '60px',
+					'desktop' => '90px',
+					'bigDesktop' => '90px'
+				)
+			),
+			'responsiveBreadcrumbLeftOffset' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '16px',
+					'tablet' => '40px',
+					'smallLaptop' => '80px',
+					'desktop' => '200px',
+					'bigDesktop' => '200px'
+				)
+			),
+			'headingColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'textColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'headingFontWeight' => array(
+				'type' => 'string',
+				'default' => '500'
+			),
+			'textFontWeight' => array(
+				'type' => 'string',
+				'default' => '300'
+			),
+			'responsiveMinHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'auto',
+					'tablet' => 'auto',
+					'smallLaptop' => 'auto',
+					'desktop' => '100vh',
+					'bigDesktop' => '100vh'
+				)
+			),
+			'responsiveWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '100%',
+					'tablet' => '100%',
+					'smallLaptop' => '100%',
+					'desktop' => '100vw',
+					'bigDesktop' => '100vw'
+				)
+			),
+			'responsiveFlexDirection' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'column',
+					'tablet' => 'row',
+					'smallLaptop' => 'row',
+					'desktop' => 'row',
+					'bigDesktop' => 'row'
+				)
+			),
+			'responsiveAlignItems' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'flex-start',
+					'tablet' => 'center',
+					'smallLaptop' => 'center',
+					'desktop' => 'center',
+					'bigDesktop' => 'center'
+				)
+			),
+			'responsivePadding' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => array(
+						'top' => '20px',
+						'right' => '16px',
+						'bottom' => '20px',
+						'left' => '16px'
+					),
+					'tablet' => array(
+						'top' => '40px',
+						'right' => '30px',
+						'bottom' => '40px',
+						'left' => '40px'
+					),
+					'smallLaptop' => array(
+						'top' => '40px',
+						'right' => '60px',
+						'bottom' => '40px',
+						'left' => '80px'
+					),
+					'desktop' => array(
+						'top' => '60px',
+						'right' => '150px',
+						'bottom' => '60px',
+						'left' => '200px'
+					),
+					'bigDesktop' => array(
+						'top' => '60px',
+						'right' => '150px',
+						'bottom' => '60px',
+						'left' => '200px'
+					)
+				)
+			),
+			'responsiveCtaWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '100%',
+					'tablet' => '100%',
+					'smallLaptop' => '60%',
+					'desktop' => '45%',
+					'bigDesktop' => '45%'
+				)
+			),
+			'responsiveCtaMargin' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => array(
+						'top' => '0px',
+						'right' => '0px',
+						'bottom' => '0px',
+						'left' => '0px'
+					),
+					'tablet' => array(
+						'top' => '0px',
+						'right' => '0px',
+						'bottom' => '0px',
+						'left' => '0px'
+					),
+					'smallLaptop' => array(
+						'top' => '0px',
+						'right' => '0px',
+						'bottom' => '0px',
+						'left' => '0px'
+					),
+					'desktop' => array(
+						'top' => '0px',
+						'right' => '0px',
+						'bottom' => '0px',
+						'left' => '0px'
+					),
+					'bigDesktop' => array(
+						'top' => '0px',
+						'right' => '0px',
+						'bottom' => '0px',
+						'left' => '0px'
+					)
+				)
+			),
+			'responsiveHeadingFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '28px',
+					'tablet' => '42px',
+					'smallLaptop' => '52px',
+					'desktop' => '72px',
+					'bigDesktop' => '72px'
+				)
+			),
+			'responsiveHeadingLineHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '36px',
+					'tablet' => '54px',
+					'smallLaptop' => '68px',
+					'desktop' => '92px',
+					'bigDesktop' => '92px'
+				)
+			),
+			'responsiveHeadingMarginBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '12px',
+					'tablet' => '18px',
+					'smallLaptop' => '20px',
+					'desktop' => '24px',
+					'bigDesktop' => '24px'
+				)
+			),
+			'responsiveHeadingMarginTop' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '0px',
+					'tablet' => '0px',
+					'smallLaptop' => '0px',
+					'desktop' => '0px',
+					'bigDesktop' => '0px'
+				)
+			),
+			'responsiveTextFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '14px',
+					'tablet' => '18px',
+					'smallLaptop' => '20px',
+					'desktop' => '26px',
+					'bigDesktop' => '26px'
+				)
+			),
+			'responsiveTextMarginBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '16px',
+					'tablet' => '20px',
+					'smallLaptop' => '20px',
+					'desktop' => '24px',
+					'bigDesktop' => '24px'
+				)
+			),
+			'responsiveTextMarginTop' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '0px',
+					'tablet' => '0px',
+					'smallLaptop' => '0px',
+					'desktop' => '0px',
+					'bigDesktop' => '0px'
+				)
+			),
+			'responsiveButtonContainerFlexDirection' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'column',
+					'tablet' => 'row',
+					'smallLaptop' => 'row',
+					'desktop' => 'row',
+					'bigDesktop' => 'row'
+				)
+			),
+			'responsiveButtonContainerGap' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '12px',
+					'tablet' => '20px',
+					'smallLaptop' => '25px',
+					'desktop' => '35px',
+					'bigDesktop' => '35px'
+				)
+			),
+			'responsiveButtonContainerMarginTop' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '0px',
+					'tablet' => '0px',
+					'smallLaptop' => '0px',
+					'desktop' => '0px',
+					'bigDesktop' => '0px'
+				)
+			),
+			'responsiveIconWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '0px',
+					'tablet' => '0px',
+					'smallLaptop' => '500px',
+					'desktop' => '700px',
+					'bigDesktop' => '700px'
+				)
+			),
+			'responsiveIconTransform' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'none',
+					'tablet' => 'none',
+					'smallLaptop' => 'translateY(-50%)',
+					'desktop' => 'translateY(-50%)',
+					'bigDesktop' => 'translateY(-50%)'
+				)
+			),
+			'preheaderText' => array(
+				'type' => 'string',
+				'default' => 'PREHEADER TEXT'
+			),
+			'showPreheader' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'preheaderColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'preheaderFontWeight' => array(
+				'type' => 'string',
+				'default' => '500'
+			),
+			'responsivePreheaderFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '14px',
+					'tablet' => '16px',
+					'smallLaptop' => '18px',
+					'desktop' => '18px',
+					'bigDesktop' => '18px'
+				)
+			),
+			'responsivePreheaderLineHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '20px',
+					'tablet' => '24px',
+					'smallLaptop' => '28px',
+					'desktop' => '28px',
+					'bigDesktop' => '28px'
+				)
+			),
+			'responsivePreheaderMarginBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '8px',
+					'tablet' => '12px',
+					'smallLaptop' => '12px',
+					'desktop' => '12px',
+					'bigDesktop' => '12px'
+				)
+			),
+			'responsiveVerticalAlignment' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'center',
+					'tablet' => 'center',
+					'smallLaptop' => 'center',
+					'desktop' => 'center',
+					'bigDesktop' => 'center'
+				)
+			),
+			'showBackgroundImage' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'backgroundImageUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'backgroundImageId' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'backgroundSize' => array(
+				'type' => 'string',
+				'default' => 'cover'
+			),
+			'backgroundPosition' => array(
+				'type' => 'string',
+				'default' => 'center'
+			),
+			'backgroundRepeat' => array(
+				'type' => 'string',
+				'default' => 'no-repeat'
+			),
+			'overlayType' => array(
+				'type' => 'string',
+				'default' => 'none'
+			),
+			'overlayColor' => array(
+				'type' => 'string',
+				'default' => '#000000'
+			),
+			'overlayGradient' => array(
+				'type' => 'string',
+				'default' => 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%)'
+			),
+			'overlayOpacity' => array(
+				'type' => 'number',
+				'default' => 0.5
+			),
+			'responsiveTextAlignment' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'left',
+					'tablet' => 'left',
+					'smallLaptop' => 'left',
+					'desktop' => 'left',
+					'bigDesktop' => 'left'
+				)
+			),
+			'responsiveButtonAlignment' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'left',
+					'tablet' => 'left',
+					'smallLaptop' => 'left',
+					'desktop' => 'left',
+					'bigDesktop' => 'left'
+				)
+			),
+			'mediaType' => array(
+				'type' => 'string',
+				'default' => 'none'
+			),
+			'mediaImageUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'mediaImageId' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'videoType' => array(
+				'type' => 'string',
+				'default' => 'youtube'
+			),
+			'videoUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'wpVideoId' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'wpVideoUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'responsiveVideoWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '100%',
+					'tablet' => '100%',
+					'smallLaptop' => '50%',
+					'desktop' => '50%',
+					'bigDesktop' => '50%'
+				)
+			),
+			'responsiveVideoHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '300px',
+					'tablet' => '400px',
+					'smallLaptop' => '500px',
+					'desktop' => '600px',
+					'bigDesktop' => '600px'
+				)
+			),
+			'responsiveVideoBorderRadius' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '8px',
+					'tablet' => '8px',
+					'smallLaptop' => '12px',
+					'desktop' => '16px',
+					'bigDesktop' => '16px'
+				)
+			),
+			'responsiveContentVideoJustify' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'flex-start',
+					'tablet' => 'flex-start',
+					'smallLaptop' => 'space-between',
+					'desktop' => 'space-between',
+					'bigDesktop' => 'space-between'
+				)
+			),
+			'responsiveContentVideoAlign' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'flex-start',
+					'tablet' => 'center',
+					'smallLaptop' => 'center',
+					'desktop' => 'center',
+					'bigDesktop' => 'center'
+				)
+			)
+		)
+	),
 	'icon-box-block' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
@@ -2185,6 +2821,69 @@ return array(
 </clipPath>
 </defs>
 </svg>'
+	),
+	'image-composition-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/image-composition-block',
+		'version' => '0.1.0',
+		'title' => 'Image Composition (Free)',
+		'category' => 'adaire-blocks-free',
+		'description' => 'Create a collage-style composition of images in an asymmetric grid layout.',
+		'supports' => array(
+			'html' => false,
+			'anchor' => true,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'customClassName' => true
+		),
+		'textdomain' => 'image-composition-block',
+		'editorScript' => 'file:./index.js',
+		'style' => 'file:./style-index.css',
+		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'images' => array(
+				'type' => 'array',
+				'default' => array(
+					
+				)
+			),
+			'gap' => array(
+				'type' => 'number',
+				'default' => 24
+			),
+			'borderRadius' => array(
+				'type' => 'number',
+				'default' => 12
+			),
+			'containerMode' => array(
+				'type' => 'string',
+				'default' => 'constrained'
+			),
+			'containerMaxWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
+					)
+				)
+			)
+		),
+		'icon' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="5" fill="#F0F0F1"/><rect x="3" y="4" width="9" height="8" rx="2" fill="#D52940"/><rect x="12" y="4" width="9" height="12" rx="2" fill="#FF9AA8"/><rect x="3" y="12" width="9" height="8" rx="2" fill="#FFC3CC"/></svg>'
 	),
 	'industries-block' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
@@ -2504,6 +3203,10 @@ return array(
 				'type' => 'number',
 				'default' => 30
 			),
+			'tileTextColor' => array(
+				'type' => 'string',
+				'default' => '#111111'
+			),
 			'tileHoverBackground' => array(
 				'type' => 'string',
 				'default' => '#ff4e4e'
@@ -2529,6 +3232,1397 @@ return array(
 </clipPath>
 </defs>
 </svg>'
+	),
+	'infogrid-2-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/infogrid-2-block',
+		'version' => '0.1.0',
+		'title' => 'Info Grid 2',
+		'category' => 'adaire-blocks-free',
+		'icon' => 'grid-view',
+		'description' => 'An advanced info grid with background image, overlay, and responsive controls.',
+		'supports' => array(
+			'html' => false,
+			'anchor' => true,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'customClassName' => true,
+			'spacing' => array(
+				'margin' => true,
+				'padding' => true
+			)
+		),
+		'textdomain' => 'adaire-blocks-dev2',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./editor.css',
+		'style' => 'file:./style-index.css',
+		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'containerMode' => array(
+				'type' => 'string',
+				'default' => 'constrained'
+			),
+			'items' => array(
+				'type' => 'array',
+				'default' => array(
+					array(
+						'id' => 1,
+						'icon' => 'bi bi-lightning-charge',
+						'title' => 'Fast Performance',
+						'text' => 'Experience blazing fast speeds with our optimized engine.'
+					),
+					array(
+						'id' => 2,
+						'icon' => 'bi bi-shield-check',
+						'title' => 'Secure Design',
+						'text' => 'Your data is protected by industry-leading security protocols.'
+					)
+				)
+			),
+			'backgroundImage' => array(
+				'type' => 'object',
+				'default' => null
+			),
+			'backgroundImageUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'overlayType' => array(
+				'type' => 'string',
+				'default' => 'none'
+			),
+			'overlayColor' => array(
+				'type' => 'string',
+				'default' => '#000000'
+			),
+			'overlayOpacity' => array(
+				'type' => 'number',
+				'default' => 0.5
+			),
+			'overlayGradient' => array(
+				'type' => 'string',
+				'default' => 'linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%)'
+			),
+			'showHeading' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'headingText' => array(
+				'type' => 'string',
+				'default' => 'What makes us different?'
+			),
+			'responsiveHeadingAlignment' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'left',
+					'tablet' => 'left',
+					'smallLaptop' => 'left',
+					'desktop' => 'left',
+					'bigDesktop' => 'left'
+				)
+			),
+			'responsiveHeadingFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '28px',
+					'tablet' => '32px',
+					'smallLaptop' => '36px',
+					'desktop' => '40px',
+					'bigDesktop' => '48px'
+				)
+			),
+			'responsiveHeadingFontWeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '700',
+					'tablet' => '700',
+					'smallLaptop' => '700',
+					'desktop' => '700',
+					'bigDesktop' => '700'
+				)
+			),
+			'responsiveHeadingLineHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '1.2',
+					'tablet' => '1.2',
+					'smallLaptop' => '1.2',
+					'desktop' => '1.2',
+					'bigDesktop' => '1.2'
+				)
+			),
+			'responsiveHeadingLetterSpacing' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '0px',
+					'tablet' => '0px',
+					'smallLaptop' => '0px',
+					'desktop' => '0px',
+					'bigDesktop' => '0px'
+				)
+			),
+			'responsiveHeadingTextTransform' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'none',
+					'tablet' => 'none',
+					'smallLaptop' => 'none',
+					'desktop' => 'none',
+					'bigDesktop' => 'none'
+				)
+			),
+			'responsiveHeadingColor' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '#ffffff',
+					'tablet' => '#ffffff',
+					'smallLaptop' => '#ffffff',
+					'desktop' => '#ffffff',
+					'bigDesktop' => '#ffffff'
+				)
+			),
+			'responsiveHeadingMarginBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '20px',
+					'tablet' => '30px',
+					'smallLaptop' => '40px',
+					'desktop' => '50px',
+					'bigDesktop' => '50px'
+				)
+			),
+			'responsiveIconSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '32px',
+					'tablet' => '32px',
+					'smallLaptop' => '32px',
+					'desktop' => '32px',
+					'bigDesktop' => '32px'
+				)
+			),
+			'responsiveIconColor' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '#ffffff',
+					'tablet' => '#ffffff',
+					'smallLaptop' => '#ffffff',
+					'desktop' => '#ffffff',
+					'bigDesktop' => '#ffffff'
+				)
+			),
+			'responsiveTitleFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '18px',
+					'tablet' => '20px',
+					'smallLaptop' => '22px',
+					'desktop' => '24px',
+					'bigDesktop' => '24px'
+				)
+			),
+			'responsiveTitleFontWeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '600',
+					'tablet' => '600',
+					'smallLaptop' => '600',
+					'desktop' => '600',
+					'bigDesktop' => '600'
+				)
+			),
+			'responsiveTitleLineHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '1.4',
+					'tablet' => '1.4',
+					'smallLaptop' => '1.4',
+					'desktop' => '1.4',
+					'bigDesktop' => '1.4'
+				)
+			),
+			'responsiveTitleLetterSpacing' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '0px',
+					'tablet' => '0px',
+					'smallLaptop' => '0px',
+					'desktop' => '0px',
+					'bigDesktop' => '0px'
+				)
+			),
+			'responsiveTitleTextTransform' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'none',
+					'tablet' => 'none',
+					'smallLaptop' => 'none',
+					'desktop' => 'none',
+					'bigDesktop' => 'none'
+				)
+			),
+			'responsiveTitleColor' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '#ffffff',
+					'tablet' => '#ffffff',
+					'smallLaptop' => '#ffffff',
+					'desktop' => '#ffffff',
+					'bigDesktop' => '#ffffff'
+				)
+			),
+			'responsiveTitleMarginBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '10px',
+					'tablet' => '10px',
+					'smallLaptop' => '10px',
+					'desktop' => '10px',
+					'bigDesktop' => '10px'
+				)
+			),
+			'responsiveTextFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '14px',
+					'tablet' => '16px',
+					'smallLaptop' => '16px',
+					'desktop' => '16px',
+					'bigDesktop' => '16px'
+				)
+			),
+			'responsiveTextFontWeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '400',
+					'tablet' => '400',
+					'smallLaptop' => '400',
+					'desktop' => '400',
+					'bigDesktop' => '400'
+				)
+			),
+			'responsiveTextLineHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '1.6',
+					'tablet' => '1.6',
+					'smallLaptop' => '1.6',
+					'desktop' => '1.6',
+					'bigDesktop' => '1.6'
+				)
+			),
+			'responsiveTextLetterSpacing' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '0px',
+					'tablet' => '0px',
+					'smallLaptop' => '0px',
+					'desktop' => '0px',
+					'bigDesktop' => '0px'
+				)
+			),
+			'responsiveTextTextTransform' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'none',
+					'tablet' => 'none',
+					'smallLaptop' => 'none',
+					'desktop' => 'none',
+					'bigDesktop' => 'none'
+				)
+			),
+			'responsiveTextColor' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '#cccccc',
+					'tablet' => '#cccccc',
+					'smallLaptop' => '#cccccc',
+					'desktop' => '#cccccc',
+					'bigDesktop' => '#cccccc'
+				)
+			),
+			'responsiveTextMarginBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '0px',
+					'tablet' => '0px',
+					'smallLaptop' => '0px',
+					'desktop' => '0px',
+					'bigDesktop' => '0px'
+				)
+			),
+			'responsiveContentAlignment' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'left',
+					'tablet' => 'left',
+					'smallLaptop' => 'left',
+					'desktop' => 'left',
+					'bigDesktop' => 'left'
+				)
+			),
+			'responsivePadding' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => array(
+						'top' => '40px',
+						'right' => '20px',
+						'bottom' => '40px',
+						'left' => '20px'
+					),
+					'tablet' => array(
+						'top' => '60px',
+						'right' => '40px',
+						'bottom' => '60px',
+						'left' => '40px'
+					),
+					'smallLaptop' => array(
+						'top' => '80px',
+						'right' => '60px',
+						'bottom' => '80px',
+						'left' => '60px'
+					),
+					'desktop' => array(
+						'top' => '100px',
+						'right' => '80px',
+						'bottom' => '100px',
+						'left' => '80px'
+					),
+					'bigDesktop' => array(
+						'top' => '100px',
+						'right' => '80px',
+						'bottom' => '100px',
+						'left' => '80px'
+					)
+				)
+			),
+			'responsiveMargin' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => array(
+						'top' => '0px',
+						'right' => '0px',
+						'bottom' => '0px',
+						'left' => '0px'
+					),
+					'tablet' => array(
+						'top' => '0px',
+						'right' => '0px',
+						'bottom' => '0px',
+						'left' => '0px'
+					),
+					'smallLaptop' => array(
+						'top' => '0px',
+						'right' => '0px',
+						'bottom' => '0px',
+						'left' => '0px'
+					),
+					'desktop' => array(
+						'top' => '0px',
+						'right' => '0px',
+						'bottom' => '0px',
+						'left' => '0px'
+					),
+					'bigDesktop' => array(
+						'top' => '0px',
+						'right' => '0px',
+						'bottom' => '0px',
+						'left' => '0px'
+					)
+				)
+			),
+			'responsiveMinHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '400px',
+					'tablet' => '500px',
+					'smallLaptop' => '600px',
+					'desktop' => '700px',
+					'bigDesktop' => '700px'
+				)
+			),
+			'responsiveGridWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '100%',
+					'tablet' => '100%',
+					'smallLaptop' => '100%',
+					'desktop' => '100%',
+					'bigDesktop' => '100%'
+				)
+			),
+			'responsiveGridColumns' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '1',
+					'tablet' => '2',
+					'smallLaptop' => '2',
+					'desktop' => '3',
+					'bigDesktop' => '3'
+				)
+			),
+			'responsiveGridGap' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '20px',
+					'tablet' => '30px',
+					'smallLaptop' => '30px',
+					'desktop' => '40px',
+					'bigDesktop' => '40px'
+				)
+			),
+			'responsiveItemPadding' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => array(
+						'top' => '20px',
+						'right' => '20px',
+						'bottom' => '20px',
+						'left' => '20px'
+					),
+					'tablet' => array(
+						'top' => '30px',
+						'right' => '30px',
+						'bottom' => '30px',
+						'left' => '30px'
+					),
+					'smallLaptop' => array(
+						'top' => '40px',
+						'right' => '40px',
+						'bottom' => '40px',
+						'left' => '40px'
+					),
+					'desktop' => array(
+						'top' => '40px',
+						'right' => '40px',
+						'bottom' => '40px',
+						'left' => '40px'
+					),
+					'bigDesktop' => array(
+						'top' => '40px',
+						'right' => '40px',
+						'bottom' => '40px',
+						'left' => '40px'
+					)
+				)
+			),
+			'responsiveItemBorderWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '1px',
+					'tablet' => '1px',
+					'smallLaptop' => '1px',
+					'desktop' => '1px',
+					'bigDesktop' => '1px'
+				)
+			),
+			'responsiveItemBorderStyle' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'solid',
+					'tablet' => 'solid',
+					'smallLaptop' => 'solid',
+					'desktop' => 'solid',
+					'bigDesktop' => 'solid'
+				)
+			),
+			'responsiveItemBorderColor' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '#ffffff33',
+					'tablet' => '#ffffff33',
+					'smallLaptop' => '#ffffff33',
+					'desktop' => '#ffffff33',
+					'bigDesktop' => '#ffffff33'
+				)
+			),
+			'responsiveBlockWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '100%',
+					'tablet' => '100%',
+					'smallLaptop' => '100%',
+					'desktop' => '100%',
+					'bigDesktop' => '100%'
+				)
+			),
+			'responsiveMaxWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'tablet' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'smallLaptop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'bigDesktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					)
+				)
+			),
+			'backgroundSize' => array(
+				'type' => 'string',
+				'default' => 'cover'
+			),
+			'backgroundPosition' => array(
+				'type' => 'string',
+				'default' => 'center'
+			),
+			'backgroundRepeat' => array(
+				'type' => 'string',
+				'default' => 'no-repeat'
+			)
+		)
+	),
+	'infogrid-3-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/infogrid-3-block',
+		'version' => '0.1.0',
+		'title' => 'Info Grid 3',
+		'category' => 'adaire-blocks-plus',
+		'icon' => 'grid-view',
+		'description' => 'A responsive 2-row grid block with a three-column sub-section and background options.',
+		'supports' => array(
+			'html' => false,
+			'anchor' => true
+		),
+		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string'
+			),
+			'containerMode' => array(
+				'type' => 'string',
+				'default' => 'constrained'
+			),
+			'mainHeading' => array(
+				'type' => 'string',
+				'source' => 'html',
+				'selector' => '.adaire-infogrid-3__main-heading',
+				'default' => 'Digitizing rail yards with AI and machine learning.'
+			),
+			'mainDescription' => array(
+				'type' => 'string',
+				'source' => 'html',
+				'selector' => '.adaire-infogrid-3__main-description',
+				'default' => 'An international logistics service provider and port operator offering diverse services, including warehousing, transport, and value-added operations. They serve multiple verticals, including petrochemicals, consumer goods, and art through their seven main business units.'
+			),
+			'cell1Title' => array(
+				'type' => 'string',
+				'source' => 'html',
+				'selector' => '.adaire-infogrid-3__cell-1 .adaire-infogrid-3__cell-label',
+				'default' => 'Challenge'
+			),
+			'cell1Content' => array(
+				'type' => 'string',
+				'source' => 'html',
+				'selector' => '.adaire-infogrid-3__cell-1 .adaire-infogrid-3__cell-text',
+				'default' => 'anual and paper-based processes in their legacy rail yard operations hindered efficiency. The company needed to digitize their processes and generate actionable performance'
+			),
+			'cell2Title' => array(
+				'type' => 'string',
+				'source' => 'html',
+				'selector' => '.adaire-infogrid-3__cell-2 .adaire-infogrid-3__cell-label',
+				'default' => 'Outcomes'
+			),
+			'cell2Content' => array(
+				'type' => 'string',
+				'source' => 'html',
+				'selector' => '.adaire-infogrid-3__cell-2 .adaire-infogrid-3__cell-text',
+				'default' => 'anual and paper-based processes in their legacy rail yard operations hindered efficiency. The company needed to digitize their processes and generate actionable performance.'
+			),
+			'cell3Title' => array(
+				'type' => 'string',
+				'source' => 'html',
+				'selector' => '.adaire-infogrid-3__cell-3 .adaire-infogrid-3__cell-label',
+				'default' => 'Solution'
+			),
+			'cell3Content' => array(
+				'type' => 'string',
+				'source' => 'html',
+				'selector' => '.adaire-infogrid-3__cell-3 .adaire-infogrid-3__cell-text',
+				'default' => 'anual and paper-based processes in their legacy rail yard operations hindered efficiency. The company needed to digitize their processes and generate actionable performance.'
+			),
+			'sub1Title' => array(
+				'type' => 'string',
+				'source' => 'html',
+				'selector' => '.adaire-infogrid-3__sub-column-1 .adaire-infogrid-3__sub-label',
+				'default' => 'Daily planning time reduction: 10 hours'
+			),
+			'sub1Content' => array(
+				'type' => 'string',
+				'source' => 'html',
+				'selector' => '.adaire-infogrid-3__sub-column-1 .adaire-infogrid-3__sub-text',
+				'default' => 'to 15 minutes'
+			),
+			'sub2Title' => array(
+				'type' => 'string',
+				'source' => 'html',
+				'selector' => '.adaire-infogrid-3__sub-column-2 .adaire-infogrid-3__sub-label',
+				'default' => 'Daily planning time reduction: 10 hours'
+			),
+			'sub2Content' => array(
+				'type' => 'string',
+				'source' => 'html',
+				'selector' => '.adaire-infogrid-3__sub-column-2 .adaire-infogrid-3__sub-text',
+				'default' => 'to 15 minutes'
+			),
+			'sub3Title' => array(
+				'type' => 'string',
+				'source' => 'html',
+				'selector' => '.adaire-infogrid-3__sub-column-3 .adaire-infogrid-3__sub-label',
+				'default' => 'Daily planning time reduction: 10 hours'
+			),
+			'sub3Content' => array(
+				'type' => 'string',
+				'source' => 'html',
+				'selector' => '.adaire-infogrid-3__sub-column-3 .adaire-infogrid-3__sub-text',
+				'default' => 'to 15 minutes'
+			),
+			'showBackgroundImage' => array(
+				'type' => 'boolean',
+				'default' => true
+			),
+			'backgroundImageUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'backgroundImageId' => array(
+				'type' => 'number'
+			),
+			'backgroundSize' => array(
+				'type' => 'string',
+				'default' => 'cover'
+			),
+			'backgroundPosition' => array(
+				'type' => 'string',
+				'default' => 'center'
+			),
+			'backgroundRepeat' => array(
+				'type' => 'string',
+				'default' => 'no-repeat'
+			),
+			'overlayType' => array(
+				'type' => 'string',
+				'default' => 'solid'
+			),
+			'overlayColor' => array(
+				'type' => 'string',
+				'default' => 'rgba(31, 0, 87, 0.6)'
+			),
+			'overlayGradient' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'overlayOpacity' => array(
+				'type' => 'number',
+				'default' => 0.6
+			),
+			'responsiveMaxWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'tablet' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'smallLaptop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'bigDesktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					)
+				)
+			),
+			'responsiveWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '100%',
+					'tablet' => '100%',
+					'smallLaptop' => '100%',
+					'desktop' => '100%',
+					'bigDesktop' => '100%'
+				)
+			),
+			'responsivePadding' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => array(
+						'top' => '40px',
+						'right' => '20px',
+						'bottom' => '40px',
+						'left' => '20px'
+					),
+					'tablet' => array(
+						'top' => '60px',
+						'right' => '30px',
+						'bottom' => '60px',
+						'left' => '30px'
+					),
+					'smallLaptop' => array(
+						'top' => '80px',
+						'right' => '50px',
+						'bottom' => '80px',
+						'left' => '50px'
+					),
+					'desktop' => array(
+						'top' => '100px',
+						'right' => '50px',
+						'bottom' => '100px',
+						'left' => '50px'
+					),
+					'bigDesktop' => array(
+						'top' => '100px',
+						'right' => '50px',
+						'bottom' => '100px',
+						'left' => '50px'
+					)
+				)
+			),
+			'responsiveGridBorderColor' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '#ffffff',
+					'tablet' => '#ffffff',
+					'smallLaptop' => '#ffffff',
+					'desktop' => '#ffffff',
+					'bigDesktop' => '#ffffff'
+				)
+			),
+			'responsiveGridThickness' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '1px',
+					'tablet' => '1px',
+					'smallLaptop' => '1px',
+					'desktop' => '1px',
+					'bigDesktop' => '1px'
+				)
+			),
+			'responsiveMainHeadingFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '32px',
+					'tablet' => '42px',
+					'smallLaptop' => '52px',
+					'desktop' => '52px',
+					'bigDesktop' => '52px'
+				)
+			),
+			'responsiveMainHeadingFontWeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '500',
+					'tablet' => '500',
+					'smallLaptop' => '500',
+					'desktop' => '500',
+					'bigDesktop' => '500'
+				)
+			),
+			'responsiveMainHeadingLineHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '1.2',
+					'tablet' => '1.2',
+					'smallLaptop' => '1.2',
+					'desktop' => '1.2',
+					'bigDesktop' => '1.2'
+				)
+			),
+			'responsiveMainHeadingColor' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '#ffffff',
+					'tablet' => '#ffffff',
+					'smallLaptop' => '#ffffff',
+					'desktop' => '#ffffff',
+					'bigDesktop' => '#ffffff'
+				)
+			),
+			'responsiveMainDescriptionFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '16px',
+					'tablet' => '18px',
+					'smallLaptop' => '18px',
+					'desktop' => '18px',
+					'bigDesktop' => '18px'
+				)
+			),
+			'responsiveMainDescriptionLineHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '1.6',
+					'tablet' => '1.6',
+					'smallLaptop' => '1.6',
+					'desktop' => '1.6',
+					'bigDesktop' => '1.6'
+				)
+			),
+			'responsiveMainDescriptionColor' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '#ffffff',
+					'tablet' => '#ffffff',
+					'smallLaptop' => '#ffffff',
+					'desktop' => '#ffffff',
+					'bigDesktop' => '#ffffff'
+				)
+			),
+			'responsiveCellLabelFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '16px',
+					'tablet' => '16px',
+					'smallLaptop' => '16px',
+					'desktop' => '16px',
+					'bigDesktop' => '16px'
+				)
+			),
+			'responsiveCellLabelColor' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '#ffffff',
+					'tablet' => '#ffffff',
+					'smallLaptop' => '#ffffff',
+					'desktop' => '#ffffff',
+					'bigDesktop' => '#ffffff'
+				)
+			),
+			'responsiveCellTextFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '16px',
+					'tablet' => '18px',
+					'smallLaptop' => '18px',
+					'desktop' => '18px',
+					'bigDesktop' => '18px'
+				)
+			),
+			'responsiveCellTextColor' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '#ffffff',
+					'tablet' => '#ffffff',
+					'smallLaptop' => '#ffffff',
+					'desktop' => '#ffffff',
+					'bigDesktop' => '#ffffff'
+				)
+			),
+			'responsiveSubLabelFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '16px',
+					'tablet' => '18px',
+					'smallLaptop' => '18px',
+					'desktop' => '18px',
+					'bigDesktop' => '18px'
+				)
+			),
+			'responsiveSubLabelColor' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '#ffffff',
+					'tablet' => '#ffffff',
+					'smallLaptop' => '#ffffff',
+					'desktop' => '#ffffff',
+					'bigDesktop' => '#ffffff'
+				)
+			),
+			'responsiveSubTextFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '14px',
+					'tablet' => '16px',
+					'smallLaptop' => '16px',
+					'desktop' => '16px',
+					'bigDesktop' => '16px'
+				)
+			),
+			'responsiveSubTextColor' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '#ffffff',
+					'tablet' => '#ffffff',
+					'smallLaptop' => '#ffffff',
+					'desktop' => '#ffffff',
+					'bigDesktop' => '#ffffff'
+				)
+			)
+		),
+		'textdomain' => 'adaire-blocks-dev2',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css'
+	),
+	'infogrid-4-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/infogrid-4-block',
+		'version' => '0.1.0',
+		'title' => 'Info Grid 4',
+		'category' => 'adaire-blocks-plus',
+		'icon' => 'grid-view',
+		'description' => 'A 2x2 grid block with configurable colors, typography, and background SVG icon.',
+		'supports' => array(
+			'html' => false,
+			'anchor' => true
+		),
+		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'containerMode' => array(
+				'type' => 'string',
+				'default' => 'constrained'
+			),
+			'mainTitle' => array(
+				'type' => 'string',
+				'default' => 'The Lumenalta difference'
+			),
+			'item1Title' => array(
+				'type' => 'string',
+				'default' => 'Fulfilling work'
+			),
+			'item1Description' => array(
+				'type' => 'string',
+				'default' => 'Build cutting-edge tech with great client partners and team members. Solve complex problems in an environment where you have the freedom to optimize for possibilities.'
+			),
+			'item2Title' => array(
+				'type' => 'string',
+				'default' => 'Remote from the start'
+			),
+			'item2Description' => array(
+				'type' => 'string',
+				'default' => 'Since the beginning we\'ve been an office-less company so you can be as ambitious in your professional life as you are in your personal life.'
+			),
+			'item3Title' => array(
+				'type' => 'string',
+				'default' => 'Dedicated teams'
+			),
+			'item3Description' => array(
+				'type' => 'string',
+				'default' => 'Brain space for one problem set at a time, no burdensome time sheets. High expectations for your professionalism, but total trust in you.'
+			),
+			'item4Title' => array(
+				'type' => 'string',
+				'default' => 'Diverse'
+			),
+			'item4Description' => array(
+				'type' => 'string',
+				'default' => 'We foster a culture of diversity and inclusion, valuing unique perspectives and empowering everyone to thrive and contribute fully.'
+			),
+			'backgroundColor' => array(
+				'type' => 'string',
+				'default' => '#f3f4f6'
+			),
+			'cardBackgroundColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'cardBorderRadius' => array(
+				'type' => 'number',
+				'default' => 16
+			),
+			'gridBorderColor' => array(
+				'type' => 'string',
+				'default' => '#e5e7eb'
+			),
+			'gridBorderWidth' => array(
+				'type' => 'number',
+				'default' => 1
+			),
+			'titleColor' => array(
+				'type' => 'string',
+				'default' => '#1f2937'
+			),
+			'itemTitleColor' => array(
+				'type' => 'string',
+				'default' => '#1f2937'
+			),
+			'itemDescriptionColor' => array(
+				'type' => 'string',
+				'default' => '#4b5563'
+			),
+			'titleFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '24px',
+					'tablet' => '28px',
+					'smallLaptop' => '32px',
+					'desktop' => '36px',
+					'bigDesktop' => '36px'
+				)
+			),
+			'titleFontWeight' => array(
+				'type' => 'string',
+				'default' => '600'
+			),
+			'titleLineHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '1.2',
+					'tablet' => '1.2',
+					'smallLaptop' => '1.2',
+					'desktop' => '1.2',
+					'bigDesktop' => '1.2'
+				)
+			),
+			'itemTitleFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '18px',
+					'tablet' => '20px',
+					'smallLaptop' => '22px',
+					'desktop' => '24px',
+					'bigDesktop' => '24px'
+				)
+			),
+			'itemTitleFontWeight' => array(
+				'type' => 'string',
+				'default' => '600'
+			),
+			'itemTitleLineHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '1.3',
+					'tablet' => '1.3',
+					'smallLaptop' => '1.3',
+					'desktop' => '1.3',
+					'bigDesktop' => '1.3'
+				)
+			),
+			'itemDescriptionFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '14px',
+					'tablet' => '15px',
+					'smallLaptop' => '16px',
+					'desktop' => '16px',
+					'bigDesktop' => '16px'
+				)
+			),
+			'itemDescriptionFontWeight' => array(
+				'type' => 'string',
+				'default' => '400'
+			),
+			'itemDescriptionLineHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '1.5',
+					'tablet' => '1.5',
+					'smallLaptop' => '1.5',
+					'desktop' => '1.5',
+					'bigDesktop' => '1.5'
+				)
+			),
+			'responsivePadding' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => array(
+						'top' => '40px',
+						'right' => '20px',
+						'bottom' => '40px',
+						'left' => '20px'
+					),
+					'tablet' => array(
+						'top' => '60px',
+						'right' => '40px',
+						'bottom' => '60px',
+						'left' => '40px'
+					),
+					'smallLaptop' => array(
+						'top' => '80px',
+						'right' => '60px',
+						'bottom' => '80px',
+						'left' => '60px'
+					),
+					'desktop' => array(
+						'top' => '100px',
+						'right' => '80px',
+						'bottom' => '100px',
+						'left' => '80px'
+					),
+					'bigDesktop' => array(
+						'top' => '100px',
+						'right' => '80px',
+						'bottom' => '100px',
+						'left' => '80px'
+					)
+				)
+			),
+			'responsiveMaxWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'tablet' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'smallLaptop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'desktop' => array(
+						'value' => 1400,
+						'unit' => 'px'
+					),
+					'bigDesktop' => array(
+						'value' => 1400,
+						'unit' => 'px'
+					)
+				)
+			),
+			'responsiveMainTitleFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '24px',
+					'tablet' => '28px',
+					'smallLaptop' => '32px',
+					'desktop' => '36px',
+					'bigDesktop' => '36px'
+				)
+			),
+			'responsiveMainTitleFontWeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '600',
+					'tablet' => '600',
+					'smallLaptop' => '600',
+					'desktop' => '600',
+					'bigDesktop' => '600'
+				)
+			),
+			'responsiveMainTitleLineHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '1.2',
+					'tablet' => '1.2',
+					'smallLaptop' => '1.2',
+					'desktop' => '1.2',
+					'bigDesktop' => '1.2'
+				)
+			),
+			'responsiveMainTitleColor' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '#111827',
+					'tablet' => '#111827',
+					'smallLaptop' => '#111827',
+					'desktop' => '#111827',
+					'bigDesktop' => '#111827'
+				)
+			),
+			'responsiveItemTitleFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '18px',
+					'tablet' => '20px',
+					'smallLaptop' => '22px',
+					'desktop' => '24px',
+					'bigDesktop' => '24px'
+				)
+			),
+			'responsiveItemTitleFontWeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '600',
+					'tablet' => '600',
+					'smallLaptop' => '600',
+					'desktop' => '600',
+					'bigDesktop' => '600'
+				)
+			),
+			'responsiveItemTitleLineHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '1.3',
+					'tablet' => '1.3',
+					'smallLaptop' => '1.3',
+					'desktop' => '1.3',
+					'bigDesktop' => '1.3'
+				)
+			),
+			'responsiveItemTitleColor' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '#111827',
+					'tablet' => '#111827',
+					'smallLaptop' => '#111827',
+					'desktop' => '#111827',
+					'bigDesktop' => '#111827'
+				)
+			),
+			'responsiveItemDescriptionFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '14px',
+					'tablet' => '15px',
+					'smallLaptop' => '16px',
+					'desktop' => '16px',
+					'bigDesktop' => '16px'
+				)
+			),
+			'responsiveItemDescriptionFontWeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '400',
+					'tablet' => '400',
+					'smallLaptop' => '400',
+					'desktop' => '400',
+					'bigDesktop' => '400'
+				)
+			),
+			'responsiveItemDescriptionLineHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '1.5',
+					'tablet' => '1.5',
+					'smallLaptop' => '1.5',
+					'desktop' => '1.5',
+					'bigDesktop' => '1.5'
+				)
+			),
+			'responsiveItemDescriptionColor' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '#4b5563',
+					'tablet' => '#4b5563',
+					'smallLaptop' => '#4b5563',
+					'desktop' => '#4b5563',
+					'bigDesktop' => '#4b5563'
+				)
+			),
+			'responsiveCardPadding' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => array(
+						'top' => '30px',
+						'right' => '20px',
+						'bottom' => '30px',
+						'left' => '20px'
+					),
+					'tablet' => array(
+						'top' => '40px',
+						'right' => '30px',
+						'bottom' => '40px',
+						'left' => '30px'
+					),
+					'smallLaptop' => array(
+						'top' => '50px',
+						'right' => '40px',
+						'bottom' => '50px',
+						'left' => '40px'
+					),
+					'desktop' => array(
+						'top' => '60px',
+						'right' => '50px',
+						'bottom' => '60px',
+						'left' => '50px'
+					),
+					'bigDesktop' => array(
+						'top' => '60px',
+						'right' => '50px',
+						'bottom' => '60px',
+						'left' => '50px'
+					)
+				)
+			),
+			'showSvgIcon' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'svgIconCode' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'svgIconColor' => array(
+				'type' => 'string',
+				'default' => '#d1d5db'
+			),
+			'svgIconPosition' => array(
+				'type' => 'string',
+				'default' => 'right'
+			),
+			'svgIconVerticalPosition' => array(
+				'type' => 'string',
+				'default' => 'top'
+			),
+			'responsiveSvgIconWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '0px',
+					'tablet' => '0px',
+					'smallLaptop' => '400px',
+					'desktop' => '500px',
+					'bigDesktop' => '500px'
+				)
+			),
+			'responsiveSvgIconTransform' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'none',
+					'tablet' => 'none',
+					'smallLaptop' => 'translateY(-50%)',
+					'desktop' => 'translateY(-50%)',
+					'bigDesktop' => 'translateY(-50%)'
+				)
+			),
+			'responsiveSvgIconVerticalOffset' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '0px',
+					'tablet' => '0px',
+					'smallLaptop' => '0px',
+					'desktop' => '0px',
+					'bigDesktop' => '0px'
+				)
+			),
+			'responsiveSvgIconHorizontalOffset' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '0px',
+					'tablet' => '0px',
+					'smallLaptop' => '0px',
+					'desktop' => '0px',
+					'bigDesktop' => '0px'
+				)
+			)
+		),
+		'textdomain' => 'adaire-blocks-dev2',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css'
 	),
 	'infogrid-block' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
@@ -2564,37 +4658,49 @@ return array(
 						'id' => 1,
 						'title' => 'FOOD & BEVERAGE',
 						'tagline' => 'Faster, safer supply chains',
-						'description' => 'Automate production and distribution workflows, improve traceability, and reduce stockouts while meeting compliance across labeling and safety standards.'
+						'description' => 'Automate production and distribution workflows, improve traceability, and reduce stockouts while meeting compliance across labeling and safety standards.',
+						'useIcon' => false,
+						'iconClass' => ''
 					),
 					array(
 						'id' => 2,
 						'title' => 'PERSONAL & HOUSEHOLD CARE',
 						'tagline' => 'Trusted products, lower cost',
-						'description' => 'Streamline product development cycles, optimize ingredient sourcing, and ensure regulatory compliance across global markets.'
+						'description' => 'Streamline product development cycles, optimize ingredient sourcing, and ensure regulatory compliance across global markets.',
+						'useIcon' => false,
+						'iconClass' => ''
 					),
 					array(
 						'id' => 3,
 						'title' => 'APPAREL, FASHION & LUXURY',
 						'tagline' => 'Fewer returns, higher margin',
-						'description' => 'Enhance customer experience with accurate sizing, reduce returns through better product information, and optimize inventory management.'
+						'description' => 'Enhance customer experience with accurate sizing, reduce returns through better product information, and optimize inventory management.',
+						'useIcon' => false,
+						'iconClass' => ''
 					),
 					array(
 						'id' => 4,
 						'title' => 'DURABLES & HOME PRODUCTS',
 						'tagline' => 'Simpler service journeys',
-						'description' => 'Improve customer service with comprehensive product documentation, spare parts management, and streamlined warranty processes.'
+						'description' => 'Improve customer service with comprehensive product documentation, spare parts management, and streamlined warranty processes.',
+						'useIcon' => false,
+						'iconClass' => ''
 					),
 					array(
 						'id' => 5,
 						'title' => 'RETAIL & E-COMMERCE',
 						'tagline' => 'More profitable growth',
-						'description' => 'Drive conversion with rich product content, optimize merchandising decisions, and create seamless omnichannel experiences.'
+						'description' => 'Drive conversion with rich product content, optimize merchandising decisions, and create seamless omnichannel experiences.',
+						'useIcon' => false,
+						'iconClass' => ''
 					),
 					array(
 						'id' => 6,
 						'title' => 'CONSUMER HEALTH & WELLNESS',
 						'tagline' => 'Compliant, tailored engagement',
-						'description' => 'Navigate complex regulatory requirements, personalize customer communications, and build trust through transparency.'
+						'description' => 'Navigate complex regulatory requirements, personalize customer communications, and build trust through transparency.',
+						'useIcon' => false,
+						'iconClass' => ''
 					)
 				)
 			),
@@ -2634,6 +4740,14 @@ return array(
 				'type' => 'string',
 				'default' => '#8b7cf7'
 			),
+			'iconSize' => array(
+				'type' => 'number',
+				'default' => 28
+			),
+			'hoverIconColor' => array(
+				'type' => 'string',
+				'default' => '#1a1a2e'
+			),
 			'borderColor' => array(
 				'type' => 'string',
 				'default' => '#2a2a4e'
@@ -2662,6 +4776,10 @@ return array(
 				'type' => 'number',
 				'default' => 1
 			),
+			'layoutStyle' => array(
+				'type' => 'string',
+				'default' => 'default'
+			),
 			'containerMode' => array(
 				'type' => 'string',
 				'default' => 'full'
@@ -2669,17 +4787,60 @@ return array(
 			'containerMaxWidth' => array(
 				'type' => 'object',
 				'default' => array(
-					'desktop' => array(
-						'value' => 1200,
-						'unit' => 'px'
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
 					),
 					'tablet' => array(
 						'value' => 100,
 						'unit' => '%'
 					),
+					'smallLaptop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'bigDesktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					)
+				)
+			),
+			'responsivePadding' => array(
+				'type' => 'object',
+				'default' => array(
 					'mobile' => array(
-						'value' => 100,
-						'unit' => '%'
+						'top' => '40px',
+						'right' => '20px',
+						'bottom' => '40px',
+						'left' => '20px'
+					),
+					'tablet' => array(
+						'top' => '60px',
+						'right' => '40px',
+						'bottom' => '60px',
+						'left' => '40px'
+					),
+					'smallLaptop' => array(
+						'top' => '80px',
+						'right' => '60px',
+						'bottom' => '80px',
+						'left' => '60px'
+					),
+					'desktop' => array(
+						'top' => '100px',
+						'right' => '80px',
+						'bottom' => '100px',
+						'left' => '80px'
+					),
+					'bigDesktop' => array(
+						'top' => '100px',
+						'right' => '80px',
+						'bottom' => '100px',
+						'left' => '80px'
 					)
 				)
 			)
@@ -8602,6 +10763,240 @@ return array(
 				)
 			)
 		)
+	),
+	'video-carousel-block' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/video-carousel-block',
+		'version' => '0.1.0',
+		'title' => 'Video Carousel (Plus)',
+		'category' => 'adaire-blocks-plus',
+		'description' => 'A draggable video carousel with a custom drag cursor and smooth scrolling cards.',
+		'supports' => array(
+			'html' => false,
+			'anchor' => true,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'customClassName' => true
+		),
+		'textdomain' => 'video-carousel-block',
+		'editorScript' => 'file:./index.js',
+		'style' => 'file:./style-index.css',
+		'viewScript' => 'file:./view.js',
+		'attributes' => array(
+			'blockId' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'items' => array(
+				'type' => 'array',
+				'default' => array(
+					array(
+						'id' => 1,
+						'title' => 'Customer story 1',
+						'position' => '',
+						'videoUrl' => '',
+						'posterUrl' => '',
+						'useImageOnly' => false,
+						'imageUrl' => '',
+						'social1IconClass' => '',
+						'social1Url' => '',
+						'social2IconClass' => '',
+						'social2Url' => '',
+						'social3IconClass' => '',
+						'social3Url' => ''
+					),
+					array(
+						'id' => 2,
+						'title' => 'Customer story 2',
+						'position' => '',
+						'videoUrl' => '',
+						'posterUrl' => '',
+						'useImageOnly' => false,
+						'imageUrl' => '',
+						'social1IconClass' => '',
+						'social1Url' => '',
+						'social2IconClass' => '',
+						'social2Url' => '',
+						'social3IconClass' => '',
+						'social3Url' => ''
+					),
+					array(
+						'id' => 3,
+						'title' => 'Customer story 3',
+						'position' => '',
+						'videoUrl' => '',
+						'posterUrl' => '',
+						'useImageOnly' => false,
+						'imageUrl' => '',
+						'social1IconClass' => '',
+						'social1Url' => '',
+						'social2IconClass' => '',
+						'social2Url' => '',
+						'social3IconClass' => '',
+						'social3Url' => ''
+					)
+				)
+			),
+			'cardWidth' => array(
+				'type' => 'number',
+				'default' => 260
+			),
+			'cardHeight' => array(
+				'type' => 'number',
+				'default' => 460
+			),
+			'cardGap' => array(
+				'type' => 'number',
+				'default' => 24
+			),
+			'slidesPerView' => array(
+				'type' => 'object',
+				'default' => array(
+					'bigDesktop' => 5,
+					'desktop' => 4,
+					'smallLaptop' => 4,
+					'tablet' => 3,
+					'mobile' => 2
+				)
+			),
+			'containerMode' => array(
+				'type' => 'string',
+				'default' => 'full'
+			),
+			'containerMaxWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
+					)
+				)
+			),
+			'marginTop' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginBottom' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'dragCursorText' => array(
+				'type' => 'string',
+				'default' => 'Drag'
+			),
+			'dragCursorSize' => array(
+				'type' => 'number',
+				'default' => 80
+			),
+			'dragCursorFontSize' => array(
+				'type' => 'number',
+				'default' => 16
+			),
+			'dragCursorFontWeight' => array(
+				'type' => 'string',
+				'default' => '500'
+			),
+			'dragCursorColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'dragCursorBgColor' => array(
+				'type' => 'string',
+				'default' => '#7c3aed'
+			),
+			'dragCursorTextTransform' => array(
+				'type' => 'string',
+				'default' => 'uppercase'
+			),
+			'metaTextAlign' => array(
+				'type' => 'string',
+				'default' => 'left'
+			),
+			'responsiveMetaTextAlign' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'left',
+					'tablet' => 'left',
+					'smallLaptop' => 'left',
+					'desktop' => 'left',
+					'bigDesktop' => 'left'
+				)
+			),
+			'nameFontSize' => array(
+				'type' => 'number',
+				'default' => 16
+			),
+			'responsiveNameFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 16,
+					'tablet' => 18,
+					'smallLaptop' => 18,
+					'desktop' => 20,
+					'bigDesktop' => 20
+				)
+			),
+			'positionFontSize' => array(
+				'type' => 'number',
+				'default' => 14
+			),
+			'responsivePositionFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 14,
+					'tablet' => 16,
+					'smallLaptop' => 16,
+					'desktop' => 18,
+					'bigDesktop' => 18
+				)
+			),
+			'nameColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'positionColor' => array(
+				'type' => 'string',
+				'default' => '#d1d5db'
+			),
+			'metaBgColor' => array(
+				'type' => 'string',
+				'default' => 'rgba(15,23,42,0.9)'
+			),
+			'socialIconSize' => array(
+				'type' => 'number',
+				'default' => 18
+			),
+			'responsiveSocialIconSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 18,
+					'tablet' => 18,
+					'smallLaptop' => 18,
+					'desktop' => 20,
+					'bigDesktop' => 20
+				)
+			),
+			'socialIconColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'socialIconHoverColor' => array(
+				'type' => 'string',
+				'default' => '#e5e7eb'
+			)
+		),
+		'icon' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="5" fill="#D52940"/><path d="M6 5.5C5.17157 5.5 4.5 6.17157 4.5 7V17C4.5 17.8284 5.17157 18.5 6 18.5H18C18.8284 18.5 19.5 17.8284 19.5 17V7C19.5 6.17157 18.8284 5.5 18 5.5H6ZM11.5 9.134C11.5 8.43661 12.2521 8.0134 12.8487 8.37059L15.8487 10.1366C16.398 10.4652 16.398 11.259 15.8487 11.5876L12.8487 13.3536C12.2521 13.7108 11.5 13.2876 11.5 12.5902V9.134Z" fill="white"/></svg>'
 	),
 	'video-hero-block' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',

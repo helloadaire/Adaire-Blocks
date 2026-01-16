@@ -619,7 +619,7 @@ class AdaireBlocksSettings {
                                         <div class="adaire-block-toggle">
                                             <?php if ($block_data['is_premium']): ?>
                                                 <div class="adaire-block-upgrade-prompt">
-                                                    <a href="https://adaire.digital/shop-blocks" target="_blank" class="adaire-upgrade-button">
+                                                    <a href="https://adaireblocks.com/shop-blocks" target="_blank" class="adaire-upgrade-button">
                                                         <span class="dashicons dashicons-external"></span>
                                                         Upgrade
                                                     </a>

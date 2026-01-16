@@ -2,10 +2,10 @@
 /**
  * Plugin Name:       Adaire Blocks
  * Description:       A powerful WordPress plugin that helps developers and designers create visually stunning, high-performance websites with ease right inside the Gutenberg editor.
- * Version:           1.2.1
+ * Version:           1.2.2
  * Requires at least: 6.7
  * Requires PHP:      7.4
- * Author:            <a href="https://adaire.digital" target="_blank">Adaire Digital</a>
+ * Author:            <a href="https://adaireblocks.com" target="_blank">Adaire Digital</a>
  * License:           GPL-3.0
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:       adaire-blocks
@@ -169,7 +169,7 @@ add_action('admin_post_my_plugin_rollback', function () {
     }
 
     // URL to the previous version ZIP
-    $previous_version_zip = 'https://github.com/helloadaire/Adaire-Blocks/releases/download/v1.2.0.alpha/adaire-blocks.1.2.0.alpha.zip';
+    $previous_version_zip = 'https://github.com/helloadaire/Adaire-Blocks/releases/download/v1.2.1/adaire-blocks.1.2.1.zip';
     error_log('[Adaire Blocks Rollback] Attempting rollback to: ' . $previous_version_zip);
 
     require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
@@ -2013,3 +2013,17 @@ function adaire_blocks_enqueue_admin_icons() {
 	);
 }
 add_action( 'admin_enqueue_scripts', 'adaire_blocks_enqueue_admin_icons' );
+
+/**
+ * Enqueue Bootstrap Icons for the editor and frontend.
+ */
+function adaire_blocks_enqueue_bootstrap_icons() {
+	wp_enqueue_style(
+		'adaire-blocks-bootstrap-icons',
+		'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css',
+		array(),
+		'1.11.3'
+	);
+}
+add_action( 'wp_enqueue_scripts', 'adaire_blocks_enqueue_bootstrap_icons' );
+add_action( 'enqueue_block_editor_assets', 'adaire_blocks_enqueue_bootstrap_icons' );

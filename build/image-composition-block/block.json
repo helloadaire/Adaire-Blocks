@@ -1,0 +1,61 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/image-composition-block",
+  "version": "0.1.0",
+  "title": "Image Composition (Free)",
+  "category": "adaire-blocks-free",
+  "description": "Create a collage-style composition of images in an asymmetric grid layout.",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "customClassName": true
+  },
+  "textdomain": "image-composition-block",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "attributes": {
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "images": {
+      "type": "array",
+      "default": []
+    },
+    "gap": {
+      "type": "number",
+      "default": 24
+    },
+    "borderRadius": {
+      "type": "number",
+      "default": 12
+    },
+    "containerMode": {
+      "type": "string",
+      "default": "constrained"
+    },
+    "containerMaxWidth": {
+      "type": "object",
+      "default": {
+        "desktop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 100,
+          "unit": "%"
+        },
+        "mobile": {
+          "value": 100,
+          "unit": "%"
+        }
+      }
+    }
+  },
+  "icon": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"24\" height=\"24\" rx=\"5\" fill=\"#F0F0F1\"/><rect x=\"3\" y=\"4\" width=\"9\" height=\"8\" rx=\"2\" fill=\"#D52940\"/><rect x=\"12\" y=\"4\" width=\"9\" height=\"12\" rx=\"2\" fill=\"#FF9AA8\"/><rect x=\"3\" y=\"12\" width=\"9\" height=\"8\" rx=\"2\" fill=\"#FFC3CC\"/></svg>"
+}

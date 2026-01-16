@@ -316,6 +316,10 @@
       "type": "number",
       "default": 30
     },
+    "tileTextColor": {
+      "type": "string",
+      "default": "#111111"
+    },
     "tileHoverBackground": {
       "type": "string",
       "default": "#ff4e4e"

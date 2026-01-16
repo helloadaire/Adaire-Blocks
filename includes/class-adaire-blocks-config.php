@@ -280,7 +280,7 @@ class AdaireBlocksConfig {
             <p style="margin: 0 0 15px 0; color: #333; line-height: 1.5;">
                 <?php echo esc_html($message); ?>
             </p>
-            <a href="https://adaire.digital/premium" 
+            <a href="https://adaireblocks.com/premium" 
                target="_blank" 
                rel="noopener noreferrer"
                style="

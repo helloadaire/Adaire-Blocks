@@ -17,7 +17,7 @@ class AdaireBlocksValidationConfig {
      * Validation server base URL
      * Change this to point to your validation server
      */
-    const VALIDATION_SERVER_URL = 'https://adaire.digital/validation-server';
+    const VALIDATION_SERVER_URL = 'https://adaireblocks.com/validation-server';
     
     /**
      * Get the validation server URL

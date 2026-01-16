@@ -221,7 +221,7 @@ class AdaireBlocksLicensePage {
                                 </ul>
                                 
                                 <h4>Need Help?</h4>
-                                <p>If you're having trouble with license activation, please contact our support team at <a href="mailto:support@adaire.digital">support@adaire.digital</a></p>
+                                <p>If you're having trouble with license activation, please contact our support team at <a href="mailto:support@adaireblocks.com">support@adaireblocks.com</a></p>
                             </div>
                         </div>
                     </div>

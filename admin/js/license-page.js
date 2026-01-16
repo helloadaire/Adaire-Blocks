@@ -11,7 +11,7 @@
         constructor() {
             // Validation server URL - handles all license operations securely
             // This URL is passed from PHP configuration
-            this.validationServerUrl = adaireLicense.validationServerUrl || 'https://adaire.digital/validation-server';
+            this.validationServerUrl = adaireLicense.validationServerUrl || 'https://adaireblocks.com/validation-server';
             this.init();
         }
 
@@ -104,6 +104,12 @@
                     this.saveActivationResult(licenseKey, combinedData);
                 })
                 .catch(error => {
+                    console.error('[Adaire License] Activation Process Error:', {
+                        error: error,
+                        message: error.message,
+                        stack: error.stack,
+                        licenseKey: licenseKey
+                    });
                     this.showMessage('error', error.message || 'License activation failed');
                 })
                 .finally(() => {
@@ -137,19 +143,45 @@
                                             errorMessages.push(jsonData.data.errors[key]);
                                         }
                                     });
-                                    reject(new Error(errorMessages.join('; ') || 'License validation failed'));
+                                    const errorMsg = errorMessages.join('; ') || 'License validation failed';
+                                    console.error('[Adaire License] Validation Error:', {
+                                        errorMessages: errorMessages,
+                                        fullResponse: jsonData,
+                                        url: fullUrl,
+                                        status: response.status
+                                    });
+                                    reject(new Error(errorMsg));
                                 } else {
                                     resolve(jsonData.data);
                                 }
                             } else {
+                                console.error('[Adaire License] Validation Failed:', {
+                                    message: jsonData.message,
+                                    fullResponse: jsonData,
+                                    url: fullUrl,
+                                    status: response.status,
+                                    ok: response.ok
+                                });
                                 reject(new Error(jsonData.message || 'License validation failed'));
                             }
                         } catch (e) {
+                            console.error('[Adaire License] Validation Parse Error:', {
+                                error: e,
+                                responseText: text,
+                                url: fullUrl,
+                                status: response.status
+                            });
                             reject(new Error('Invalid validation response from server'));
                         }
                     });
                 })
                 .catch(error => {
+                    console.error('[Adaire License] Validation Network Error:', {
+                        error: error,
+                        message: error.message,
+                        stack: error.stack,
+                        url: fullUrl
+                    });
                     reject(new Error('Network error during validation: ' + error.message));
                 });
             });
@@ -175,14 +207,33 @@
                                 const validationData = jsonData.data.data || jsonData.data;
                                 resolve(validationData);
                             } else {
+                                console.error('[Adaire License] Post-Activation Validation Failed:', {
+                                    message: jsonData.message,
+                                    fullResponse: jsonData,
+                                    url: fullUrl,
+                                    status: response.status,
+                                    ok: response.ok
+                                });
                                 reject(new Error(jsonData.message || 'Post-activation validation failed'));
                             }
                         } catch (e) {
+                            console.error('[Adaire License] Post-Activation Validation Parse Error:', {
+                                error: e,
+                                responseText: text,
+                                url: fullUrl,
+                                status: response.status
+                            });
                             reject(new Error('Invalid validation response'));
                         }
                     });
                 })
                 .catch(error => {
+                    console.error('[Adaire License] Post-Activation Validation Network Error:', {
+                        error: error,
+                        message: error.message,
+                        stack: error.stack,
+                        url: fullUrl
+                    });
                     reject(new Error('Network error during post-activation validation: ' + error.message));
                 });
             });
@@ -213,7 +264,14 @@
                                             errorMessages.push(jsonData.data.errors[key]);
                                         }
                                     });
-                                    reject(new Error(errorMessages.join('; ') || 'License activation failed'));
+                                    const errorMsg = errorMessages.join('; ') || 'License activation failed';
+                                    console.error('[Adaire License] Activation Error:', {
+                                        errorMessages: errorMessages,
+                                        fullResponse: jsonData,
+                                        url: fullUrl,
+                                        status: response.status
+                                    });
+                                    reject(new Error(errorMsg));
                                 } else if (jsonData.data) {
                                     // Extract token from various possible locations
                                     const token = jsonData.data.token || 
@@ -235,20 +293,49 @@
                                         };
                                         resolve(activationResult);
                                     } else {
+                                        console.error('[Adaire License] Activation Failed - No Token:', {
+                                            fullResponse: jsonData,
+                                            url: fullUrl,
+                                            status: response.status
+                                        });
                                         reject(new Error('License activation failed - no token received'));
                                     }
                                 } else {
+                                    console.error('[Adaire License] Activation Failed - No Data:', {
+                                        fullResponse: jsonData,
+                                        url: fullUrl,
+                                        status: response.status
+                                    });
                                     reject(new Error('License activation failed - no data received'));
                                 }
                             } else {
+                                console.error('[Adaire License] Activation Failed:', {
+                                    message: jsonData.message,
+                                    fullResponse: jsonData,
+                                    url: fullUrl,
+                                    status: response.status,
+                                    ok: response.ok
+                                });
                                 reject(new Error(jsonData.message || 'License activation failed'));
                             }
                         } catch (e) {
+                            console.error('[Adaire License] Activation Parse Error:', {
+                                error: e,
+                                responseText: text,
+                                url: fullUrl,
+                                status: response.status
+                            });
                             reject(new Error('Invalid activation response from server'));
                         }
                     });
                 })
                 .catch(error => {
+                    console.error('[Adaire License] Activation Network Error:', {
+                        error: error,
+                        message: error.message,
+                        stack: error.stack,
+                        url: fullUrl
+                    });
                     reject(new Error('Network error during activation: ' + error.message));
                 });
             });
@@ -301,7 +388,14 @@
                                         errorMessages.push(jsonData.data.errors[key]);
                                     }
                                 });
-                                this.showMessage('error', errorMessages.join('; ') || 'License deactivation failed');
+                                const errorMsg = errorMessages.join('; ') || 'License deactivation failed';
+                                console.error('[Adaire License] Deactivation Error:', {
+                                    errorMessages: errorMessages,
+                                    fullResponse: jsonData,
+                                    url: fullUrl,
+                                    status: response.status
+                                });
+                                this.showMessage('error', errorMsg);
                             } else {
                                 // Successful deactivation
                                 const message = activationToken ? 
@@ -312,14 +406,33 @@
                                 this.saveDeactivationResult();
                             }
                         } else {
+                            console.error('[Adaire License] Deactivation Failed:', {
+                                message: jsonData.message,
+                                fullResponse: jsonData,
+                                url: fullUrl,
+                                status: response.status,
+                                ok: response.ok
+                            });
                             this.showMessage('error', jsonData.message || 'License deactivation failed');
                         }
                     } catch (e) {
+                        console.error('[Adaire License] Deactivation Parse Error:', {
+                            error: e,
+                            responseText: text,
+                            url: fullUrl,
+                            status: response.status
+                        });
                         this.showMessage('error', 'Invalid response from server');
                     }
                 });
             })
             .catch(error => {
+                console.error('[Adaire License] Deactivation Network Error:', {
+                    error: error,
+                    message: error.message,
+                    stack: error.stack,
+                    url: fullUrl
+                });
                 this.showMessage('error', 'Network error: ' + error.message);
             })
             .finally(() => {
@@ -368,7 +481,14 @@
                                         errorMessages.push(jsonData.data.errors[key]);
                                     }
                                 });
-                                this.showMessage('error', errorMessages.join('; ') || 'License validation failed');
+                                const errorMsg = errorMessages.join('; ') || 'License validation failed';
+                                console.error('[Adaire License] Validation Error:', {
+                                    errorMessages: errorMessages,
+                                    fullResponse: jsonData,
+                                    url: fullUrl,
+                                    status: response.status
+                                });
+                                this.showMessage('error', errorMsg);
                             } else {
                                 // Successful validation
                                 this.showMessage('success', 'License validation successful!');
@@ -376,14 +496,33 @@
                                 this.updateLicenseData(jsonData.data);
                             }
                         } else {
+                            console.error('[Adaire License] Validation Failed:', {
+                                message: jsonData.message,
+                                fullResponse: jsonData,
+                                url: fullUrl,
+                                status: response.status,
+                                ok: response.ok
+                            });
                             this.showMessage('error', jsonData.message || 'License validation failed');
                         }
                     } catch (e) {
+                        console.error('[Adaire License] Validation Parse Error:', {
+                            error: e,
+                            responseText: text,
+                            url: fullUrl,
+                            status: response.status
+                        });
                         this.showMessage('error', 'Invalid response from server');
                     }
                 });
             })
             .catch(error => {
+                console.error('[Adaire License] Validation Network Error:', {
+                    error: error,
+                    message: error.message,
+                    stack: error.stack,
+                    url: fullUrl
+                });
                 this.showMessage('error', 'Network error: ' + error.message);
             })
             .finally(() => {
@@ -464,6 +603,13 @@
                     }
                 },
                 error: (xhr, status, error) => {
+                    console.error('[Adaire License] Save Deactivation AJAX Error:', {
+                        xhr: xhr,
+                        status: status,
+                        error: error,
+                        responseText: xhr.responseText,
+                        statusCode: xhr.status
+                    });
                     this.showMessage('error', 'License deactivated but failed to save status. Please refresh the page manually.');
                 }
             });
@@ -490,6 +636,14 @@
                     }
                 },
                 error: (xhr, status, error) => {
+                    console.error('[Adaire License] Update License Data AJAX Error:', {
+                        xhr: xhr,
+                        status: status,
+                        error: error,
+                        responseText: xhr.responseText,
+                        statusCode: xhr.status,
+                        validationData: validationData
+                    });
                     this.showMessage('error', 'License validated but failed to update status. Please refresh the page manually.');
                 }
             });
@@ -523,6 +677,15 @@
                     }
                 },
                 error: (xhr, status, error) => {
+                    console.error('[Adaire License] Save Activation AJAX Error:', {
+                        xhr: xhr,
+                        status: status,
+                        error: error,
+                        responseText: xhr.responseText,
+                        statusCode: xhr.status,
+                        licenseKey: licenseKey,
+                        activationData: activationData
+                    });
                     this.showMessage('error', 'License activated but failed to save status. Please refresh the page manually.');
                 }
             });

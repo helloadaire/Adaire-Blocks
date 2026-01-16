@@ -1,0 +1,443 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/infogrid-4-block",
+  "version": "0.1.0",
+  "title": "Info Grid 4",
+  "category": "adaire-blocks-plus",
+  "icon": "grid-view",
+  "description": "A 2x2 grid block with configurable colors, typography, and background SVG icon.",
+  "supports": {
+    "html": false,
+    "anchor": true
+  },
+  "attributes": {
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "containerMode": {
+      "type": "string",
+      "default": "constrained"
+    },
+    "mainTitle": {
+      "type": "string",
+      "default": "The Lumenalta difference"
+    },
+    "item1Title": {
+      "type": "string",
+      "default": "Fulfilling work"
+    },
+    "item1Description": {
+      "type": "string",
+      "default": "Build cutting-edge tech with great client partners and team members. Solve complex problems in an environment where you have the freedom to optimize for possibilities."
+    },
+    "item2Title": {
+      "type": "string",
+      "default": "Remote from the start"
+    },
+    "item2Description": {
+      "type": "string",
+      "default": "Since the beginning we've been an office-less company so you can be as ambitious in your professional life as you are in your personal life."
+    },
+    "item3Title": {
+      "type": "string",
+      "default": "Dedicated teams"
+    },
+    "item3Description": {
+      "type": "string",
+      "default": "Brain space for one problem set at a time, no burdensome time sheets. High expectations for your professionalism, but total trust in you."
+    },
+    "item4Title": {
+      "type": "string",
+      "default": "Diverse"
+    },
+    "item4Description": {
+      "type": "string",
+      "default": "We foster a culture of diversity and inclusion, valuing unique perspectives and empowering everyone to thrive and contribute fully."
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#f3f4f6"
+    },
+    "cardBackgroundColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "cardBorderRadius": {
+      "type": "number",
+      "default": 16
+    },
+    "gridBorderColor": {
+      "type": "string",
+      "default": "#e5e7eb"
+    },
+    "gridBorderWidth": {
+      "type": "number",
+      "default": 1
+    },
+    "titleColor": {
+      "type": "string",
+      "default": "#1f2937"
+    },
+    "itemTitleColor": {
+      "type": "string",
+      "default": "#1f2937"
+    },
+    "itemDescriptionColor": {
+      "type": "string",
+      "default": "#4b5563"
+    },
+    "titleFontSize": {
+      "type": "object",
+      "default": {
+        "mobile": "24px",
+        "tablet": "28px",
+        "smallLaptop": "32px",
+        "desktop": "36px",
+        "bigDesktop": "36px"
+      }
+    },
+    "titleFontWeight": {
+      "type": "string",
+      "default": "600"
+    },
+    "titleLineHeight": {
+      "type": "object",
+      "default": {
+        "mobile": "1.2",
+        "tablet": "1.2",
+        "smallLaptop": "1.2",
+        "desktop": "1.2",
+        "bigDesktop": "1.2"
+      }
+    },
+    "itemTitleFontSize": {
+      "type": "object",
+      "default": {
+        "mobile": "18px",
+        "tablet": "20px",
+        "smallLaptop": "22px",
+        "desktop": "24px",
+        "bigDesktop": "24px"
+      }
+    },
+    "itemTitleFontWeight": {
+      "type": "string",
+      "default": "600"
+    },
+    "itemTitleLineHeight": {
+      "type": "object",
+      "default": {
+        "mobile": "1.3",
+        "tablet": "1.3",
+        "smallLaptop": "1.3",
+        "desktop": "1.3",
+        "bigDesktop": "1.3"
+      }
+    },
+    "itemDescriptionFontSize": {
+      "type": "object",
+      "default": {
+        "mobile": "14px",
+        "tablet": "15px",
+        "smallLaptop": "16px",
+        "desktop": "16px",
+        "bigDesktop": "16px"
+      }
+    },
+    "itemDescriptionFontWeight": {
+      "type": "string",
+      "default": "400"
+    },
+    "itemDescriptionLineHeight": {
+      "type": "object",
+      "default": {
+        "mobile": "1.5",
+        "tablet": "1.5",
+        "smallLaptop": "1.5",
+        "desktop": "1.5",
+        "bigDesktop": "1.5"
+      }
+    },
+    "responsivePadding": {
+      "type": "object",
+      "default": {
+        "mobile": {
+          "top": "40px",
+          "right": "20px",
+          "bottom": "40px",
+          "left": "20px"
+        },
+        "tablet": {
+          "top": "60px",
+          "right": "40px",
+          "bottom": "60px",
+          "left": "40px"
+        },
+        "smallLaptop": {
+          "top": "80px",
+          "right": "60px",
+          "bottom": "80px",
+          "left": "60px"
+        },
+        "desktop": {
+          "top": "100px",
+          "right": "80px",
+          "bottom": "100px",
+          "left": "80px"
+        },
+        "bigDesktop": {
+          "top": "100px",
+          "right": "80px",
+          "bottom": "100px",
+          "left": "80px"
+        }
+      }
+    },
+    "responsiveMaxWidth": {
+      "type": "object",
+      "default": {
+        "mobile": {
+          "value": 100,
+          "unit": "%"
+        },
+        "tablet": {
+          "value": 100,
+          "unit": "%"
+        },
+        "smallLaptop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "desktop": {
+          "value": 1400,
+          "unit": "px"
+        },
+        "bigDesktop": {
+          "value": 1400,
+          "unit": "px"
+        }
+      }
+    },
+    "responsiveMainTitleFontSize": {
+      "type": "object",
+      "default": {
+        "mobile": "24px",
+        "tablet": "28px",
+        "smallLaptop": "32px",
+        "desktop": "36px",
+        "bigDesktop": "36px"
+      }
+    },
+    "responsiveMainTitleFontWeight": {
+      "type": "object",
+      "default": {
+        "mobile": "600",
+        "tablet": "600",
+        "smallLaptop": "600",
+        "desktop": "600",
+        "bigDesktop": "600"
+      }
+    },
+    "responsiveMainTitleLineHeight": {
+      "type": "object",
+      "default": {
+        "mobile": "1.2",
+        "tablet": "1.2",
+        "smallLaptop": "1.2",
+        "desktop": "1.2",
+        "bigDesktop": "1.2"
+      }
+    },
+    "responsiveMainTitleColor": {
+      "type": "object",
+      "default": {
+        "mobile": "#111827",
+        "tablet": "#111827",
+        "smallLaptop": "#111827",
+        "desktop": "#111827",
+        "bigDesktop": "#111827"
+      }
+    },
+    "responsiveItemTitleFontSize": {
+      "type": "object",
+      "default": {
+        "mobile": "18px",
+        "tablet": "20px",
+        "smallLaptop": "22px",
+        "desktop": "24px",
+        "bigDesktop": "24px"
+      }
+    },
+    "responsiveItemTitleFontWeight": {
+      "type": "object",
+      "default": {
+        "mobile": "600",
+        "tablet": "600",
+        "smallLaptop": "600",
+        "desktop": "600",
+        "bigDesktop": "600"
+      }
+    },
+    "responsiveItemTitleLineHeight": {
+      "type": "object",
+      "default": {
+        "mobile": "1.3",
+        "tablet": "1.3",
+        "smallLaptop": "1.3",
+        "desktop": "1.3",
+        "bigDesktop": "1.3"
+      }
+    },
+    "responsiveItemTitleColor": {
+      "type": "object",
+      "default": {
+        "mobile": "#111827",
+        "tablet": "#111827",
+        "smallLaptop": "#111827",
+        "desktop": "#111827",
+        "bigDesktop": "#111827"
+      }
+    },
+    "responsiveItemDescriptionFontSize": {
+      "type": "object",
+      "default": {
+        "mobile": "14px",
+        "tablet": "15px",
+        "smallLaptop": "16px",
+        "desktop": "16px",
+        "bigDesktop": "16px"
+      }
+    },
+    "responsiveItemDescriptionFontWeight": {
+      "type": "object",
+      "default": {
+        "mobile": "400",
+        "tablet": "400",
+        "smallLaptop": "400",
+        "desktop": "400",
+        "bigDesktop": "400"
+      }
+    },
+    "responsiveItemDescriptionLineHeight": {
+      "type": "object",
+      "default": {
+        "mobile": "1.5",
+        "tablet": "1.5",
+        "smallLaptop": "1.5",
+        "desktop": "1.5",
+        "bigDesktop": "1.5"
+      }
+    },
+    "responsiveItemDescriptionColor": {
+      "type": "object",
+      "default": {
+        "mobile": "#4b5563",
+        "tablet": "#4b5563",
+        "smallLaptop": "#4b5563",
+        "desktop": "#4b5563",
+        "bigDesktop": "#4b5563"
+      }
+    },
+    "responsiveCardPadding": {
+      "type": "object",
+      "default": {
+        "mobile": {
+          "top": "30px",
+          "right": "20px",
+          "bottom": "30px",
+          "left": "20px"
+        },
+        "tablet": {
+          "top": "40px",
+          "right": "30px",
+          "bottom": "40px",
+          "left": "30px"
+        },
+        "smallLaptop": {
+          "top": "50px",
+          "right": "40px",
+          "bottom": "50px",
+          "left": "40px"
+        },
+        "desktop": {
+          "top": "60px",
+          "right": "50px",
+          "bottom": "60px",
+          "left": "50px"
+        },
+        "bigDesktop": {
+          "top": "60px",
+          "right": "50px",
+          "bottom": "60px",
+          "left": "50px"
+        }
+      }
+    },
+    "showSvgIcon": {
+      "type": "boolean",
+      "default": false
+    },
+    "svgIconCode": {
+      "type": "string",
+      "default": ""
+    },
+    "svgIconColor": {
+      "type": "string",
+      "default": "#d1d5db"
+    },
+    "svgIconPosition": {
+      "type": "string",
+      "default": "right"
+    },
+    "svgIconVerticalPosition": {
+      "type": "string",
+      "default": "top"
+    },
+    "responsiveSvgIconWidth": {
+      "type": "object",
+      "default": {
+        "mobile": "0px",
+        "tablet": "0px",
+        "smallLaptop": "400px",
+        "desktop": "500px",
+        "bigDesktop": "500px"
+      }
+    },
+    "responsiveSvgIconTransform": {
+      "type": "object",
+      "default": {
+        "mobile": "none",
+        "tablet": "none",
+        "smallLaptop": "translateY(-50%)",
+        "desktop": "translateY(-50%)",
+        "bigDesktop": "translateY(-50%)"
+      }
+    },
+    "responsiveSvgIconVerticalOffset": {
+      "type": "object",
+      "default": {
+        "mobile": "0px",
+        "tablet": "0px",
+        "smallLaptop": "0px",
+        "desktop": "0px",
+        "bigDesktop": "0px"
+      }
+    },
+    "responsiveSvgIconHorizontalOffset": {
+      "type": "object",
+      "default": {
+        "mobile": "0px",
+        "tablet": "0px",
+        "smallLaptop": "0px",
+        "desktop": "0px",
+        "bigDesktop": "0px"
+      }
+    }
+  },
+  "textdomain": "adaire-blocks-dev2",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

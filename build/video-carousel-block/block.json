@@ -1,0 +1,234 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/video-carousel-block",
+  "version": "0.1.0",
+  "title": "Video Carousel (Plus)",
+  "category": "adaire-blocks-plus",
+  "description": "A draggable video carousel with a custom drag cursor and smooth scrolling cards.",
+  "supports": {
+    "html": false,
+    "anchor": true,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "customClassName": true
+  },
+  "textdomain": "video-carousel-block",
+  "editorScript": "file:./index.js",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "attributes": {
+    "blockId": {
+      "type": "string",
+      "default": ""
+    },
+    "items": {
+      "type": "array",
+      "default": [
+        {
+          "id": 1,
+          "title": "Customer story 1",
+          "position": "",
+          "videoUrl": "",
+          "posterUrl": "",
+          "useImageOnly": false,
+          "imageUrl": "",
+          "social1IconClass": "",
+          "social1Url": "",
+          "social2IconClass": "",
+          "social2Url": "",
+          "social3IconClass": "",
+          "social3Url": ""
+        },
+        {
+          "id": 2,
+          "title": "Customer story 2",
+          "position": "",
+          "videoUrl": "",
+          "posterUrl": "",
+          "useImageOnly": false,
+          "imageUrl": "",
+          "social1IconClass": "",
+          "social1Url": "",
+          "social2IconClass": "",
+          "social2Url": "",
+          "social3IconClass": "",
+          "social3Url": ""
+        },
+        {
+          "id": 3,
+          "title": "Customer story 3",
+          "position": "",
+          "videoUrl": "",
+          "posterUrl": "",
+          "useImageOnly": false,
+          "imageUrl": "",
+          "social1IconClass": "",
+          "social1Url": "",
+          "social2IconClass": "",
+          "social2Url": "",
+          "social3IconClass": "",
+          "social3Url": ""
+        }
+      ]
+    },
+    "cardWidth": {
+      "type": "number",
+      "default": 260
+    },
+    "cardHeight": {
+      "type": "number",
+      "default": 460
+    },
+    "cardGap": {
+      "type": "number",
+      "default": 24
+    },
+    "slidesPerView": {
+      "type": "object",
+      "default": {
+        "bigDesktop": 5,
+        "desktop": 4,
+        "smallLaptop": 4,
+        "tablet": 3,
+        "mobile": 2
+      }
+    },
+    "containerMode": {
+      "type": "string",
+      "default": "full"
+    },
+    "containerMaxWidth": {
+      "type": "object",
+      "default": {
+        "desktop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "tablet": {
+          "value": 100,
+          "unit": "%"
+        },
+        "mobile": {
+          "value": 100,
+          "unit": "%"
+        }
+      }
+    },
+    "marginTop": {
+      "type": "number",
+      "default": 0
+    },
+    "marginBottom": {
+      "type": "number",
+      "default": 0
+    },
+    "dragCursorText": {
+      "type": "string",
+      "default": "Drag"
+    },
+    "dragCursorSize": {
+      "type": "number",
+      "default": 80
+    },
+    "dragCursorFontSize": {
+      "type": "number",
+      "default": 16
+    },
+    "dragCursorFontWeight": {
+      "type": "string",
+      "default": "500"
+    },
+    "dragCursorColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "dragCursorBgColor": {
+      "type": "string",
+      "default": "#7c3aed"
+    },
+    "dragCursorTextTransform": {
+      "type": "string",
+      "default": "uppercase"
+    },
+    "metaTextAlign": {
+      "type": "string",
+      "default": "left"
+    },
+    "responsiveMetaTextAlign": {
+      "type": "object",
+      "default": {
+        "mobile": "left",
+        "tablet": "left",
+        "smallLaptop": "left",
+        "desktop": "left",
+        "bigDesktop": "left"
+      }
+    },
+    "nameFontSize": {
+      "type": "number",
+      "default": 16
+    },
+    "responsiveNameFontSize": {
+      "type": "object",
+      "default": {
+        "mobile": 16,
+        "tablet": 18,
+        "smallLaptop": 18,
+        "desktop": 20,
+        "bigDesktop": 20
+      }
+    },
+    "positionFontSize": {
+      "type": "number",
+      "default": 14
+    },
+    "responsivePositionFontSize": {
+      "type": "object",
+      "default": {
+        "mobile": 14,
+        "tablet": 16,
+        "smallLaptop": 16,
+        "desktop": 18,
+        "bigDesktop": 18
+      }
+    },
+    "nameColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "positionColor": {
+      "type": "string",
+      "default": "#d1d5db"
+    },
+    "metaBgColor": {
+      "type": "string",
+      "default": "rgba(15,23,42,0.9)"
+    },
+    "socialIconSize": {
+      "type": "number",
+      "default": 18
+    },
+    "responsiveSocialIconSize": {
+      "type": "object",
+      "default": {
+        "mobile": 18,
+        "tablet": 18,
+        "smallLaptop": 18,
+        "desktop": 20,
+        "bigDesktop": 20
+      }
+    },
+    "socialIconColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "socialIconHoverColor": {
+      "type": "string",
+      "default": "#e5e7eb"
+    }
+  },
+  "icon": "<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect width=\"24\" height=\"24\" rx=\"5\" fill=\"#D52940\"/><path d=\"M6 5.5C5.17157 5.5 4.5 6.17157 4.5 7V17C4.5 17.8284 5.17157 18.5 6 18.5H18C18.8284 18.5 19.5 17.8284 19.5 17V7C19.5 6.17157 18.8284 5.5 18 5.5H6ZM11.5 9.134C11.5 8.43661 12.2521 8.0134 12.8487 8.37059L15.8487 10.1366C16.398 10.4652 16.398 11.259 15.8487 11.5876L12.8487 13.3536C12.2521 13.7108 11.5 13.2876 11.5 12.5902V9.134Z\" fill=\"white\"/></svg>"
+}

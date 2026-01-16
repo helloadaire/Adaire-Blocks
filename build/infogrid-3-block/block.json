@@ -1,0 +1,390 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/infogrid-3-block",
+  "version": "0.1.0",
+  "title": "Info Grid 3",
+  "category": "adaire-blocks-plus",
+  "icon": "grid-view",
+  "description": "A responsive 2-row grid block with a three-column sub-section and background options.",
+  "supports": {
+    "html": false,
+    "anchor": true
+  },
+  "attributes": {
+    "blockId": {
+      "type": "string"
+    },
+    "containerMode": {
+      "type": "string",
+      "default": "constrained"
+    },
+    "mainHeading": {
+      "type": "string",
+      "source": "html",
+      "selector": ".adaire-infogrid-3__main-heading",
+      "default": "Digitizing rail yards with AI and machine learning."
+    },
+    "mainDescription": {
+      "type": "string",
+      "source": "html",
+      "selector": ".adaire-infogrid-3__main-description",
+      "default": "An international logistics service provider and port operator offering diverse services, including warehousing, transport, and value-added operations. They serve multiple verticals, including petrochemicals, consumer goods, and art through their seven main business units."
+    },
+    "cell1Title": {
+      "type": "string",
+      "source": "html",
+      "selector": ".adaire-infogrid-3__cell-1 .adaire-infogrid-3__cell-label",
+      "default": "Challenge"
+    },
+    "cell1Content": {
+      "type": "string",
+      "source": "html",
+      "selector": ".adaire-infogrid-3__cell-1 .adaire-infogrid-3__cell-text",
+      "default": "anual and paper-based processes in their legacy rail yard operations hindered efficiency. The company needed to digitize their processes and generate actionable performance"
+    },
+    "cell2Title": {
+      "type": "string",
+      "source": "html",
+      "selector": ".adaire-infogrid-3__cell-2 .adaire-infogrid-3__cell-label",
+      "default": "Outcomes"
+    },
+    "cell2Content": {
+      "type": "string",
+      "source": "html",
+      "selector": ".adaire-infogrid-3__cell-2 .adaire-infogrid-3__cell-text",
+      "default": "anual and paper-based processes in their legacy rail yard operations hindered efficiency. The company needed to digitize their processes and generate actionable performance."
+    },
+    "cell3Title": {
+      "type": "string",
+      "source": "html",
+      "selector": ".adaire-infogrid-3__cell-3 .adaire-infogrid-3__cell-label",
+      "default": "Solution"
+    },
+    "cell3Content": {
+      "type": "string",
+      "source": "html",
+      "selector": ".adaire-infogrid-3__cell-3 .adaire-infogrid-3__cell-text",
+      "default": "anual and paper-based processes in their legacy rail yard operations hindered efficiency. The company needed to digitize their processes and generate actionable performance."
+    },
+    "sub1Title": {
+      "type": "string",
+      "source": "html",
+      "selector": ".adaire-infogrid-3__sub-column-1 .adaire-infogrid-3__sub-label",
+      "default": "Daily planning time reduction: 10 hours"
+    },
+    "sub1Content": {
+      "type": "string",
+      "source": "html",
+      "selector": ".adaire-infogrid-3__sub-column-1 .adaire-infogrid-3__sub-text",
+      "default": "to 15 minutes"
+    },
+    "sub2Title": {
+      "type": "string",
+      "source": "html",
+      "selector": ".adaire-infogrid-3__sub-column-2 .adaire-infogrid-3__sub-label",
+      "default": "Daily planning time reduction: 10 hours"
+    },
+    "sub2Content": {
+      "type": "string",
+      "source": "html",
+      "selector": ".adaire-infogrid-3__sub-column-2 .adaire-infogrid-3__sub-text",
+      "default": "to 15 minutes"
+    },
+    "sub3Title": {
+      "type": "string",
+      "source": "html",
+      "selector": ".adaire-infogrid-3__sub-column-3 .adaire-infogrid-3__sub-label",
+      "default": "Daily planning time reduction: 10 hours"
+    },
+    "sub3Content": {
+      "type": "string",
+      "source": "html",
+      "selector": ".adaire-infogrid-3__sub-column-3 .adaire-infogrid-3__sub-text",
+      "default": "to 15 minutes"
+    },
+    "showBackgroundImage": {
+      "type": "boolean",
+      "default": true
+    },
+    "backgroundImageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "backgroundImageId": {
+      "type": "number"
+    },
+    "backgroundSize": {
+      "type": "string",
+      "default": "cover"
+    },
+    "backgroundPosition": {
+      "type": "string",
+      "default": "center"
+    },
+    "backgroundRepeat": {
+      "type": "string",
+      "default": "no-repeat"
+    },
+    "overlayType": {
+      "type": "string",
+      "default": "solid"
+    },
+    "overlayColor": {
+      "type": "string",
+      "default": "rgba(31, 0, 87, 0.6)"
+    },
+    "overlayGradient": {
+      "type": "string",
+      "default": ""
+    },
+    "overlayOpacity": {
+      "type": "number",
+      "default": 0.6
+    },
+    "responsiveMaxWidth": {
+      "type": "object",
+      "default": {
+        "mobile": {
+          "value": 100,
+          "unit": "%"
+        },
+        "tablet": {
+          "value": 100,
+          "unit": "%"
+        },
+        "smallLaptop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "desktop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "bigDesktop": {
+          "value": 1200,
+          "unit": "px"
+        }
+      }
+    },
+    "responsiveWidth": {
+      "type": "object",
+      "default": {
+        "mobile": "100%",
+        "tablet": "100%",
+        "smallLaptop": "100%",
+        "desktop": "100%",
+        "bigDesktop": "100%"
+      }
+    },
+    "responsivePadding": {
+      "type": "object",
+      "default": {
+        "mobile": {
+          "top": "40px",
+          "right": "20px",
+          "bottom": "40px",
+          "left": "20px"
+        },
+        "tablet": {
+          "top": "60px",
+          "right": "30px",
+          "bottom": "60px",
+          "left": "30px"
+        },
+        "smallLaptop": {
+          "top": "80px",
+          "right": "50px",
+          "bottom": "80px",
+          "left": "50px"
+        },
+        "desktop": {
+          "top": "100px",
+          "right": "50px",
+          "bottom": "100px",
+          "left": "50px"
+        },
+        "bigDesktop": {
+          "top": "100px",
+          "right": "50px",
+          "bottom": "100px",
+          "left": "50px"
+        }
+      }
+    },
+    "responsiveGridBorderColor": {
+      "type": "object",
+      "default": {
+        "mobile": "#ffffff",
+        "tablet": "#ffffff",
+        "smallLaptop": "#ffffff",
+        "desktop": "#ffffff",
+        "bigDesktop": "#ffffff"
+      }
+    },
+    "responsiveGridThickness": {
+      "type": "object",
+      "default": {
+        "mobile": "1px",
+        "tablet": "1px",
+        "smallLaptop": "1px",
+        "desktop": "1px",
+        "bigDesktop": "1px"
+      }
+    },
+    "responsiveMainHeadingFontSize": {
+      "type": "object",
+      "default": {
+        "mobile": "32px",
+        "tablet": "42px",
+        "smallLaptop": "52px",
+        "desktop": "52px",
+        "bigDesktop": "52px"
+      }
+    },
+    "responsiveMainHeadingFontWeight": {
+      "type": "object",
+      "default": {
+        "mobile": "500",
+        "tablet": "500",
+        "smallLaptop": "500",
+        "desktop": "500",
+        "bigDesktop": "500"
+      }
+    },
+    "responsiveMainHeadingLineHeight": {
+      "type": "object",
+      "default": {
+        "mobile": "1.2",
+        "tablet": "1.2",
+        "smallLaptop": "1.2",
+        "desktop": "1.2",
+        "bigDesktop": "1.2"
+      }
+    },
+    "responsiveMainHeadingColor": {
+      "type": "object",
+      "default": {
+        "mobile": "#ffffff",
+        "tablet": "#ffffff",
+        "smallLaptop": "#ffffff",
+        "desktop": "#ffffff",
+        "bigDesktop": "#ffffff"
+      }
+    },
+    "responsiveMainDescriptionFontSize": {
+      "type": "object",
+      "default": {
+        "mobile": "16px",
+        "tablet": "18px",
+        "smallLaptop": "18px",
+        "desktop": "18px",
+        "bigDesktop": "18px"
+      }
+    },
+    "responsiveMainDescriptionLineHeight": {
+      "type": "object",
+      "default": {
+        "mobile": "1.6",
+        "tablet": "1.6",
+        "smallLaptop": "1.6",
+        "desktop": "1.6",
+        "bigDesktop": "1.6"
+      }
+    },
+    "responsiveMainDescriptionColor": {
+      "type": "object",
+      "default": {
+        "mobile": "#ffffff",
+        "tablet": "#ffffff",
+        "smallLaptop": "#ffffff",
+        "desktop": "#ffffff",
+        "bigDesktop": "#ffffff"
+      }
+    },
+    "responsiveCellLabelFontSize": {
+      "type": "object",
+      "default": {
+        "mobile": "16px",
+        "tablet": "16px",
+        "smallLaptop": "16px",
+        "desktop": "16px",
+        "bigDesktop": "16px"
+      }
+    },
+    "responsiveCellLabelColor": {
+      "type": "object",
+      "default": {
+        "mobile": "#ffffff",
+        "tablet": "#ffffff",
+        "smallLaptop": "#ffffff",
+        "desktop": "#ffffff",
+        "bigDesktop": "#ffffff"
+      }
+    },
+    "responsiveCellTextFontSize": {
+      "type": "object",
+      "default": {
+        "mobile": "16px",
+        "tablet": "18px",
+        "smallLaptop": "18px",
+        "desktop": "18px",
+        "bigDesktop": "18px"
+      }
+    },
+    "responsiveCellTextColor": {
+      "type": "object",
+      "default": {
+        "mobile": "#ffffff",
+        "tablet": "#ffffff",
+        "smallLaptop": "#ffffff",
+        "desktop": "#ffffff",
+        "bigDesktop": "#ffffff"
+      }
+    },
+    "responsiveSubLabelFontSize": {
+      "type": "object",
+      "default": {
+        "mobile": "16px",
+        "tablet": "18px",
+        "smallLaptop": "18px",
+        "desktop": "18px",
+        "bigDesktop": "18px"
+      }
+    },
+    "responsiveSubLabelColor": {
+      "type": "object",
+      "default": {
+        "mobile": "#ffffff",
+        "tablet": "#ffffff",
+        "smallLaptop": "#ffffff",
+        "desktop": "#ffffff",
+        "bigDesktop": "#ffffff"
+      }
+    },
+    "responsiveSubTextFontSize": {
+      "type": "object",
+      "default": {
+        "mobile": "14px",
+        "tablet": "16px",
+        "smallLaptop": "16px",
+        "desktop": "16px",
+        "bigDesktop": "16px"
+      }
+    },
+    "responsiveSubTextColor": {
+      "type": "object",
+      "default": {
+        "mobile": "#ffffff",
+        "tablet": "#ffffff",
+        "smallLaptop": "#ffffff",
+        "desktop": "#ffffff",
+        "bigDesktop": "#ffffff"
+      }
+    }
+  },
+  "textdomain": "adaire-blocks-dev2",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}
