@@ -79,8 +79,11 @@
       "default": 260
     },
     "cardHeight": {
-      "type": "number",
-      "default": 460
+      "type": "object",
+      "default": {
+        "value": 460,
+        "unit": "px"
+      }
     },
     "cardGap": {
       "type": "number",
@@ -93,7 +96,25 @@
         "desktop": 4,
         "smallLaptop": 4,
         "tablet": 3,
-        "mobile": 2
+        "mobile": 1
+      }
+    },
+    "loop": {
+      "type": "boolean",
+      "default": false
+    },
+    "mobilePeekPercent": {
+      "type": "number",
+      "default": 20
+    },
+    "listPaddingLeft": {
+      "type": "object",
+      "default": {
+        "mobile": 10,
+        "tablet": 10,
+        "smallLaptop": 10,
+        "desktop": 10,
+        "bigDesktop": 10
       }
     },
     "containerMode": {
@@ -103,17 +124,25 @@
     "containerMaxWidth": {
       "type": "object",
       "default": {
-        "desktop": {
-          "value": 1200,
-          "unit": "px"
+        "mobile": {
+          "value": 100,
+          "unit": "%"
         },
         "tablet": {
           "value": 100,
           "unit": "%"
         },
-        "mobile": {
-          "value": 100,
-          "unit": "%"
+        "smallLaptop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "desktop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "bigDesktop": {
+          "value": 1200,
+          "unit": "px"
         }
       }
     },

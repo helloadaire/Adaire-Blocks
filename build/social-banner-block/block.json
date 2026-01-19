@@ -21,9 +21,17 @@
       "type": "string",
       "default": ""
     },
-    "position": {
+    "positionType": {
       "type": "string",
-      "default": "right"
+      "default": "fixed"
+    },
+    "displayType": {
+      "type": "string",
+      "default": "block"
+    },
+    "layoutDirection": {
+      "type": "string",
+      "default": "column"
     },
     "offsetFrom": {
       "type": "string",
@@ -34,6 +42,18 @@
       "default": 100
     },
     "offsetUnit": {
+      "type": "string",
+      "default": "px"
+    },
+    "horizontalOffsetFrom": {
+      "type": "string",
+      "default": "left"
+    },
+    "horizontalOffset": {
+      "type": "number",
+      "default": 0
+    },
+    "horizontalOffsetUnit": {
       "type": "string",
       "default": "px"
     },
@@ -52,6 +72,49 @@
     "borderRadius": {
       "type": "number",
       "default": 0
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": ""
+    },
+    "backgroundBorderRadius": {
+      "type": "number",
+      "default": 0
+    },
+    "responsivePadding": {
+      "type": "object",
+      "default": {
+        "mobile": {
+          "top": "0px",
+          "right": "0px",
+          "bottom": "0px",
+          "left": "0px"
+        },
+        "tablet": {
+          "top": "0px",
+          "right": "0px",
+          "bottom": "0px",
+          "left": "0px"
+        },
+        "smallLaptop": {
+          "top": "0px",
+          "right": "0px",
+          "bottom": "0px",
+          "left": "0px"
+        },
+        "desktop": {
+          "top": "0px",
+          "right": "0px",
+          "bottom": "0px",
+          "left": "0px"
+        },
+        "bigDesktop": {
+          "top": "0px",
+          "right": "0px",
+          "bottom": "0px",
+          "left": "0px"
+        }
+      }
     },
     "hoverAnimation": {
       "type": "string",

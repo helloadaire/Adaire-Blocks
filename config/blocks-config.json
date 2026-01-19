@@ -72,6 +72,10 @@
 			"enabled": true,
 			"upgradeMessage": "Upgrade to Premium for advanced container features and unlimited custom breakpoints."
 		},
+		"hero-1-block": {
+			"enabled": true,
+			"upgradeMessage": "Upgrade to Premium for advanced hero block features and layouts."
+		},
 		"infogrid-2-block": {
 			"enabled": true,
 			"upgradeMessage": "Upgrade to Premium for even more advanced grid features."

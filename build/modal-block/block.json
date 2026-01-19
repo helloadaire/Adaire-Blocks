@@ -28,33 +28,49 @@
     "modalWidth": {
       "type": "object",
       "default": {
+        "mobile": {
+          "value": 90,
+          "unit": "vw"
+        },
+        "tablet": {
+          "value": 90,
+          "unit": "vw"
+        },
+        "smallLaptop": {
+          "value": 600,
+          "unit": "px"
+        },
         "desktop": {
           "value": 600,
           "unit": "px"
         },
-        "tablet": {
-          "value": 90,
-          "unit": "%"
-        },
-        "mobile": {
-          "value": 90,
-          "unit": "%"
+        "bigDesktop": {
+          "value": 600,
+          "unit": "px"
         }
       }
     },
     "modalHeight": {
       "type": "object",
       "default": {
-        "desktop": {
-          "value": 400,
+        "mobile": {
+          "value": 360,
           "unit": "px"
         },
         "tablet": {
           "value": 400,
           "unit": "px"
         },
-        "mobile": {
-          "value": 360,
+        "smallLaptop": {
+          "value": 400,
+          "unit": "px"
+        },
+        "desktop": {
+          "value": 400,
+          "unit": "px"
+        },
+        "bigDesktop": {
+          "value": 400,
           "unit": "px"
         }
       }

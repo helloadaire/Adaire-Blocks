@@ -3,7 +3,7 @@
   "apiVersion": 3,
   "name": "create-block/infogrid-2-block",
   "version": "0.1.0",
-  "title": "Info Grid 2",
+  "title": "Info Grid 2 (Free)",
   "category": "adaire-blocks-free",
   "icon": "grid-view",
   "description": "An advanced info grid with background image, overlay, and responsive controls.",

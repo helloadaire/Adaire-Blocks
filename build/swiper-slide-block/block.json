@@ -70,6 +70,146 @@
     "slideHoverBorderRadius": {
       "type": "number",
       "default": 0
+    },
+    "responsiveHeaderFontSize": {
+      "type": "object",
+      "default": {
+        "mobile": "28px",
+        "tablet": "30px",
+        "smallLaptop": "32px",
+        "desktop": "32px",
+        "bigDesktop": "32px"
+      }
+    },
+    "responsiveHeaderFontWeight": {
+      "type": "object",
+      "default": {
+        "mobile": "700",
+        "tablet": "700",
+        "smallLaptop": "700",
+        "desktop": "700",
+        "bigDesktop": "700"
+      }
+    },
+    "responsiveHeaderLineHeight": {
+      "type": "object",
+      "default": {
+        "mobile": "1.2",
+        "tablet": "1.2",
+        "smallLaptop": "1.2",
+        "desktop": "1.2",
+        "bigDesktop": "1.2"
+      }
+    },
+    "responsiveHeaderLetterSpacing": {
+      "type": "object",
+      "default": {
+        "mobile": "0px",
+        "tablet": "0px",
+        "smallLaptop": "0px",
+        "desktop": "0px",
+        "bigDesktop": "0px"
+      }
+    },
+    "responsiveHeaderTextTransform": {
+      "type": "object",
+      "default": {
+        "mobile": "none",
+        "tablet": "none",
+        "smallLaptop": "none",
+        "desktop": "none",
+        "bigDesktop": "none"
+      }
+    },
+    "responsiveHeaderColor": {
+      "type": "object",
+      "default": {
+        "mobile": "#ffffff",
+        "tablet": "#ffffff",
+        "smallLaptop": "#ffffff",
+        "desktop": "#ffffff",
+        "bigDesktop": "#ffffff"
+      }
+    },
+    "responsiveHeaderMarginBottom": {
+      "type": "object",
+      "default": {
+        "mobile": "10px",
+        "tablet": "10px",
+        "smallLaptop": "10px",
+        "desktop": "10px",
+        "bigDesktop": "10px"
+      }
+    },
+    "responsiveTextFontSize": {
+      "type": "object",
+      "default": {
+        "mobile": "16px",
+        "tablet": "17px",
+        "smallLaptop": "18px",
+        "desktop": "18px",
+        "bigDesktop": "18px"
+      }
+    },
+    "responsiveTextFontWeight": {
+      "type": "object",
+      "default": {
+        "mobile": "400",
+        "tablet": "400",
+        "smallLaptop": "400",
+        "desktop": "400",
+        "bigDesktop": "400"
+      }
+    },
+    "responsiveTextLineHeight": {
+      "type": "object",
+      "default": {
+        "mobile": "1.5",
+        "tablet": "1.5",
+        "smallLaptop": "1.5",
+        "desktop": "1.5",
+        "bigDesktop": "1.5"
+      }
+    },
+    "responsiveTextLetterSpacing": {
+      "type": "object",
+      "default": {
+        "mobile": "0px",
+        "tablet": "0px",
+        "smallLaptop": "0px",
+        "desktop": "0px",
+        "bigDesktop": "0px"
+      }
+    },
+    "responsiveTextTextTransform": {
+      "type": "object",
+      "default": {
+        "mobile": "none",
+        "tablet": "none",
+        "smallLaptop": "none",
+        "desktop": "none",
+        "bigDesktop": "none"
+      }
+    },
+    "responsiveTextColor": {
+      "type": "object",
+      "default": {
+        "mobile": "#ffffff",
+        "tablet": "#ffffff",
+        "smallLaptop": "#ffffff",
+        "desktop": "#ffffff",
+        "bigDesktop": "#ffffff"
+      }
+    },
+    "responsiveTextMarginBottom": {
+      "type": "object",
+      "default": {
+        "mobile": "0px",
+        "tablet": "0px",
+        "smallLaptop": "0px",
+        "desktop": "0px",
+        "bigDesktop": "0px"
+      }
     }
   }
 }

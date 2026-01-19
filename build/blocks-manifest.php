@@ -1920,6 +1920,7 @@ return array(
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css',
+		'viewScript' => 'file:./view.js',
 		'attributes' => array(
 			'blockId' => array(
 				'type' => 'string',
@@ -3238,7 +3239,7 @@ return array(
 		'apiVersion' => 3,
 		'name' => 'create-block/infogrid-2-block',
 		'version' => '0.1.0',
-		'title' => 'Info Grid 2',
+		'title' => 'Info Grid 2 (Free)',
 		'category' => 'adaire-blocks-free',
 		'icon' => 'grid-view',
 		'description' => 'An advanced info grid with background image, overlay, and responsive controls.',
@@ -6482,33 +6483,49 @@ return array(
 			'modalWidth' => array(
 				'type' => 'object',
 				'default' => array(
+					'mobile' => array(
+						'value' => 90,
+						'unit' => 'vw'
+					),
+					'tablet' => array(
+						'value' => 90,
+						'unit' => 'vw'
+					),
+					'smallLaptop' => array(
+						'value' => 600,
+						'unit' => 'px'
+					),
 					'desktop' => array(
 						'value' => 600,
 						'unit' => 'px'
 					),
-					'tablet' => array(
-						'value' => 90,
-						'unit' => '%'
-					),
-					'mobile' => array(
-						'value' => 90,
-						'unit' => '%'
+					'bigDesktop' => array(
+						'value' => 600,
+						'unit' => 'px'
 					)
 				)
 			),
 			'modalHeight' => array(
 				'type' => 'object',
 				'default' => array(
-					'desktop' => array(
-						'value' => 400,
+					'mobile' => array(
+						'value' => 360,
 						'unit' => 'px'
 					),
 					'tablet' => array(
 						'value' => 400,
 						'unit' => 'px'
 					),
-					'mobile' => array(
-						'value' => 360,
+					'smallLaptop' => array(
+						'value' => 400,
+						'unit' => 'px'
+					),
+					'desktop' => array(
+						'value' => 400,
+						'unit' => 'px'
+					),
+					'bigDesktop' => array(
+						'value' => 400,
 						'unit' => 'px'
 					)
 				)
@@ -9460,9 +9477,17 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
-			'position' => array(
+			'positionType' => array(
 				'type' => 'string',
-				'default' => 'right'
+				'default' => 'fixed'
+			),
+			'displayType' => array(
+				'type' => 'string',
+				'default' => 'block'
+			),
+			'layoutDirection' => array(
+				'type' => 'string',
+				'default' => 'column'
 			),
 			'offsetFrom' => array(
 				'type' => 'string',
@@ -9473,6 +9498,18 @@ return array(
 				'default' => 100
 			),
 			'offsetUnit' => array(
+				'type' => 'string',
+				'default' => 'px'
+			),
+			'horizontalOffsetFrom' => array(
+				'type' => 'string',
+				'default' => 'left'
+			),
+			'horizontalOffset' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'horizontalOffsetUnit' => array(
 				'type' => 'string',
 				'default' => 'px'
 			),
@@ -9493,6 +9530,49 @@ return array(
 			'borderRadius' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'backgroundColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'backgroundBorderRadius' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'responsivePadding' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => array(
+						'top' => '0px',
+						'right' => '0px',
+						'bottom' => '0px',
+						'left' => '0px'
+					),
+					'tablet' => array(
+						'top' => '0px',
+						'right' => '0px',
+						'bottom' => '0px',
+						'left' => '0px'
+					),
+					'smallLaptop' => array(
+						'top' => '0px',
+						'right' => '0px',
+						'bottom' => '0px',
+						'left' => '0px'
+					),
+					'desktop' => array(
+						'top' => '0px',
+						'right' => '0px',
+						'bottom' => '0px',
+						'left' => '0px'
+					),
+					'bigDesktop' => array(
+						'top' => '0px',
+						'right' => '0px',
+						'bottom' => '0px',
+						'left' => '0px'
+					)
+				)
 			),
 			'hoverAnimation' => array(
 				'type' => 'string',
@@ -9694,7 +9774,7 @@ return array(
 </clipPath>
 </defs>
 </svg>',
-		'description' => 'A draggable image carousel using Swiper.js.',
+		'description' => 'A draggable image carousel using Swiper.js with the same mechanics as the video carousel.',
 		'supports' => array(
 			'html' => false,
 			'align' => array(
@@ -9712,41 +9792,131 @@ return array(
 				'type' => 'string',
 				'default' => ''
 			),
-			'speed' => array(
+			'cardGap' => array(
 				'type' => 'number',
-				'default' => 600
+				'default' => 24
+			),
+			'slidesPerView' => array(
+				'type' => 'object',
+				'default' => array(
+					'bigDesktop' => 5,
+					'desktop' => 4,
+					'smallLaptop' => 4,
+					'tablet' => 3,
+					'mobile' => 1
+				)
 			),
 			'loop' => array(
 				'type' => 'boolean',
-				'default' => true
-			),
-			'autoplay' => array(
-				'type' => 'boolean',
 				'default' => false
 			),
-			'autoplayDelay' => array(
+			'mobilePeekPercent' => array(
 				'type' => 'number',
-				'default' => 3000
+				'default' => 20
 			),
-			'effect' => array(
+			'slideHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => array(
+						'value' => 300,
+						'unit' => 'px'
+					),
+					'tablet' => array(
+						'value' => 400,
+						'unit' => 'px'
+					),
+					'smallLaptop' => array(
+						'value' => 450,
+						'unit' => 'px'
+					),
+					'desktop' => array(
+						'value' => 500,
+						'unit' => 'px'
+					),
+					'bigDesktop' => array(
+						'value' => 500,
+						'unit' => 'px'
+					)
+				)
+			),
+			'containerMode' => array(
 				'type' => 'string',
-				'default' => 'slide'
+				'default' => 'full'
+			),
+			'containerMaxWidth' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'tablet' => array(
+						'value' => 100,
+						'unit' => '%'
+					),
+					'smallLaptop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'bigDesktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					)
+				)
+			),
+			'marginTop' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginBottom' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'listPaddingLeft' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 10,
+					'tablet' => 10,
+					'smallLaptop' => 10,
+					'desktop' => 10,
+					'bigDesktop' => 10
+				)
+			),
+			'dragCursorText' => array(
+				'type' => 'string',
+				'default' => 'Drag'
+			),
+			'dragCursorSize' => array(
+				'type' => 'number',
+				'default' => 80
+			),
+			'dragCursorFontSize' => array(
+				'type' => 'number',
+				'default' => 16
+			),
+			'dragCursorFontWeight' => array(
+				'type' => 'string',
+				'default' => '500'
+			),
+			'dragCursorColor' => array(
+				'type' => 'string',
+				'default' => '#ffffff'
+			),
+			'dragCursorBgColor' => array(
+				'type' => 'string',
+				'default' => '#7c3aed'
+			),
+			'dragCursorTextTransform' => array(
+				'type' => 'string',
+				'default' => 'uppercase'
 			),
 			'borderRadius' => array(
 				'type' => 'number',
 				'default' => 0
-			),
-			'carouselHeight' => array(
-				'type' => 'number',
-				'default' => 50
-			),
-			'cursorOverlayBg' => array(
-				'type' => 'string',
-				'default' => '#ff0000'
-			),
-			'cursorOverlayText' => array(
-				'type' => 'string',
-				'default' => 'drg'
 			)
 		)
 	),
@@ -9842,6 +10012,146 @@ return array(
 			'slideHoverBorderRadius' => array(
 				'type' => 'number',
 				'default' => 0
+			),
+			'responsiveHeaderFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '28px',
+					'tablet' => '30px',
+					'smallLaptop' => '32px',
+					'desktop' => '32px',
+					'bigDesktop' => '32px'
+				)
+			),
+			'responsiveHeaderFontWeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '700',
+					'tablet' => '700',
+					'smallLaptop' => '700',
+					'desktop' => '700',
+					'bigDesktop' => '700'
+				)
+			),
+			'responsiveHeaderLineHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '1.2',
+					'tablet' => '1.2',
+					'smallLaptop' => '1.2',
+					'desktop' => '1.2',
+					'bigDesktop' => '1.2'
+				)
+			),
+			'responsiveHeaderLetterSpacing' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '0px',
+					'tablet' => '0px',
+					'smallLaptop' => '0px',
+					'desktop' => '0px',
+					'bigDesktop' => '0px'
+				)
+			),
+			'responsiveHeaderTextTransform' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'none',
+					'tablet' => 'none',
+					'smallLaptop' => 'none',
+					'desktop' => 'none',
+					'bigDesktop' => 'none'
+				)
+			),
+			'responsiveHeaderColor' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '#ffffff',
+					'tablet' => '#ffffff',
+					'smallLaptop' => '#ffffff',
+					'desktop' => '#ffffff',
+					'bigDesktop' => '#ffffff'
+				)
+			),
+			'responsiveHeaderMarginBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '10px',
+					'tablet' => '10px',
+					'smallLaptop' => '10px',
+					'desktop' => '10px',
+					'bigDesktop' => '10px'
+				)
+			),
+			'responsiveTextFontSize' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '16px',
+					'tablet' => '17px',
+					'smallLaptop' => '18px',
+					'desktop' => '18px',
+					'bigDesktop' => '18px'
+				)
+			),
+			'responsiveTextFontWeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '400',
+					'tablet' => '400',
+					'smallLaptop' => '400',
+					'desktop' => '400',
+					'bigDesktop' => '400'
+				)
+			),
+			'responsiveTextLineHeight' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '1.5',
+					'tablet' => '1.5',
+					'smallLaptop' => '1.5',
+					'desktop' => '1.5',
+					'bigDesktop' => '1.5'
+				)
+			),
+			'responsiveTextLetterSpacing' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '0px',
+					'tablet' => '0px',
+					'smallLaptop' => '0px',
+					'desktop' => '0px',
+					'bigDesktop' => '0px'
+				)
+			),
+			'responsiveTextTextTransform' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 'none',
+					'tablet' => 'none',
+					'smallLaptop' => 'none',
+					'desktop' => 'none',
+					'bigDesktop' => 'none'
+				)
+			),
+			'responsiveTextColor' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '#ffffff',
+					'tablet' => '#ffffff',
+					'smallLaptop' => '#ffffff',
+					'desktop' => '#ffffff',
+					'bigDesktop' => '#ffffff'
+				)
+			),
+			'responsiveTextMarginBottom' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => '0px',
+					'tablet' => '0px',
+					'smallLaptop' => '0px',
+					'desktop' => '0px',
+					'bigDesktop' => '0px'
+				)
 			)
 		)
 	),
@@ -10845,8 +11155,11 @@ return array(
 				'default' => 260
 			),
 			'cardHeight' => array(
-				'type' => 'number',
-				'default' => 460
+				'type' => 'object',
+				'default' => array(
+					'value' => 460,
+					'unit' => 'px'
+				)
 			),
 			'cardGap' => array(
 				'type' => 'number',
@@ -10859,7 +11172,25 @@ return array(
 					'desktop' => 4,
 					'smallLaptop' => 4,
 					'tablet' => 3,
-					'mobile' => 2
+					'mobile' => 1
+				)
+			),
+			'loop' => array(
+				'type' => 'boolean',
+				'default' => false
+			),
+			'mobilePeekPercent' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'listPaddingLeft' => array(
+				'type' => 'object',
+				'default' => array(
+					'mobile' => 10,
+					'tablet' => 10,
+					'smallLaptop' => 10,
+					'desktop' => 10,
+					'bigDesktop' => 10
 				)
 			),
 			'containerMode' => array(
@@ -10869,17 +11200,25 @@ return array(
 			'containerMaxWidth' => array(
 				'type' => 'object',
 				'default' => array(
-					'desktop' => array(
-						'value' => 1200,
-						'unit' => 'px'
+					'mobile' => array(
+						'value' => 100,
+						'unit' => '%'
 					),
 					'tablet' => array(
 						'value' => 100,
 						'unit' => '%'
 					),
-					'mobile' => array(
-						'value' => 100,
-						'unit' => '%'
+					'smallLaptop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'desktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
+					),
+					'bigDesktop' => array(
+						'value' => 1200,
+						'unit' => 'px'
 					)
 				)
 			),

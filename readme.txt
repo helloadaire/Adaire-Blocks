@@ -4,7 +4,7 @@ Donate link: https://adaireblocks.com/
 Tags: blocks, gutenberg, gsap, animation, portfolio
 Requires at least: 6.7
 Tested up to: 6.8
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 Requires PHP: 7.4
 License: GPL-3.0
 Source Code: https://github.com/helloadaire/Adaire-Blocks-Free
@@ -146,6 +146,22 @@ For support, please visit our website at https://adaireblocks.com/ or contact us
 6. Posts Grid Block with filtering and pagination
 
 == Changelog ==
+
+= 1.2.3 =
+* Enhanced Video Carousel Block - Migrated to Swiper.js for smoother carousel functionality and improved performance
+* Enhanced Swiper Carousel Block - Complete overhaul to use Swiper.js, added comprehensive styling controls including responsive slide height with unit options, pagination visibility toggle, and pagination color controls
+* Enhanced Swiper Carousel Block - Added full breakpoint support (mobile, tablet, small-laptop, desktop, big-desktop) for all styling controls
+* Enhanced Modal Block - Added responsive width and height controls for all 5 breakpoints (mobile, tablet, small-laptop, desktop, big-desktop)
+* Enhanced Modal Block - Removed percentage option for width as modal is freely floating without a parent reference
+* Enhanced Flip Card Block - Added touch interaction support allowing cards to flip back when tapped on mobile and tablet devices
+* Enhanced Social Banner Block - Added position type options (fixed, absolute, relative) for flexible positioning
+* Enhanced Social Banner Block - Added display type option (block, inline) for easier positioning control
+* Enhanced Social Banner Block - Added horizontal offset controls (left/right) matching existing vertical offset functionality
+* Enhanced Social Banner Block - Added background color control with color picker
+* Enhanced Social Banner Block - Added responsive padding controls (top, right, bottom, left) for all 5 breakpoints
+* Enhanced Social Banner Block - Added background border radius control
+* Fixed React error #130 in Social Banner Block by correcting PanelColorSettings import
+* Improved real-time editor preview updates for background settings in Social Banner Block
 
 = 1.2.2 =
 * Added Hero 1 Block (Free) - Responsive hero block with flexible layout controls and responsive padding
