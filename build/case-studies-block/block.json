@@ -32,7 +32,15 @@
     "containerMaxWidth": {
       "type": "object",
       "default": {
+        "bigDesktop": {
+          "value": 1400,
+          "unit": "px"
+        },
         "desktop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "smallLaptop": {
           "value": 1200,
           "unit": "px"
         },
@@ -99,6 +107,14 @@
       "type": "number",
       "default": 4
     },
+    "columnsBigDesktop": {
+      "type": "number",
+      "default": 5
+    },
+    "columnsSmallLaptop": {
+      "type": "number",
+      "default": 3
+    },
     "columnsMobile": {
       "type": "number",
       "default": 1
@@ -134,8 +150,16 @@
     "cardHeight": {
       "type": "object",
       "default": {
+        "bigDesktop": {
+          "value": 340,
+          "unit": "px"
+        },
         "desktop": {
           "value": 320,
+          "unit": "px"
+        },
+        "smallLaptop": {
+          "value": 300,
           "unit": "px"
         },
         "tablet": {
@@ -179,8 +203,16 @@
     "titleFontSize": {
       "type": "object",
       "default": {
+        "bigDesktop": {
+          "value": 22,
+          "unit": "px"
+        },
         "desktop": {
           "value": 20,
+          "unit": "px"
+        },
+        "smallLaptop": {
+          "value": 19,
           "unit": "px"
         },
         "tablet": {
@@ -212,8 +244,16 @@
     "descriptionFontSize": {
       "type": "object",
       "default": {
+        "bigDesktop": {
+          "value": 14,
+          "unit": "px"
+        },
         "desktop": {
           "value": 14,
+          "unit": "px"
+        },
+        "smallLaptop": {
+          "value": 13,
           "unit": "px"
         },
         "tablet": {
@@ -317,8 +357,16 @@
     "carouselCardWidth": {
       "type": "object",
       "default": {
+        "bigDesktop": {
+          "value": 440,
+          "unit": "px"
+        },
         "desktop": {
           "value": 400,
+          "unit": "px"
+        },
+        "smallLaptop": {
+          "value": 360,
           "unit": "px"
         },
         "tablet": {

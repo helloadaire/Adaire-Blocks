@@ -55,9 +55,36 @@
     "slidesPerView": {
       "type": "object",
       "default": {
+        "bigDesktop": 5,
         "desktop": 3,
+        "smallLaptop": 3,
         "tablet": 2,
         "mobile": 1
+      }
+    },
+    "loop": {
+      "type": "boolean",
+      "default": false
+    },
+    "cardHeight": {
+      "type": "object",
+      "default": {
+        "value": 460,
+        "unit": "px"
+      }
+    },
+    "mobilePeekPercent": {
+      "type": "number",
+      "default": 20
+    },
+    "listPaddingLeft": {
+      "type": "object",
+      "default": {
+        "mobile": 10,
+        "tablet": 10,
+        "smallLaptop": 10,
+        "desktop": 10,
+        "bigDesktop": 10
       }
     },
     "backgroundColor": {
@@ -155,18 +182,90 @@
     "containerMaxWidth": {
       "type": "object",
       "default": {
-        "desktop": {
-          "value": 1200,
-          "unit": "px"
+        "mobile": {
+          "value": 100,
+          "unit": "%"
         },
         "tablet": {
           "value": 100,
           "unit": "%"
         },
-        "mobile": {
-          "value": 100,
-          "unit": "%"
+        "smallLaptop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "desktop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "bigDesktop": {
+          "value": 1200,
+          "unit": "px"
         }
+      }
+    },
+    "dragCursorText": {
+      "type": "string",
+      "default": "Drag"
+    },
+    "dragCursorSize": {
+      "type": "object",
+      "default": {
+        "mobile": 80,
+        "tablet": 80,
+        "smallLaptop": 80,
+        "desktop": 80,
+        "bigDesktop": 80
+      }
+    },
+    "dragCursorFontSize": {
+      "type": "object",
+      "default": {
+        "mobile": 16,
+        "tablet": 16,
+        "smallLaptop": 16,
+        "desktop": 16,
+        "bigDesktop": 16
+      }
+    },
+    "dragCursorFontWeight": {
+      "type": "object",
+      "default": {
+        "mobile": "500",
+        "tablet": "500",
+        "smallLaptop": "500",
+        "desktop": "500",
+        "bigDesktop": "500"
+      }
+    },
+    "dragCursorColor": {
+      "type": "object",
+      "default": {
+        "mobile": "#ffffff",
+        "tablet": "#ffffff",
+        "smallLaptop": "#ffffff",
+        "desktop": "#ffffff",
+        "bigDesktop": "#ffffff"
+      }
+    },
+    "dragCursorBgColor": {
+      "type": "object",
+      "default": {
+        "mobile": "#7c3aed",
+        "tablet": "#7c3aed",
+        "smallLaptop": "#7c3aed",
+        "desktop": "#7c3aed",
+        "bigDesktop": "#7c3aed"
+      }
+    },
+    "dragCursorTextTransform": {
+      "type": "object",
+      "default": {
+        "mobile": "uppercase",
+        "tablet": "uppercase",
+        "smallLaptop": "uppercase",
+        "desktop": "uppercase",
+        "bigDesktop": "uppercase"
       }
     },
     "marginTop": {

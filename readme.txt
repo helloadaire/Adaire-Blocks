@@ -4,7 +4,7 @@ Donate link: https://adaireblocks.com/
 Tags: blocks, gutenberg, gsap, animation, portfolio
 Requires at least: 6.7
 Tested up to: 6.8
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 Requires PHP: 7.4
 License: GPL-3.0
 Source Code: https://github.com/helloadaire/Adaire-Blocks-Free
@@ -146,6 +146,13 @@ For support, please visit our website at https://adaireblocks.com/ or contact us
 6. Posts Grid Block with filtering and pagination
 
 == Changelog ==
+
+= 1.2.4 =
+* Added new custom block icons for Hero 1, Image Composition, Info Grid, Info Grid 2, Info Grid 3, Info Grid 4, Card Scroll, Card Scroll Item, and Footer blocks
+* Block picker (inserter) now displays custom icons correctly for these blocks
+* Free plugin: registered "ADAIRE BLOCKS FREE" block category so free blocks appear categorized in the block picker instead of uncategorized
+* Icon assets added to new-icons/part5 and Free Blocks folder; block-icon-mapping and prebuild scripts updated
+* Exported CardScrollIcon and ContainerIcon from icons index for consistent block registration
 
 = 1.2.3 =
 * Enhanced Video Carousel Block - Migrated to Swiper.js for smoother carousel functionality and improved performance

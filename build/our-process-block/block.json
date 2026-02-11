@@ -32,17 +32,25 @@
     "containerMaxWidth": {
       "type": "object",
       "default": {
-        "desktop": {
-          "value": 1200,
-          "unit": "px"
+        "mobile": {
+          "value": 100,
+          "unit": "%"
         },
         "tablet": {
           "value": 100,
           "unit": "%"
         },
-        "mobile": {
-          "value": 100,
-          "unit": "%"
+        "smallLaptop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "desktop": {
+          "value": 1200,
+          "unit": "px"
+        },
+        "bigDesktop": {
+          "value": 1200,
+          "unit": "px"
         }
       }
     },
@@ -212,6 +220,38 @@
         "desktop": 16,
         "tablet": 16,
         "mobile": 16
+      }
+    },
+    "paddingTop": {
+      "type": "object",
+      "default": {
+        "desktop": 80,
+        "tablet": 60,
+        "mobile": 40
+      }
+    },
+    "paddingRight": {
+      "type": "object",
+      "default": {
+        "desktop": 20,
+        "tablet": 20,
+        "mobile": 20
+      }
+    },
+    "paddingBottom": {
+      "type": "object",
+      "default": {
+        "desktop": 80,
+        "tablet": 60,
+        "mobile": 40
+      }
+    },
+    "paddingLeft": {
+      "type": "object",
+      "default": {
+        "desktop": 20,
+        "tablet": 20,
+        "mobile": 20
       }
     }
   }

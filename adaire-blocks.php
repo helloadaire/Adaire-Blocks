@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Adaire Blocks
  * Description:       A powerful WordPress plugin that helps developers and designers create visually stunning, high-performance websites with ease right inside the Gutenberg editor.
- * Version:           1.2.3
+ * Version:           1.2.4
  * Requires at least: 6.7
  * Requires PHP:      7.4
  * Author:            <a href="https://adaireblocks.com" target="_blank">Adaire Digital</a>
@@ -169,7 +169,7 @@ add_action('admin_post_my_plugin_rollback', function () {
     }
 
     // URL to the previous version ZIP
-    $previous_version_zip = 'https://github.com/helloadaire/Adaire-Blocks/releases/download/v1.2.2.alpha/adaire-blocks.1.2.2.alpha.zip';
+    $previous_version_zip = 'https://github.com/helloadaire/Adaire-Blocks/releases/download/v1.2.3.alpha/adaire-blocks.1.2.3.alpha.zip';
     error_log('[Adaire Blocks Rollback] Attempting rollback to: ' . $previous_version_zip);
 
     require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
@@ -604,6 +604,9 @@ function render_mega_menu_block($attributes, $content) {
         $ribbonLinkColor = $attrs['ribbonLinkColor'] ?? '#ffffff';
         $ribbonLinkFontWeight = $attrs['ribbonLinkFontWeight'] ?? '600';
         $ribbonLinkOpenInNewTab = $attrs['ribbonLinkOpenInNewTab'] ?? false;
+        $ribbonLinkUnderline = $attrs['ribbonLinkUnderline'] ?? true;
+        $ribbonLinkUnderlineColor = $attrs['ribbonLinkUnderlineColor'] ?? '#ffffff';
+        $ribbonLinkUnderlineWidth = $attrs['ribbonLinkUnderlineWidth'] ?? 1;
         $ribbonHeight = $attrs['ribbonHeight'] ?? 48;
         $ribbonPaddingTop = $attrs['ribbonPaddingTop'] ?? 8;
         $ribbonPaddingBottom = $attrs['ribbonPaddingBottom'] ?? 8;
@@ -719,6 +722,23 @@ function render_mega_menu_block($attributes, $content) {
         $mobileMenuIconColor = $attrs['mobileMenuIconColor'] ?? '#111111';
         $mobileMenuIconColorScroll = $attrs['mobileMenuIconColorScroll'] ?? '#ffffff';
         $menuDropdownOffset = $attrs['menuDropdownOffset'] ?? 70;
+        $mobileImmersiveMode = $attrs['mobileImmersiveMode'] ?? false;
+        $mobileImmersiveBgType = $attrs['mobileImmersiveBgType'] ?? 'solid';
+        $mobileImmersiveBgColor = $attrs['mobileImmersiveBgColor'] ?? '#ffffff';
+        $mobileImmersiveGradientType = $attrs['mobileImmersiveGradientType'] ?? 'linear';
+        $mobileImmersiveGradientAngle = $attrs['mobileImmersiveGradientAngle'] ?? 180;
+        $mobileImmersiveGradientColor1 = $attrs['mobileImmersiveGradientColor1'] ?? '#000000';
+        $mobileImmersiveGradientColor2 = $attrs['mobileImmersiveGradientColor2'] ?? '#ffffff';
+        $mobileImmersiveGradientStartStop = $attrs['mobileImmersiveGradientStartStop'] ?? 0;
+        $mobileImmersiveGradientEndStop = $attrs['mobileImmersiveGradientEndStop'] ?? 100;
+        $mobileImmersiveBgImage = $attrs['mobileImmersiveBgImage'] ?? '';
+        $mobileImmersiveBgImageSize = $attrs['mobileImmersiveBgImageSize'] ?? 'cover';
+        $mobileImmersiveBgImagePosition = $attrs['mobileImmersiveBgImagePosition'] ?? 'center center';
+        $mobileImmersiveOverlayColor = $attrs['mobileImmersiveOverlayColor'] ?? '#000000';
+        $mobileImmersiveOverlayOpacity = $attrs['mobileImmersiveOverlayOpacity'] ?? 0.5;
+        $mobileImmersiveIconSize = $attrs['mobileImmersiveIconSize'] ?? 24;
+        $mobileImmersiveIconColor = $attrs['mobileImmersiveIconColor'] ?? '#ffffff';
+        $mobileImmersiveButtonRowPadding = $attrs['mobileImmersiveButtonRowPadding'] ?? array('top' => 0, 'right' => 0, 'bottom' => 32, 'left' => 0);
 
         // Helper function to get level colors
         $getLevelColors = function($level) use ($level1HoverColor, $level1ShowHoverUnderline, $level1UnderlineWidth, $level1UnderlineColor, $level1UnderlineBorderRadius, $level1FontSize, $level1FontWeight, $level1FontColor, $level2HoverColor, $level2ShowHoverUnderline, $level2FontSize, $level2FontWeight, $level2FontColor, $level3HoverColor, $level3ShowHoverUnderline, $level3UnderlineWidth, $level3UnderlineColor, $level3FontSize, $level3FontWeight, $level3FontColor) {
@@ -861,6 +881,9 @@ function render_mega_menu_block($attributes, $content) {
             '--ribbon-font-weight' => $ribbonFontWeight,
             '--ribbon-link-color' => $ribbonLinkColor,
             '--ribbon-link-font-weight' => $ribbonLinkFontWeight ?? '600',
+            '--ribbon-link-underline' => ($ribbonLinkUnderline !== false) ? 'underline' : 'none',
+            '--ribbon-link-underline-color' => $ribbonLinkUnderlineColor,
+            '--ribbon-link-underline-width' => $ribbonLinkUnderlineWidth . 'px',
             '--ribbon-height' => $ribbonHeight . 'px',
             '--mega-menu-navbar-offset' => $ribbonEnabled ? $ribbonHeight . 'px' : '0px',
             '--ribbon-padding-top' => $ribbonPaddingTop . 'px',
@@ -984,6 +1007,87 @@ function render_mega_menu_block($attributes, $content) {
                 $canvasStoryDividerAlpha ?? 0.4
             ),
         );
+
+        // Build immersive mode background CSS
+        $immersive_bg = '';
+        if ($mobileImmersiveMode) {
+            switch ($mobileImmersiveBgType) {
+                case 'solid':
+                    $immersive_bg = $mobileImmersiveBgColor;
+                    break;
+                case 'gradient':
+                    if ($mobileImmersiveGradientType === 'linear') {
+                        $immersive_bg = sprintf(
+                            'linear-gradient(%ddeg, %s %d%%, %s %d%%)',
+                            $mobileImmersiveGradientAngle,
+                            $mobileImmersiveGradientColor1,
+                            $mobileImmersiveGradientStartStop,
+                            $mobileImmersiveGradientColor2,
+                            $mobileImmersiveGradientEndStop
+                        );
+                    } else {
+                        $immersive_bg = sprintf(
+                            'radial-gradient(circle, %s %d%%, %s %d%%)',
+                            $mobileImmersiveGradientColor1,
+                            $mobileImmersiveGradientStartStop,
+                            $mobileImmersiveGradientColor2,
+                            $mobileImmersiveGradientEndStop
+                        );
+                    }
+                    break;
+                case 'image':
+                    if ($mobileImmersiveBgImage) {
+                        $immersive_bg = sprintf(
+                            "url('%s')",
+                            esc_url($mobileImmersiveBgImage)
+                        );
+                        $styles['--immersive-bg-size'] = $mobileImmersiveBgImageSize;
+                        $styles['--immersive-bg-position'] = $mobileImmersiveBgImagePosition;
+                    }
+                    break;
+                case 'image-overlay':
+                    if ($mobileImmersiveBgImage) {
+                        $immersive_bg = sprintf(
+                            "url('%s')",
+                            esc_url($mobileImmersiveBgImage)
+                        );
+                        $styles['--immersive-bg-size'] = $mobileImmersiveBgImageSize;
+                        $styles['--immersive-bg-position'] = $mobileImmersiveBgImagePosition;
+                        $overlay_rgba = adaire_blocks_hex_to_rgba(
+                            $mobileImmersiveOverlayColor,
+                            $mobileImmersiveOverlayOpacity
+                        );
+                        $styles['--immersive-overlay-bg'] = $overlay_rgba;
+                        $styles['--immersive-overlay-opacity'] = (string)$mobileImmersiveOverlayOpacity;
+                    }
+                    break;
+            }
+            if ($immersive_bg) {
+                $styles['--immersive-bg'] = $immersive_bg;
+            }
+            // Add immersive mode icon and button row variables
+            $styles['--immersive-icon-size'] = $mobileImmersiveIconSize . 'px';
+            $styles['--immersive-icon-color'] = $mobileImmersiveIconColor;
+            
+            // Helper function to normalize padding values (handle both numbers and strings with/without units)
+            $normalizePadding = function($value, $default = 0) {
+                if ($value === null || $value === '') {
+                    return $default . 'px';
+                }
+                // If it's already a string with units, return as is
+                if (is_string($value) && preg_match('/^\d+(\.\d+)?(px|em|rem|%|vh|vw)$/i', $value)) {
+                    return $value;
+                }
+                // If it's a number or numeric string, append px
+                $num = is_numeric($value) ? floatval($value) : floatval(preg_replace('/[^0-9.-]/', '', $value));
+                return $num . 'px';
+            };
+            
+            $styles['--immersive-button-row-padding-top'] = $normalizePadding($mobileImmersiveButtonRowPadding['top'] ?? null, 0);
+            $styles['--immersive-button-row-padding-right'] = $normalizePadding($mobileImmersiveButtonRowPadding['right'] ?? null, 0);
+            $styles['--immersive-button-row-padding-bottom'] = $normalizePadding($mobileImmersiveButtonRowPadding['bottom'] ?? null, 32);
+            $styles['--immersive-button-row-padding-left'] = $normalizePadding($mobileImmersiveButtonRowPadding['left'] ?? null, 0);
+        }
 
         $style_string = '';
         foreach ($styles as $prop => $value) {
@@ -1313,7 +1417,7 @@ function render_mega_menu_block($attributes, $content) {
 
                 <!-- Mobile Menu Overlay -->
                     <div class="adaire-mega-menu__mobile-overlay">
-                        <div class="adaire-mega-menu__mobile-container">
+                        <div class="adaire-mega-menu__mobile-container<?php echo $mobileImmersiveMode ? ' immersive-mode' : ''; ?>">
                             <div class="adaire-mega-menu__mobile-content">
                                 <!-- Mobile menu content will be dynamically rendered here -->
                             </div>

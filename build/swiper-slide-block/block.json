@@ -12,7 +12,8 @@
   "description": "A single slide for the Swiper Carousel.",
   "supports": {
     "html": false,
-    "reusable": false
+    "reusable": false,
+    "innerBlocks": true
   },
   "textdomain": "adaire-blocks",
   "editorScript": "file:./index.js",

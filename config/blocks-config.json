@@ -20,6 +20,14 @@
 			"enabled": true,
 			"upgradeMessage": "Upgrade to Premium for advanced icon box features."
 		},
+		"hero-1-block": {
+			"enabled": true,
+			"upgradeMessage": "Upgrade to Premium for advanced icon box features."
+		},
+		"image-composition-block": {
+			"enabled": true,
+			"upgradeMessage": "Upgrade to Premium for advanced icon box features."
+		},
 		"social-banner-block": {
 			"enabled": true,
 			"upgradeMessage": "Upgrade to Premium for advanced social banner features."
@@ -72,17 +80,13 @@
 			"enabled": true,
 			"upgradeMessage": "Upgrade to Premium for advanced container features and unlimited custom breakpoints."
 		},
-		"hero-1-block": {
-			"enabled": true,
-			"upgradeMessage": "Upgrade to Premium for advanced hero block features and layouts."
-		},
 		"infogrid-2-block": {
 			"enabled": true,
 			"upgradeMessage": "Upgrade to Premium for even more advanced grid features."
 		},
-		"image-composition-block": {
+		"footer-block": {
 			"enabled": true,
-			"upgradeMessage": "Create beautiful collage layouts with your favourite images."
+			"upgradeMessage": "Upgrade to Premium for more footer layouts and styling."
 		}
 	},
 	"premium": {
@@ -475,6 +479,24 @@
 				"background-svg-icon-support",
 				"responsive-layout-configuration"
 			]
+		},
+		"card-scroll-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"custom-content",
+				"advanced-styling",
+				"responsive-controls"
+			]
+		},
+		"card-scroll-item-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"custom-content",
+				"advanced-styling",
+				"responsive-controls"
+			]
 		}
 	},
 	"plus": {
@@ -676,6 +698,24 @@
 				"vertical-layout",
 				"stacked-layout",
 				"advanced-styling"
+			]
+		},
+		"card-scroll-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"custom-content",
+				"advanced-styling",
+				"responsive-controls"
+			]
+		},
+		"card-scroll-item-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"custom-content",
+				"advanced-styling",
+				"responsive-controls"
 			]
 		},
 		"counter-block": {

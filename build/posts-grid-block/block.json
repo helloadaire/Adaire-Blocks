@@ -24,6 +24,84 @@
       "type": "string",
       "default": ""
     },
+    "showHeading": {
+      "type": "boolean",
+      "default": false
+    },
+    "headingText": {
+      "type": "string",
+      "source": "html",
+      "selector": ".adaire-posts-grid__heading",
+      "default": ""
+    },
+    "headingResponsiveAlign": {
+      "type": "object",
+      "default": {
+        "mobile": "flex-start",
+        "tablet": "flex-start",
+        "smallLaptop": "flex-start",
+        "desktop": "flex-start",
+        "bigDesktop": "flex-start"
+      }
+    },
+    "headingResponsiveTextAlign": {
+      "type": "object",
+      "default": {
+        "mobile": "left",
+        "tablet": "left",
+        "smallLaptop": "left",
+        "desktop": "left",
+        "bigDesktop": "left"
+      }
+    },
+    "headingResponsiveFontSize": {
+      "type": "object",
+      "default": {
+        "mobile": "28px",
+        "tablet": "32px",
+        "smallLaptop": "36px",
+        "desktop": "40px",
+        "bigDesktop": "48px"
+      }
+    },
+    "headingResponsiveFontWeight": {
+      "type": "object",
+      "default": {
+        "mobile": "600",
+        "tablet": "600",
+        "smallLaptop": "600",
+        "desktop": "600",
+        "bigDesktop": "600"
+      }
+    },
+    "headingColor": {
+      "type": "string",
+      "default": "#111827"
+    },
+    "headingUnderlineColor": {
+      "type": "string",
+      "default": "#D52940"
+    },
+    "headingResponsiveUnderlineWidth": {
+      "type": "object",
+      "default": {
+        "mobile": "6px",
+        "tablet": "6px",
+        "smallLaptop": "7px",
+        "desktop": "8px",
+        "bigDesktop": "10px"
+      }
+    },
+    "headingResponsiveMarginBottom": {
+      "type": "object",
+      "default": {
+        "mobile": "24px",
+        "tablet": "24px",
+        "smallLaptop": "24px",
+        "desktop": "24px",
+        "bigDesktop": "24px"
+      }
+    },
     "postsPerPage": {
       "type": "number",
       "default": 6
