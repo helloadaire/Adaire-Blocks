@@ -20,14 +20,6 @@
 			"enabled": true,
 			"upgradeMessage": "Upgrade to Premium for advanced icon box features."
 		},
-		"hero-1-block": {
-			"enabled": true,
-			"upgradeMessage": "Upgrade to Premium for advanced icon box features."
-		},
-		"image-composition-block": {
-			"enabled": true,
-			"upgradeMessage": "Upgrade to Premium for advanced icon box features."
-		},
 		"social-banner-block": {
 			"enabled": true,
 			"upgradeMessage": "Upgrade to Premium for advanced social banner features."
@@ -84,9 +76,25 @@
 			"enabled": true,
 			"upgradeMessage": "Upgrade to Premium for even more advanced grid features."
 		},
+		"card-scroll-block": {
+			"enabled": true,
+			"upgradeMessage": "Upgrade to Premium for advanced scroll animations and more cards."
+		},
+		"card-scroll-item-block": {
+			"enabled": true,
+			"upgradeMessage": "Card Scroll Item Block works with the Card Scroll Block."
+		},
 		"footer-block": {
 			"enabled": true,
 			"upgradeMessage": "Upgrade to Premium for more footer layouts and styling."
+		},
+		"pricing-comparison-block": {
+			"enabled": true,
+			"upgradeMessage": "Upgrade to Premium for advanced comparison features and more plan groups."
+		},
+		"pricing-table-block": {
+			"enabled": true,
+			"upgradeMessage": "Responsive pricing tables with monthly/yearly toggle, card grid, and fully customizable styling."
 		}
 	},
 	"premium": {
@@ -480,7 +488,7 @@
 				"responsive-layout-configuration"
 			]
 		},
-		"card-scroll-block": {
+		"card-scroll-item-block": {
 			"enabled": true,
 			"limits": {},
 			"features": [
@@ -489,13 +497,14 @@
 				"responsive-controls"
 			]
 		},
-		"card-scroll-item-block": {
+		"pricing-comparison-block": {
 			"enabled": true,
-			"limits": {},
 			"features": [
-				"custom-content",
-				"advanced-styling",
-				"responsive-controls"
+				"unlimited-plan-groups",
+				"audience-tabs",
+				"feature-comparison-table",
+				"sticky-plan-bar",
+				"advanced-styling"
 			]
 		}
 	},
@@ -700,24 +709,6 @@
 				"advanced-styling"
 			]
 		},
-		"card-scroll-block": {
-			"enabled": true,
-			"limits": {},
-			"features": [
-				"custom-content",
-				"advanced-styling",
-				"responsive-controls"
-			]
-		},
-		"card-scroll-item-block": {
-			"enabled": true,
-			"limits": {},
-			"features": [
-				"custom-content",
-				"advanced-styling",
-				"responsive-controls"
-			]
-		},
 		"counter-block": {
 			"enabled": true,
 			"limits": {},
@@ -852,6 +843,17 @@
 				"custom-drag-cursor",
 				"consistent-card-sizing",
 				"single-video-playback"
+			]
+		},
+		"pricing-comparison-block": {
+			"enabled": true,
+			"limits": {},
+			"features": [
+				"unlimited-plan-groups",
+				"audience-tabs",
+				"feature-comparison-table",
+				"sticky-plan-bar",
+				"advanced-styling"
 			]
 		}
 	}

@@ -186,6 +186,12 @@
     display: block;
 }
 
+.adaire-block-icon-image {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
 .adaire-block-info {
     flex: 1;
 }

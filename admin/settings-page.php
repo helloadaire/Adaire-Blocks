@@ -452,8 +452,8 @@ class AdaireBlocksSettings {
                 }
             }
             
-            if (!$nonce_verified && check_admin_referer($nonce_action, '', false)) {
-                // check_admin_referer with false parameter only checks referer, not nonce
+            if (!$nonce_verified && isset($_REQUEST['_wpnonce']) && wp_verify_nonce(sanitize_text_field(wp_unslash($_REQUEST['_wpnonce'])), $nonce_action)) {
+                // Verified valid fallback nonce without dying
                 $nonce_verified = true;
             }
             
@@ -598,17 +598,23 @@ class AdaireBlocksSettings {
                                     <div class="adaire-block-header">
                                         <div class="adaire-block-icon">
                                             <?php 
+                                            $icon_markup = is_string( $block_data['icon'] ) ? trim( $block_data['icon'] ) : '';
                                             $allowed_svg = $this->get_allowed_svg_tags();
-                                            // Check if icon is SVG content (starts with <svg)
-                                            if (strpos($block_data['icon'], '<svg') === 0) {
-                                                echo wp_kses( $block_data['icon'], $allowed_svg );
-                                            } elseif (strpos($block_data['icon'], 'data:image/svg+xml;base64,') === 0) {
+                                            // Render trusted block.json SVGs as data URIs in the admin list.
+                                            // This avoids inline SVG rendering edge cases with clip paths and ids.
+                                            if (strpos($icon_markup, '<svg') === 0) {
+                                                $svg_data_uri = 'data:image/svg+xml;base64,' . base64_encode( $icon_markup );
+                                                echo '<img src="' . esc_url( $svg_data_uri ) . '" alt="" class="adaire-block-icon-image" />';
+                                            } elseif (strpos($icon_markup, 'data:image/svg+xml;base64,') === 0) {
                                                 // Decode base64 SVG and render it (fallback for old format)
-                                                $svg_data = base64_decode(str_replace('data:image/svg+xml;base64,', '', $block_data['icon']));
-                                                echo wp_kses( $svg_data, $allowed_svg );
+                                                $svg_data = base64_decode(str_replace('data:image/svg+xml;base64,', '', $icon_markup));
+                                                if ( $svg_data ) {
+                                                    $svg_data_uri = 'data:image/svg+xml;base64,' . base64_encode( $svg_data );
+                                                    echo '<img src="' . esc_url( $svg_data_uri ) . '" alt="" class="adaire-block-icon-image" />';
+                                                }
                                             } else {
                                             // Use dashicon for non-SVG icons
-                                                echo '<span class="dashicons dashicons-' . esc_attr($block_data['icon']) . '"></span>';
+                                                echo '<span class="dashicons dashicons-' . esc_attr($icon_markup) . '"></span>';
                                             }
                                             ?>
                                         </div>
