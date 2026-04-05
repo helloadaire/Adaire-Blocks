@@ -66,75 +66,7 @@ const convertColorToRgba = (color, opacity) => {
 	return color;
 };
 
-const createComparisonCell = (type = "dash", text = "") => ({ type, text });
 
-const normalizeComparisonValues = (values = [], planCount) => {
-	const normalizedValues = Array.isArray(values) ? [...values] : [];
-	while (normalizedValues.length < planCount) {
-		normalizedValues.push(createComparisonCell());
-	}
-	return normalizedValues.slice(0, planCount);
-};
-
-const syncComparisonSectionsToCards = (sections = [], planCount = 0) =>
-	(sections || []).map((section) => ({
-		...section,
-		rows: (section.rows || []).map((row) => ({
-			...row,
-			values: normalizeComparisonValues(row.values, planCount),
-		})),
-	}));
-
-const renderComparisonCellContent = (cell) => {
-	if (cell.type === "check") {
-		return (
-			<span className="adaire-pricing-table__comparison-icon adaire-pricing-table__comparison-icon--check">
-				<svg
-					width="18"
-					height="18"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					strokeWidth="2"
-					strokeLinecap="round"
-					strokeLinejoin="round"
-				>
-					<polyline points="20 6 9 17 4 12" />
-				</svg>
-			</span>
-		);
-	}
-
-	if (cell.type === "cross") {
-		return (
-			<span className="adaire-pricing-table__comparison-icon adaire-pricing-table__comparison-icon--cross">
-				<svg
-					width="18"
-					height="18"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					strokeWidth="2"
-					strokeLinecap="round"
-					strokeLinejoin="round"
-				>
-					<line x1="18" y1="6" x2="6" y2="18" />
-					<line x1="6" y1="6" x2="18" y2="18" />
-				</svg>
-			</span>
-		);
-	}
-
-	if (cell.type === "text") {
-		return (
-			<span className="adaire-pricing-table__comparison-cell-text">
-				{cell.text || "—"}
-			</span>
-		);
-	}
-
-	return <span className="adaire-pricing-table__comparison-cell-text">—</span>;
-};
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -148,10 +80,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		yearlyLabel,
 		yearlyBadgeText,
 		cards = [],
-		showComparisonTable,
-		comparisonDisclaimer,
-		comparisonToggleLabel,
-		comparisonSections = [],
 		backgroundColor,
 		cardBackgroundColor,
 		featuredCardBackgroundColor,
@@ -189,7 +117,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		cardTextAlignment,
 		cardButtonAlignment,
 	} = attributes;
-	const [isComparisonPreviewOpen, setIsComparisonPreviewOpen] = useState(false);
+
 
 	useEffect(() => {
 		if (!blockId) {
@@ -249,26 +177,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		];
 		setAttributes({
 			cards: nextCards,
-			comparisonSections: syncComparisonSectionsToCards(
-				comparisonSections,
-				nextCards.length,
-			),
 		});
 	};
 
 	const removeCard = (index) => {
 		if (cards.length <= 1) return;
 		const nextCards = cards.filter((_, i) => i !== index);
-		const nextSections = (comparisonSections || []).map((section) => ({
-			...section,
-			rows: (section.rows || []).map((row) => ({
-				...row,
-				values: normalizeComparisonValues(row.values, cards.length).filter(
-					(_, valueIndex) => valueIndex !== index,
-				),
-			})),
-		}));
-		setAttributes({ cards: nextCards, comparisonSections: nextSections });
+		setAttributes({ cards: nextCards });
 	};
 
 	const moveCard = (index, direction) => {
@@ -279,18 +194,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			nextCards[targetIndex],
 			nextCards[index],
 		];
-		const nextSections = (comparisonSections || []).map((section) => ({
-			...section,
-			rows: (section.rows || []).map((row) => {
-				const values = normalizeComparisonValues(row.values, cards.length);
-				[values[index], values[targetIndex]] = [
-					values[targetIndex],
-					values[index],
-				];
-				return { ...row, values };
-			}),
-		}));
-		setAttributes({ cards: nextCards, comparisonSections: nextSections });
+		setAttributes({ cards: nextCards });
 	};
 
 	const updateCard = (index, patch) => {
@@ -321,94 +225,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		updateCard(cardIndex, { features });
 	};
 
-	const updateComparisonSections = (nextSections) => {
-		setAttributes({
-			comparisonSections: syncComparisonSectionsToCards(
-				nextSections,
-				cards.length,
-			),
-		});
-	};
 
-	const addComparisonSection = () => {
-		const nextSections = [
-			...comparisonSections,
-			{
-				id: `section-${Date.now()}`,
-				title: __("New Section", "pricing-table-block"),
-				open: true,
-				rows: [
-					{
-						id: `row-${Date.now()}`,
-						label: __("New Feature", "pricing-table-block"),
-						values: Array.from({ length: cards.length }, () =>
-							createComparisonCell(),
-						),
-					},
-				],
-			},
-		];
-		updateComparisonSections(nextSections);
-	};
-
-	const updateComparisonSection = (sectionIndex, patch) => {
-		const nextSections = [...comparisonSections];
-		nextSections[sectionIndex] = { ...nextSections[sectionIndex], ...patch };
-		updateComparisonSections(nextSections);
-	};
-
-	const removeComparisonSection = (sectionIndex) => {
-		const nextSections = comparisonSections.filter(
-			(_, index) => index !== sectionIndex,
-		);
-		updateComparisonSections(nextSections);
-	};
-
-	const addComparisonRow = (sectionIndex) => {
-		const nextSections = [...comparisonSections];
-		const section = nextSections[sectionIndex];
-		nextSections[sectionIndex] = {
-			...section,
-			rows: [
-				...(section.rows || []),
-				{
-					id: `row-${Date.now()}-${sectionIndex}`,
-					label: __("New Feature", "pricing-table-block"),
-					values: Array.from({ length: cards.length }, () =>
-						createComparisonCell(),
-					),
-				},
-			],
-		};
-		updateComparisonSections(nextSections);
-	};
-
-	const updateComparisonRow = (sectionIndex, rowIndex, patch) => {
-		const nextSections = [...comparisonSections];
-		const section = nextSections[sectionIndex];
-		const rows = [...(section.rows || [])];
-		rows[rowIndex] = { ...rows[rowIndex], ...patch };
-		nextSections[sectionIndex] = { ...section, rows };
-		updateComparisonSections(nextSections);
-	};
-
-	const removeComparisonRow = (sectionIndex, rowIndex) => {
-		const nextSections = [...comparisonSections];
-		const section = nextSections[sectionIndex];
-		nextSections[sectionIndex] = {
-			...section,
-			rows: (section.rows || []).filter((_, index) => index !== rowIndex),
-		};
-		updateComparisonSections(nextSections);
-	};
-
-	const updateComparisonCell = (sectionIndex, rowIndex, cellIndex, patch) => {
-		const section = comparisonSections[sectionIndex];
-		const row = section?.rows?.[rowIndex];
-		const values = normalizeComparisonValues(row?.values, cards.length);
-		values[cellIndex] = { ...values[cellIndex], ...patch };
-		updateComparisonRow(sectionIndex, rowIndex, { values });
-	};
 
 	const blockProps = useBlockProps({
 		id: blockId || undefined,
@@ -629,7 +446,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			"--pricing-grid-columns": `${gridColumnsDesktop}`,
 			"--pricing-grid-columns-tablet": `${gridColumnsTablet}`,
 			"--pricing-grid-columns-mobile": `${gridColumnsMobile}`,
-			"--pricing-comparison-columns": `${cards.length || 1}`,
+
 			"--pricing-grid-gap": `${gridGapDesktop}px`,
 			"--pricing-grid-gap-tablet": `${gridGapTablet}px`,
 			"--pricing-grid-gap-mobile": `${gridGapMobile}px`,
@@ -999,192 +816,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</Button>
 				</PanelBody>
 
-				<PanelBody
-					title={__("Comparison Table", "pricing-table-block")}
-					initialOpen={false}
-				>
-					<ToggleControl
-						label={__("Show comparison table", "pricing-table-block")}
-						checked={!!showComparisonTable}
-						onChange={(value) => setAttributes({ showComparisonTable: value })}
-					/>
 
-					{showComparisonTable && (
-						<>
-							<TextControl
-								label={__("Toggle Button Label", "pricing-table-block")}
-								value={comparisonToggleLabel}
-								onChange={(value) =>
-									setAttributes({ comparisonToggleLabel: value })
-								}
-							/>
-							<TextControl
-								label={__("Disclaimer Text", "pricing-table-block")}
-								value={comparisonDisclaimer}
-								onChange={(value) =>
-									setAttributes({ comparisonDisclaimer: value })
-								}
-								help={__(
-									"Short note shown above the compare features button.",
-									"pricing-table-block",
-								)}
-							/>
-
-							{comparisonSections.map((section, sectionIndex) => (
-								<div
-									key={section.id || sectionIndex}
-									className="adaire-pricing-table__comparison-control"
-								>
-									<div className="adaire-pricing-table__card-control-header">
-										<strong>
-											{sprintf(
-												__("Section %d", "pricing-table-block"),
-												sectionIndex + 1,
-											)}
-										</strong>
-										<Button
-											icon={trash}
-											onClick={() => removeComparisonSection(sectionIndex)}
-											isSmall
-											isDestructive
-										/>
-									</div>
-
-									<TextControl
-										label={__("Section Title", "pricing-table-block")}
-										value={section.title}
-										onChange={(value) =>
-											updateComparisonSection(sectionIndex, { title: value })
-										}
-									/>
-									<ToggleControl
-										label={__("Open by default", "pricing-table-block")}
-										checked={!!section.open}
-										onChange={(value) =>
-											updateComparisonSection(sectionIndex, { open: value })
-										}
-									/>
-
-									{(section.rows || []).map((row, rowIndex) => (
-										<div
-											key={row.id || rowIndex}
-											className="adaire-pricing-table__comparison-row-control"
-										>
-											<div className="adaire-pricing-table__card-control-header">
-												<strong>
-													{sprintf(
-														__("Row %d", "pricing-table-block"),
-														rowIndex + 1,
-													)}
-												</strong>
-												<Button
-													icon={trash}
-													onClick={() =>
-														removeComparisonRow(sectionIndex, rowIndex)
-													}
-													isSmall
-													isDestructive
-													disabled={(section.rows || []).length <= 1}
-												/>
-											</div>
-
-											<TextControl
-												label={__("Row Label", "pricing-table-block")}
-												value={row.label}
-												onChange={(value) =>
-													updateComparisonRow(sectionIndex, rowIndex, {
-														label: value,
-													})
-												}
-											/>
-
-											{normalizeComparisonValues(row.values, cards.length).map(
-												(cell, cellIndex) => (
-													<div
-														key={`${row.id || rowIndex}-${cellIndex}`}
-														className="adaire-pricing-table__comparison-cell-control"
-													>
-														<strong>
-															{cards[cellIndex]?.name ||
-																sprintf(
-																	__("Plan %d", "pricing-table-block"),
-																	cellIndex + 1,
-																)}
-														</strong>
-														<SelectControl
-															label={__("Cell Type", "pricing-table-block")}
-															value={cell.type}
-															options={[
-																{
-																	label: __("Text", "pricing-table-block"),
-																	value: "text",
-																},
-																{
-																	label: __("Check", "pricing-table-block"),
-																	value: "check",
-																},
-																{
-																	label: __("Cross", "pricing-table-block"),
-																	value: "cross",
-																},
-																{
-																	label: __("Dash", "pricing-table-block"),
-																	value: "dash",
-																},
-															]}
-															onChange={(value) =>
-																updateComparisonCell(
-																	sectionIndex,
-																	rowIndex,
-																	cellIndex,
-																	{
-																		type: value,
-																		text: value === "text" ? cell.text : "",
-																	},
-																)
-															}
-														/>
-														{cell.type === "text" && (
-															<TextControl
-																label={__("Cell Text", "pricing-table-block")}
-																value={cell.text}
-																onChange={(value) =>
-																	updateComparisonCell(
-																		sectionIndex,
-																		rowIndex,
-																		cellIndex,
-																		{ text: value },
-																	)
-																}
-															/>
-														)}
-													</div>
-												),
-											)}
-										</div>
-									))}
-
-									<Button
-										icon={plus}
-										variant="secondary"
-										onClick={() => addComparisonRow(sectionIndex)}
-									>
-										{__("Add Row", "pricing-table-block")}
-									</Button>
-								</div>
-							))}
-
-							<Button
-								icon={plus}
-								variant="secondary"
-								onClick={addComparisonSection}
-								style={{ marginTop: "12px" }}
-							>
-								{__("Add Section", "pricing-table-block")}
-							</Button>
-						</>
-					)}
-				</PanelBody>
 
 				<PanelColorSettings
 					title={__("Colors", "pricing-table-block")}
@@ -1735,98 +1367,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						))}
 					</div>
 
-					{showComparisonTable && comparisonSections.length > 0 && (
-						<div
-							className={`adaire-pricing-table__comparison-wrap ${
-								isComparisonPreviewOpen ? "is-comparison-open" : ""
-							}`}
-						>
-							<RichText
-								tagName="p"
-								value={comparisonDisclaimer}
-								onChange={(value) =>
-									setAttributes({ comparisonDisclaimer: value })
-								}
-								placeholder={__(
-									"Add disclaimer text",
-									"pricing-table-block",
-								)}
-								className="adaire-pricing-table__comparison-disclaimer"
-								allowedFormats={[]}
-							/>
 
-							<button
-								type="button"
-								className="adaire-pricing-table__comparison-toggle"
-								aria-expanded={isComparisonPreviewOpen ? "true" : "false"}
-								onClick={() =>
-									setIsComparisonPreviewOpen((current) => !current)
-								}
-							>
-								<span>{comparisonToggleLabel || "Compare features"}</span>
-								<span
-									className="adaire-pricing-table__comparison-toggle-icon"
-									aria-hidden="true"
-								>
-									+
-								</span>
-							</button>
-
-							{isComparisonPreviewOpen && (
-								<div className="adaire-pricing-table__comparison-content">
-									<div className="adaire-pricing-table__comparison-table">
-										<div className="adaire-pricing-table__comparison-table-header">
-											<div className="adaire-pricing-table__comparison-table-spacer" />
-											{cards.map((card, index) => (
-												<div
-													key={card.id || index}
-													className="adaire-pricing-table__comparison-table-plan"
-												>
-													{card.name}
-												</div>
-											))}
-										</div>
-
-										{comparisonSections.map((section, sectionIndex) => (
-											<div
-												key={section.id || sectionIndex}
-												className="adaire-pricing-table__comparison-section"
-											>
-												<div className="adaire-pricing-table__comparison-section-title">
-													{section.title}
-												</div>
-												{(section.rows || []).map((row, rowIndex) => {
-													const values = normalizeComparisonValues(
-														row.values,
-														cards.length,
-													);
-
-													return (
-														<div
-															key={row.id || rowIndex}
-															className="adaire-pricing-table__comparison-table-row"
-														>
-															<div className="adaire-pricing-table__comparison-table-label">
-																{row.label}
-															</div>
-															{values.map((cell, cellIndex) => (
-																<div
-																	key={`${row.id || rowIndex}-${cellIndex}`}
-																	className="adaire-pricing-table__comparison-table-value"
-																>
-																	{renderComparisonCellContent(cell)}
-																</div>
-															))}
-														</div>
-													);
-												})}
-											</div>
-										))}
-									</div>
-								</div>
-							)}
-						</div>
-					)}
 				</div>
 			</div>
 		</>
