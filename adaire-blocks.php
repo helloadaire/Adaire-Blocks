@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Adaire Blocks
  * Description:       A powerful WordPress plugin that helps developers and designers create visually stunning, high-performance websites with ease right inside the Gutenberg editor.
- * Version:           1.2.4
+ * Version:           1.2.3
  * Requires at least: 6.7
  * Requires PHP:      7.4
  * Author:            <a href="https://adaireblocks.com" target="_blank">Adaire Digital</a>
@@ -228,6 +228,7 @@ add_action('admin_notices', function () {
 
 // Define plugin constants
 define('ADAIRE_BLOCKS_VERSION', '1.1.9');
+define('ADAIRE_BLOCKS_PLUGIN_FILE', __FILE__);
 define('ADAIRE_BLOCKS_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('ADAIRE_BLOCKS_PLUGIN_PATH', plugin_dir_path(__FILE__));
 
@@ -245,11 +246,24 @@ require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'includes/class-adaire-blocks-validatio
 // Include license manager
 require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'includes/class-adaire-blocks-license.php';
 
+// Include SendGrid helper
+require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'includes/sendgrid.php';
+
 // Include settings page
 require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'admin/settings-page.php';
 
 // Include license page
 require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'admin/license-page.php';
+
+if (is_admin()) {
+    // Deactivation feedback modal
+    require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'admin/deactivation-modal.php';
+    Adaire_Deactivation_Modal::get_instance();
+
+    // Deactivation feedback log + test page
+    require_once ADAIRE_BLOCKS_PLUGIN_PATH . 'admin/deactivation-log-page.php';
+    Adaire_Deactivation_Log_Page::get_instance();
+}
 
 /**
  * Check if premium features are available

@@ -37,6 +37,7 @@
 		"posts-grid-block": "posts-grid",
 		"posts-carousel-block": "posts-carousel",
 		"pricing-table-block": "pricing-table",
+		"pricing-comparison-block": "pricing-comparison",
 		"progress-block": "progress",
 		"project-block": "project",
 		"questions-block": "questions",
@@ -51,6 +52,7 @@
 		"testimonial-block": "testimonial",
 		"testimonial2-block": "testimonial-plus",
 		"testimonial3-block": "testimonial-premium",
+		"video-carousel-block": "video-carousel",
 		"video-hero-block": "video-hero",
 		"video-player-block": "video-player"
 	},
@@ -83,6 +85,7 @@
 		"posts-grid-block": "Free Blocks/posts-grid-block.svg",
 		"posts-carousel-block": "Free Blocks/posts-carousel-block.svg",
 		"pricing-table-block": "Plus Blocks/pricing-table-plus-block.svg",
+		"pricing-comparison-block": "newer-icons/pricing-table-block.svg",
 		"progress-block": "Plus Blocks/progress-plus-block.svg",
 		"project-block": "Premium Blocks/project-premium-block.svg",
 		"questions-block": "Plus Blocks/questions-plus-block.svg",
@@ -95,6 +98,7 @@
 		"testimonial-block": "Free Blocks/testimonial-block.svg",
 		"testimonial2-block": "newer-icons/testimonial-plus-block.svg",
 		"testimonial3-block": "newer-icons/testimonial-premium-block.svg",
+		"video-carousel-block": "Free Blocks/video-block.svg",
 		"video-hero-block": "Plus Blocks/video-hero-plus-block.svg",
 		"video-player-block": "Free Blocks/video-block.svg"
 	}
